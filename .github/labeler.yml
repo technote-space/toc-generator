@@ -1,0 +1,15 @@
+javascript:
+  - '**/*.js'
+typescript:
+  - '**/*.ts'
+dependencies:
+  - '**/*.lock'
+  - '**/*-lock.json'
+
+'Type: Testing':
+  - '**/tests/*'
+  - '**/test/*'
+  - '**/__tests__/*'
+
+'Type: Documentation':
+  - '**/*.md'

@@ -1,0 +1,15 @@
+on: release
+name: Release
+jobs:
+  release:
+    name: Release GitHub Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release GitHub Actions
+        uses: technote-space/release-github-actions@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          COMMIT_NAME: Technote
+          COMMIT_EMAIL: technote.space@gmail.com
+          OUTPUT_BUILD_INFO_FILENAME: build.json

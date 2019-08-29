@@ -1,0 +1,15 @@
+# https://help.github.com/ja/articles/metadata-syntax-for-github-actions
+name: GitHub Actions Template
+description: Template for GitHub actions.
+author: technote-space
+inputs:
+  GITHUB_TOKEN:
+    description: Secret GitHub API token to use for making API requests.
+    required: true
+branding:
+  # https://feathericons.com/
+  icon: 'package'
+  color: 'orange'
+runs:
+  using: node12
+  main: lib/main.js
