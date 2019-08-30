@@ -7,12 +7,11 @@ inputs:
     required: true
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
-    default: '.'
+    default: 'README.md'
   COMMIT_MESSAGE:
     description: Commit message.
     default: 'docs: Update TOC'
 branding:
-  # https://feathericons.com/
   icon: 'package'
   color: 'orange'
 runs:
