@@ -1,11 +1,16 @@
-# https://help.github.com/ja/articles/metadata-syntax-for-github-actions
-name: GitHub Actions Template
-description: Template for GitHub actions.
+name: TOC Generator
+description: GitHub Action to generate TOC.
 author: technote-space
 inputs:
   GITHUB_TOKEN:
     description: Secret GitHub API token to use for making API requests.
     required: true
+  TARGET_PATHS:
+    description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
+    default: '.'
+  COMMIT_MESSAGE:
+    description: Commit message.
+    default: 'docs: Update TOC'
 branding:
   # https://feathericons.com/
   icon: 'package'
