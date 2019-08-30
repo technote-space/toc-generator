@@ -8,6 +8,9 @@
 GitHub Action to generate TOC.  
 Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if changed.
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 ## Installation
 1. Setup workflow  
    e.g. `.github/workflows/push.yml`
