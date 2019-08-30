@@ -31,10 +31,10 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 ## Installation
 1. Setup workflow  
-   e.g. `.github/workflows/push.yml`
+   e.g. `.github/workflows/toc.yml`
    ```yaml
    on: push
-   name: Push
+   name: TOC Generator
    jobs:
      assignAuthor:
        name: TOC Generator
