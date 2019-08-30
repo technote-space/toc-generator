@@ -39,9 +39,26 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
 
+## Options
+### TARGET_PATHS
+Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
+default: `'README.md'`  
+### COMMIT_MESSAGE
+Commit message.  
+default: `'docs: Update TOC'`  
+
 ## Action event details
 ### Target event
 - push: *
+
+## Addition
+### Recommended setting
+#### Specifying location of toc
+see: https://github.com/thlorenz/doctoc#specifying-location-of-toc  
+```markdown
+<!-- START doctoc -->
+<!-- END doctoc -->
+```
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
