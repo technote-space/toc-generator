@@ -12,6 +12,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+- [Screenshot](#screenshot)
 - [Installation](#installation)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
@@ -25,12 +26,15 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## Screenshot
+![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
+
 ## Installation
 1. Setup workflow  
-   e.g. `.github/workflows/push.yml`
+   e.g. `.github/workflows/toc.yml`
    ```yaml
    on: push
-   name: Push
+   name: TOC Generator
    jobs:
      assignAuthor:
        name: TOC Generator
