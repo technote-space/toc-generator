@@ -8,8 +8,22 @@
 GitHub Action to generate TOC.  
 Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if changed.
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Installation](#installation)
+- [Options](#options)
+  - [TARGET_PATHS](#target_paths)
+  - [COMMIT_MESSAGE](#commit_message)
+- [Action event details](#action-event-details)
+  - [Target event](#target-event)
+- [Addition](#addition)
+  - [Recommended setting](#recommended-setting)
+    - [Specifying location of toc](#specifying-location-of-toc)
+- [Author](#author)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
 1. Setup workflow  
