@@ -74,6 +74,7 @@ describe('getWorkDir', () => {
     });
 
     it('should get working dir', () => {
+        process.env.GITHUB_WORKSPACE = undefined;
         expect(getWorkDir()).toBe(path.resolve('.work'));
     });
 });
