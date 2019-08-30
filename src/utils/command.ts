@@ -50,7 +50,10 @@ const commit = async (workDir: string): Promise<boolean> => {
     return true;
 };
 
-const getDiff = async (workDir: string): Promise<string[]> => (await execAsync(`git -C ${workDir} status --short -uno`, false, null, false, true)).split(/\r\n|\n/).filter(line => line.match(/^M\s+/));
+const getDiff = async (workDir: string): Promise<string[]> => (await execAsync(`git -C ${workDir} status --short -uno`, false, null, false, true))
+    .split(/\r\n|\n/)
+    .filter(line => line.match(/^M\s+/))
+    .map(line => line.replace(/^M\s+/, ''));
 
 const execAsync = (command: string, quiet: boolean = false, altCommand: string | null = null, suppressError: boolean = false, suppressOutput: boolean = false) => new Promise<string>((resolve, reject) => {
     if ('string' === typeof altCommand) signale.info('Run command: %s', altCommand);
