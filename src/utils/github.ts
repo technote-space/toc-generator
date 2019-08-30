@@ -17,9 +17,18 @@ export const push = async (files: string[], octokit: GitHub, context: Context): 
         return false;
     }
 
+    signale.info('Start push to branch [%s]', getBranch(context));
+
+    signale.info('>> Creating blobs...');
     const blobs = await filesToBlobs(files, octokit, context);
+
+    signale.info('>> Creating tree...');
     const tree = await createTree(blobs, octokit, context);
+
+    signale.info('>> Creating commit...');
     const commit = await createCommit(tree, octokit, context);
+
+    signale.info('>> Updating ref...');
     await updateRef(commit, octokit, context);
     return true;
 };
