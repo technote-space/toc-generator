@@ -9,6 +9,9 @@ When contributing to this repository, please first discuss the change you wish t
 
 Please note we have a [Contributor Code of Conduct][code-of-conduct], please follow it in all your interactions with the project.
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 ## Submitting a pull request
 
 1. [Fork][fork] and clone the repository
