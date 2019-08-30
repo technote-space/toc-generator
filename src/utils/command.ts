@@ -22,7 +22,7 @@ const clone = async (workDir: string, context: Context): Promise<boolean> => {
     await execAsync(`git -C ${workDir} clone --quiet --branch=${branch} --depth=1 ${url} .`, false, null, true);
 
     if (await getCurrentBranchName(workDir) !== branch) {
-        signale.warn('remote branch %s not found', branch);
+        signale.warn('remote branch [%s] not found', branch);
         return false;
     }
 
