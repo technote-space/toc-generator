@@ -14,20 +14,27 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 - [Screenshot](#screenshot)
 - [Installation](#installation)
+- [Options](#options)
+  - [TARGET_PATHS](#target_paths)
+  - [COMMIT_MESSAGE](#commit_message)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
+- [Addition](#addition)
+  - [Recommended setting](#recommended-setting)
+    - [Specifying location of toc](#specifying-location-of-toc)
 - [Author](#author)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Screenshot
+![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## Installation
 1. Setup workflow  
-   e.g. `.github/workflows/push.yml`
+   e.g. `.github/workflows/toc.yml`
    ```yaml
    on: push
-   name: Push
+   name: TOC Generator
    jobs:
      assignAuthor:
        name: TOC Generator
@@ -39,9 +46,26 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
 
+## Options
+### TARGET_PATHS
+Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
+default: `'README.md'`  
+### COMMIT_MESSAGE
+Commit message.  
+default: `'docs: Update TOC'`  
+
 ## Action event details
 ### Target event
 - push: *
+
+## Addition
+### Recommended setting
+#### Specifying location of toc
+see: https://github.com/thlorenz/doctoc#specifying-location-of-toc  
+```markdown
+<!-- START doctoc -->
+<!-- END doctoc -->
+```
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
