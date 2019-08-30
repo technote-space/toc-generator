@@ -67,7 +67,7 @@ describe('getDocTocArgs', () => {
 
     it('should get default DocToc args', () => {
         process.env.GITHUB_WORKSPACE = '/tmp/workspace';
-        expect(getDocTocArgs()).toBe('/tmp/workspace/.work');
+        expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md');
     });
 
     it('should get DocToc args', () => {
