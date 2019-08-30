@@ -4,7 +4,13 @@ import {getInput} from '@actions/core' ;
 import {Context} from '@actions/github/lib/context';
 import {DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS, TARGET_EVENTS} from '../constant';
 
-export const isTargetEvent = (context: Context): boolean => isTargetRef(context) && 'string' === typeof context.payload.action && context.eventName in TARGET_EVENTS && (TARGET_EVENTS[context.eventName] === context.payload.action || '*' === TARGET_EVENTS[context.eventName]);
+export const isTargetEvent = (context: Context): boolean =>
+    isTargetRef(context) &&
+    context.eventName in TARGET_EVENTS &&
+    (
+        ('string' === typeof context.payload.action && TARGET_EVENTS[context.eventName] === context.payload.action) ||
+        '*' === TARGET_EVENTS[context.eventName]
+    );
 
 export const getBuildVersion = (filepath: string): string | boolean => {
     if (!fs.existsSync(filepath)) {

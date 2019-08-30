@@ -13,9 +13,19 @@ import {
 import {DEFAULT_COMMIT_MESSAGE} from '../../src/constant';
 
 describe('isTargetEvent', () => {
-    it('should return true', () => {
+    it('should return true 1', () => {
         expect(isTargetEvent(getContext({
             ref: 'refs/heads/test',
+            eventName: 'push',
+        }))).toBeTruthy();
+    });
+
+    it('should return true 2', () => {
+        expect(isTargetEvent(getContext({
+            ref: 'refs/heads/test',
+            payload: {
+                action: undefined,
+            },
             eventName: 'push',
         }))).toBeTruthy();
     });
