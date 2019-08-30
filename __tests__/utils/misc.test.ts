@@ -66,12 +66,14 @@ describe('getDocTocArgs', () => {
     testEnv();
 
     it('should get default DocToc args', () => {
-        expect(getDocTocArgs()).toBe('.');
+        process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+        expect(getDocTocArgs()).toBe('/tmp/workspace/.work');
     });
 
     it('should get DocToc args', () => {
+        process.env.GITHUB_WORKSPACE = '/tmp/workspace';
         process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md';
-        expect(getDocTocArgs()).toBe('README.md .github/CONTRIBUTING.md');
+        expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md /tmp/workspace/.work/.github/CONTRIBUTING.md');
     });
 });
 

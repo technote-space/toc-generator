@@ -27,7 +27,10 @@ export const getBuildVersion = (filepath: string): string | boolean => {
 
 const getTargetPaths = (): string[] => [...new Set<string>((getInput('TARGET_PATHS') || DEFAULT_TARGET_PATHS).split(',').map(target => target.trim()).filter(target => target && !target.startsWith('/') && !target.includes('..')))];
 
-export const getDocTocArgs = () => getTargetPaths().join(' ');
+export const getDocTocArgs = () => {
+    const workDir = getWorkDir();
+    return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ');
+};
 
 const getWorkspace = (): string => process.env.GITHUB_WORKSPACE || '';
 
