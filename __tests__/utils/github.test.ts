@@ -85,7 +85,7 @@ describe('push', () => {
                 fn8();
                 return getApiFixture('repos.git.commits');
             })
-            .patch('/repos/hello/world/git/refs/refs/heads/test', body => {
+            .patch('/repos/hello/world/git/refs/heads/test', body => {
                 fn9();
                 expect(body).toHaveProperty('sha');
                 return body;

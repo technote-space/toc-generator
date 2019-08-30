@@ -7,6 +7,7 @@ import {
     getWorkDir,
     getGitUrl,
     getRef,
+    getRefForUpdate,
     getBranch,
     getCommitMessage,
 } from '../../src/utils/misc';
@@ -107,6 +108,15 @@ describe('getRef', () => {
         expect(getRef(getContext({
             ref: 'refs/heads/test',
         }))).toBe('refs/heads/test');
+    });
+});
+
+describe('getRefForUpdate', () => {
+    // https://github.com/octokit/rest.js/issues/1308#issuecomment-480532468
+    it('should get ref for update', () => {
+        expect(getRefForUpdate(getContext({
+            ref: 'refs/heads/test',
+        }))).toBe('heads/test');
     });
 });
 

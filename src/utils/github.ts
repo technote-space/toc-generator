@@ -4,7 +4,7 @@ import signale from 'signale';
 import {GitHub} from '@actions/github/lib/github';
 import {Context} from '@actions/github/lib/context';
 import {Response, GitCreateTreeResponse, GitCreateCommitResponse} from '@octokit/rest';
-import {getBranch, getWorkDir, getRef, getCommitMessage} from './misc';
+import {getBranch, getWorkDir, getRefForUpdate, getCommitMessage} from './misc';
 
 export const push = async (files: string[], octokit: GitHub, context: Context): Promise<boolean> => {
     if (!files.length) {
@@ -91,7 +91,7 @@ const updateRef = async (commit: Response<GitCreateCommitResponse>, octokit: Git
     await octokit.git.updateRef({
         owner: context.repo.owner,
         repo: context.repo.repo,
-        ref: getRef(context),
+        ref: getRefForUpdate(context),
         sha: commit.data.sha,
     });
 };
