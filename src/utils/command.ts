@@ -39,8 +39,9 @@ const getCurrentBranchName = async (workDir: string): Promise<string> => {
 
 const runDocToc = async (workDir: string): Promise<boolean> => {
     const args = getDocTocArgs();
+    const pkg = path.resolve(workDir, 'package.json');
     const doctoc = path.resolve(workDir, 'node_modules/.bin/doctoc');
-    await execAsync(`cd ${workDir} && touch package.json`);
+    await execAsync(`echo "{}" >> ${pkg}`);
     await execAsync(`yarn --cwd ${workDir} add doctoc`);
     await execAsync(`${doctoc} ${args} --github`);
     return true;
