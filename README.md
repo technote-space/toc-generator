@@ -25,6 +25,9 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## Screenshot
+![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
+
 ## Installation
 1. Setup workflow  
    e.g. `.github/workflows/push.yml`
