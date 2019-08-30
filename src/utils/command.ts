@@ -9,6 +9,7 @@ export const getChangedFiles = async (context: Context): Promise<string[] | fals
     signale.info('Running DocToc and getting changed files');
     const workDir = getWorkDir();
 
+    fs.mkdirSync(workDir, {recursive: true});
     if (!await clone(workDir, context)) return false;
     if (!await runDocToc(workDir)) return false;
     if (!await commit(workDir)) return false;
