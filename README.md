@@ -12,6 +12,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+- [Screenshot](#screenshot)
 - [Installation](#installation)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
