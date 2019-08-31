@@ -8,12 +8,15 @@ inputs:
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
     default: 'README.md'
+  TOC_TITLE:
+    description: TOC Title
+    default: '**Table of Contents**'
   COMMIT_MESSAGE:
     description: Commit message.
     default: 'docs: Update TOC'
 branding:
-  icon: 'package'
-  color: 'orange'
+  icon: 'book-open'
+  color: 'blue'
 runs:
   using: node12
   main: lib/main.js
