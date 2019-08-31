@@ -50,6 +50,9 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 ### TARGET_PATHS
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
 default: `'README.md'`  
+### TOC_TITLE
+TOC Title.
+default: `'**Table of Contents**'`
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  

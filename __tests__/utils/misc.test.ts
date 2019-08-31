@@ -1,5 +1,5 @@
 import path from 'path';
-import {getContext, getApiFixture, disableNetConnect, testEnv} from '../util';
+import {getContext, testEnv} from '../util';
 import {
     isTargetEvent,
     getBuildVersion,
@@ -66,15 +66,16 @@ describe('getBuildVersion', () => {
 describe('getDocTocArgs', () => {
     testEnv();
 
-    it('should get default DocToc args', () => {
-        process.env.GITHUB_WORKSPACE = '/tmp/workspace';
-        expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md');
-    });
-
     it('should get DocToc args', () => {
         process.env.GITHUB_WORKSPACE = '/tmp/workspace';
         process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md';
-        expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md /tmp/workspace/.work/.github/CONTRIBUTING.md');
+        process.env.INPUT_TOC_TITLE = '**Table of Contents**';
+        expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md /tmp/workspace/.work/.github/CONTRIBUTING.md --title **Table of Contents**');
+    });
+
+    it('should get default DocToc args', () => {
+        process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+        expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md --notitle');
     });
 });
 
