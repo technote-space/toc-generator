@@ -43,7 +43,7 @@ export const getGitUrl = (context: Context): string => `https://github.com/${con
 
 export const getRef = (context: Context): string => context.ref;
 
-export const getRefForUpdate = (context: Context): string => getRef(context).replace(/^refs\//, '');
+export const getRefForUpdate = (context: Context): string => encodeURIComponent(getRef(context).replace(/^refs\//, ''));
 
 const isTargetRef = (context: Context): boolean => /^refs\/heads\//.test(getRef(context));
 
