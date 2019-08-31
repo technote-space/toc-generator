@@ -23,6 +23,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 - [Addition](#addition)
   - [Recommended setting](#recommended-setting)
     - [Specifying location of toc](#specifying-location-of-toc)
+- [GitHub Actions using this Action](#github-actions-using-this-action)
 - [Author](#author)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
