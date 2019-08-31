@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: TOC Generator
-        uses: technote-space/toc-generator@v0
+        uses: technote-space/toc-generator@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_PATHS: 'README.md,.github/CODE_OF_CONDUCT.md,.github/CONTRIBUTING.md'

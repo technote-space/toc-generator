@@ -16,6 +16,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 - [Installation](#installation)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
+  - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
@@ -50,6 +51,9 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 ### TARGET_PATHS
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
 default: `'README.md'`  
+### TOC_TITLE
+TOC Title.
+default: `'**Table of Contents**'`
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
