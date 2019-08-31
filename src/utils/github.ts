@@ -25,10 +25,10 @@ export const push = async (files: string[], octokit: GitHub, context: Context): 
     signale.info('>> Creating tree...');
     const tree = await createTree(blobs, octokit, context);
 
-    signale.info('>> Creating commit...');
+    signale.info('>> Creating commit... [%s]', tree.data.sha);
     const commit = await createCommit(tree, octokit, context);
 
-    signale.info('>> Updating ref...');
+    signale.info('>> Updating ref... [%s] [%s]', getRefForUpdate(context), commit.data.sha);
     await updateRef(commit, octokit, context);
     return true;
 };
