@@ -30,7 +30,7 @@ const getTargetPaths = (): string[] => [...new Set<string>((getInput('TARGET_PAT
 export const getDocTocArgs = () => {
     const workDir = getWorkDir();
     const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
-    return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title ${title}` : ' --notitle');
+    return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
 
 const getTocTitle = (): string => getInput('TOC_TITLE') || '';
