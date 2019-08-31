@@ -16,12 +16,14 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 - [Installation](#installation)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
+  - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
 - [Addition](#addition)
   - [Recommended setting](#recommended-setting)
     - [Specifying location of toc](#specifying-location-of-toc)
+- [GitHub Actions using this Action](#github-actions-using-this-action)
 - [Author](#author)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -50,6 +52,9 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 ### TARGET_PATHS
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
 default: `'README.md'`  
+### TOC_TITLE
+TOC Title.
+default: `'**Table of Contents**'`
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
@@ -66,6 +71,12 @@ see: https://github.com/thlorenz/doctoc#specifying-location-of-toc
 <!-- START doctoc -->
 <!-- END doctoc -->
 ```
+
+## GitHub Actions using this Action
+- [TOC Generator](https://github.com/technote-space/toc-generator)
+- [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
+- [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
+- [Assign Author](https://github.com/technote-space/assign-author)
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  

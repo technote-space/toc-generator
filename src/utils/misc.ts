@@ -29,8 +29,11 @@ const getTargetPaths = (): string[] => [...new Set<string>((getInput('TARGET_PAT
 
 export const getDocTocArgs = () => {
     const workDir = getWorkDir();
-    return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ');
+    const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
+    return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title ${title}` : ' --notitle');
 };
+
+const getTocTitle = (): string => getInput('TOC_TITLE') || '';
 
 const getWorkspace = (): string => process.env.GITHUB_WORKSPACE || '';
 
@@ -40,7 +43,7 @@ export const getGitUrl = (context: Context): string => `https://github.com/${con
 
 export const getRef = (context: Context): string => context.ref;
 
-export const getRefForUpdate = (context: Context): string => getRef(context).replace(/^refs\//, '');
+export const getRefForUpdate = (context: Context): string => encodeURIComponent(getRef(context).replace(/^refs\//, ''));
 
 const isTargetRef = (context: Context): boolean => /^refs\/heads\//.test(getRef(context));
 

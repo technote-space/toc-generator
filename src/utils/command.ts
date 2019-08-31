@@ -40,9 +40,8 @@ const getCurrentBranchName = async (workDir: string): Promise<string> => {
 const runDocToc = async (workDir: string): Promise<boolean> => {
     const args = getDocTocArgs();
     const doctoc = path.resolve(workDir, 'node_modules/.bin/doctoc');
-    await execAsync(`yarn --cwd ${workDir} add doctoc`);
+    await execAsync(`yarn --cwd ${workDir} add doctoc`, false, null, false, true);
     await execAsync(`${doctoc} ${args} --github`);
-    await execAsync(`yarn --cwd ${workDir} remove doctoc`);
     return true;
 };
 
