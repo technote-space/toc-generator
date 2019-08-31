@@ -42,7 +42,6 @@ const runDocToc = async (workDir: string): Promise<boolean> => {
     const doctoc = path.resolve(workDir, 'node_modules/.bin/doctoc');
     await execAsync(`yarn --cwd ${workDir} add doctoc`);
     await execAsync(`${doctoc} ${args} --github`);
-    await execAsync(`yarn --cwd ${workDir} remove doctoc`);
     return true;
 };
 
