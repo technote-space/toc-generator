@@ -5,7 +5,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/technote-space/toc-generator/badge)](https://www.codefactor.io/repository/github/technote-space/toc-generator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/technote-space/toc-generator/blob/master/LICENSE)
 
-GitHub Action to generate TOC.  
+GitHub Action to generate TOC (Table of Contents).  
 Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if changed.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
