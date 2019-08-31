@@ -16,6 +16,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 - [Installation](#installation)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
+  - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
