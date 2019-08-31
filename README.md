@@ -71,6 +71,12 @@ see: https://github.com/thlorenz/doctoc#specifying-location-of-toc
 <!-- END doctoc -->
 ```
 
+## GitHub Actions using this Action
+- [TOC Generator](https://github.com/technote-space/toc-generator)
+- [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
+- [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
+- [Assign Author](https://github.com/technote-space/assign-author)
+
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
 [Blog](https://technote.space)
