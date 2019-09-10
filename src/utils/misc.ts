@@ -39,7 +39,7 @@ const getWorkspace = (): string => process.env.GITHUB_WORKSPACE || '';
 
 export const isCloned = (): boolean => fs.existsSync(path.resolve(getWorkspace(), '.git'));
 
-export const getWorkDir = (): string => isCloned() ? getWorkspace() : path.resolve(getWorkspace(), '.work');
+export const getWorkDir = (): string => isCloned() ? path.resolve(getWorkspace()) : path.resolve(getWorkspace(), '.work');
 
 export const getGitUrl = (context: Context): string => `https://github.com/${context.repo.owner}/${context.repo.repo}.git`;
 
