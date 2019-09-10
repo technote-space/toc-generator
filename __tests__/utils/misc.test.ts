@@ -69,7 +69,7 @@ describe('getDocTocArgs', () => {
 
     it('should get DocToc args', () => {
         process.env.GITHUB_WORKSPACE = '/tmp/workspace';
-        process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md';
+        process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
         process.env.INPUT_TOC_TITLE = '**Table of Contents**';
         expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md /tmp/workspace/.work/.github/CONTRIBUTING.md --title \'**Table of Contents**\'');
     });
