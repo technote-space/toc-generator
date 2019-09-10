@@ -3,7 +3,7 @@ import path from 'path';
 import signale from 'signale';
 import {exec} from 'child_process';
 import {Context} from '@actions/github/lib/context';
-import {getBranch, getDocTocArgs, getGitUrl, getWorkDir} from './misc';
+import {getBranch, getDocTocArgs, getGitUrl, isCloned, getWorkDir} from './misc';
 
 export const getChangedFiles = async (context: Context): Promise<string[] | false> => {
     signale.info('Running DocToc and getting changed files');
@@ -18,6 +18,10 @@ export const getChangedFiles = async (context: Context): Promise<string[] | fals
 };
 
 const clone = async (workDir: string, context: Context): Promise<boolean> => {
+    if (isCloned()) {
+        return true;
+    }
+
     const branch = getBranch(context);
     const url = getGitUrl(context);
     await execAsync(`git -C ${workDir} clone --quiet --branch=${branch} --depth=1 ${url} .`, false, null, true);

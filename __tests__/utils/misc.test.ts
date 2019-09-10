@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import {getContext, testEnv} from '../util';
 import {
@@ -89,7 +90,10 @@ describe('getWorkDir', () => {
 
     it('should get working dir', () => {
         process.env.GITHUB_WORKSPACE = undefined;
-        expect(getWorkDir()).toBe(path.resolve('.work'));
+        if (!fs.existsSync(path.resolve('.git'))) {
+            fs.mkdirSync(path.resolve('.git'));
+        }
+        expect(getWorkDir()).toBe(path.resolve('.'));
     });
 });
 
