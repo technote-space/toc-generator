@@ -48,6 +48,24 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
 
+### For private repository
+Use [actions/checkout](https://github.com/actions/checkout) to checkout before TOC Generator step.  
+   e.g. `.github/workflows/toc.yml`
+   ```yaml
+   on: push
+   name: TOC Generator
+   jobs:
+     assignAuthor:
+       name: TOC Generator
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v1
+         - name: TOC Generator
+           uses: technote-space/toc-generator@v1
+           with:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   ```
+
 ## Options
 ### TARGET_PATHS
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
