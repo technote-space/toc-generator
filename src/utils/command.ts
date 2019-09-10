@@ -43,6 +43,11 @@ const getCurrentBranchName = async (workDir: string): Promise<string> => {
 
 const runDocToc = async (workDir: string): Promise<boolean> => {
     const args = getDocTocArgs();
+    if (false === args) {
+        signale.warn('There is no valid target. Please check if [TARGET_PATHS] is set correctly.');
+        return false;
+    }
+
     const doctoc = path.resolve(workDir, 'node_modules/.bin/doctoc');
     await execAsync(`yarn --cwd ${workDir} add doctoc`, false, null, false, true);
     await execAsync(`${doctoc} ${args} --github`);

@@ -27,9 +27,13 @@ export const getBuildVersion = (filepath: string): string | boolean => {
 
 const getTargetPaths = (): string[] => [...new Set<string>((getInput('TARGET_PATHS') || DEFAULT_TARGET_PATHS).split(',').map(target => target.trim()).filter(target => target && !target.startsWith('/') && !target.includes('..')))];
 
-export const getDocTocArgs = () => {
+export const getDocTocArgs = (): string | false => {
     const workDir = getWorkDir();
     const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
+    const paths = getTargetPaths();
+    if (!paths.length) {
+        return false;
+    }
     return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
 

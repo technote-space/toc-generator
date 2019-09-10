@@ -78,6 +78,12 @@ describe('getDocTocArgs', () => {
         process.env.GITHUB_WORKSPACE = '/tmp/workspace';
         expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md --notitle');
     });
+
+    it('should return false', () => {
+        process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+        process.env.INPUT_TARGET_PATHS = '..';
+        expect(getDocTocArgs()).toBe(false);
+    });
 });
 
 describe('getWorkDir', () => {
