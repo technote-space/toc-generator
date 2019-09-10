@@ -5,7 +5,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/technote-space/toc-generator/badge)](https://www.codefactor.io/repository/github/technote-space/toc-generator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/technote-space/toc-generator/blob/master/LICENSE)
 
-GitHub Action to generate TOC.  
+GitHub Action to generate TOC (Table of Contents).  
 Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if changed.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -14,6 +14,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 - [Screenshot](#screenshot)
 - [Installation](#installation)
+  - [For private repository](#for-private-repository)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
@@ -42,6 +43,24 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
+         - name: TOC Generator
+           uses: technote-space/toc-generator@v1
+           with:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   ```
+
+### For private repository
+Use [actions/checkout](https://github.com/actions/checkout) to checkout before TOC Generator step.  
+   e.g. `.github/workflows/toc.yml`
+   ```yaml
+   on: push
+   name: TOC Generator
+   jobs:
+     assignAuthor:
+       name: TOC Generator
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v1
          - name: TOC Generator
            uses: technote-space/toc-generator@v1
            with:
