@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import {getContext, testEnv} from '../util';
 import {
@@ -68,7 +69,7 @@ describe('getDocTocArgs', () => {
 
     it('should get DocToc args', () => {
         process.env.GITHUB_WORKSPACE = '/tmp/workspace';
-        process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md';
+        process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
         process.env.INPUT_TOC_TITLE = '**Table of Contents**';
         expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md /tmp/workspace/.work/.github/CONTRIBUTING.md --title \'**Table of Contents**\'');
     });
@@ -76,6 +77,12 @@ describe('getDocTocArgs', () => {
     it('should get default DocToc args', () => {
         process.env.GITHUB_WORKSPACE = '/tmp/workspace';
         expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md --notitle');
+    });
+
+    it('should return false', () => {
+        process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+        process.env.INPUT_TARGET_PATHS = '..';
+        expect(getDocTocArgs()).toBe(false);
     });
 });
 
@@ -89,7 +96,10 @@ describe('getWorkDir', () => {
 
     it('should get working dir', () => {
         process.env.GITHUB_WORKSPACE = undefined;
-        expect(getWorkDir()).toBe(path.resolve('.work'));
+        if (!fs.existsSync(path.resolve('.git'))) {
+            fs.mkdirSync(path.resolve('.git'));
+        }
+        expect(getWorkDir()).toBe(path.resolve('.'));
     });
 });
 

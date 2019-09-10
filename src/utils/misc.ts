@@ -27,9 +27,13 @@ export const getBuildVersion = (filepath: string): string | boolean => {
 
 const getTargetPaths = (): string[] => [...new Set<string>((getInput('TARGET_PATHS') || DEFAULT_TARGET_PATHS).split(',').map(target => target.trim()).filter(target => target && !target.startsWith('/') && !target.includes('..')))];
 
-export const getDocTocArgs = () => {
+export const getDocTocArgs = (): string | false => {
     const workDir = getWorkDir();
     const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
+    const paths = getTargetPaths();
+    if (!paths.length) {
+        return false;
+    }
     return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
 
@@ -37,7 +41,9 @@ const getTocTitle = (): string => getInput('TOC_TITLE') || '';
 
 const getWorkspace = (): string => process.env.GITHUB_WORKSPACE || '';
 
-export const getWorkDir = () => path.resolve(getWorkspace(), '.work');
+export const isCloned = (): boolean => fs.existsSync(path.resolve(getWorkspace(), '.git'));
+
+export const getWorkDir = (): string => isCloned() ? path.resolve(getWorkspace()) : path.resolve(getWorkspace(), '.work');
 
 export const getGitUrl = (context: Context): string => `https://github.com/${context.repo.owner}/${context.repo.repo}.git`;
 

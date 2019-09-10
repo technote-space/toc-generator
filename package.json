@@ -18,16 +18,16 @@
   },
   "main": "lib/main.js",
   "dependencies": {
-    "@actions/core": "^1.0.0",
-    "@actions/github": "^1.0.0",
+    "@actions/core": "^1.1.0",
+    "@actions/github": "^1.1.0",
     "signale": "^1.4.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.2",
+    "@types/node": "^12.7.4",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
-    "nock": "^10.0.6",
+    "nock": "^11.3.3",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.2"
   },
@@ -37,6 +37,13 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "cover": "jest --coverage"
+    "cover": "jest --coverage",
+    "release": "yarn release:build && yarn release:mkdir && yarn release:copy && yarn release:clear",
+    "release:build": "yarn install && yarn build && yarn install --production",
+    "release:mkdir": "rm -rdf .work && mkdir .work",
+    "release:copy": "rsync -a --exclude='.git' --exclude='.work' --exclude='.idea' --exclude='coverage' --checksum --delete . .work",
+    "release:clear": "yarn release:clear:dir && yarn release:clear:file",
+    "release:clear:dir": "rm -rdf .work/.github && rm -rdf .work/__tests__ && rm -rdf .work/src",
+    "release:clear:file": "rm -rdf .work/.gitignore && rm -rdf .work/*.js && rm -rdf .work/*.json && rm -rdf .work/*.lock && rm -rdf .work/_config.yml"
   }
 }
