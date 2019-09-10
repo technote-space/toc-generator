@@ -14,6 +14,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 - [Screenshot](#screenshot)
 - [Installation](#installation)
+  - [For private repository](#for-private-repository)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
