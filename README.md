@@ -39,7 +39,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
    on: push
    name: TOC Generator
    jobs:
-     assignAuthor:
+     generateTOC:
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
@@ -56,7 +56,7 @@ Use [actions/checkout](https://github.com/actions/checkout) to checkout before T
    on: push
    name: TOC Generator
    jobs:
-     assignAuthor:
+     generateTOC:
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
