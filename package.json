@@ -18,7 +18,7 @@
   },
   "main": "lib/main.js",
   "dependencies": {
-    "@actions/core": "^1.1.0",
+    "@actions/core": "^1.1.1",
     "@actions/github": "^1.1.0",
     "signale": "^1.4.0"
   },
