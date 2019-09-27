@@ -1,7 +1,7 @@
 # TOC Generator
 
 [![Build Status](https://github.com/technote-space/toc-generator/workflows/Build/badge.svg)](https://github.com/technote-space/toc-generator/actions)
-[![Coverage Status](https://coveralls.io/repos/github/technote-space/toc-generator/badge.svg?branch=master)](https://coveralls.io/github/technote-space/toc-generator?branch=master)
+[![codecov](https://codecov.io/gh/technote-space/toc-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/technote-space/toc-generator)
 [![CodeFactor](https://www.codefactor.io/repository/github/technote-space/toc-generator/badge)](https://www.codefactor.io/repository/github/technote-space/toc-generator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/technote-space/toc-generator/blob/master/LICENSE)
 
