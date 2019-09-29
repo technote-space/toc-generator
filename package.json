@@ -1,12 +1,13 @@
 {
-  "name": "@technote/toc-generator",
+  "name": "@technote-space/toc-generator",
   "version": "0.0.1",
-  "description": "Template for GitHub actions.",
+  "description": "GitHub Action to generate TOC.",
   "author": "Technote <technote.space@gmail.com> (https://technote.space)",
   "license": "MIT",
   "keywords": [
     "github",
-    "github actions"
+    "github actions",
+    "toc"
   ],
   "homepage": "https://github.com/technote-space/toc-generator",
   "repository": {
@@ -20,11 +21,16 @@
   "dependencies": {
     "@actions/core": "^1.1.1",
     "@actions/github": "^1.1.0",
-    "signale": "^1.4.0"
+    "@technote-space/filter-github-action": "^0.1.1",
+    "@technote-space/github-action-helper": "^0.1.8"
   },
   "devDependencies": {
+    "@technote-space/github-action-test-helper": "^0.0.10",
     "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.5",
+    "@types/node": "^12.7.8",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "eslint": "^6.5.0",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
     "nock": "^11.3.5",
@@ -36,14 +42,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "yarn lint && yarn cover",
+    "lint": "eslint src/**/**/*.ts && eslint __tests__/**/**/*.ts",
     "cover": "jest --coverage",
-    "release": "yarn release:build && yarn release:mkdir && yarn release:copy && yarn release:clear",
-    "release:build": "yarn install && yarn build && yarn install --production",
-    "release:mkdir": "rm -rdf .work && mkdir .work",
-    "release:copy": "rsync -a --exclude='.git' --exclude='.work' --exclude='.idea' --exclude='coverage' --checksum --delete . .work",
-    "release:clear": "yarn release:clear:dir && yarn release:clear:file",
-    "release:clear:dir": "rm -rdf .work/.github && rm -rdf .work/__tests__ && rm -rdf .work/src",
-    "release:clear:file": "rm -rdf .work/.gitignore && rm -rdf .work/*.js && rm -rdf .work/*.json && rm -rdf .work/*.lock && rm -rdf .work/_config.yml"
+    "update": "ncu -u && yarn install && yarn upgrade && yarn audit"
   }
 }
