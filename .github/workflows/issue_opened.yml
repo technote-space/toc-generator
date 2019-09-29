@@ -1,4 +1,6 @@
-on: issues
+on:
+  issues:
+    types: [opened]
 name: Issue opened
 jobs:
   assign:
@@ -6,8 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign issues to project
-        if: github.event.action == 'opened'
-        uses: alex-page/github-project-automation-plus@master
+        uses: alex-page/github-project-automation-plus@v0.0.3
         with:
           project: Backlog
           column: To do
@@ -18,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign author to issue
-        if: github.event.action == 'opened'
         uses: technote-space/assign-author@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
