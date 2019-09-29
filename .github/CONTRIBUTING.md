@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Contributing](#contributing)
+  - [Submitting a pull request](#submitting-a-pull-request)
+  - [Resources](#resources)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Contributing
 [issues]: https://github.com/technote-space/toc-generator/issues
 [fork]: https://github.com/technote-space/toc-generator/fork
