@@ -9,15 +9,6 @@ When contributing to this repository, please first discuss the change you wish t
 
 Please note we have a [Contributor Code of Conduct][code-of-conduct], please follow it in all your interactions with the project.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [Submitting a pull request](#submitting-a-pull-request)
-- [Resources](#resources)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Submitting a pull request
 
 1. [Fork][fork] and clone the repository
