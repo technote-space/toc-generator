@@ -22,12 +22,13 @@ export const getWorkDir = (): string => isCloned() ? path.resolve(getWorkspace()
 const getTocTitle = (): string => getInput('TOC_TITLE') || '';
 
 export const getDocTocArgs = (): string | false => {
-	const workDir = getWorkDir();
-	const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
 	const paths = getTargetPaths();
 	if (!paths.length) {
 		return false;
 	}
+
+	const workDir = getWorkDir();
+	const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
 	return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
 
