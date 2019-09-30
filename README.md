@@ -34,7 +34,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## Installation
-1. Specifying location of TOC (option)  
+1. Specify location of TOC (option)  
 e.g. `README.md`  
    ```markdown
    <!-- START doctoc -->
