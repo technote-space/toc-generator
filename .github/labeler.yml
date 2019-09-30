@@ -2,9 +2,8 @@ javascript:
   - '**/*.js'
 typescript:
   - '**/*.ts'
-dependencies:
-  - '**/*.lock'
-  - '**/*-lock.json'
+php:
+  - '**/*.php'
 
 'Type: Testing':
   - '**/tests/*'
@@ -13,3 +12,8 @@ dependencies:
 
 'Type: Documentation':
   - '**/*.md'
+
+'Type: CI/CD':
+  - '.github/workflows/*.yml'
+  - '.circleci/*'
+  - '.travis.yml'
