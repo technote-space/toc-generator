@@ -46,11 +46,14 @@ export const runDocToc = async(): Promise<boolean> => {
 		return false;
 	}
 
-	startProcess('Running Doctoc');
-	const workDir = getWorkDir();
-	const doctoc = path.resolve(workDir, 'node_modules/.bin/doctoc');
-	await execAsync({command: `yarn --cwd ${workDir} add doctoc`, suppressOutput: true});
-	await execAsync({command: `${doctoc} ${args} --github`});
+	startProcess('Running Doctoc...');
+	await helper.runCommand(getWorkDir(), [
+		'rm -f package.json',
+		'rm -f package-lock.json',
+		'rm -f yarn.lock',
+		'yarn add doctoc',
+		`node_modules/.bin/doctoc ${args} --github`,
+	]);
 	return true;
 };
 
