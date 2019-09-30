@@ -34,6 +34,13 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## Installation
+1. Specifying location of TOC (option)  
+e.g. `README.md`  
+   ```markdown
+   <!-- START doctoc -->
+   <!-- END doctoc -->
+   ```
+   [detail](https://github.com/thlorenz/doctoc#specifying-location-of-toc)  
 1. Setup workflow  
    e.g. `.github/workflows/toc.yml`
    ```yaml
@@ -49,12 +56,6 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
            with:
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
-1. Specifying location of TOC (option)  
-see: https://github.com/thlorenz/doctoc#specifying-location-of-toc  
-```markdown
-<!-- START doctoc -->
-<!-- END doctoc -->
-```
 
 ## Options
 ### TARGET_PATHS
