@@ -34,7 +34,13 @@
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## インストール
-1. Setup workflow  
+1. 目次の位置を指定 (option)  
+   ```markdown
+   <!-- START doctoc -->
+   <!-- END doctoc -->
+   ```
+   [詳細](https://github.com/thlorenz/doctoc#specifying-location-of-toc)  
+1. workflow を設定  
    例：`.github/workflows/toc.yml`
    ```yaml
    on: push
@@ -49,12 +55,6 @@
            with:
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
-1. 目次の位置を指定 (option)  
-詳細: https://github.com/thlorenz/doctoc#specifying-location-of-toc  
-```markdown
-<!-- START doctoc -->
-<!-- END doctoc -->
-```
 
 ## オプション
 ### TARGET_PATHS
