@@ -84,7 +84,7 @@ So it won't spawn actions which triggered by push.
 
 ![GITHUB_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/no_access_token.png)
 
-This is a problem if you are setting up branch protection.  
+This can be a problem if you have branch protection configured.  
 
 If you want to trigger actions, use a personal access token instead.  
 1. Generate a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) with the public_repo or repo scope.  
