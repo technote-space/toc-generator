@@ -6,6 +6,7 @@ categories:
     labels:
       - 'Type: Feature'
       - 'Type: Refactoring'
+      - 'Type: CI/CD'
   - title: ':bug: Bug Fixes'
     labels:
       - 'Type: Bug'
@@ -22,6 +23,8 @@ categories:
   - title: ':sparkles: All Changes'
     labels:
       - 'Type: Release'
+exclude-lables:
+  - 'dependencies'
 template: |
   ## What’s Changed
 

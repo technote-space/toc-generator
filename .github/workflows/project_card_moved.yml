@@ -1,4 +1,6 @@
-on: project_card
+on:
+  project_card:
+    types: [moved]
 name: Project Card Event
 jobs:
   triage:

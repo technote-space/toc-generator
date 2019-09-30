@@ -1,4 +1,6 @@
-on: pull_request
+on:
+  pull_request:
+    types: [opened]
 name: Pull Request opened
 jobs:
   assignToProject:
@@ -6,8 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign PullRequest to Project
-        if: github.event.action == 'opened'
-        uses: alex-page/github-project-automation-plus@master
+        uses: alex-page/github-project-automation-plus@v0.0.3
         with:
           project: Backlog
           column: To do
@@ -18,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign Author to PR
-        if: github.event.action == 'opened'
         uses: technote-space/assign-author@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,7 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PR Labeler
-        if: github.event.action == 'opened'
         uses: technote-fork/pr-labeler-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
