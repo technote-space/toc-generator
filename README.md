@@ -110,10 +110,16 @@ If you want to trigger actions, use a personal access token instead.
 ![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
 
 ## GitHub Actions using this Action
-- [TOC Generator](https://github.com/technote-space/toc-generator)
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
+  - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
 - [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
+  - [toc.yml](https://github.com/technote-space/auto-card-labeler/blob/master/.github/workflows/toc.yml)
 - [Assign Author](https://github.com/technote-space/assign-author)
+  - [toc.yml](https://github.com/technote-space/assign-author/blob/master/.github/workflows/toc.yml)
+- [TOC Generator](https://github.com/technote-space/toc-generator)
+  - [toc.yml](https://github.com/technote-space/toc-generator/blob/master/.github/workflows/toc.yml)
+- [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
+  - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
