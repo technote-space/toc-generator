@@ -2,6 +2,7 @@
 [issues]: https://github.com/technote-space/toc-generator/issues
 [fork]: https://github.com/technote-space/toc-generator/fork
 [pr]: https://github.com/technote-space/toc-generator/compare
+[eslint]: https://eslint.org/
 [jest]: https://jestjs.io/
 [code-of-conduct]: CODE_OF_CONDUCT.md
 
@@ -12,7 +13,8 @@ Please note we have a [Contributor Code of Conduct][code-of-conduct], please fol
 ## Submitting a pull request
 
 1. [Fork][fork] and clone the repository
-1. Make sure the tests pass on your machine: `composer test`, which contains
+1. Make sure the tests pass on your machine: `yarn test`, which contains
+   - [`ESLint`][eslint]
    - [`Jest`][jest]
 1. Create a new branch: `git checkout -b my-branch-name`
 1. Make your change, add tests, and make sure the tests still pass.
