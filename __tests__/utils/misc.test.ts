@@ -6,8 +6,6 @@ import { testEnv, getContext } from '@technote-space/github-action-test-helper';
 import {
 	getDocTocArgs,
 	getWorkDir,
-	getRefForUpdate,
-	getBranch,
 	getCommitMessage,
 } from '../../src/utils/misc';
 import { DEFAULT_COMMIT_MESSAGE, TARGET_EVENTS } from '../../src/constant';
@@ -84,23 +82,6 @@ describe('getWorkDir', () => {
 			fs.mkdirSync(path.resolve('.git'));
 		}
 		expect(getWorkDir()).toBe(path.resolve('.'));
-	});
-});
-
-describe('getRefForUpdate', () => {
-	// https://github.com/octokit/rest.js/issues/1308#issuecomment-480532468
-	it('should get ref for update', () => {
-		expect(getRefForUpdate(getContext({
-			ref: 'refs/heads/test',
-		}))).toBe(encodeURIComponent('heads/test'));
-	});
-});
-
-describe('getBranch', () => {
-	it('should get branch', () => {
-		expect(getBranch(getContext({
-			ref: 'refs/heads/test',
-		}))).toBe('test');
 	});
 });
 

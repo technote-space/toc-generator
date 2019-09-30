@@ -1,37 +1,32 @@
 import fs from 'fs';
 import path from 'path';
-import { Logger, Command, Utils } from '@technote-space/github-action-helper';
+import { Logger, GitHelper, Utils } from '@technote-space/github-action-helper';
 import { Context } from '@actions/github/lib/context';
-import { getBranch, getDocTocArgs, isCloned, getWorkDir } from './misc';
+import { getDocTocArgs, isCloned, getWorkDir } from './misc';
+
+const {getBranch, getWorkspace} = Utils;
 
 export const replaceDirectory = (message: string): string => {
-	const workDir = getWorkDir();
-	return message.replace(` -C ${workDir}`, '').replace(workDir, '<Working Directory>');
+	const workDir = path.resolve(getWorkspace());
+	return message
+		.replace(` -C ${workDir}/.work`, '')
+		.replace(` -C ${workDir}`, '')
+		.replace(`${workDir}/.work`, '<Working Directory>')
+		.replace(workDir, '<Working Directory>');
 };
 
-const {getGitUrl} = Utils;
 const logger = new Logger(replaceDirectory);
-const command = new Command(logger);
 const {startProcess, warn} = logger;
-const {execAsync} = command;
-
-export const getCurrentBranchName = async(): Promise<string> => {
-	const workDir = getWorkDir();
-	if (!fs.existsSync(path.resolve(workDir, '.git'))) {
-		return '';
-	}
-	return (await execAsync({command: `git -C ${workDir} branch -a | grep -E '^\\*' | cut -b 3-`})).trim();
-};
+const helper = new GitHelper(logger, {filter: (line: string): boolean => /^M\s+/.test(line) && /\.md$/i.test(line)});
 
 export const clone = async(context: Context): Promise<boolean> => {
-	const workDir = getWorkDir();
 	const branch = getBranch(context);
-	startProcess('Cloning the branch %s from the remote repo', branch);
+	const workDir = getWorkDir();
+	startProcess('Cloning the branch %s from the remote repo...', branch);
 
-	const url = getGitUrl(context, false);
-	await execAsync({command: `git -C ${workDir} clone --quiet --branch=${branch} --depth=3 ${url} .`, suppressError: true});
+	await helper.clone(workDir, branch, context);
 
-	if (await getCurrentBranchName() !== branch) {
+	if (await helper.getCurrentBranchName(workDir) !== branch) {
 		warn('remote branch [%s] not found', branch);
 		return false;
 	}
@@ -58,20 +53,17 @@ export const runDocToc = async(): Promise<boolean> => {
 };
 
 export const commit = async(): Promise<void> => {
-	startProcess('Committing');
+	startProcess('Committing...');
 
-	const workDir = getWorkDir();
-	await execAsync({command: `git -C ${workDir} add --all`});
+	await helper.runCommand(getWorkDir(), [
+		'git add --all',
+	]);
 };
 
 export const getDiff = async(): Promise<string[]> => {
-	startProcess('Checking diff');
+	startProcess('Checking diff...');
 
-	const workDir = getWorkDir();
-	return (await execAsync({command: `git -C ${workDir} status --short -uno`, suppressOutput: true}))
-		.split(/\r\n|\n/)
-		.filter(line => line.match(/^M\s+/) && line.match(/\.md$/i))
-		.map(line => line.replace(/^M\s+/, ''));
+	return await helper.getDiff(getWorkDir());
 };
 
 export const getChangedFiles = async(context: Context): Promise<string[] | false> => {

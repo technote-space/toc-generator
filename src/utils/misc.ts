@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { Utils } from '@technote-space/github-action-helper';
 import { getInput } from '@actions/core' ;
-import { Context } from '@actions/github/lib/context';
 import { DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS } from '../constant';
 
 const {getWorkspace, getArrayInput} = Utils;
@@ -31,9 +30,5 @@ export const getDocTocArgs = (): string | false => {
 	const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
 	return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
-
-export const getRefForUpdate = (context: Context): string => encodeURIComponent(context.ref.replace(/^refs\//, ''));
-
-export const getBranch = (context: Context): string => context.ref.replace(/^refs\/heads\//, '');
 
 export const getCommitMessage = (): string => getInput('COMMIT_MESSAGE') || DEFAULT_COMMIT_MESSAGE;
