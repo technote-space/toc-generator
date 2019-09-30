@@ -16,16 +16,15 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 - [Screenshot](#screenshot)
 - [Installation](#installation)
-  - [For private repository](#for-private-repository)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
+  - [condition](#condition)
 - [Addition](#addition)
-  - [Recommended setting](#recommended-setting)
-    - [Specifying location of toc](#specifying-location-of-toc)
+  - [Commit](#commit)
 - [GitHub Actions using this Action](#github-actions-using-this-action)
 - [Author](#author)
 
