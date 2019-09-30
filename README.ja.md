@@ -83,7 +83,7 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
 
 ![GITHUB_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/no_access_token.png)
 
-これはブランチプロテクションを設定していると問題になります。
+これはブランチプロテクションを設定していると問題になる場合があります。  
 
 もしアクションをトリガーしたい場合は代わりに`personal access token`を使用してください。  
 1. public_repo または repo の権限で [Personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) を生成  
