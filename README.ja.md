@@ -7,8 +7,8 @@
 
 *Read this in other languages: [English](README.md), [日本語](README.ja.md).*
 
-This is a `GitHub Action` to generate TOC (Table of Contents).  
-Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if changed.
+これは目次を生成する`GitHub Action`です。  
+[DocToc](https://github.com/thlorenz/doctoc) を実行し変更があればコミットします。  
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -31,12 +31,12 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Screenshot
+## スクリーンショット
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
-## Installation
+## インストール
 1. Setup workflow  
-   e.g. `.github/workflows/toc.yml`
+   例：`.github/workflows/toc.yml`
    ```yaml
    on: push
    name: TOC Generator
@@ -50,48 +50,48 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
            with:
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
-1. Specifying location of TOC (option)  
-see: https://github.com/thlorenz/doctoc#specifying-location-of-toc  
+1. 目次の位置を指定 (option)  
+詳細: https://github.com/thlorenz/doctoc#specifying-location-of-toc  
 ```markdown
 <!-- START doctoc -->
 <!-- END doctoc -->
 ```
 
-## Options
+## オプション
 ### TARGET_PATHS
-Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
+対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
 default: `'README.md'`  
-e.g. `'README.md,README.ja.md'`  
+例：`'README.md,README.ja.md'`  
 ### TOC_TITLE
-TOC Title.
+目次タイトル  
 default: `'**Table of Contents**'`
 ### COMMIT_MESSAGE
-Commit message.  
+コミットメッセージ    
 default: `'docs: Update TOC'`  
 
-## Action event details
-### Target event
+## Action イベント詳細
+### 対象イベント
 | eventName: action | condition |
 |:---:|:---:|
 |push: *|[condition](#condition)|
 ### condition
-- push to branch
+- ブランチへのプッシュ
 
-## Addition
-### Commit
-The `GITHUB_TOKEN` that is provided as a part of `GitHub Actions` doesn't have authorization to create any successive events.  
-So it won't spawn actions which triggered by push.  
+## 補足
+### コミット
+GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作成する権限がありません。  
+したがって、プッシュによってトリガーされるビルドアクションなどは実行されません。  
 
 ![GITHUB_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/no_access_token.png)
 
-This is a problem if you are setting up branch protection.  
+これはブランチプロテクションを設定していると問題になります。
 
-If you want to trigger actions, use a personal access token instead.  
-1. Generate a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) with the public_repo or repo scope.  
-(repo is required for private repositories).  
-1. [Save as ACCESS_TOKEN](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables)
-1. Use `ACCESS_TOKEN` instead of `GITHUB_TOKEN`.  
-   e.g. `.github/workflows/toc.yml`
+もしアクションをトリガーしたい場合は代わりに`personal access token`を使用してください。  
+1. public_repo または repo の権限で [Personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) を生成  
+(repo はプライベートリポジトリで必要です)  
+1. [ACCESS_TOKENとして保存](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables)
+1. `GITHUB_TOKEN`の代わりに`ACCESS_TOKEN`を使用  
+   例：`.github/workflows/toc.yml`
    ```yaml
    on: push
    name: TOC Generator
@@ -109,11 +109,17 @@ If you want to trigger actions, use a personal access token instead.
 
 ![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
 
-## GitHub Actions using this Action
-- [TOC Generator](https://github.com/technote-space/toc-generator)
+## このアクションを使用しているアクションの例
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
+  - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
 - [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
+  - [toc.yml](https://github.com/technote-space/auto-card-labeler/blob/master/.github/workflows/toc.yml)
 - [Assign Author](https://github.com/technote-space/assign-author)
+  - [toc.yml](https://github.com/technote-space/assign-author/blob/master/.github/workflows/toc.yml)
+- [TOC Generator](https://github.com/technote-space/toc-generator)
+  - [toc.yml](https://github.com/technote-space/toc-generator/blob/master/.github/workflows/toc.yml)
+- [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
+  - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
