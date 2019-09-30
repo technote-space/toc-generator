@@ -14,19 +14,18 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Screenshot](#screenshot)
-- [Installation](#installation)
-  - [For private repository](#for-private-repository)
-- [Options](#options)
+- [スクリーンショット](#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88)
+- [インストール](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
-- [Action event details](#action-event-details)
-  - [Target event](#target-event)
-- [Addition](#addition)
-  - [Recommended setting](#recommended-setting)
-    - [Specifying location of toc](#specifying-location-of-toc)
-- [GitHub Actions using this Action](#github-actions-using-this-action)
+- [Action イベント詳細](#action-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E8%A9%B3%E7%B4%B0)
+  - [対象イベント](#%E5%AF%BE%E8%B1%A1%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)
+  - [condition](#condition)
+- [補足](#%E8%A3%9C%E8%B6%B3)
+  - [コミット](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88)
+- [このアクションを使用しているアクションの例](#%E3%81%93%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BE%8B)
 - [Author](#author)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
