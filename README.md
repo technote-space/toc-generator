@@ -62,7 +62,7 @@ Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#
 default: `'README.md'`  
 e.g. `'README.md,README.ja.md'`  
 ### TOC_TITLE
-TOC Title.
+TOC Title.  
 default: `'**Table of Contents**'`
 ### COMMIT_MESSAGE
 Commit message.  
