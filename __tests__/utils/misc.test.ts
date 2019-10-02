@@ -68,6 +68,23 @@ describe('isTargetContext', () => {
 		}))).toBe(true);
 	});
 
+	it('should return true 6', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/master',
+			eventName: 'push',
+		}))).toBe(true);
+	});
+
+	it('should return true 7', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_INCLUDE_LABELS = 'label';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/master',
+			eventName: 'push',
+		}))).toBe(true);
+	});
+
 	it('should return false 1', () => {
 		expect(isTargetContext(getContext({
 			ref: 'refs/tags/test',
@@ -83,6 +100,43 @@ describe('isTargetContext', () => {
 				'pull_request': {
 					labels: [{name: 'label1'}],
 				},
+			},
+			eventName: 'pull_request',
+		}))).toBe(false);
+	});
+
+	it('should return false 3', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/test',
+			payload: {
+				action: undefined,
+			},
+			eventName: 'push',
+		}))).toBe(false);
+	});
+
+	it('should return false 4', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_INCLUDE_LABELS = 'label1';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/master',
+			action: 'synchronized',
+			'pull_request': {
+				labels: [{name: 'label2'}],
+			},
+			eventName: 'pull_request',
+		}))).toBe(false);
+	});
+
+	it('should return false 5', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_INCLUDE_LABELS = 'label1';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/feature/test',
+			action: 'synchronized',
+			'pull_request': {
+				labels: [{name: 'label1'}],
 			},
 			eventName: 'pull_request',
 		}))).toBe(false);
