@@ -84,6 +84,11 @@ INCLUDE_LABELS: |
   Test Label2
 ```
 
+### BRANCH_PREFIX
+ブランチプリフィックス  
+default: `''`  
+e.g. `master`
+
 ## Action イベント詳細
 ### 対象イベント
 | eventName: action | condition |
@@ -93,6 +98,7 @@ INCLUDE_LABELS: |
 ### Conditions
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
+  - ブランチ名 ([`BRANCH_PREFIX`](#branch_prefix))
 #### condition2
 - [指定したラベル](#include_labels)が付与されているかどうか
 

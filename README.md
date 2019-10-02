@@ -85,6 +85,11 @@ INCLUDE_LABELS: |
   Test Label2
 ```
 
+### BRANCH_PREFIX
+Branch name prefix.  
+default: `''`  
+e.g. `master`
+
 ## Action event details
 ### Target event
 | eventName: action | condition |
@@ -94,6 +99,7 @@ INCLUDE_LABELS: |
 ### Conditions
 #### condition1
 - push to branch (not tag)
+  - branch name ([`BRANCH_PREFIX`](#branch_prefix))
 #### condition2
 - [specified labels](#include_labels) included?
 
