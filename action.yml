@@ -14,6 +14,9 @@ inputs:
   COMMIT_MESSAGE:
     description: Commit message.
     default: 'docs: Update TOC'
+  INCLUDE_LABELS:
+    description: Labels used to check if the PR has it.
+    default: ''
 branding:
   icon: 'book-open'
   color: 'blue'
