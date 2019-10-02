@@ -66,14 +66,17 @@ Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#
 default: `'README.md'`  
 e.g. `'README.md,README.ja.md'`  
 e.g. `.`
+
 ### TOC_TITLE
 TOC Title.  
 default: `'**Table of Contents**'`  
 e.g. `''`
+
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
 e.g. `feat: update TOC`
+
 ### INCLUDE_LABELS
 Labels used to check if the PR has it.  
 default: `''`  

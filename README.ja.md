@@ -65,14 +65,17 @@
 default: `'README.md'`  
 例：`'README.md,README.ja.md'`  
 例：`.`
+
 ### TOC_TITLE
 目次タイトル  
 default: `'**Table of Contents**'`  
 例：`''`
+
 ### COMMIT_MESSAGE
 コミットメッセージ    
 default: `'docs: Update TOC'`  
 例：`feat: update TOC`
+
 ### INCLUDE_LABELS
 プルリクエストに付与されているかチェックするラベル  
 default: `''`  
