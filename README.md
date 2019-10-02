@@ -21,6 +21,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
   - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
   - [INCLUDE_LABELS](#include_labels)
+  - [BRANCH_PREFIX](#branch_prefix)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
@@ -88,6 +89,11 @@ INCLUDE_LABELS: |
   Test Label2
 ```
 
+### BRANCH_PREFIX
+Branch name prefix.  
+default: `''`  
+e.g. `master`
+
 ## Action event details
 ### Target event
 | eventName: action | condition |
@@ -97,6 +103,7 @@ INCLUDE_LABELS: |
 ### Conditions
 #### condition1
 - push to branch (not tag)
+  - branch name ([`BRANCH_PREFIX`](#branch_prefix))
 #### condition2
 - [specified labels](#include_labels) included?
 
