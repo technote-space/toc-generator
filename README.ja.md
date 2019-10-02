@@ -61,12 +61,15 @@
 対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
 default: `'README.md'`  
 例：`'README.md,README.ja.md'`  
+例：`.`
 ### TOC_TITLE
 目次タイトル  
-default: `'**Table of Contents**'`
+default: `'**Table of Contents**'`  
+例：`''`
 ### COMMIT_MESSAGE
 コミットメッセージ    
 default: `'docs: Update TOC'`  
+例：`feat: update TOC`
 
 ## Action イベント詳細
 ### 対象イベント
