@@ -20,9 +20,12 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
+  - [INCLUDE_LABELS](#include_labels)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
-  - [condition](#condition)
+  - [Conditions](#conditions)
+    - [condition1](#condition1)
+    - [condition2](#condition2)
 - [Addition](#addition)
   - [Commit](#commit)
 - [GitHub Actions using this Action](#github-actions-using-this-action)
@@ -68,14 +71,28 @@ default: `'**Table of Contents**'`
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
+### INCLUDE_LABELS
+Labels used to check if the PR has it.  
+default: `''`  
+e.g. `'Label1, Label2'`  
+e.g. 
+```yaml
+INCLUDE_LABELS: |
+  Test Label1
+  Test Label2
+```
 
 ## Action event details
 ### Target event
 | eventName: action | condition |
 |:---:|:---:|
-|push: *|[condition](#condition)|
-### condition
-- push to branch
+|push: *|[condition1](#condition1)|
+|pull_request: \[opened, synchronized, labeled, unlabeled]|[condition2](#condition2)|
+### Conditions
+#### condition1
+- push to branch (not tag)
+#### condition2
+- [specified labels](#include_labels) included?
 
 ## Addition
 ### Commit

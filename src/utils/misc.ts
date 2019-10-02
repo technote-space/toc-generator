@@ -1,10 +1,14 @@
 import fs from 'fs';
 import path from 'path';
+import { Context } from '@actions/github/lib/context';
 import { Utils } from '@technote-space/github-action-helper';
+import { isTargetEvent, isTargetLabels } from '@technote-space/filter-github-action';
 import { getInput } from '@actions/core' ;
-import { DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS } from '../constant';
+import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS } from '../constant';
 
 const {getWorkspace, getArrayInput} = Utils;
+
+export const isTargetContext = (context: Context): boolean => isTargetEvent(TARGET_EVENTS, context) && isTargetLabels(getArrayInput('INCLUDE_LABELS'), [], context);
 
 const getTargetPaths = (): string[] => {
 	const paths = getArrayInput('TARGET_PATHS');

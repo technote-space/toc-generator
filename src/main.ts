@@ -1,11 +1,9 @@
 import path from 'path';
 import { setFailed, getInput } from '@actions/core';
 import { context, GitHub } from '@actions/github';
-import { isTargetEvent } from '@technote-space/filter-github-action';
 import { Logger, Utils, ApiHelper } from '@technote-space/github-action-helper';
 import { getChangedFiles } from './utils/command';
-import { TARGET_EVENTS } from './constant';
-import { getCommitMessage, getWorkDir } from './utils/misc';
+import { isTargetContext, getCommitMessage, getWorkDir } from './utils/misc';
 
 const {showActionInfo} = Utils;
 
@@ -17,7 +15,7 @@ async function run(): Promise<void> {
 		const logger = new Logger();
 		showActionInfo(path.resolve(__dirname, '..'), logger, context);
 
-		if (!isTargetEvent(TARGET_EVENTS, context)) {
+		if (!isTargetContext(context)) {
 			logger.info('This is not target event.');
 			return;
 		}
