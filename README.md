@@ -21,6 +21,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
   - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
   - [INCLUDE_LABELS](#include_labels)
+  - [BRANCH_PREFIX](#branch_prefix)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
