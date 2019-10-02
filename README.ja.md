@@ -67,14 +67,28 @@ default: `'**Table of Contents**'`
 ### COMMIT_MESSAGE
 コミットメッセージ    
 default: `'docs: Update TOC'`  
+### INCLUDE_LABELS
+プルリクエストに付与されているかチェックするラベル  
+default: `''`  
+例：`'Label1, Label2'`  
+例：
+```yaml
+INCLUDE_LABELS: |
+  Test Label1
+  Test Label2
+```
 
 ## Action イベント詳細
 ### 対象イベント
 | eventName: action | condition |
 |:---:|:---:|
-|push: *|[condition](#condition)|
-### condition
-- ブランチへのプッシュ
+|push: *|[condition1](#condition1)|
+|pull_request: \[opened, synchronized, labeled, unlabeled]|[condition2](#condition2)|
+### Conditions
+#### condition1
+- ブランチへのプッシュ (タグのプッシュではない)
+#### condition2
+- [指定したラベル](#include_labels)が付与されているかどうか
 
 ## 補足
 ### コミット
