@@ -20,9 +20,13 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
+  - [INCLUDE_LABELS](#include_labels)
+  - [BRANCH_PREFIX](#branch_prefix)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
-  - [condition](#condition)
+  - [Conditions](#conditions)
+    - [condition1](#condition1)
+    - [condition2](#condition2)
 - [Addition](#addition)
   - [Commit](#commit)
 - [GitHub Actions using this Action](#github-actions-using-this-action)
@@ -34,7 +38,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## Installation
-1. Specifying location of TOC (option)  
+1. Specify location of TOC (option)  
 e.g. `README.md`  
    ```markdown
    <!-- START doctoc -->
@@ -62,20 +66,46 @@ e.g. `README.md`
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
 default: `'README.md'`  
 e.g. `'README.md,README.ja.md'`  
+e.g. `.`
+
 ### TOC_TITLE
 TOC Title.  
-default: `'**Table of Contents**'`
+default: `'**Table of Contents**'`  
+e.g. `''`
+
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
+e.g. `feat: update TOC`
+
+### INCLUDE_LABELS
+Labels used to check if the PR has it.  
+default: `''`  
+e.g. `'Label1, Label2'`  
+e.g. 
+```yaml
+INCLUDE_LABELS: |
+  Test Label1
+  Test Label2
+```
+
+### BRANCH_PREFIX
+Branch name prefix.  
+default: `''`  
+e.g. `master`
 
 ## Action event details
 ### Target event
 | eventName: action | condition |
 |:---:|:---:|
-|push: *|[condition](#condition)|
-### condition
-- push to branch
+|push: *|[condition1](#condition1)|
+|pull_request: \[opened, synchronized, labeled, unlabeled]|[condition2](#condition2)|
+### Conditions
+#### condition1
+- push to branch (not tag)
+  - branch name ([`BRANCH_PREFIX`](#branch_prefix))
+#### condition2
+- [specified labels](#include_labels) included?
 
 ## Addition
 ### Commit
@@ -84,7 +114,7 @@ So it won't spawn actions which triggered by push.
 
 ![GITHUB_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/no_access_token.png)
 
-This is a problem if you are setting up branch protection.  
+This can be a problem if you have branch protection configured.  
 
 If you want to trigger actions, use a personal access token instead.  
 1. Generate a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) with the public_repo or repo scope.  
@@ -110,10 +140,16 @@ If you want to trigger actions, use a personal access token instead.
 ![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
 
 ## GitHub Actions using this Action
-- [TOC Generator](https://github.com/technote-space/toc-generator)
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
+  - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
 - [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
+  - [toc.yml](https://github.com/technote-space/auto-card-labeler/blob/master/.github/workflows/toc.yml)
 - [Assign Author](https://github.com/technote-space/assign-author)
+  - [toc.yml](https://github.com/technote-space/assign-author/blob/master/.github/workflows/toc.yml)
+- [TOC Generator](https://github.com/technote-space/toc-generator)
+  - [toc.yml](https://github.com/technote-space/toc-generator/blob/master/.github/workflows/toc.yml)
+- [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
+  - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
