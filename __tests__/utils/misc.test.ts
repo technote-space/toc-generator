@@ -46,7 +46,7 @@ describe('isTargetContext', () => {
 		process.env.INPUT_INCLUDE_LABELS = 'label2';
 		expect(isTargetContext(getContext({
 			payload: {
-				action: 'synchronized',
+				action: 'synchronize',
 				'pull_request': {
 					labels: [{name: 'label1'}, {name: 'label2'}],
 				},
@@ -59,7 +59,7 @@ describe('isTargetContext', () => {
 		process.env.INPUT_INCLUDE_LABELS = 'label1,label2\nlabel3';
 		expect(isTargetContext(getContext({
 			payload: {
-				action: 'synchronized',
+				action: 'synchronize',
 				'pull_request': {
 					labels: [{name: 'label2'}],
 				},
@@ -121,7 +121,7 @@ describe('isTargetContext', () => {
 		process.env.INPUT_INCLUDE_LABELS = 'label1';
 		expect(isTargetContext(getContext({
 			ref: 'refs/heads/master',
-			action: 'synchronized',
+			action: 'synchronize',
 			'pull_request': {
 				labels: [{name: 'label2'}],
 			},
@@ -134,7 +134,7 @@ describe('isTargetContext', () => {
 		process.env.INPUT_INCLUDE_LABELS = 'label1';
 		expect(isTargetContext(getContext({
 			ref: 'refs/heads/feature/test',
-			action: 'synchronized',
+			action: 'synchronize',
 			'pull_request': {
 				labels: [{name: 'label1'}],
 			},
