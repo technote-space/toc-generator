@@ -99,7 +99,7 @@ e.g. `master`
 | eventName: action | condition |
 |:---:|:---:|
 |push: *|[condition1](#condition1)|
-|pull_request: \[opened, synchronized, labeled, unlabeled]|[condition2](#condition2)|
+|pull_request: \[opened, synchronize, labeled, unlabeled]|[condition2](#condition2)|
 ### Conditions
 #### condition1
 - push to branch (not tag)
