@@ -41,49 +41,24 @@ describe('clone', () => {
 	testEnv();
 	testChildProcess();
 
-	it('should return false', async() => {
+	it('should run clone command', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
 		process.env.GITHUB_WORKSPACE = 'test-dir';
-		const mockExec = spyOnExec();
-		const mockStdout = spyOnStdout();
-
-		expect(await clone(getContext({
-			ref: 'refs/heads/test',
-		}))).toBeFalsy();
-
-		const dir = path.resolve('test-dir/.work');
-		execCalledWith(mockExec, [
-			`git -C ${dir} clone --branch=test --depth=3 https://octocat:test-token@github.com//.git . > /dev/null 2>&1 || :`,
-		]);
-		stdoutCalledWith(mockStdout, [
-			'::group::Cloning the branch test from the remote repo...',
-			'[command]git clone --branch=test --depth=3',
-			'::warning::remote branch [test] not found',
-		]);
-	});
-
-	it('should return true', async() => {
-		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		process.env.GITHUB_WORKSPACE = 'test-dir';
-		setExists([false, false, true]);
 		setChildProcessParams({stdout: 'test-branch'});
 		const mockExec = spyOnExec();
 		const mockStdout = spyOnStdout();
 
-		expect(await clone(getContext({
+		await clone(getContext({
 			ref: 'refs/heads/test-branch',
-		}))).toBeTruthy();
+		}));
 
 		const dir = path.resolve('test-dir', '.work');
 		execCalledWith(mockExec, [
 			`git -C ${dir} clone --branch=test-branch --depth=3 https://octocat:test-token@github.com//.git . > /dev/null 2>&1 || :`,
-			`git -C ${dir} branch -a | grep -E '^\\*' | cut -b 3-`,
 		]);
 		stdoutCalledWith(mockStdout, [
-			'::group::Cloning the branch test-branch from the remote repo...',
+			'::group::Cloning from the remote repo...',
 			'[command]git clone --branch=test-branch --depth=3',
-			'[command]git branch -a | grep -E \'^\\*\' | cut -b 3-',
-			'  >> test-branch',
 		]);
 	});
 });
@@ -95,7 +70,7 @@ describe('runDocToc', () => {
 		process.env.INPUT_TARGET_PATHS = '../test.md';
 		const mockStdout = spyOnStdout();
 
-		expect(await runDocToc()).toBeFalsy();
+		expect(await runDocToc()).toBe(false);
 
 		stdoutCalledWith(mockStdout, [
 			'::warning::There is no valid target. Please check if [TARGET_PATHS] is set correctly.',
@@ -108,7 +83,7 @@ describe('runDocToc', () => {
 		const mockExec = spyOnExec();
 		const mockStdout = spyOnStdout();
 
-		expect(await runDocToc()).toBeTruthy();
+		expect(await runDocToc()).toBe(true);
 
 		const dir = path.resolve('test-dir/.work');
 		execCalledWith(mockExec, [
@@ -166,16 +141,7 @@ describe('getChangedFiles', () => {
 	testEnv();
 	testChildProcess();
 
-	it('should return false 1', async() => {
-		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		process.env.GITHUB_WORKSPACE = 'test-dir';
-
-		expect(await getChangedFiles(getContext({
-			ref: 'refs/heads/test',
-		}))).toBeFalsy();
-	});
-
-	it('should return false 2', async() => {
+	it('should return false', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
 		process.env.GITHUB_WORKSPACE = 'test-dir';
 		process.env.INPUT_TARGET_PATHS = '../test.md';
@@ -184,7 +150,7 @@ describe('getChangedFiles', () => {
 
 		expect(await getChangedFiles(getContext({
 			ref: 'refs/heads/test',
-		}))).toBeFalsy();
+		}))).toBe(false);
 	});
 
 	it('should get changed files', async() => {
