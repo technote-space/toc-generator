@@ -361,10 +361,10 @@
   dependencies:
     "@actions/github" "^1.1.0"
 
-"@technote-space/github-action-helper@^0.1.15":
-  version "0.1.15"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.1.15.tgz#599bbc286a0cdad20f5c411c7fe7f5bd72351c4b"
-  integrity sha512-bmiDqLqD42xDMGDn1Cf6z1U0obPoVE7tX5SFqHHb5bfk6E+J14lZ0b07+9Uh5Ddw5nuudC6uZceF3/psUoaqYg==
+"@technote-space/github-action-helper@^0.1.16":
+  version "0.1.16"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.1.16.tgz#04683dbf1836ce8986ec3bfe9b79a30d4a4c861e"
+  integrity sha512-jreoDkVGqGNPCqodTti0lY04zY7oEowA6Hp2TAmvF3uKFdChTzgooH+YDggvL0sGprygleRKJj4aecRbrFErfA==
   dependencies:
     "@actions/core" "^1.1.3"
     "@actions/github" "^1.1.0"
