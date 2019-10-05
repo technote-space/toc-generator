@@ -13,19 +13,19 @@ const {showActionInfo, getPrHeadRef} = Utils;
 async function run(): Promise<void> {
 	try {
 		const logger = new Logger();
-		const _context = Object.assign({}, context, {ref: getPrHeadRef(context)});
-		showActionInfo(path.resolve(__dirname, '..'), logger, _context);
+		context.ref = getPrHeadRef(context);
+		showActionInfo(path.resolve(__dirname, '..'), logger, context);
 
-		if (!isTargetContext(_context)) {
+		if (!isTargetContext(context)) {
 			logger.info('This is not target event.');
 			return;
 		}
 
-		const files = await getChangedFiles(_context);
+		const files = await getChangedFiles(context);
 		if (false === files) {
 			return;
 		}
-		await (new ApiHelper(logger)).commit(getWorkDir(), getCommitMessage(), files, new GitHub(getInput('GITHUB_TOKEN', {required: true})), _context);
+		await (new ApiHelper(logger)).commit(getWorkDir(), getCommitMessage(), files, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);
 	} catch (error) {
 		setFailed(error.message);
 	}
