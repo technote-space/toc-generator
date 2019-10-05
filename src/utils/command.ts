@@ -4,7 +4,7 @@ import { Logger, GitHelper, Utils } from '@technote-space/github-action-helper';
 import { Context } from '@actions/github/lib/context';
 import { getDocTocArgs, isCloned, getWorkDir } from './misc';
 
-const {getBranch, getWorkspace} = Utils;
+const {getWorkspace} = Utils;
 
 export const replaceDirectory = (message: string): string => {
 	const workDir = path.resolve(getWorkspace());
@@ -19,19 +19,11 @@ const logger = new Logger(replaceDirectory);
 const {startProcess, warn} = logger;
 const helper = new GitHelper(logger, {filter: (line: string): boolean => /^M\s+/.test(line) && /\.md$/i.test(line)});
 
-export const clone = async(context: Context): Promise<boolean> => {
-	const branch = getBranch(context);
+export const clone = async(context: Context): Promise<void> => {
 	const workDir = getWorkDir();
-	startProcess('Cloning the branch %s from the remote repo...', branch);
+	startProcess('Cloning from the remote repo...');
 
-	await helper.clone(workDir, branch, context);
-
-	if (await helper.getCurrentBranchName(workDir) !== branch) {
-		warn('remote branch [%s] not found', branch);
-		return false;
-	}
-
-	return true;
+	await helper.clone(workDir, context);
 };
 
 export const runDocToc = async(): Promise<boolean> => {
@@ -72,9 +64,7 @@ export const getChangedFiles = async(context: Context): Promise<string[] | false
 	const workDir = getWorkDir();
 	fs.mkdirSync(workDir, {recursive: true});
 	if (!isCloned()) {
-		if (!await clone(context)) {
-			return false;
-		}
+		await clone(context);
 	}
 	if (!await runDocToc()) {
 		return false;
