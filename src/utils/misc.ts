@@ -1,10 +1,12 @@
 import fs from 'fs';
 import path from 'path';
+import { Context } from '@actions/github/lib/context';
 import { Utils } from '@technote-space/github-action-helper';
+import { isTargetEvent, isTargetLabels } from '@technote-space/filter-github-action';
 import { getInput } from '@actions/core' ;
-import { DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS } from '../constant';
+import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS } from '../constant';
 
-const {getWorkspace, getArrayInput} = Utils;
+const {getWorkspace, getArrayInput, escapeRegExp, getBranch} = Utils;
 
 const getTargetPaths = (): string[] => {
 	const paths = getArrayInput('TARGET_PATHS');
@@ -32,3 +34,14 @@ export const getDocTocArgs = (): string | false => {
 };
 
 export const getCommitMessage = (): string => getInput('COMMIT_MESSAGE') || DEFAULT_COMMIT_MESSAGE;
+
+const getBranchPrefix = (): string => getInput('BRANCH_PREFIX') || '';
+
+const getBranchPrefixRegExp = (): RegExp => new RegExp('^' + escapeRegExp(getBranchPrefix()));
+
+export const isValidBranch = (branch: string): boolean => !getBranchPrefix() || getBranchPrefixRegExp().test(branch);
+
+export const isTargetContext = (context: Context): boolean =>
+	isTargetEvent(TARGET_EVENTS, context) &&
+	(context.eventName === 'push' || isTargetLabels(getArrayInput('INCLUDE_LABELS'), [], context)) &&
+	(context.eventName !== 'push' || isValidBranch(getBranch(context)));

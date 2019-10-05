@@ -20,9 +20,13 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
   - [COMMIT_MESSAGE](#commit_message)
+  - [INCLUDE_LABELS](#include_labels)
+  - [BRANCH_PREFIX](#branch_prefix)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
-  - [condition](#condition)
+  - [Conditions](#conditions)
+    - [condition1](#condition1)
+    - [condition2](#condition2)
 - [Addition](#addition)
   - [Commit](#commit)
 - [GitHub Actions using this Action](#github-actions-using-this-action)
@@ -62,20 +66,46 @@ e.g. `README.md`
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
 default: `'README.md'`  
 e.g. `'README.md,README.ja.md'`  
+e.g. `.`
+
 ### TOC_TITLE
 TOC Title.  
-default: `'**Table of Contents**'`
+default: `'**Table of Contents**'`  
+e.g. `''`
+
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
+e.g. `feat: update TOC`
+
+### INCLUDE_LABELS
+Labels used to check if the PR has it.  
+default: `''`  
+e.g. `'Label1, Label2'`  
+e.g. 
+```yaml
+INCLUDE_LABELS: |
+  Test Label1
+  Test Label2
+```
+
+### BRANCH_PREFIX
+Branch name prefix.  
+default: `''`  
+e.g. `master`
 
 ## Action event details
 ### Target event
 | eventName: action | condition |
 |:---:|:---:|
-|push: *|[condition](#condition)|
-### condition
-- push to branch
+|push: *|[condition1](#condition1)|
+|pull_request: \[opened, synchronize, labeled, unlabeled]|[condition2](#condition2)|
+### Conditions
+#### condition1
+- push to branch (not tag)
+  - branch name ([`BRANCH_PREFIX`](#branch_prefix))
+#### condition2
+- [specified labels](#include_labels) included?
 
 ## Addition
 ### Commit

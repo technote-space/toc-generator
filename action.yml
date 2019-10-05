@@ -14,6 +14,12 @@ inputs:
   COMMIT_MESSAGE:
     description: Commit message.
     default: 'docs: Update TOC'
+  INCLUDE_LABELS:
+    description: Labels used to check if the PR has it.
+    default: ''
+  BRANCH_PREFIX:
+    description: Branch name prefix.
+    default: ''
 branding:
   icon: 'book-open'
   color: 'blue'

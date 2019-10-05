@@ -1,48 +1,145 @@
 /* eslint-disable no-magic-numbers */
 import fs from 'fs';
 import path from 'path';
-import { isTargetEvent } from '@technote-space/filter-github-action';
 import { testEnv, getContext } from '@technote-space/github-action-test-helper';
 import {
 	getDocTocArgs,
 	getWorkDir,
 	getCommitMessage,
+	isTargetContext,
 } from '../../src/utils/misc';
-import { DEFAULT_COMMIT_MESSAGE, TARGET_EVENTS } from '../../src/constant';
+import { DEFAULT_COMMIT_MESSAGE } from '../../src/constant';
 
-describe('isTargetEvent', () => {
+describe('isTargetContext', () => {
+	testEnv();
+
 	it('should return true 1', () => {
-		expect(isTargetEvent(TARGET_EVENTS, getContext({
+		expect(isTargetContext(getContext({
 			ref: 'refs/heads/test',
 			eventName: 'push',
-		}))).toBeTruthy();
+		}))).toBe(true);
 	});
 
 	it('should return true 2', () => {
-		expect(isTargetEvent(TARGET_EVENTS, getContext({
+		expect(isTargetContext(getContext({
 			ref: 'refs/heads/test',
 			payload: {
 				action: undefined,
 			},
 			eventName: 'push',
-		}))).toBeTruthy();
+		}))).toBe(true);
+	});
+
+	it('should return true 3', () => {
+		expect(isTargetContext(getContext({
+			payload: {
+				action: 'opened',
+				'pull_request': {
+					labels: [],
+				},
+			},
+			eventName: 'pull_request',
+		}))).toBe(true);
+	});
+
+	it('should return true 4', () => {
+		process.env.INPUT_INCLUDE_LABELS = 'label2';
+		expect(isTargetContext(getContext({
+			payload: {
+				action: 'synchronize',
+				'pull_request': {
+					labels: [{name: 'label1'}, {name: 'label2'}],
+				},
+			},
+			eventName: 'pull_request',
+		}))).toBe(true);
+	});
+
+	it('should return true 5', () => {
+		process.env.INPUT_INCLUDE_LABELS = 'label1,label2\nlabel3';
+		expect(isTargetContext(getContext({
+			payload: {
+				action: 'synchronize',
+				'pull_request': {
+					labels: [{name: 'label2'}],
+				},
+			},
+			eventName: 'pull_request',
+		}))).toBe(true);
+	});
+
+	it('should return true 6', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/master',
+			eventName: 'push',
+		}))).toBe(true);
+	});
+
+	it('should return true 7', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_INCLUDE_LABELS = 'label';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/master',
+			eventName: 'push',
+		}))).toBe(true);
 	});
 
 	it('should return false 1', () => {
-		expect(isTargetEvent(TARGET_EVENTS, getContext({
-			ref: 'refs/heads/test',
-			payload: {
-				action: 'opened',
-			},
-			eventName: 'pull_request',
-		}))).toBeFalsy();
+		expect(isTargetContext(getContext({
+			ref: 'refs/tags/test',
+			eventName: 'push',
+		}))).toBe(false);
 	});
 
 	it('should return false 2', () => {
-		expect(isTargetEvent(TARGET_EVENTS, getContext({
-			ref: 'refs/tags/test',
+		process.env.INPUT_INCLUDE_LABELS = 'test2';
+		expect(isTargetContext(getContext({
+			payload: {
+				action: 'opened',
+				'pull_request': {
+					labels: [{name: 'label1'}],
+				},
+			},
+			eventName: 'pull_request',
+		}))).toBe(false);
+	});
+
+	it('should return false 3', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/test',
+			payload: {
+				action: undefined,
+			},
 			eventName: 'push',
-		}))).toBeFalsy();
+		}))).toBe(false);
+	});
+
+	it('should return false 4', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_INCLUDE_LABELS = 'label1';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/master',
+			action: 'synchronize',
+			'pull_request': {
+				labels: [{name: 'label2'}],
+			},
+			eventName: 'pull_request',
+		}))).toBe(false);
+	});
+
+	it('should return false 5', () => {
+		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_INCLUDE_LABELS = 'label1';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/feature/test',
+			action: 'synchronize',
+			'pull_request': {
+				labels: [{name: 'label1'}],
+			},
+			eventName: 'pull_request',
+		}))).toBe(false);
 	});
 });
 

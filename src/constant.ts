@@ -6,4 +6,10 @@ export const TARGET_EVENTS = {
 	'push': [
 		(context: Context): boolean => /^refs\/heads\//.test(context.ref),
 	],
+	'pull_request': [
+		'opened',
+		'synchronize',
+		'labeled',
+		'unlabeled',
+	],
 };
