@@ -5,7 +5,7 @@ import { Logger, Utils, ApiHelper } from '@technote-space/github-action-helper';
 import { getChangedFiles } from './utils/command';
 import { isTargetContext, getCommitMessage, getWorkDir } from './utils/misc';
 
-const {showActionInfo, getPrHeadRef} = Utils;
+const {showActionInfo} = Utils;
 
 /**
  * run
@@ -13,7 +13,6 @@ const {showActionInfo, getPrHeadRef} = Utils;
 async function run(): Promise<void> {
 	try {
 		const logger = new Logger();
-		context.ref = getPrHeadRef(context);
 		showActionInfo(path.resolve(__dirname, '..'), logger, context);
 
 		if (!isTargetContext(context)) {
