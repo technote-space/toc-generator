@@ -21,7 +21,7 @@ inputs:
     description: Branch name prefix.
     default: ''
   DELETE_PACKAGE:
-    description: Delete package file before install DocToc for performance.
+    description: Whether to delete package file before install DocToc for performance.
     default: '1'
 branding:
   icon: 'book-open'
