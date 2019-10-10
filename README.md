@@ -22,6 +22,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [COMMIT_MESSAGE](#commit_message)
   - [INCLUDE_LABELS](#include_labels)
   - [BRANCH_PREFIX](#branch_prefix)
+  - [DELETE_PACKAGE](#delete_package)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
@@ -93,6 +94,11 @@ INCLUDE_LABELS: |
 Branch name prefix.  
 default: `''`  
 e.g. `master`
+
+### DELETE_PACKAGE
+Whether to Delete package file before install DocToc for performance.  
+default: `'1'`  
+e.g. `''`
 
 ## Action event details
 ### Target event
