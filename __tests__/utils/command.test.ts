@@ -78,6 +78,7 @@ describe('runDocToc', () => {
 	});
 
 	it('should run doctoc', async() => {
+		process.env.INPUT_DELETE_PACKAGE = '1';
 		process.env.GITHUB_WORKSPACE = 'test-dir';
 		setChildProcessParams({stdout: ''});
 		const mockExec = spyOnExec();
@@ -98,6 +99,27 @@ describe('runDocToc', () => {
 			'[command]rm -f package.json',
 			'[command]rm -f package-lock.json',
 			'[command]rm -f yarn.lock',
+			'[command]yarn add doctoc',
+			'[command]node_modules/.bin/doctoc <Working Directory>/README.md --notitle --github',
+		]);
+	});
+
+	it('should run doctoc without delete package', async() => {
+		process.env.INPUT_DELETE_PACKAGE = '';
+		process.env.GITHUB_WORKSPACE = 'test-dir';
+		setChildProcessParams({stdout: ''});
+		const mockExec = spyOnExec();
+		const mockStdout = spyOnStdout();
+
+		expect(await runDocToc()).toBe(true);
+
+		const dir = path.resolve('test-dir/.work');
+		execCalledWith(mockExec, [
+			'yarn add doctoc',
+			`node_modules/.bin/doctoc ${dir}/README.md --notitle --github`,
+		]);
+		stdoutCalledWith(mockStdout, [
+			'::group::Running Doctoc...',
 			'[command]yarn add doctoc',
 			'[command]node_modules/.bin/doctoc <Working Directory>/README.md --notitle --github',
 		]);

@@ -6,7 +6,7 @@ import { isTargetEvent, isTargetLabels } from '@technote-space/filter-github-act
 import { getInput } from '@actions/core' ;
 import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS } from '../constant';
 
-const {getWorkspace, getArrayInput, escapeRegExp, getBranch} = Utils;
+const {getWorkspace, getArrayInput, escapeRegExp, getBranch, getBoolValue} = Utils;
 
 const getTargetPaths = (): string[] => {
 	const paths = getArrayInput('TARGET_PATHS');
@@ -34,6 +34,8 @@ export const getDocTocArgs = (): string | false => {
 };
 
 export const getCommitMessage = (): string => getInput('COMMIT_MESSAGE') || DEFAULT_COMMIT_MESSAGE;
+
+export const isDisabledDeletePackage = (): boolean => !getBoolValue(getInput('DELETE_PACKAGE'));
 
 const getBranchPrefix = (): string => getInput('BRANCH_PREFIX') || '';
 

@@ -93,6 +93,11 @@ INCLUDE_LABELS: |
 default: `''`  
 e.g. `master`
 
+### DELETE_PACKAGE
+パフォーマンス改善のために DocToc のインストール前に package ファイルを削除するかどうか  
+default: `'1'`  
+e.g. `''`
+
 ## Action イベント詳細
 ### 対象イベント
 | eventName: action | condition |
