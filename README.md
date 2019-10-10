@@ -7,8 +7,8 @@
 
 *Read this in other languages: [English](README.md), [日本語](README.ja.md).*
 
-This is a `GitHub Action` to generate TOC (Table of Contents).  
-Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if changed.
+This is a `GitHub Action` to generate TOC (Table of Contents),  
+which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if changed.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
