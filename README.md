@@ -96,7 +96,7 @@ default: `''`
 e.g. `master`
 
 ### DELETE_PACKAGE
-Whether to Delete package file before install DocToc for performance.  
+Whether to delete package file before install DocToc for performance.  
 default: `'1'`  
 e.g. `''`
 
