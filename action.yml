@@ -20,6 +20,9 @@ inputs:
   BRANCH_PREFIX:
     description: Branch name prefix.
     default: ''
+  DELETE_PACKAGE:
+    description: Delete package file before install DocToc for performance.
+    default: '1'
 branding:
   icon: 'book-open'
   color: 'blue'
