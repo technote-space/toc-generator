@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { Logger, GitHelper, Utils } from '@technote-space/github-action-helper';
 import { Context } from '@actions/github/lib/context';
-import { getDocTocArgs, isCloned, getWorkDir } from './misc';
+import { getDocTocArgs, isCloned, getWorkDir, isDisabledDeletePackage } from './misc';
 
 const {getWorkspace} = Utils;
 
@@ -26,6 +26,23 @@ export const clone = async(context: Context): Promise<void> => {
 	await helper.clone(workDir, context);
 };
 
+const clearPackage = async(): Promise<void> => {
+	if (isDisabledDeletePackage()) {
+		return;
+	}
+	await helper.runCommand(getWorkDir(), [
+		'rm -f package.json',
+		'rm -f package-lock.json',
+		'rm -f yarn.lock',
+	]);
+};
+
+const installDoctoc = async(): Promise<void> => {
+	await helper.runCommand(getWorkDir(), [
+		'yarn add doctoc',
+	]);
+};
+
 export const runDocToc = async(): Promise<boolean> => {
 	const args = getDocTocArgs();
 	if (false === args) {
@@ -34,11 +51,9 @@ export const runDocToc = async(): Promise<boolean> => {
 	}
 
 	startProcess('Running Doctoc...');
+	await clearPackage();
+	await installDoctoc();
 	await helper.runCommand(getWorkDir(), [
-		'rm -f package.json',
-		'rm -f package-lock.json',
-		'rm -f yarn.lock',
-		'yarn add doctoc',
 		`node_modules/.bin/doctoc ${args} --github`,
 	]);
 	return true;

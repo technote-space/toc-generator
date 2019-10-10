@@ -6,6 +6,7 @@ import {
 	getDocTocArgs,
 	getWorkDir,
 	getCommitMessage,
+	isDisabledDeletePackage,
 	isTargetContext,
 } from '../../src/utils/misc';
 import { DEFAULT_COMMIT_MESSAGE } from '../../src/constant';
@@ -192,5 +193,39 @@ describe('getCommitMessage', () => {
 
 	it('should get default commit message', () => {
 		expect(getCommitMessage()).toBe(DEFAULT_COMMIT_MESSAGE);
+	});
+});
+
+describe('isDisabledDeletePackage', () => {
+	testEnv();
+
+	it('should be false 1', () => {
+		process.env.INPUT_DELETE_PACKAGE = '1';
+		expect(isDisabledDeletePackage()).toBe(false);
+	});
+
+	it('should be false 2', () => {
+		process.env.INPUT_DELETE_PACKAGE = 'true';
+		expect(isDisabledDeletePackage()).toBe(false);
+	});
+
+	it('should be false 3', () => {
+		process.env.INPUT_DELETE_PACKAGE = 'abc';
+		expect(isDisabledDeletePackage()).toBe(false);
+	});
+
+	it('should be true 1', () => {
+		process.env.INPUT_DELETE_PACKAGE = '0';
+		expect(isDisabledDeletePackage()).toBe(true);
+	});
+
+	it('should be true 2', () => {
+		process.env.INPUT_DELETE_PACKAGE = 'false';
+		expect(isDisabledDeletePackage()).toBe(true);
+	});
+
+	it('should be true 3', () => {
+		process.env.INPUT_DELETE_PACKAGE = '';
+		expect(isDisabledDeletePackage()).toBe(true);
 	});
 });

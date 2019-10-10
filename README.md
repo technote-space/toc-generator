@@ -7,8 +7,8 @@
 
 *Read this in other languages: [English](README.md), [日本語](README.ja.md).*
 
-This is a `GitHub Action` to generate TOC (Table of Contents).  
-Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if changed.
+This is a `GitHub Action` to generate TOC (Table of Contents),  
+which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if changed.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -22,6 +22,7 @@ Just run [DocToc](https://github.com/thlorenz/doctoc) and commit to branch if ch
   - [COMMIT_MESSAGE](#commit_message)
   - [INCLUDE_LABELS](#include_labels)
   - [BRANCH_PREFIX](#branch_prefix)
+  - [DELETE_PACKAGE](#delete_package)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
@@ -93,6 +94,11 @@ INCLUDE_LABELS: |
 Branch name prefix.  
 default: `''`  
 e.g. `master`
+
+### DELETE_PACKAGE
+Whether to delete package file before install DocToc for performance.  
+default: `'1'`  
+e.g. `''`
 
 ## Action event details
 ### Target event

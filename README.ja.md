@@ -22,6 +22,7 @@
   - [COMMIT_MESSAGE](#commit_message)
   - [INCLUDE_LABELS](#include_labels)
   - [BRANCH_PREFIX](#branch_prefix)
+  - [DELETE_PACKAGE](#delete_package)
 - [Action イベント詳細](#action-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E8%A9%B3%E7%B4%B0)
   - [対象イベント](#%E5%AF%BE%E8%B1%A1%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)
   - [Conditions](#conditions)
@@ -92,6 +93,11 @@ INCLUDE_LABELS: |
 ブランチプリフィックス  
 default: `''`  
 e.g. `master`
+
+### DELETE_PACKAGE
+パフォーマンス改善のために DocToc のインストール前に package ファイルを削除するかどうか  
+default: `'1'`  
+e.g. `''`
 
 ## Action イベント詳細
 ### 対象イベント
