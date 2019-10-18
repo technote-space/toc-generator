@@ -19,7 +19,7 @@
   },
   "main": "lib/main.js",
   "dependencies": {
-    "@actions/core": "^1.1.3",
+    "@actions/core": "^1.2.0",
     "@actions/github": "^1.1.0",
     "@technote-space/filter-github-action": "^0.1.4",
     "@technote-space/github-action-helper": "^0.1.19"
