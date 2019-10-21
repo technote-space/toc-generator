@@ -15,7 +15,7 @@ inputs:
     description: Commit message.
     default: 'docs: Update TOC'
   INCLUDE_LABELS:
-    description: Labels used to check if the PR has it.
+    description: Labels used to check if the PullRequest has it.
     default: ''
   BRANCH_PREFIX:
     description: Branch name prefix.

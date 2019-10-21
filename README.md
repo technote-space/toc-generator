@@ -80,7 +80,7 @@ default: `'docs: Update TOC'`
 e.g. `feat: update TOC`
 
 ### INCLUDE_LABELS
-Labels used to check if the PR has it.  
+Labels used to check if the PullRequest has it.  
 default: `''`  
 e.g. `'Label1, Label2'`  
 e.g. 
