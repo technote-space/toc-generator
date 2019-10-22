@@ -126,6 +126,7 @@ e.g. `''`
 #### condition1
 - push to branch (not tag)
   - branch name ([`BRANCH_PREFIX`](#branch_prefix))
+- not set `PR_BRANCH_NAME`
 #### condition2
 - [specified labels](#include_labels) included?
 

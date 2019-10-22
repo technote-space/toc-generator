@@ -125,6 +125,7 @@ e.g. `''`
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
   - ブランチ名 ([`BRANCH_PREFIX`](#branch_prefix))
+- `PR_BRANCH_NAME` が設定されていない
 #### condition2
 - [指定したラベル](#include_labels)が付与されているかどうか
 
