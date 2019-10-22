@@ -361,19 +361,19 @@
   dependencies:
     "@actions/github" "^1.1.0"
 
-"@technote-space/github-action-helper@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.2.2.tgz#500f855ac9b9e8d3e744721feaab9eeae081f23e"
-  integrity sha512-QOZOHz1JGf2QS5oQgYQKRGAHuMUoavezVxEgCs1MVQZwlAIsnCEmerWfnz5jyPR7b27PdK1TmKDaEP9c0/hDoQ==
+"@technote-space/github-action-helper@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.2.3.tgz#337c6133886e52dd5b370f5487801e36da6e9617"
+  integrity sha512-jGqmFe8w1zGm/uPWZ+sLcppUmgg9n17pwXcafF0OyIZ2Vf4uVFGARhsfPeTAOmi/Pk7HbkE7vadMOswCOkfDfQ==
   dependencies:
     "@actions/core" "^1.2.0"
     "@actions/github" "^1.1.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-test-helper@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-test-helper/-/github-action-test-helper-0.0.12.tgz#14ec0544172c8d2338cbd49400e62c9b5e3e826d"
-  integrity sha512-Yv1nsk0p+HJyM7TEuUdNhUznQ+m7Ar7FVPhqqDdm2AzKNau9gNDX9rK+EHnL1tM/NXcIice/juwELhWnQGZ/0g==
+"@technote-space/github-action-test-helper@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-test-helper/-/github-action-test-helper-0.0.13.tgz#0a3de9f03bc52fcd193d9eb21deef6524f287346"
+  integrity sha512-GHWm68+Y1FT3q8dvteQvvUkPlfLzn3HkNIud+2/0qts+KXhudCYFqHzE+3IV1XoiR8igCa37WHiwrTElxnzkiA==
   dependencies:
     "@actions/github" "^1.1.0"
 
@@ -817,9 +817,9 @@ bs-logger@0.x:
     fast-json-stable-stringify "2.x"
 
 bser@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/bser/-/bser-2.1.0.tgz#65fc784bf7f87c009b973c12db6546902fa9c7b5"
-  integrity sha512-8zsjWrQkkBoLK6uxASk1nJ2SKv97ltiGDo6A3wA0/yRPz+CwmEyDo0hUrhIuukG2JHpAl3bvFIixw2/3Hi0DOg==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/bser/-/bser-2.1.1.tgz#e6787da20ece9d07998533cfd9de6f5c38f4bc05"
+  integrity sha512-gQxTNE/GAfIIrmHLUE3oJyp5FO6HRBfhjnw4/wMmA63ZGDJnWBmgY/lyQBpnDUkGmAhbSe39tx2d/iTOAfglwQ==
   dependencies:
     node-int64 "^0.4.0"
 
