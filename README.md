@@ -74,6 +74,19 @@ TOC Title.
 default: `'**Table of Contents**'`  
 e.g. `''`
 
+### PR_BRANCH_NAME
+PullRequest branch name.  
+If this option is set, changes will be committed to PullRequest.  
+default: `''`  
+e.g. `docs/toc-${PR_NUMBER}`  
+[Context variables](#context-variables)
+
+### PR_TITLE
+PullRequest title.  
+default: `'docs: Update TOC'`  
+e.g. `feat: update TOC (${PR_HEAD_REF})`  
+[Context variables](#context-variables)
+
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
@@ -144,6 +157,15 @@ If you want to trigger actions, use a personal access token instead.
    ```
 
 ![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
+
+### Context variables
+| name | description |
+|:---|:---|
+| PR_NUMBER | pull_request.number (e.g. `11`) |
+| PR_ID | pull_request.id (e.g. `21031067`) |
+| PR_HEAD_REF | pull_request.head.ref (e.g. `change`) |
+| PR_BASE_REF | pull_request.base.ref (e.g. `master`) |
+[Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
 
 ## GitHub Actions using this Action
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)

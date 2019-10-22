@@ -6,10 +6,14 @@ import {
 	getDocTocArgs,
 	getWorkDir,
 	getCommitMessage,
+	getPrBranchName,
+	getPrTitle,
+	getPrBody,
 	isDisabledDeletePackage,
 	isTargetContext,
+	isCreatePR,
 } from '../../src/utils/misc';
-import { DEFAULT_COMMIT_MESSAGE } from '../../src/constant';
+import { DEFAULT_COMMIT_MESSAGE, DEFAULT_PR_TITLE } from '../../src/constant';
 
 describe('isTargetContext', () => {
 	testEnv();
@@ -196,6 +200,100 @@ describe('getCommitMessage', () => {
 	});
 });
 
+describe('getPrBranchName', () => {
+	testEnv();
+	const context = getContext({
+		payload: {
+			'pull_request': {
+				number: 11,
+				id: 21031067,
+				head: {
+					ref: 'change',
+				},
+				base: {
+					ref: 'master',
+				},
+			},
+		},
+	});
+
+	it('should get branch name', () => {
+		process.env.INPUT_PR_BRANCH_NAME = '${PR_NUMBER}-${PR_ID}-${PR_HEAD_REF}-${PR_BASE_REF}';
+		expect(getPrBranchName(context)).toBe('11-21031067-change-master');
+	});
+
+	it('should get empty', () => {
+		expect(getPrBranchName(context)).toBeFalsy();
+	});
+
+	it('should throw error', () => {
+		expect(() => getPrBranchName(getContext({}))).toThrow();
+	});
+});
+
+describe('getPrTitle', () => {
+	testEnv();
+	const context = getContext({
+		payload: {
+			'pull_request': {
+				number: 11,
+				id: 21031067,
+				head: {
+					ref: 'change',
+				},
+				base: {
+					ref: 'master',
+				},
+			},
+		},
+	});
+
+	it('should get PR title', () => {
+		process.env.INPUT_PR_TITLE = '${PR_NUMBER}-${PR_ID}-${PR_HEAD_REF}-${PR_BASE_REF}';
+		expect(getPrTitle(context)).toBe('11-21031067-change-master');
+	});
+
+	it('should get default PR title', () => {
+		expect(getPrTitle(context)).toBe(DEFAULT_PR_TITLE);
+	});
+
+	it('should throw error', () => {
+		process.env.INPUT_PR_TITLE = '${PR_NUMBER}-${PR_ID}-${PR_HEAD_REF}-${PR_BASE_REF}';
+		expect(() => getPrTitle(getContext({}))).toThrow();
+	});
+});
+
+describe('getPrBody', () => {
+	it('should get PR Body', () => {
+		expect(getPrBody(['README.md', 'CHANGELOG.md'])).toBe([
+			'## Updated TOC',
+			'',
+			'<details>',
+			'',
+			'<summary>Changed files</summary>',
+			'',
+			'- README.md',
+			'- CHANGELOG.md',
+			'',
+			'</details>',
+		].join('\n'));
+	});
+
+	it('should get PR Body', () => {
+		expect(getPrBody(['README.md'])).toBe([
+			'## Updated TOC',
+			'',
+			'<details>',
+			'',
+			'<summary>Changed file</summary>',
+			'',
+			'- README.md',
+			'',
+			'</details>',
+		].join('\n'));
+	});
+});
+
 describe('isDisabledDeletePackage', () => {
 	testEnv();
 
@@ -227,5 +325,28 @@ describe('isDisabledDeletePackage', () => {
 	it('should be true 3', () => {
 		process.env.INPUT_DELETE_PACKAGE = '';
 		expect(isDisabledDeletePackage()).toBe(true);
+	});
+});
+
+describe('isCreatePR', () => {
+	testEnv();
+	it('should return true', () => {
+		process.env.INPUT_PR_BRANCH_NAME = 'test';
+		expect(isCreatePR(getContext({
+			eventName: 'pull_request',
+		}))).toBe(true);
+	});
+
+	it('should return false 1', () => {
+		process.env.INPUT_PR_BRANCH_NAME = 'test';
+		expect(isCreatePR(getContext({
+			eventName: 'push',
+		}))).toBe(false);
+	});
+
+	it('should return false 2', () => {
+		expect(isCreatePR(getContext({
+			eventName: 'pull_request',
+		}))).toBe(false);
 	});
 });
