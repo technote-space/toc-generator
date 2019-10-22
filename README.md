@@ -19,6 +19,8 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
+  - [PR_BRANCH_NAME](#pr_branch_name)
+  - [PR_TITLE](#pr_title)
   - [COMMIT_MESSAGE](#commit_message)
   - [INCLUDE_LABELS](#include_labels)
   - [BRANCH_PREFIX](#branch_prefix)
@@ -30,6 +32,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
     - [condition2](#condition2)
 - [Addition](#addition)
   - [Commit](#commit)
+  - [Context variables](#context-variables)
 - [GitHub Actions using this Action](#github-actions-using-this-action)
 - [Author](#author)
 
