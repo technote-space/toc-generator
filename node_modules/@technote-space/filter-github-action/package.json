@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/filter-github-action",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Helper to filter GitHub Action.",
   "author": "Technote <technote.space@gmail.com> (https://technote.space)",
   "license": "MIT",
@@ -26,15 +26,15 @@
   },
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.0.11",
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.9",
-    "@typescript-eslint/eslint-plugin": "^2.3.2",
-    "@typescript-eslint/parser": "^2.3.2",
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.4.0",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.4"
   },
   "publishConfig": {
     "access": "public"
