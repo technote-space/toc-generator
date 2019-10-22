@@ -19,6 +19,8 @@
 - [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
+  - [PR_BRANCH_NAME](#pr_branch_name)
+  - [PR_TITLE](#pr_title)
   - [COMMIT_MESSAGE](#commit_message)
   - [INCLUDE_LABELS](#include_labels)
   - [BRANCH_PREFIX](#branch_prefix)
@@ -30,6 +32,7 @@
     - [condition2](#condition2)
 - [補足](#%E8%A3%9C%E8%B6%B3)
   - [コミット](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88)
+  - [Context variables](#context-variables)
 - [このアクションを使用しているアクションの例](#%E3%81%93%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BE%8B)
 - [Author](#author)
 
@@ -122,6 +125,7 @@ e.g. `''`
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
   - ブランチ名 ([`BRANCH_PREFIX`](#branch_prefix))
+- `PR_BRANCH_NAME` が設定されていない
 #### condition2
 - [指定したラベル](#include_labels)が付与されているかどうか
 
