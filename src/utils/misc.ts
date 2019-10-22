@@ -4,9 +4,9 @@ import { Context } from '@actions/github/lib/context';
 import { Utils } from '@technote-space/github-action-helper';
 import { isTargetEvent, isTargetLabels } from '@technote-space/filter-github-action';
 import { getInput } from '@actions/core' ;
-import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS } from '../constant';
+import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS, DEFAULT_PR_TITLE } from '../constant';
 
-const {getWorkspace, getArrayInput, escapeRegExp, getBranch, getBoolValue} = Utils;
+const {getWorkspace, getArrayInput, escapeRegExp, getBranch, getBoolValue, isPr} = Utils;
 
 const getTargetPaths = (): string[] => {
 	const paths = getArrayInput('TARGET_PATHS');
@@ -35,6 +35,49 @@ export const getDocTocArgs = (): string | false => {
 
 export const getCommitMessage = (): string => getInput('COMMIT_MESSAGE') || DEFAULT_COMMIT_MESSAGE;
 
+/**
+ * @return {{string, Function}[]} replacer
+ */
+const contextVariables = (): { key: string; replace: (Context) => string }[] => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const getPrParam = (context: Context, extractor: (pr: { [key: string]: any }) => string): string => {
+		if (!context.payload.pull_request) {
+			throw new Error('Invalid context.');
+		}
+		return extractor(context.payload.pull_request);
+	};
+	return [
+		{key: 'PR_NUMBER', replace: (context: Context): string => getPrParam(context, pr => pr.number)},
+		{key: 'PR_ID', replace: (context: Context): string => getPrParam(context, pr => pr.id)},
+		{key: 'PR_HEAD_REF', replace: (context: Context): string => getPrParam(context, pr => pr.head.ref)},
+		{key: 'PR_BASE_REF', replace: (context: Context): string => getPrParam(context, pr => pr.base.ref)},
+	];
+};
+
+/**
+ * @param {string} variable variable
+ * @param {Context} context context
+ * @return {string} replaced
+ */
+const replaceContextVariables = (variable: string, context: Context): string => contextVariables().reduce((acc, value) => acc.replace(`\${${value.key}}`, value.replace(context)), variable);
+
+export const getPrBranchName = (context: Context): string => replaceContextVariables(getInput('PR_BRANCH_NAME'), context) || '';
+
+export const getPrTitle = (context: Context): string => replaceContextVariables(getInput('PR_TITLE'), context) || DEFAULT_PR_TITLE;
+
+export const getPrBody = (files: string[]): string => [
+	'## Updated TOC',
+	'',
+	'<details>',
+	'',
+	// eslint-disable-next-line no-magic-numbers
+	'<summary>Changed ' + (files.length > 1 ? 'files' : 'file') + '</summary>',
+	'',
+].concat(files.map(file => `- ${file}`)).concat([
+	'',
+	'</details>',
+]).join('\n');
+
 export const isDisabledDeletePackage = (): boolean => !getBoolValue(getInput('DELETE_PACKAGE'));
 
 const getBranchPrefix = (): string => getInput('BRANCH_PREFIX') || '';
@@ -47,3 +90,5 @@ export const isTargetContext = (context: Context): boolean =>
 	isTargetEvent(TARGET_EVENTS, context) &&
 	(context.eventName === 'push' || isTargetLabels(getArrayInput('INCLUDE_LABELS'), [], context)) &&
 	(context.eventName !== 'push' || isValidBranch(getBranch(context)));
+
+export const isCreatePR = (context: Context): boolean => isPr(context) && !!getInput('PR_BRANCH_NAME');
