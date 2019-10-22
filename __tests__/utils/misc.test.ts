@@ -90,6 +90,19 @@ describe('isTargetContext', () => {
 		}))).toBe(true);
 	});
 
+	it('should return true 8', () => {
+		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
+		expect(isTargetContext(getContext({
+			payload: {
+				action: 'opened',
+				'pull_request': {
+					labels: [],
+				},
+			},
+			eventName: 'pull_request',
+		}))).toBe(true);
+	});
+
 	it('should return false 1', () => {
 		expect(isTargetContext(getContext({
 			ref: 'refs/tags/test',
@@ -144,6 +157,14 @@ describe('isTargetContext', () => {
 				labels: [{name: 'label1'}],
 			},
 			eventName: 'pull_request',
+		}))).toBe(false);
+	});
+
+	it('should return false 6', () => {
+		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
+		expect(isTargetContext(getContext({
+			ref: 'refs/heads/master',
+			eventName: 'push',
 		}))).toBe(false);
 	});
 });

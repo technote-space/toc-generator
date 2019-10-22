@@ -6,7 +6,7 @@ import { isTargetEvent, isTargetLabels } from '@technote-space/filter-github-act
 import { getInput } from '@actions/core' ;
 import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS, DEFAULT_PR_TITLE } from '../constant';
 
-const {getWorkspace, getArrayInput, escapeRegExp, getBranch, getBoolValue, isPr} = Utils;
+const {getWorkspace, getArrayInput, escapeRegExp, getBranch, getBoolValue, isPr, isPush} = Utils;
 
 const getTargetPaths = (): string[] => {
 	const paths = getArrayInput('TARGET_PATHS');
@@ -86,9 +86,21 @@ const getBranchPrefixRegExp = (): RegExp => new RegExp('^' + escapeRegExp(getBra
 
 export const isValidBranch = (branch: string): boolean => !getBranchPrefix() || getBranchPrefixRegExp().test(branch);
 
-export const isTargetContext = (context: Context): boolean =>
-	isTargetEvent(TARGET_EVENTS, context) &&
-	(context.eventName === 'push' || isTargetLabels(getArrayInput('INCLUDE_LABELS'), [], context)) &&
-	(context.eventName !== 'push' || isValidBranch(getBranch(context)));
+const isSetPrBranchName = (): boolean => !!getInput('PR_BRANCH_NAME');
 
-export const isCreatePR = (context: Context): boolean => isPr(context) && !!getInput('PR_BRANCH_NAME');
+export const isCreatePR = (context: Context): boolean => isPr(context) && isSetPrBranchName();
+
+export const isTargetContext = (context: Context): boolean => {
+	if (!isTargetEvent(TARGET_EVENTS, context)) {
+		return false;
+	}
+	if (isSetPrBranchName()) {
+		if (!isCreatePR(context)) {
+			return false;
+		}
+	}
+	if (isPush(context)) {
+		return isValidBranch(getBranch(context));
+	}
+	return isTargetLabels(getArrayInput('INCLUDE_LABELS'), [], context);
+};
