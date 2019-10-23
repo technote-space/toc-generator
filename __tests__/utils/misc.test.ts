@@ -8,6 +8,7 @@ import {
 	getCommitMessage,
 	getPrBranchName,
 	getPrTitle,
+	getPrLink,
 	getPrBody,
 	isDisabledDeletePackage,
 	isTargetContext,
@@ -284,10 +285,42 @@ describe('getPrTitle', () => {
 	});
 });
 
+describe('getPrLink', () => {
+	it('should get pr link', () => {
+		expect(getPrLink(getContext({
+			ref: 'refs/heads/test',
+			eventName: 'push',
+			payload: {
+				'pull_request': {
+					title: 'test title',
+					'html_url': 'http://example.com',
+				},
+			},
+		}))).toEqual(['[test title](http://example.com)', '']);
+	});
+
+	it('should get empty', () => {
+		expect(getPrLink(getContext({}))).toEqual([]);
+	});
+});
+
 describe('getPrBody', () => {
+	const context = getContext({
+		ref: 'refs/heads/test',
+		eventName: 'push',
+		payload: {
+			'pull_request': {
+				title: 'test title',
+				'html_url': 'http://example.com',
+			},
+		},
+	});
+
 	it('should get PR Body', () => {
-		expect(getPrBody(['README.md', 'CHANGELOG.md'])).toBe([
+		expect(getPrBody(context, ['README.md', 'CHANGELOG.md'])).toBe([
 			'## Updated TOC',
+			'',
+			'[test title](http://example.com)',
 			'',
 			'<details>',
 			'',
@@ -301,8 +334,10 @@ describe('getPrBody', () => {
 	});
 
 	it('should get PR Body', () => {
-		expect(getPrBody(['README.md'])).toBe([
+		expect(getPrBody(context, ['README.md'])).toBe([
 			'## Updated TOC',
+			'',
+			'[test title](http://example.com)',
 			'',
 			'<details>',
 			'',

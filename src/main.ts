@@ -28,7 +28,7 @@ async function run(): Promise<void> {
 		if (isCreatePR(context)) {
 			await (new ApiHelper(logger)).createPR(getWorkDir(), getCommitMessage(), files, getPrBranchName(context), {
 				title: getPrTitle(context),
-				body: getPrBody(files),
+				body: getPrBody(context, files),
 			}, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);
 		} else {
 			await (new ApiHelper(logger)).commit(getWorkDir(), getCommitMessage(), files, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);

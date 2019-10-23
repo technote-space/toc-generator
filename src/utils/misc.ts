@@ -65,15 +65,21 @@ export const getPrBranchName = (context: Context): string => replaceContextVaria
 
 export const getPrTitle = (context: Context): string => replaceContextVariables(getInput('PR_TITLE'), context) || DEFAULT_PR_TITLE;
 
-export const getPrBody = (files: string[]): string => [
+export const getPrLink = (context: Context): string[] => context.payload.pull_request ? [
+	`[${context.payload.pull_request.title}](${context.payload.pull_request.html_url})`,
+	'',
+] : [];
+
+export const getPrBody = (context: Context, files: string[]): string => [
 	'## Updated TOC',
 	'',
+].concat(getPrLink(context)).concat([
 	'<details>',
 	'',
 	// eslint-disable-next-line no-magic-numbers
 	'<summary>Changed ' + (files.length > 1 ? 'files' : 'file') + '</summary>',
 	'',
-].concat(files.map(file => `- ${file}`)).concat([
+]).concat(files.map(file => `- ${file}`)).concat([
 	'',
 	'</details>',
 ]).join('\n');
