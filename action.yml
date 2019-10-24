@@ -15,7 +15,7 @@ inputs:
     description: Commit message.
     default: 'docs: Update TOC'
   INCLUDE_LABELS:
-    description: Labels used to check if the PR has it.
+    description: Labels used to check if the PullRequest has it.
     default: ''
   BRANCH_PREFIX:
     description: Branch name prefix.
@@ -23,6 +23,12 @@ inputs:
   DELETE_PACKAGE:
     description: Whether to delete package file before install DocToc for performance.
     default: '1'
+  PR_BRANCH_NAME:
+    description: PullRequest branch name.
+    default: ''
+  PR_TITLE:
+    description: PullRequest title.
+    default: 'docs: Update TOC'
 branding:
   icon: 'book-open'
   color: 'blue'

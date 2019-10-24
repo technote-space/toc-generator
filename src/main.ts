@@ -3,7 +3,7 @@ import { setFailed, getInput } from '@actions/core';
 import { context, GitHub } from '@actions/github';
 import { Logger, Utils, ApiHelper } from '@technote-space/github-action-helper';
 import { getChangedFiles } from './utils/command';
-import { isTargetContext, getCommitMessage, getWorkDir } from './utils/misc';
+import { isTargetContext, getCommitMessage, getPrBranchName, getPrTitle, getPrBody, getWorkDir, isCreatePR } from './utils/misc';
 
 const {showActionInfo} = Utils;
 
@@ -24,7 +24,15 @@ async function run(): Promise<void> {
 		if (false === files) {
 			return;
 		}
-		await (new ApiHelper(logger)).commit(getWorkDir(), getCommitMessage(), files, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);
+
+		if (isCreatePR(context)) {
+			await (new ApiHelper(logger)).createPR(getWorkDir(), getCommitMessage(), files, getPrBranchName(context), {
+				title: getPrTitle(context),
+				body: getPrBody(context, files),
+			}, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);
+		} else {
+			await (new ApiHelper(logger)).commit(getWorkDir(), getCommitMessage(), files, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);
+		}
 	} catch (error) {
 		setFailed(error.message);
 	}
