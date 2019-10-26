@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import fs from 'fs';
 import path from 'path';
-import { testEnv, getContext } from '@technote-space/github-action-test-helper';
+import { testEnv, getContext, generateContext } from '@technote-space/github-action-test-helper';
 import {
 	getDocTocArgs,
 	getWorkDir,
@@ -20,152 +20,150 @@ describe('isTargetContext', () => {
 	testEnv();
 
 	it('should return true 1', () => {
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/test',
-			eventName: 'push',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/test',
+			event: 'push',
 		}))).toBe(true);
 	});
 
 	it('should return true 2', () => {
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/test',
-			payload: {
-				action: undefined,
-			},
-			eventName: 'push',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/test',
+			event: 'push',
 		}))).toBe(true);
 	});
 
 	it('should return true 3', () => {
-		expect(isTargetContext(getContext({
+		expect(isTargetContext(generateContext({
+			event: 'pull_request',
+			action: 'opened',
+		}, {
 			payload: {
-				action: 'opened',
 				'pull_request': {
 					labels: [],
 				},
 			},
-			eventName: 'pull_request',
 		}))).toBe(true);
 	});
 
 	it('should return true 4', () => {
 		process.env.INPUT_INCLUDE_LABELS = 'label2';
-		expect(isTargetContext(getContext({
+		expect(isTargetContext(generateContext({
+			event: 'pull_request',
+			action: 'synchronize',
+		}, {
 			payload: {
-				action: 'synchronize',
 				'pull_request': {
 					labels: [{name: 'label1'}, {name: 'label2'}],
 				},
 			},
-			eventName: 'pull_request',
 		}))).toBe(true);
 	});
 
 	it('should return true 5', () => {
 		process.env.INPUT_INCLUDE_LABELS = 'label1,label2\nlabel3';
-		expect(isTargetContext(getContext({
+		expect(isTargetContext(generateContext({
+			event: 'pull_request',
+			action: 'synchronize',
+		}, {
 			payload: {
-				action: 'synchronize',
 				'pull_request': {
 					labels: [{name: 'label2'}],
 				},
 			},
-			eventName: 'pull_request',
 		}))).toBe(true);
 	});
 
 	it('should return true 6', () => {
 		process.env.INPUT_BRANCH_PREFIX = 'master';
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/master',
-			eventName: 'push',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/master',
+			event: 'push',
 		}))).toBe(true);
 	});
 
 	it('should return true 7', () => {
 		process.env.INPUT_BRANCH_PREFIX = 'master';
 		process.env.INPUT_INCLUDE_LABELS = 'label';
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/master',
-			eventName: 'push',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/master',
+			event: 'push',
 		}))).toBe(true);
 	});
 
 	it('should return true 8', () => {
 		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
-		expect(isTargetContext(getContext({
+		expect(isTargetContext(generateContext({
+			event: 'pull_request',
+			action: 'opened',
+		}, {
 			payload: {
-				action: 'opened',
 				'pull_request': {
 					labels: [],
 				},
 			},
-			eventName: 'pull_request',
 		}))).toBe(true);
 	});
 
 	it('should return false 1', () => {
-		expect(isTargetContext(getContext({
-			ref: 'refs/tags/test',
-			eventName: 'push',
+		expect(isTargetContext(generateContext({
+			ref: 'tags/test',
+			event: 'push',
 		}))).toBe(false);
 	});
 
 	it('should return false 2', () => {
 		process.env.INPUT_INCLUDE_LABELS = 'test2';
-		expect(isTargetContext(getContext({
+		expect(isTargetContext(generateContext({
+			event: 'pull_request',
+			action: 'opened',
+		}, {
 			payload: {
-				action: 'opened',
 				'pull_request': {
 					labels: [{name: 'label1'}],
 				},
 			},
-			eventName: 'pull_request',
 		}))).toBe(false);
 	});
 
 	it('should return false 3', () => {
 		process.env.INPUT_BRANCH_PREFIX = 'master';
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/test',
-			payload: {
-				action: undefined,
-			},
-			eventName: 'push',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/test',
+			event: 'push',
 		}))).toBe(false);
 	});
 
 	it('should return false 4', () => {
 		process.env.INPUT_BRANCH_PREFIX = 'master';
 		process.env.INPUT_INCLUDE_LABELS = 'label1';
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/master',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/master',
+			event: 'pull_request',
 			action: 'synchronize',
-			'pull_request': {
-				labels: [{name: 'label2'}],
+		}, {
+			payload: {
+				'pull_request': {
+					labels: [{name: 'label2'}],
+				},
 			},
-			eventName: 'pull_request',
 		}))).toBe(false);
 	});
 
 	it('should return false 5', () => {
 		process.env.INPUT_BRANCH_PREFIX = 'master';
 		process.env.INPUT_INCLUDE_LABELS = 'label1';
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/feature/test',
-			action: 'synchronize',
-			'pull_request': {
-				labels: [{name: 'label1'}],
-			},
-			eventName: 'pull_request',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/feature/test',
+			event: 'push',
 		}))).toBe(false);
 	});
 
 	it('should return false 6', () => {
 		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
-		expect(isTargetContext(getContext({
-			ref: 'refs/heads/master',
-			eventName: 'push',
+		expect(isTargetContext(generateContext({
+			ref: 'heads/master',
+			event: 'push',
 		}))).toBe(false);
 	});
 });
@@ -287,9 +285,10 @@ describe('getPrTitle', () => {
 
 describe('getPrLink', () => {
 	it('should get pr link', () => {
-		expect(getPrLink(getContext({
-			ref: 'refs/heads/test',
-			eventName: 'push',
+		expect(getPrLink(generateContext({
+			ref: 'heads/test',
+			event: 'push',
+		}, {
 			payload: {
 				'pull_request': {
 					title: 'test title',
