@@ -105,6 +105,14 @@ describe('isTargetContext', () => {
 		}))).toBe(true);
 	});
 
+	it('should return true 9', () => {
+		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
+		expect(isTargetContext(generateContext({
+			event: 'pull_request',
+			action: 'closed',
+		}))).toBe(true);
+	});
+
 	it('should return false 1', () => {
 		expect(isTargetContext(generateContext({
 			ref: 'tags/test',
@@ -164,6 +172,13 @@ describe('isTargetContext', () => {
 		expect(isTargetContext(generateContext({
 			ref: 'heads/master',
 			event: 'push',
+		}))).toBe(false);
+	});
+
+	it('should return false 7', () => {
+		expect(isTargetContext(generateContext({
+			event: 'pull_request',
+			action: 'closed',
 		}))).toBe(false);
 	});
 });

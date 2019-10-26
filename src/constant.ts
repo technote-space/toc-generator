@@ -12,5 +12,6 @@ export const TARGET_EVENTS = {
 		'synchronize',
 		'labeled',
 		'unlabeled',
+		'closed',
 	],
 };
