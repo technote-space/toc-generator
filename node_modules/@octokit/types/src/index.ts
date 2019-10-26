@@ -1,3 +1,4 @@
+import { AuthInterface } from "./AuthInterface";
 import { EndpointDefaults } from "./EndpointDefaults";
 import { EndpointInterface } from "./EndpointInterface";
 import { EndpointOptions } from "./EndpointOptions";
@@ -16,6 +17,7 @@ import { Url } from "./Url";
 export { VERSION } from "./VERSION";
 
 export {
+  AuthInterface,
   EndpointDefaults,
   EndpointInterface,
   EndpointOptions,
