@@ -120,7 +120,7 @@ e.g. `''`
 | eventName: action | condition |
 |:---:|:---:|
 |push: *|[condition1](#condition1)|
-|pull_request: \[opened, synchronize, labeled, unlabeled]|[condition2](#condition2)|
+|pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
 ### Conditions
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
