@@ -22,10 +22,10 @@
     "@actions/core": "^1.2.0",
     "@actions/github": "^1.1.0",
     "@technote-space/filter-github-action": "^0.1.6",
-    "@technote-space/github-action-helper": "^0.2.7"
+    "@technote-space/github-action-helper": "^0.2.9"
   },
   "devDependencies": {
-    "@technote-space/github-action-test-helper": "^0.0.14",
+    "@technote-space/github-action-test-helper": "^0.0.16",
     "@types/jest": "^24.0.20",
     "@types/node": "^12.11.7",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
