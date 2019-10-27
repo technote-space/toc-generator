@@ -1,9 +1,9 @@
 import path from 'path';
-import { setFailed, getInput } from '@actions/core';
-import { context, GitHub } from '@actions/github';
-import { Logger, Utils, ApiHelper } from '@technote-space/github-action-helper';
-import { getChangedFiles } from './utils/command';
-import { isTargetContext, getCommitMessage, getPrBranchName, getPrTitle, getPrBody, getWorkDir, isCreatePR } from './utils/misc';
+import { setFailed } from '@actions/core';
+import { context } from '@actions/github';
+import { Logger, Utils } from '@technote-space/github-action-helper';
+import { isTargetContext } from './utils/misc';
+import { execute } from './utils/process';
 
 const {showActionInfo} = Utils;
 
@@ -20,19 +20,7 @@ async function run(): Promise<void> {
 			return;
 		}
 
-		const files = await getChangedFiles(context);
-		if (false === files) {
-			return;
-		}
-
-		if (isCreatePR(context)) {
-			await (new ApiHelper(logger)).createPR(getWorkDir(), getCommitMessage(), files, getPrBranchName(context), {
-				title: getPrTitle(context),
-				body: getPrBody(context, files),
-			}, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);
-		} else {
-			await (new ApiHelper(logger)).commit(getWorkDir(), getCommitMessage(), files, new GitHub(getInput('GITHUB_TOKEN', {required: true})), context);
-		}
+		await execute(logger, context);
 	} catch (error) {
 		setFailed(error.message);
 	}

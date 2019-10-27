@@ -96,14 +96,14 @@ const isSetPrBranchName = (): boolean => !!getInput('PR_BRANCH_NAME');
 
 export const isCreatePR = (context: Context): boolean => isPr(context) && isSetPrBranchName();
 
-export const isClosedPR = (context: Context): boolean => isPr(context) && context.action === 'closed';
+export const isClosePR = (context: Context): boolean => isPr(context) && context.action === 'closed';
 
 export const isTargetContext = (context: Context): boolean => {
 	if (!isTargetEvent(TARGET_EVENTS, context)) {
 		return false;
 	}
 
-	if (isClosedPR(context)) {
+	if (isClosePR(context)) {
 		return isSetPrBranchName();
 	}
 
