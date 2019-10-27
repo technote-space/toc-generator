@@ -81,6 +81,7 @@ default: `'**Table of Contents**'`
 このオプションが設定されている場合、変更はプルリクエストにコミットされます。  
 default: `''`  
 例：`docs/toc-${PR_NUMBER}`  
+[詳細](#create-pullrequest)  
 [Context variables](#context-variables)
 
 ### PR_TITLE
@@ -160,6 +161,44 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
    ```
 
 ![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
+
+### プルリクエストの作成
+下のyamlのように`PR_BRANCH_NAME`オプションを設定した場合、変更はプルリクエストにコミットされます。  
+```yaml
+on: pull_request
+name: TOC Generator
+jobs:
+ generateTOC:
+   name: TOC Generator
+   runs-on: ubuntu-latest
+   steps:
+     - name: TOC Generator
+       uses: technote-space/toc-generator@v1
+       with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
+```
+
+![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
+
+マージ先のプルリクエストが閉じられたときにプルリクエストを閉じたい場合は、アクティビティタイプに`closed`を設定してください。
+
+```yaml
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+name: TOC Generator
+jobs:
+ generateTOC:
+   name: TOC Generator
+   runs-on: ubuntu-latest
+   steps:
+     - name: TOC Generator
+       uses: technote-space/toc-generator@v1
+       with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
+```
 
 ### Context variables
 | name | description |
