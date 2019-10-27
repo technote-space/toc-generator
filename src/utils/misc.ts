@@ -96,17 +96,26 @@ const isSetPrBranchName = (): boolean => !!getInput('PR_BRANCH_NAME');
 
 export const isCreatePR = (context: Context): boolean => isPr(context) && isSetPrBranchName();
 
+export const isClosePR = (context: Context): boolean => isPr(context) && context.action === 'closed';
+
 export const isTargetContext = (context: Context): boolean => {
 	if (!isTargetEvent(TARGET_EVENTS, context)) {
 		return false;
 	}
+
+	if (isClosePR(context)) {
+		return isSetPrBranchName();
+	}
+
 	if (isSetPrBranchName()) {
 		if (!isCreatePR(context)) {
 			return false;
 		}
 	}
+
 	if (isPush(context)) {
 		return isValidBranch(getBranch(context));
 	}
+
 	return isTargetLabels(getArrayInput('INCLUDE_LABELS'), [], context);
 };
