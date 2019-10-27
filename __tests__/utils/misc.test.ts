@@ -13,6 +13,7 @@ import {
 	isDisabledDeletePackage,
 	isTargetContext,
 	isCreatePR,
+	isClosePR,
 } from '../../src/utils/misc';
 import { DEFAULT_COMMIT_MESSAGE, DEFAULT_PR_TITLE } from '../../src/constant';
 
@@ -402,21 +403,45 @@ describe('isCreatePR', () => {
 	testEnv();
 	it('should return true', () => {
 		process.env.INPUT_PR_BRANCH_NAME = 'test';
-		expect(isCreatePR(getContext({
-			eventName: 'pull_request',
+		expect(isCreatePR(generateContext({
+			event: 'pull_request',
 		}))).toBe(true);
 	});
 
 	it('should return false 1', () => {
 		process.env.INPUT_PR_BRANCH_NAME = 'test';
-		expect(isCreatePR(getContext({
-			eventName: 'push',
+		expect(isCreatePR(generateContext({
+			event: 'push',
 		}))).toBe(false);
 	});
 
 	it('should return false 2', () => {
-		expect(isCreatePR(getContext({
-			eventName: 'pull_request',
+		expect(isCreatePR(generateContext({
+			event: 'pull_request',
+		}))).toBe(false);
+	});
+});
+
+describe('isClosePR', () => {
+	testEnv();
+	it('should return true', () => {
+		expect(isClosePR(generateContext({
+			event: 'pull_request',
+			action: 'closed',
+		}))).toBe(true);
+	});
+
+	it('should return false 1', () => {
+		process.env.INPUT_PR_BRANCH_NAME = 'test';
+		expect(isClosePR(generateContext({
+			event: 'push',
+		}))).toBe(false);
+	});
+
+	it('should return false 2', () => {
+		expect(isClosePR(generateContext({
+			event: 'pull_request',
+			action: 'synchronize',
 		}))).toBe(false);
 	});
 });
