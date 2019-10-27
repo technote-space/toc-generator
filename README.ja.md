@@ -123,6 +123,10 @@ e.g. `''`
 |:---:|:---:|
 |push: *|[condition1](#condition1)|
 |pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
+|pull_request: \[closed]||
+
+- 次のアクティビティタイプは明示的に指定する必要があります。 ([詳細](https://help.github.com/en/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows#pull-request-event-pull_request))
+  - `labeled`, `unlabeled`, `closed`
 ### Conditions
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
