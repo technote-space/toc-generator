@@ -57,7 +57,7 @@ describe('execute', () => {
 
 		nock('https://api.github.com')
 			.persist()
-			.get('/repos/hello/world/pulls?head=hello%3Acreate%2Ftest&state=open')
+			.get('/repos/hello/world/pulls?head=hello%3Acreate%2Ftest')
 			.reply(200, () => getApiFixture(rootDir, 'pulls.list'))
 			.patch('/repos/hello/world/pulls/1347')
 			.reply(200, () => getApiFixture(rootDir, 'pulls.update'));
@@ -105,7 +105,7 @@ describe('execute', () => {
 			.reply(201, () => getApiFixture(rootDir, 'repos.git.commits'))
 			.post('/repos/hello/world/git/refs')
 			.reply(201, () => getApiFixture(rootDir, 'repos.git.refs.create'))
-			.get('/repos/hello/world/pulls?head=hello%3Acreate%2Ftest&state=all')
+			.get('/repos/hello/world/pulls?head=hello%3Acreate%2Ftest')
 			.reply(200, () => getApiFixture(rootDir, 'pulls.list'))
 			.patch('/repos/hello/world/pulls/1347')
 			.reply(200, () => getApiFixture(rootDir, 'pulls.update'));
