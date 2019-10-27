@@ -124,6 +124,10 @@ e.g. `''`
 |:---:|:---:|
 |push: *|[condition1](#condition1)|
 |pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
+|pull_request: \[closed]||
+
+- The following activity types must be explicitly specified ([detail](https://help.github.com/en/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows#pull-request-event-pull_request))
+  - `labeled`, `unlabeled`, `closed`
 ### Conditions
 #### condition1
 - push to branch (not tag)
