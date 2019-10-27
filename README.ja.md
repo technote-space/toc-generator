@@ -81,7 +81,7 @@ default: `'**Table of Contents**'`
 このオプションが設定されている場合、変更はプルリクエストにコミットされます。  
 default: `''`  
 例：`docs/toc-${PR_NUMBER}`  
-[詳細](#create-pullrequest)  
+[詳細](#プルリクエストの作成)  
 [Context variables](#context-variables)
 
 ### PR_TITLE
