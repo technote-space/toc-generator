@@ -52,20 +52,24 @@ describe('execute', () => {
 
 	it('should close pull request', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		process.env.INPUT_PR_BRANCH_NAME = 'create/test';
+		process.env.INPUT_PR_BRANCH_NAME = 'close/test';
 		const mockStdout = spyOnStdout();
 
 		nock('https://api.github.com')
 			.persist()
-			.get('/repos/hello/world/pulls?head=hello%3Acreate%2Ftest')
+			.get('/repos/hello/world/pulls?head=hello%3Aclose%2Ftest')
 			.reply(200, () => getApiFixture(rootDir, 'pulls.list'))
 			.patch('/repos/hello/world/pulls/1347')
-			.reply(200, () => getApiFixture(rootDir, 'pulls.update'));
+			.reply(200, () => getApiFixture(rootDir, 'pulls.update'))
+			.delete('/repos/hello/world/git/refs/heads/close/test')
+			.reply(204, () => getApiFixture(rootDir, 'pulls.update'));
 
 		await execute(new Logger(), context('closed'));
 
 		stdoutCalledWith(mockStdout, [
-			'::group::Closing PullRequest... [create/test]',
+			'::group::Closing PullRequest... [close/test]',
+			'::endgroup::',
+			'::group::Deleting reference... [refs/heads/close/test]',
 			'::endgroup::',
 		]);
 	});
