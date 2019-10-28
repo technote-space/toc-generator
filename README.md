@@ -32,6 +32,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
     - [condition2](#condition2)
 - [Addition](#addition)
   - [Commit](#commit)
+  - [Create PullRequest](#create-pullrequest)
   - [Context variables](#context-variables)
 - [GitHub Actions using this Action](#github-actions-using-this-action)
 - [Author](#author)
@@ -82,6 +83,7 @@ PullRequest branch name.
 If this option is set, changes will be committed to PullRequest.  
 default: `''`  
 e.g. `docs/toc-${PR_NUMBER}`  
+[Detail](#create-pullrequest)  
 [Context variables](#context-variables)
 
 ### PR_TITLE
@@ -121,7 +123,11 @@ e.g. `''`
 | eventName: action | condition |
 |:---:|:---:|
 |push: *|[condition1](#condition1)|
-|pull_request: \[opened, synchronize, labeled, unlabeled]|[condition2](#condition2)|
+|pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
+|pull_request: \[closed]||
+
+- The following activity types must be explicitly specified ([detail](https://help.github.com/en/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows#pull-request-event-pull_request))
+  - `labeled`, `unlabeled`, `closed`
 ### Conditions
 #### condition1
 - push to branch (not tag)
@@ -161,6 +167,44 @@ If you want to trigger actions, use a personal access token instead.
    ```
 
 ![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
+
+### Create PullRequest
+If you set `PR_BRANCH_NAME` option like following yaml, changes will be committed to PullRequest.  
+```yaml
+on: pull_request
+name: TOC Generator
+jobs:
+ generateTOC:
+   name: TOC Generator
+   runs-on: ubuntu-latest
+   steps:
+     - name: TOC Generator
+       uses: technote-space/toc-generator@v1
+       with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
+```
+
+![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
+
+If you want to close PullRequest when PullRequest to merge has been closed, please set `closed` activity type.  
+
+```yaml
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+name: TOC Generator
+jobs:
+ generateTOC:
+   name: TOC Generator
+   runs-on: ubuntu-latest
+   steps:
+     - name: TOC Generator
+       uses: technote-space/toc-generator@v1
+       with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
+```
 
 ### Context variables
 | name | description |
