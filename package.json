@@ -35,7 +35,7 @@
     "jest-circus": "^24.9.0",
     "nock": "^11.6.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "publishConfig": {
     "access": "public"
