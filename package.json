@@ -21,7 +21,7 @@
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/github": "^1.1.0",
-    "@technote-space/filter-github-action": "^0.1.7",
+    "@technote-space/filter-github-action": "^0.1.8",
     "@technote-space/github-action-helper": "^0.2.11"
   },
   "devDependencies": {
