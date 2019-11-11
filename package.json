@@ -25,7 +25,7 @@
     "@technote-space/github-action-helper": "^0.2.11"
   },
   "devDependencies": {
-    "@technote-space/github-action-test-helper": "^0.0.17",
+    "@technote-space/github-action-test-helper": "^0.0.19",
     "@types/jest": "^24.0.20",
     "@types/node": "^12.11.7",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
