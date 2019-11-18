@@ -363,10 +363,10 @@
   dependencies:
     "@types/node" "^12.11.1"
 
-"@technote-space/filter-github-action@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.1.7.tgz#3ab3dbd5be4949b15bc221fc2eb1b5f232b8c3a7"
-  integrity sha512-qd/cakNzXJR3HBrBzTE7iLmmg0hp+J7NpNR49y1ndMcSZM2JuuocBpApcqWd6PDTJP8y1zD5yo8Coo6l3OhxDQ==
+"@technote-space/filter-github-action@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.1.9.tgz#a337ec056539fdfc8a0f3fe4b54d90d4018ef266"
+  integrity sha512-U7RQp4ARrh1GstrmLgRMTEWvP2aaGGh01CZWnTyHLyzhXQnXHjfOgIzbOOEYqEpLMC5wxcRhvNnmtKBdvO3WYg==
   dependencies:
     "@actions/github" "^1.1.0"
 
