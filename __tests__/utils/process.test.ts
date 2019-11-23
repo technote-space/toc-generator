@@ -17,7 +17,7 @@ import {
 import { Logger } from '@technote-space/github-action-helper';
 import { execute } from '../../src/utils/process';
 
-const rootDir = path.resolve(__dirname, '..', 'fixtures');
+const rootDir   = path.resolve(__dirname, '..', 'fixtures');
 const setExists = testFs();
 beforeEach(() => {
 	Logger.resetForTesting();
@@ -51,9 +51,9 @@ describe('execute', () => {
 	testChildProcess();
 
 	it('should close pull request', async() => {
-		process.env.INPUT_GITHUB_TOKEN = 'test-token';
+		process.env.INPUT_GITHUB_TOKEN   = 'test-token';
 		process.env.INPUT_PR_BRANCH_NAME = 'close/test';
-		const mockStdout = spyOnStdout();
+		const mockStdout                 = spyOnStdout();
 
 		nock('https://api.github.com')
 			.persist()
@@ -77,7 +77,7 @@ describe('execute', () => {
 	it('should do nothing', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
 		process.env.INPUT_TARGET_PATHS = '/test';
-		const mockStdout = spyOnStdout();
+		const mockStdout               = spyOnStdout();
 		setExists(true);
 
 		await execute(new Logger(), context('synchronize'));
@@ -89,9 +89,9 @@ describe('execute', () => {
 	});
 
 	it('should create pull request', async() => {
-		process.env.INPUT_GITHUB_TOKEN = 'test-token';
+		process.env.INPUT_GITHUB_TOKEN   = 'test-token';
 		process.env.INPUT_PR_BRANCH_NAME = 'create/test';
-		const mockStdout = spyOnStdout();
+		const mockStdout                 = spyOnStdout();
 		setChildProcessParams({stdout: 'M  __tests__/fixtures/test.md'});
 		setExists(true);
 
@@ -124,7 +124,7 @@ describe('execute', () => {
 
 	it('should create commit', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		const mockStdout = spyOnStdout();
+		const mockStdout               = spyOnStdout();
 		setChildProcessParams({stdout: 'M  __tests__/fixtures/test.md'});
 		setExists(true);
 

@@ -84,7 +84,7 @@ describe('isTargetContext', () => {
 	});
 
 	it('should return true 7', () => {
-		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_BRANCH_PREFIX  = 'master';
 		process.env.INPUT_INCLUDE_LABELS = 'label';
 		expect(isTargetContext(generateContext({
 			ref: 'heads/master',
@@ -144,7 +144,7 @@ describe('isTargetContext', () => {
 	});
 
 	it('should return false 4', () => {
-		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_BRANCH_PREFIX  = 'master';
 		process.env.INPUT_INCLUDE_LABELS = 'label1';
 		expect(isTargetContext(generateContext({
 			ref: 'heads/master',
@@ -160,7 +160,7 @@ describe('isTargetContext', () => {
 	});
 
 	it('should return false 5', () => {
-		process.env.INPUT_BRANCH_PREFIX = 'master';
+		process.env.INPUT_BRANCH_PREFIX  = 'master';
 		process.env.INPUT_INCLUDE_LABELS = 'label1';
 		expect(isTargetContext(generateContext({
 			ref: 'heads/feature/test',
@@ -188,9 +188,9 @@ describe('getDocTocArgs', () => {
 	testEnv();
 
 	it('should get DocToc args', () => {
-		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
 		process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
-		process.env.INPUT_TOC_TITLE = '**Table of Contents**';
+		process.env.INPUT_TOC_TITLE    = '**Table of Contents**';
 		expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md /tmp/workspace/.work/.github/CONTRIBUTING.md --title \'**Table of Contents**\'');
 	});
 
@@ -200,7 +200,7 @@ describe('getDocTocArgs', () => {
 	});
 
 	it('should return false', () => {
-		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
 		process.env.INPUT_TARGET_PATHS = '..';
 		expect(getDocTocArgs()).toBe(false);
 	});

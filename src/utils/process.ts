@@ -16,7 +16,7 @@ export const execute = async(logger: Logger, context: Context): Promise<void> =>
 	}
 
 	const files = await getChangedFiles(context);
-	if (false === files) {
+	if (false === files || !files.length) {
 		return;
 	}
 
