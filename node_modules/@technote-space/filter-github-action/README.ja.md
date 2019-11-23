@@ -1,7 +1,7 @@
 # Filter GitHub Action
 
 [![npm version](https://badge.fury.io/js/%40technote-space%2Ffilter-github-action.svg)](https://badge.fury.io/js/%40technote-space%2Ffilter-github-action)
-[![Build Status](https://github.com/technote-space/filter-github-action/workflows/Build/badge.svg)](https://github.com/technote-space/filter-github-action/actions)
+[![CI Status](https://github.com/technote-space/filter-github-action/workflows/CI/badge.svg)](https://github.com/technote-space/filter-github-action/actions)
 [![codecov](https://codecov.io/gh/technote-space/filter-github-action/branch/master/graph/badge.svg)](https://codecov.io/gh/technote-space/filter-github-action)
 [![CodeFactor](https://www.codefactor.io/repository/github/technote-space/filter-github-action/badge)](https://www.codefactor.io/repository/github/technote-space/filter-github-action)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/technote-space/filter-github-action/blob/master/LICENSE)
