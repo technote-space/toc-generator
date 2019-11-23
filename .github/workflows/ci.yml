@@ -6,7 +6,7 @@ on:
     tags:
       - "!*"
 
-name: Build
+name: CI
 
 jobs:
   eslint:
