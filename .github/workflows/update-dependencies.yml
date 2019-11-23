@@ -1,0 +1,27 @@
+on:
+  schedule:
+    - cron: 0 17 * * *
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+name: Update dependencies
+jobs:
+  release:
+    name: Update npm dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update dependencies
+        uses: technote-space/create-pr-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GLOBAL_INSTALL_PACKAGES: npm-check-updates
+          EXECUTE_COMMANDS: |
+            ncu -u --packageFile package.json
+            yarn install
+            yarn upgrade
+            yarn audit
+          COMMIT_MESSAGE: 'chore: update npm dependencies'
+          COMMIT_NAME: Technote
+          COMMIT_EMAIL: technote.space@gmail.com
+          PR_BRANCH_NAME: 'chore-npm-update-${PR_ID}'
+          PR_TITLE: 'chore: update npm dependencies'
