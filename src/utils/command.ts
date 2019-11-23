@@ -4,20 +4,21 @@ import { Logger, GitHelper, Utils } from '@technote-space/github-action-helper';
 import { Context } from '@actions/github/lib/context';
 import { getDocTocArgs, isCloned, getWorkDir, isDisabledDeletePackage } from './misc';
 
-const {getWorkspace} = Utils;
+const {getWorkspace, replaceAll} = Utils;
 
 export const replaceDirectory = (message: string): string => {
 	const workDir = path.resolve(getWorkspace());
-	return message
-		.replace(` -C ${workDir}/.work`, '')
-		.replace(` -C ${workDir}`, '')
-		.replace(`${workDir}/.work`, '<Working Directory>')
-		.replace(workDir, '<Working Directory>');
+	return [
+		{key: ` -C ${workDir}/.work`, value: ''},
+		{key: ` -C ${workDir}`, value: ''},
+		{key: `${workDir}/.work`, value: '<Working Directory>'},
+		{key: workDir, value: '<Working Directory>'},
+	].reduce((value, target) => replaceAll(value, target.key, target.value), message);
 };
 
-const logger = new Logger(replaceDirectory);
+const logger               = new Logger(replaceDirectory);
 const {startProcess, warn} = logger;
-const helper = new GitHelper(logger, {filter: (line: string): boolean => /^M\s+/.test(line) && /\.md$/i.test(line)});
+const helper               = new GitHelper(logger, {filter: (line: string): boolean => /^M\s+/.test(line) && /\.md$/i.test(line)});
 
 export const clone = async(context: Context): Promise<void> => {
 	const workDir = getWorkDir();

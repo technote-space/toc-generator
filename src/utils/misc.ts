@@ -1,12 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { Context } from '@actions/github/lib/context';
-import { Utils } from '@technote-space/github-action-helper';
+import { Utils, ContextHelper } from '@technote-space/github-action-helper';
 import { isTargetEvent, isTargetLabels } from '@technote-space/filter-github-action';
 import { getInput } from '@actions/core' ;
 import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS, DEFAULT_PR_TITLE } from '../constant';
 
-const {getWorkspace, getArrayInput, escapeRegExp, getBranch, getBoolValue, isPr, isPush} = Utils;
+const {getWorkspace, getArrayInput, getPrefixRegExp, getBranch, getBoolValue} = Utils;
+const {isPr, isPush}                                                          = ContextHelper;
 
 const getTargetPaths = (): string[] => {
 	const paths = getArrayInput('TARGET_PATHS');
@@ -29,7 +30,7 @@ export const getDocTocArgs = (): string | false => {
 	}
 
 	const workDir = getWorkDir();
-	const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
+	const title   = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
 	return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
 
@@ -88,7 +89,7 @@ export const isDisabledDeletePackage = (): boolean => !getBoolValue(getInput('DE
 
 const getBranchPrefix = (): string => getInput('BRANCH_PREFIX') || '';
 
-const getBranchPrefixRegExp = (): RegExp => new RegExp('^' + escapeRegExp(getBranchPrefix()));
+const getBranchPrefixRegExp = (): RegExp => getPrefixRegExp(getBranchPrefix());
 
 export const isValidBranch = (branch: string): boolean => !getBranchPrefix() || getBranchPrefixRegExp().test(branch);
 

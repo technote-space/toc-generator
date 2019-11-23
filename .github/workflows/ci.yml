@@ -6,7 +6,7 @@ on:
     tags:
       - "!*"
 
-name: Build
+name: CI
 
 jobs:
   eslint:
@@ -16,6 +16,13 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 3
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install Package dependencies
         run: yarn install
       - name: Check code style
@@ -34,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['8', '10', '11', '12']
+        node: ['10', '11', '12']
     steps:
       - uses: actions/checkout@v1
         with:
@@ -43,6 +50,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install Package dependencies
         run: yarn install
       - name: Run tests

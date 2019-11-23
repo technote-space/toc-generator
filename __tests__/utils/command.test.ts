@@ -31,7 +31,7 @@ describe('replaceDirectory', () => {
 
 	it('should replace working directory', () => {
 		process.env.GITHUB_WORKSPACE = 'test-dir';
-		const workDir = path.resolve('test-dir/.work');
+		const workDir                = path.resolve('test-dir/.work');
 
 		expect(replaceDirectory(`git -C ${workDir} fetch`)).toBe('git fetch');
 	});
@@ -43,18 +43,17 @@ describe('clone', () => {
 
 	it('should run clone command', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		process.env.GITHUB_WORKSPACE = 'test-dir';
+		process.env.GITHUB_WORKSPACE   = 'test-dir';
 		setChildProcessParams({stdout: 'test-branch'});
-		const mockExec = spyOnExec();
+		const mockExec   = spyOnExec();
 		const mockStdout = spyOnStdout();
 
 		await clone(getContext({
 			ref: 'refs/heads/test-branch',
 		}));
 
-		const dir = path.resolve('test-dir', '.work');
 		execCalledWith(mockExec, [
-			`git -C ${dir} clone --branch=test-branch --depth=3 https://octocat:test-token@github.com//.git . > /dev/null 2>&1 || :`,
+			'git clone --branch=test-branch --depth=3 https://octocat:test-token@github.com//.git . > /dev/null 2>&1 || :',
 		]);
 		stdoutCalledWith(mockStdout, [
 			'::group::Cloning from the remote repo...',
@@ -68,7 +67,7 @@ describe('runDocToc', () => {
 
 	it('should do nothing', async() => {
 		process.env.INPUT_TARGET_PATHS = '../test.md';
-		const mockStdout = spyOnStdout();
+		const mockStdout               = spyOnStdout();
 
 		expect(await runDocToc()).toBe(false);
 
@@ -79,9 +78,9 @@ describe('runDocToc', () => {
 
 	it('should run doctoc', async() => {
 		process.env.INPUT_DELETE_PACKAGE = '1';
-		process.env.GITHUB_WORKSPACE = 'test-dir';
+		process.env.GITHUB_WORKSPACE     = 'test-dir';
 		setChildProcessParams({stdout: ''});
-		const mockExec = spyOnExec();
+		const mockExec   = spyOnExec();
 		const mockStdout = spyOnStdout();
 
 		expect(await runDocToc()).toBe(true);
@@ -106,9 +105,9 @@ describe('runDocToc', () => {
 
 	it('should run doctoc without delete package', async() => {
 		process.env.INPUT_DELETE_PACKAGE = '';
-		process.env.GITHUB_WORKSPACE = 'test-dir';
+		process.env.GITHUB_WORKSPACE     = 'test-dir';
 		setChildProcessParams({stdout: ''});
-		const mockExec = spyOnExec();
+		const mockExec   = spyOnExec();
 		const mockStdout = spyOnStdout();
 
 		expect(await runDocToc()).toBe(true);
@@ -131,7 +130,7 @@ describe('commit', () => {
 
 	it('should run git commit', async() => {
 		process.env.GITHUB_WORKSPACE = 'test-dir';
-		const mockExec = spyOnExec();
+		const mockExec               = spyOnExec();
 
 		await commit();
 
@@ -152,9 +151,8 @@ describe('getDiff', () => {
 
 		expect(await getDiff()).toEqual(['test2.md']);
 
-		const dir = path.resolve('test-dir/.work');
 		execCalledWith(mockExec, [
-			`git -C ${dir} status --short -uno`,
+			'git status --short -uno',
 		]);
 	});
 });
@@ -165,7 +163,7 @@ describe('getChangedFiles', () => {
 
 	it('should return false', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		process.env.GITHUB_WORKSPACE = 'test-dir';
+		process.env.GITHUB_WORKSPACE   = 'test-dir';
 		process.env.INPUT_TARGET_PATHS = '../test.md';
 		setChildProcessParams({stdout: 'test'});
 		setExists([false, false, false, true]);
@@ -177,7 +175,7 @@ describe('getChangedFiles', () => {
 
 	it('should get changed files', async() => {
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		process.env.GITHUB_WORKSPACE = 'test-dir';
+		process.env.GITHUB_WORKSPACE   = 'test-dir';
 		setChildProcessParams({stdout: 'test'});
 		setExists(true);
 
