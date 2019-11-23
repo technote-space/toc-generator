@@ -21,21 +21,21 @@
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/github": "^1.1.0",
-    "@technote-space/filter-github-action": "^0.1.7",
-    "@technote-space/github-action-helper": "^0.2.11"
+    "@technote-space/filter-github-action": "^0.1.10",
+    "@technote-space/github-action-helper": "^0.6.0"
   },
   "devDependencies": {
-    "@technote-space/github-action-test-helper": "^0.0.17",
-    "@types/jest": "^24.0.20",
-    "@types/node": "^12.11.7",
-    "@typescript-eslint/eslint-plugin": "^2.5.0",
-    "@typescript-eslint/parser": "^2.5.0",
-    "eslint": "^6.6.0",
+    "@technote-space/github-action-test-helper": "^0.0.22",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.12",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "eslint": "^6.7.0",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
-    "nock": "^11.6.0",
-    "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
+    "nock": "^11.7.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.2"
   },
   "publishConfig": {
     "access": "public"
@@ -43,7 +43,8 @@
   "scripts": {
     "build": "tsc",
     "test": "yarn lint && yarn cover",
-    "lint": "eslint src/**/**/*.ts && eslint __tests__/**/**/*.ts",
+    "lint": "eslint src/**/**/*.ts __tests__/**/**/*.ts",
+    "lint:fix": "eslint --fix src/**/**/*.ts __tests__/**/**/*.ts",
     "cover": "jest --coverage",
     "update": "ncu -u && yarn install && yarn upgrade && yarn audit"
   }
