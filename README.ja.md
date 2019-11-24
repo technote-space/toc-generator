@@ -19,12 +19,16 @@
 - [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
+  - [COMMIT_MESSAGE](#commit_message)
+  - [COMMIT_NAME](#commit_name)
+  - [COMMIT_EMAIL](#commit_email)
+  - [PR_BRANCH_PREFIX](#pr_branch_prefix)
   - [PR_BRANCH_NAME](#pr_branch_name)
   - [PR_TITLE](#pr_title)
-  - [COMMIT_MESSAGE](#commit_message)
+  - [PR_BODY](#pr_body)
+  - [PR_CLOSE_MESSAGE](#pr_close_message)
+  - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
   - [INCLUDE_LABELS](#include_labels)
-  - [BRANCH_PREFIX](#branch_prefix)
-  - [DELETE_PACKAGE](#delete_package)
 - [Action イベント詳細](#action-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E8%A9%B3%E7%B4%B0)
   - [対象イベント](#%E5%AF%BE%E8%B1%A1%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)
   - [Conditions](#conditions)
@@ -34,7 +38,8 @@
   - [コミット](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88)
   - [プルリクエストの作成](#%E3%83%97%E3%83%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)
   - [Context variables](#context-variables)
-- [このアクションを使用しているアクションの例](#%E3%81%93%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BE%8B)
+  - [Context PR variables](#context-pr-variables)
+- [このアクションを使用しているリポジトリの例](#%E3%81%93%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BE%8B)
 - [Author](#author)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -60,7 +65,7 @@
        runs-on: ubuntu-latest
        steps:
          - name: TOC Generator
-           uses: technote-space/toc-generator@v1
+           uses: technote-space/toc-generator@v2
            with:
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
@@ -77,12 +82,27 @@ default: `'README.md'`
 default: `'**Table of Contents**'`  
 例：`''`
 
+### COMMIT_MESSAGE
+コミットメッセージ  
+default: `'docs: Update TOC'`  
+例：`feat: update TOC`
+
+### COMMIT_NAME
+コミット名  
+default: `'GitHub'`  
+
+### COMMIT_EMAIL
+コミットメールアドレス  
+default: `'noreply@github.com'`  
+
+### PR_BRANCH_PREFIX
+プルリクエストのブランチプリフィックス  
+default: `'toc-generator/'`
+
 ### PR_BRANCH_NAME
 プルリクエストのブランチ名  
-このオプションが設定されている場合、変更はプルリクエストにコミットされます。  
-default: `''`  
-例：`docs/toc-${PR_NUMBER}`  
-[詳細](#プルリクエストの作成)  
+default: `'update-toc-${PR_ID}'`  
+例：`toc-${PR_NUMBER}`  
 [Context variables](#context-variables)
 
 ### PR_TITLE
@@ -91,10 +111,44 @@ default: `'docs: Update TOC'`
 例：`feat: update TOC (${PR_HEAD_REF})`  
 [Context variables](#context-variables)
 
-### COMMIT_MESSAGE
-コミットメッセージ    
-default: `'docs: Update TOC'`  
-例：`feat: update TOC`
+### PR_BODY
+プルリクエストの本文  
+default:
+```
+## Base PullRequest
+
+${PR_TITLE} (${PR_NUMBER_REF})
+
+## Command results
+<details>
+  <summary>Details: </summary>
+
+  ${COMMANDS_OUTPUT}
+
+</details>
+
+## Changed files
+<details>
+  <summary>${FILES_SUMMARY}: </summary>
+
+  ${FILES}
+
+</details>
+
+<hr>
+
+[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+```
+[Context PR variables](#context-pr-variables)
+
+### PR_CLOSE_MESSAGE
+プルリクエストを閉じるときのメッセージ  
+default: `'This PR is no longer needed because the package looks up-to-date.'`
+
+### TARGET_BRANCH_PREFIX
+ブランチ名のフィルタ  
+default: `''`  
+例：`'release/'`
 
 ### INCLUDE_LABELS
 プルリクエストに付与されているかチェックするラベル  
@@ -106,16 +160,6 @@ INCLUDE_LABELS: |
   Test Label1
   Test Label2
 ```
-
-### BRANCH_PREFIX
-ブランチプリフィックス  
-default: `''`  
-e.g. `master`
-
-### DELETE_PACKAGE
-パフォーマンス改善のために DocToc のインストール前に package ファイルを削除するかどうか  
-default: `'1'`  
-e.g. `''`
 
 ## Action イベント詳細
 ### 対象イベント
@@ -130,17 +174,16 @@ e.g. `''`
 ### Conditions
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
-  - ブランチ名 ([`BRANCH_PREFIX`](#branch_prefix))
+  - ブランチ名 ([`BRANCH_PREFIX`](#target_branch_prefix))
 - `PR_BRANCH_NAME` が設定されていない
 #### condition2
 - [指定したラベル](#include_labels)が付与されているかどうか
+- ブランチ名 ([`BRANCH_PREFIX`](#target_branch_prefix))
 
 ## 補足
 ### コミット
 GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作成する権限がありません。  
 したがって、プッシュによってトリガーされるビルドアクションなどは実行されません。  
-
-![GITHUB_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/no_access_token.png)
 
 これはブランチプロテクションを設定していると問題になる場合があります。  
 
@@ -159,16 +202,14 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
        runs-on: ubuntu-latest
        steps:
          - name: TOC Generator
-           uses: technote-space/toc-generator@v1
+           uses: technote-space/toc-generator@v2
            with:
              # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
 
-![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
-
 ### プルリクエストの作成
-下のyamlのように`PR_BRANCH_NAME`オプションを設定した場合、変更はプルリクエストにコミットされます。  
+下のyamlのように`pull_request`イベントを設定した場合、変更はプルリクエストにコミットされます。  
 ```yaml
 on: pull_request
 name: TOC Generator
@@ -178,15 +219,14 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: TOC Generator
-       uses: technote-space/toc-generator@v1
+       uses: technote-space/toc-generator@v2
        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
 
-マージ先のプルリクエストが閉じられたときにプルリクエストを閉じたい場合は、アクティビティタイプに`closed`を設定してください。
+`closed`アクティビティタイプが設定されている場合、このアクションは不要になったときにプルリクエストを閉じます。
 
 ```yaml
 on:
@@ -199,23 +239,32 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: TOC Generator
-       uses: technote-space/toc-generator@v1
+       uses: technote-space/toc-generator@v2
        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
 ```
 
 ### Context variables
 | name | description |
 |:---|:---|
-| PR_NUMBER | pull_request.number (e.g. `11`) |
-| PR_ID | pull_request.id (e.g. `21031067`) |
-| PR_HEAD_REF | pull_request.head.ref (e.g. `change`) |
-| PR_BASE_REF | pull_request.base.ref (e.g. `master`) |
+| PR_NUMBER | pull_request.number (例：`11`) |
+| PR_NUMBER_REF | `#${pull_request.number}` (例：`#11`) |
+| PR_ID | pull_request.id (例：`21031067`) |
+| PR_HEAD_REF | pull_request.head.ref (例：`change`) |
+| PR_BASE_REF | pull_request.base.ref (例：`master`) |
+| PR_TITLE | pull_request.title (例：`Update the README with new information.`) |
 
 [Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
 
-## このアクションを使用しているアクションの例
+### Context PR variables
+| name | description |
+|:---|:---|
+| PR_LINK | Link to PR |
+| COMMANDS_OUTPUT | Result of TOC command |
+| FILES_SUMMARY | 例：`Changed 2 files` |
+| FILES | Changed file list |
+
+## このアクションを使用しているリポジトリの例
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
   - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
 - [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
