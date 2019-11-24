@@ -1,10 +1,8 @@
 /* eslint-disable no-magic-numbers */
-import fs from 'fs';
 import path from 'path';
 import { testEnv } from '@technote-space/github-action-test-helper';
 import {
 	replaceDirectory,
-	getWorkDir,
 	getDocTocArgs,
 	getRunnerArguments,
 } from '../../src/utils/misc';
@@ -15,7 +13,7 @@ describe('replaceDirectory', () => {
 
 	it('should replace working directory', () => {
 		process.env.GITHUB_WORKSPACE = 'test-dir';
-		const workDir                = path.resolve('test-dir/.work');
+		const workDir                = path.resolve('test-dir');
 
 		expect(replaceDirectory(`git -C ${workDir} fetch`)).toBe('git fetch');
 		expect(replaceDirectory(`ls ${workDir}`)).toBe('ls [Working Directory]');
@@ -29,35 +27,18 @@ describe('getDocTocArgs', () => {
 		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
 		process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
 		process.env.INPUT_TOC_TITLE    = '**Table of Contents**';
-		expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md /tmp/workspace/.work/.github/CONTRIBUTING.md --title \'**Table of Contents**\'');
+		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --title \'**Table of Contents**\'');
 	});
 
 	it('should get default DocToc args', () => {
 		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
-		expect(getDocTocArgs()).toBe('/tmp/workspace/.work/README.md --notitle');
+		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md --notitle');
 	});
 
 	it('should return false', () => {
 		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
 		process.env.INPUT_TARGET_PATHS = '..';
 		expect(getDocTocArgs()).toBe(false);
-	});
-});
-
-describe('getWorkDir', () => {
-	testEnv();
-
-	it('should get working dir', () => {
-		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
-		expect(getWorkDir()).toBe('/tmp/workspace/.work');
-	});
-
-	it('should get working dir', () => {
-		process.env.GITHUB_WORKSPACE = undefined;
-		if (!fs.existsSync(path.resolve('.git'))) {
-			fs.mkdirSync(path.resolve('.git'));
-		}
-		expect(getWorkDir()).toBe(path.resolve('.'));
 	});
 });
 
