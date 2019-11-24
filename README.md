@@ -19,12 +19,16 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
+  - [COMMIT_MESSAGE](#commit_message)
+  - [COMMIT_NAME](#commit_name)
+  - [COMMIT_EMAIL](#commit_email)
+  - [PR_BRANCH_PREFIX](#pr_branch_prefix)
   - [PR_BRANCH_NAME](#pr_branch_name)
   - [PR_TITLE](#pr_title)
-  - [COMMIT_MESSAGE](#commit_message)
+  - [PR_BODY](#pr_body)
+  - [PR_CLOSE_MESSAGE](#pr_close_message)
+  - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
   - [INCLUDE_LABELS](#include_labels)
-  - [BRANCH_PREFIX](#branch_prefix)
-  - [DELETE_PACKAGE](#delete_package)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
@@ -34,7 +38,8 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Commit](#commit)
   - [Create PullRequest](#create-pullrequest)
   - [Context variables](#context-variables)
-- [GitHub Actions using this Action](#github-actions-using-this-action)
+  - [Context PR variables](#context-pr-variables)
+- [Sample repositories using this Action](#sample-repositories-using-this-action)
 - [Author](#author)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -61,7 +66,7 @@ e.g. `README.md`
        runs-on: ubuntu-latest
        steps:
          - name: TOC Generator
-           uses: technote-space/toc-generator@v1
+           uses: technote-space/toc-generator@v2
            with:
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
@@ -78,12 +83,27 @@ TOC Title.
 default: `'**Table of Contents**'`  
 e.g. `''`
 
+### COMMIT_MESSAGE
+Commit message.  
+default: `'docs: Update TOC'`  
+e.g. `feat: update TOC`
+
+### COMMIT_NAME
+Git commit name.  
+default: `'GitHub'`  
+
+### COMMIT_EMAIL
+Git commit email.  
+default: `'noreply@github.com'`  
+
+### PR_BRANCH_PREFIX
+PullRequest branch prefix.  
+default: `'toc-generator/'`
+
 ### PR_BRANCH_NAME
 PullRequest branch name.  
-If this option is set, changes will be committed to PullRequest.  
-default: `''`  
-e.g. `docs/toc-${PR_NUMBER}`  
-[Detail](#create-pullrequest)  
+default: `'update-toc-${PR_ID}'`  
+e.g. `toc-${PR_NUMBER}`  
 [Context variables](#context-variables)
 
 ### PR_TITLE
@@ -92,10 +112,44 @@ default: `'docs: Update TOC'`
 e.g. `feat: update TOC (${PR_HEAD_REF})`  
 [Context variables](#context-variables)
 
-### COMMIT_MESSAGE
-Commit message.  
-default: `'docs: Update TOC'`  
-e.g. `feat: update TOC`
+### PR_BODY
+PullRequest body.  
+default:
+```
+## Base PullRequest
+
+${PR_TITLE} (${PR_NUMBER_REF})
+
+## Command results
+<details>
+  <summary>Details: </summary>
+
+  ${COMMANDS_OUTPUT}
+
+</details>
+
+## Changed files
+<details>
+  <summary>${FILES_SUMMARY}: </summary>
+
+  ${FILES}
+
+</details>
+
+<hr>
+
+[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+```
+[Context PR variables](#context-pr-variables)
+
+### PR_CLOSE_MESSAGE
+Message body when closing PullRequest.  
+default: `'This PR is no longer needed because the package looks up-to-date.'`
+
+### TARGET_BRANCH_PREFIX
+Filter by branch name.  
+default: `''`  
+e.g. `'release/'`
 
 ### INCLUDE_LABELS
 Labels used to check if the PullRequest has it.  
@@ -107,16 +161,6 @@ INCLUDE_LABELS: |
   Test Label1
   Test Label2
 ```
-
-### BRANCH_PREFIX
-Branch name prefix.  
-default: `''`  
-e.g. `master`
-
-### DELETE_PACKAGE
-Whether to delete package file before install DocToc for performance.  
-default: `'1'`  
-e.g. `''`
 
 ## Action event details
 ### Target event
@@ -131,17 +175,15 @@ e.g. `''`
 ### Conditions
 #### condition1
 - push to branch (not tag)
-  - branch name ([`BRANCH_PREFIX`](#branch_prefix))
-- not set `PR_BRANCH_NAME`
+  - branch name ([`BRANCH_PREFIX`](#target_branch_prefix))
 #### condition2
 - [specified labels](#include_labels) included?
+- branch name ([`BRANCH_PREFIX`](#target_branch_prefix))
 
 ## Addition
 ### Commit
 The `GITHUB_TOKEN` that is provided as a part of `GitHub Actions` doesn't have authorization to create any successive events.  
 So it won't spawn actions which triggered by push.  
-
-![GITHUB_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/no_access_token.png)
 
 This can be a problem if you have branch protection configured.  
 
@@ -160,16 +202,14 @@ If you want to trigger actions, use a personal access token instead.
        runs-on: ubuntu-latest
        steps:
          - name: TOC Generator
-           uses: technote-space/toc-generator@v1
+           uses: technote-space/toc-generator@v2
            with:
              # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
 
-![ACCESS_TOKEN](https://raw.githubusercontent.com/technote-space/toc-generator/images/with_access_token.png)
-
 ### Create PullRequest
-If you set `PR_BRANCH_NAME` option like following yaml, changes will be committed to PullRequest.  
+If you set `pull_request` event like following yaml, changes will be committed to PullRequest.  
 ```yaml
 on: pull_request
 name: TOC Generator
@@ -179,15 +219,12 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: TOC Generator
-       uses: technote-space/toc-generator@v1
+       uses: technote-space/toc-generator@v2
        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
 ```
 
-![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
-
-If you want to close PullRequest when PullRequest to merge has been closed, please set `closed` activity type.  
+If the `closed` activity type is set, this action closes the PR when it is no longer needed.  
 
 ```yaml
 on:
@@ -200,23 +237,32 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: TOC Generator
-       uses: technote-space/toc-generator@v1
+       uses: technote-space/toc-generator@v2
        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_BRANCH_NAME: docs/toc-${PR_NUMBER}
 ```
 
 ### Context variables
 | name | description |
 |:---|:---|
 | PR_NUMBER | pull_request.number (e.g. `11`) |
+| PR_NUMBER_REF | `#${pull_request.number}` (e.g. `#11`) |
 | PR_ID | pull_request.id (e.g. `21031067`) |
 | PR_HEAD_REF | pull_request.head.ref (e.g. `change`) |
 | PR_BASE_REF | pull_request.base.ref (e.g. `master`) |
+| PR_TITLE | pull_request.title (e.g. `Update the README with new information.`) |
 
 [Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
 
-## GitHub Actions using this Action
+### Context PR variables
+| name | description |
+|:---|:---|
+| PR_LINK | Link to PR |
+| COMMANDS_OUTPUT | Result of TOC command |
+| FILES_SUMMARY | e.g. `Changed 2 files` |
+| FILES | Changed file list |
+
+## Sample repositories using this Action
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
   - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
 - [Auto card labeler](https://github.com/technote-space/auto-card-labeler)

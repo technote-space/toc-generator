@@ -20,12 +20,10 @@
   "main": "lib/main.js",
   "dependencies": {
     "@actions/core": "^1.2.0",
-    "@actions/github": "^1.1.0",
-    "@technote-space/filter-github-action": "^0.1.10",
-    "@technote-space/github-action-helper": "^0.6.0"
+    "@technote-space/github-action-pr-helper": "^0.1.6"
   },
   "devDependencies": {
-    "@technote-space/github-action-test-helper": "^0.0.22",
+    "@technote-space/github-action-test-helper": "^0.0.24",
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.12",
     "@typescript-eslint/eslint-plugin": "^2.8.0",

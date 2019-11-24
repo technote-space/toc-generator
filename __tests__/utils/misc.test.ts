@@ -1,186 +1,24 @@
 /* eslint-disable no-magic-numbers */
 import fs from 'fs';
 import path from 'path';
-import { testEnv, getContext, generateContext } from '@technote-space/github-action-test-helper';
+import { testEnv } from '@technote-space/github-action-test-helper';
 import {
-	getDocTocArgs,
+	replaceDirectory,
 	getWorkDir,
-	getCommitMessage,
-	getPrBranchName,
-	getPrTitle,
-	getPrLink,
-	getPrBody,
-	isDisabledDeletePackage,
-	isTargetContext,
-	isCreatePR,
-	isClosePR,
+	getDocTocArgs,
+	getRunnerArguments,
 } from '../../src/utils/misc';
-import { DEFAULT_COMMIT_MESSAGE, DEFAULT_PR_TITLE } from '../../src/constant';
+import { TARGET_EVENTS } from '../../src/constant';
 
-describe('isTargetContext', () => {
+describe('replaceDirectory', () => {
 	testEnv();
 
-	it('should return true 1', () => {
-		expect(isTargetContext(generateContext({
-			ref: 'heads/test',
-			event: 'push',
-		}))).toBe(true);
-	});
+	it('should replace working directory', () => {
+		process.env.GITHUB_WORKSPACE = 'test-dir';
+		const workDir                = path.resolve('test-dir/.work');
 
-	it('should return true 2', () => {
-		expect(isTargetContext(generateContext({
-			ref: 'heads/test',
-			event: 'push',
-		}))).toBe(true);
-	});
-
-	it('should return true 3', () => {
-		expect(isTargetContext(generateContext({
-			event: 'pull_request',
-			action: 'opened',
-		}, {
-			payload: {
-				'pull_request': {
-					labels: [],
-				},
-			},
-		}))).toBe(true);
-	});
-
-	it('should return true 4', () => {
-		process.env.INPUT_INCLUDE_LABELS = 'label2';
-		expect(isTargetContext(generateContext({
-			event: 'pull_request',
-			action: 'synchronize',
-		}, {
-			payload: {
-				'pull_request': {
-					labels: [{name: 'label1'}, {name: 'label2'}],
-				},
-			},
-		}))).toBe(true);
-	});
-
-	it('should return true 5', () => {
-		process.env.INPUT_INCLUDE_LABELS = 'label1,label2\nlabel3';
-		expect(isTargetContext(generateContext({
-			event: 'pull_request',
-			action: 'synchronize',
-		}, {
-			payload: {
-				'pull_request': {
-					labels: [{name: 'label2'}],
-				},
-			},
-		}))).toBe(true);
-	});
-
-	it('should return true 6', () => {
-		process.env.INPUT_BRANCH_PREFIX = 'master';
-		expect(isTargetContext(generateContext({
-			ref: 'heads/master',
-			event: 'push',
-		}))).toBe(true);
-	});
-
-	it('should return true 7', () => {
-		process.env.INPUT_BRANCH_PREFIX  = 'master';
-		process.env.INPUT_INCLUDE_LABELS = 'label';
-		expect(isTargetContext(generateContext({
-			ref: 'heads/master',
-			event: 'push',
-		}))).toBe(true);
-	});
-
-	it('should return true 8', () => {
-		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
-		expect(isTargetContext(generateContext({
-			event: 'pull_request',
-			action: 'opened',
-		}, {
-			payload: {
-				'pull_request': {
-					labels: [],
-				},
-			},
-		}))).toBe(true);
-	});
-
-	it('should return true 9', () => {
-		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
-		expect(isTargetContext(generateContext({
-			event: 'pull_request',
-			action: 'closed',
-		}))).toBe(true);
-	});
-
-	it('should return false 1', () => {
-		expect(isTargetContext(generateContext({
-			ref: 'tags/test',
-			event: 'push',
-		}))).toBe(false);
-	});
-
-	it('should return false 2', () => {
-		process.env.INPUT_INCLUDE_LABELS = 'test2';
-		expect(isTargetContext(generateContext({
-			event: 'pull_request',
-			action: 'opened',
-		}, {
-			payload: {
-				'pull_request': {
-					labels: [{name: 'label1'}],
-				},
-			},
-		}))).toBe(false);
-	});
-
-	it('should return false 3', () => {
-		process.env.INPUT_BRANCH_PREFIX = 'master';
-		expect(isTargetContext(generateContext({
-			ref: 'heads/test',
-			event: 'push',
-		}))).toBe(false);
-	});
-
-	it('should return false 4', () => {
-		process.env.INPUT_BRANCH_PREFIX  = 'master';
-		process.env.INPUT_INCLUDE_LABELS = 'label1';
-		expect(isTargetContext(generateContext({
-			ref: 'heads/master',
-			event: 'pull_request',
-			action: 'synchronize',
-		}, {
-			payload: {
-				'pull_request': {
-					labels: [{name: 'label2'}],
-				},
-			},
-		}))).toBe(false);
-	});
-
-	it('should return false 5', () => {
-		process.env.INPUT_BRANCH_PREFIX  = 'master';
-		process.env.INPUT_INCLUDE_LABELS = 'label1';
-		expect(isTargetContext(generateContext({
-			ref: 'heads/feature/test',
-			event: 'push',
-		}))).toBe(false);
-	});
-
-	it('should return false 6', () => {
-		process.env.INPUT_PR_BRANCH_NAME = 'toc/test';
-		expect(isTargetContext(generateContext({
-			ref: 'heads/master',
-			event: 'push',
-		}))).toBe(false);
-	});
-
-	it('should return false 7', () => {
-		expect(isTargetContext(generateContext({
-			event: 'pull_request',
-			action: 'closed',
-		}))).toBe(false);
+		expect(replaceDirectory(`git -C ${workDir} fetch`)).toBe('git fetch');
+		expect(replaceDirectory(`ls ${workDir}`)).toBe('ls [Working Directory]');
 	});
 });
 
@@ -223,225 +61,112 @@ describe('getWorkDir', () => {
 	});
 });
 
-describe('getCommitMessage', () => {
-	testEnv();
+describe('getRunnerArguments', () => {
+	const rootDir = path.resolve(__dirname, '../..');
+	testEnv(rootDir);
 
-	it('should get commit message', () => {
-		process.env.INPUT_COMMIT_MESSAGE = 'test';
-		expect(getCommitMessage()).toBe('test');
+	it('should return args', () => {
+		const args = getRunnerArguments();
+		delete args.logger;
+		expect(args).toEqual({
+			rootDir: rootDir,
+			actionName: 'TOC Generator',
+			actionOwner: 'technote-space',
+			actionRepo: 'toc-generator',
+			commitEmail: 'noreply@github.com',
+			commitMessage: 'docs: Update TOC',
+			commitName: 'GitHub',
+			executeCommands: [
+				`doctoc ${rootDir}/README.md --title '**Table of Contents**' --github`,
+			],
+			filterExtensions: [
+				'md',
+			],
+			filterGitStatus: 'M',
+			globalInstallPackages: [
+				'doctoc',
+			],
+			includeLabels: [],
+			prBody: [
+				'## Base PullRequest',
+				'',
+				'${PR_TITLE} (${PR_NUMBER_REF})',
+				'',
+				'## Command results',
+				'<details>',
+				'  <summary>Details: </summary>',
+				'',
+				'  ${COMMANDS_OUTPUT}',
+				'',
+				'</details>',
+				'',
+				'## Changed files',
+				'<details>',
+				'  <summary>${FILES_SUMMARY}: </summary>',
+				'',
+				'  ${FILES}',
+				'',
+				'</details>',
+				'',
+				'<hr>',
+				'',
+				'[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})',
+			].join('\n'),
+			prBranchName: 'update-toc-${PR_ID}',
+			prBranchPrefix: 'toc-generator/',
+			prCloseMessage: 'This PR is no longer needed because the package looks up-to-date.',
+			prTitle: 'docs: Update TOC',
+			targetBranchPrefix: '',
+			targetEvents: TARGET_EVENTS,
+		});
 	});
 
-	it('should get default commit message', () => {
-		expect(getCommitMessage()).toBe(DEFAULT_COMMIT_MESSAGE);
-	});
-});
+	it('should return args', () => {
+		process.env.INPUT_COMMIT_NAME          = 'test name';
+		process.env.INPUT_COMMIT_EMAIL         = 'test email';
+		process.env.INPUT_COMMIT_MESSAGE       = 'test message';
+		process.env.INPUT_PR_BRANCH_PREFIX     = 'prefix/';
+		process.env.INPUT_PR_BRANCH_NAME       = 'test-branch-${PR_ID}';
+		process.env.INPUT_PR_TITLE             = 'test: create pull request (${PR_NUMBER})';
+		process.env.INPUT_PR_BODY              = 'pull request body';
+		process.env.INPUT_PR_CLOSE_MESSAGE     = 'close message';
+		process.env.INPUT_PR_DATE_FORMAT1      = 'YYYY-MM-DD HH:mm:ss';
+		process.env.INPUT_PR_DATE_FORMAT2      = 'YYYY-MM-DD';
+		process.env.INPUT_TARGET_BRANCH_PREFIX = 'feature/';
+		process.env.INPUT_DELETE_PACKAGE       = '1';
+		process.env.INPUT_INCLUDE_LABELS       = 'label1, label2\nlabel3';
+		process.env.INPUT_TARGET_PATHS         = '/';
 
-describe('getPrBranchName', () => {
-	testEnv();
-	const context = getContext({
-		payload: {
-			'pull_request': {
-				number: 11,
-				id: 21031067,
-				head: {
-					ref: 'change',
-				},
-				base: {
-					ref: 'master',
-				},
-			},
-		},
-	});
-
-	it('should get branch name', () => {
-		process.env.INPUT_PR_BRANCH_NAME = '${PR_NUMBER}-${PR_ID}-${PR_HEAD_REF}-${PR_BASE_REF}';
-		expect(getPrBranchName(context)).toBe('11-21031067-change-master');
-	});
-
-	it('should get empty', () => {
-		expect(getPrBranchName(context)).toBeFalsy();
-	});
-
-	it('should throw error', () => {
-		expect(() => getPrBranchName(getContext({}))).toThrow();
-	});
-});
-
-describe('getPrTitle', () => {
-	testEnv();
-	const context = getContext({
-		payload: {
-			'pull_request': {
-				number: 11,
-				id: 21031067,
-				head: {
-					ref: 'change',
-				},
-				base: {
-					ref: 'master',
-				},
-			},
-		},
-	});
-
-	it('should get PR title', () => {
-		process.env.INPUT_PR_TITLE = '${PR_NUMBER}-${PR_ID}-${PR_HEAD_REF}-${PR_BASE_REF}';
-		expect(getPrTitle(context)).toBe('11-21031067-change-master');
-	});
-
-	it('should get default PR title', () => {
-		expect(getPrTitle(context)).toBe(DEFAULT_PR_TITLE);
-	});
-
-	it('should throw error', () => {
-		process.env.INPUT_PR_TITLE = '${PR_NUMBER}-${PR_ID}-${PR_HEAD_REF}-${PR_BASE_REF}';
-		expect(() => getPrTitle(getContext({}))).toThrow();
-	});
-});
-
-describe('getPrLink', () => {
-	it('should get pr link', () => {
-		expect(getPrLink(generateContext({
-			ref: 'heads/test',
-			event: 'push',
-		}, {
-			payload: {
-				'pull_request': {
-					title: 'test title',
-					'html_url': 'http://example.com',
-				},
-			},
-		}))).toEqual(['[test title](http://example.com)', '']);
-	});
-
-	it('should get empty', () => {
-		expect(getPrLink(getContext({}))).toEqual([]);
-	});
-});
-
-describe('getPrBody', () => {
-	const context = getContext({
-		ref: 'refs/heads/test',
-		eventName: 'push',
-		payload: {
-			'pull_request': {
-				title: 'test title',
-				'html_url': 'http://example.com',
-			},
-		},
-	});
-
-	it('should get PR Body', () => {
-		expect(getPrBody(context, ['README.md', 'CHANGELOG.md'])).toBe([
-			'## Updated TOC',
-			'',
-			'[test title](http://example.com)',
-			'',
-			'<details>',
-			'',
-			'<summary>Changed files</summary>',
-			'',
-			'- README.md',
-			'- CHANGELOG.md',
-			'',
-			'</details>',
-		].join('\n'));
-	});
-
-	it('should get PR Body', () => {
-		expect(getPrBody(context, ['README.md'])).toBe([
-			'## Updated TOC',
-			'',
-			'[test title](http://example.com)',
-			'',
-			'<details>',
-			'',
-			'<summary>Changed file</summary>',
-			'',
-			'- README.md',
-			'',
-			'</details>',
-		].join('\n'));
-	});
-});
-
-describe('isDisabledDeletePackage', () => {
-	testEnv();
-
-	it('should be false 1', () => {
-		process.env.INPUT_DELETE_PACKAGE = '1';
-		expect(isDisabledDeletePackage()).toBe(false);
-	});
-
-	it('should be false 2', () => {
-		process.env.INPUT_DELETE_PACKAGE = 'true';
-		expect(isDisabledDeletePackage()).toBe(false);
-	});
-
-	it('should be false 3', () => {
-		process.env.INPUT_DELETE_PACKAGE = 'abc';
-		expect(isDisabledDeletePackage()).toBe(false);
-	});
-
-	it('should be true 1', () => {
-		process.env.INPUT_DELETE_PACKAGE = '0';
-		expect(isDisabledDeletePackage()).toBe(true);
-	});
-
-	it('should be true 2', () => {
-		process.env.INPUT_DELETE_PACKAGE = 'false';
-		expect(isDisabledDeletePackage()).toBe(true);
-	});
-
-	it('should be true 3', () => {
-		process.env.INPUT_DELETE_PACKAGE = '';
-		expect(isDisabledDeletePackage()).toBe(true);
-	});
-});
-
-describe('isCreatePR', () => {
-	testEnv();
-	it('should return true', () => {
-		process.env.INPUT_PR_BRANCH_NAME = 'test';
-		expect(isCreatePR(generateContext({
-			event: 'pull_request',
-		}))).toBe(true);
-	});
-
-	it('should return false 1', () => {
-		process.env.INPUT_PR_BRANCH_NAME = 'test';
-		expect(isCreatePR(generateContext({
-			event: 'push',
-		}))).toBe(false);
-	});
-
-	it('should return false 2', () => {
-		expect(isCreatePR(generateContext({
-			event: 'pull_request',
-		}))).toBe(false);
-	});
-});
-
-describe('isClosePR', () => {
-	testEnv();
-	it('should return true', () => {
-		expect(isClosePR(generateContext({
-			event: 'pull_request',
-			action: 'closed',
-		}))).toBe(true);
-	});
-
-	it('should return false 1', () => {
-		process.env.INPUT_PR_BRANCH_NAME = 'test';
-		expect(isClosePR(generateContext({
-			event: 'push',
-		}))).toBe(false);
-	});
-
-	it('should return false 2', () => {
-		expect(isClosePR(generateContext({
-			event: 'pull_request',
-			action: 'synchronize',
-		}))).toBe(false);
+		const args = getRunnerArguments();
+		delete args.logger;
+		expect(args).toEqual({
+			rootDir: rootDir,
+			actionName: 'TOC Generator',
+			actionOwner: 'technote-space',
+			actionRepo: 'toc-generator',
+			commitName: 'test name',
+			commitEmail: 'test email',
+			commitMessage: 'test message',
+			executeCommands: [],
+			filterExtensions: [
+				'md',
+			],
+			filterGitStatus: 'M',
+			globalInstallPackages: [
+				'doctoc',
+			],
+			includeLabels: [
+				'label1',
+				'label2',
+				'label3',
+			],
+			prBody: 'pull request body',
+			prBranchName: 'test-branch-${PR_ID}',
+			prBranchPrefix: 'prefix/',
+			prCloseMessage: 'close message',
+			prTitle: 'test: create pull request (${PR_NUMBER})',
+			targetBranchPrefix: 'feature/',
+			targetEvents: TARGET_EVENTS,
+		});
 	});
 });
