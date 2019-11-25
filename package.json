@@ -20,7 +20,7 @@
   "main": "lib/main.js",
   "dependencies": {
     "@actions/core": "^1.2.0",
-    "@technote-space/github-action-pr-helper": "^0.1.6"
+    "@technote-space/github-action-pr-helper": "^0.1.7"
   },
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.0.24",
@@ -28,7 +28,7 @@
     "@types/node": "^12.12.12",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
-    "eslint": "^6.7.0",
+    "eslint": "^6.7.1",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
     "nock": "^11.7.0",
