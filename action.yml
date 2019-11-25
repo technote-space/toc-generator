@@ -23,11 +23,11 @@ inputs:
   COMMIT_NAME:
     description: Git commit name.
     required: true
-    default: 'GitHub'
+    default: 'github-actions[bot]'
   COMMIT_EMAIL:
     description: Git commit email.
     required: true
-    default: 'noreply@github.com'
+    default: '41898282+github-actions[bot]@users.noreply.github.com'
 
   PR_BRANCH_PREFIX:
     description: PullRequest branch prefix.
