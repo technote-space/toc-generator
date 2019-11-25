@@ -54,9 +54,9 @@ describe('getRunnerArguments', () => {
 			actionName: 'TOC Generator',
 			actionOwner: 'technote-space',
 			actionRepo: 'toc-generator',
-			commitEmail: 'noreply@github.com',
+			commitEmail: '41898282+github-actions[bot]@users.noreply.github.com',
 			commitMessage: 'docs: Update TOC',
-			commitName: 'GitHub',
+			commitName: 'github-actions[bot]',
 			executeCommands: [
 				`doctoc ${rootDir}/README.md --title '**Table of Contents**' --github`,
 			],
@@ -96,7 +96,7 @@ describe('getRunnerArguments', () => {
 			prBranchName: 'update-toc-${PR_ID}',
 			prBranchPrefix: 'toc-generator/',
 			prCloseMessage: 'This PR is no longer needed because the package looks up-to-date.',
-			prTitle: 'docs: Update TOC',
+			prTitle: 'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})',
 			targetBranchPrefix: '',
 			targetEvents: TARGET_EVENTS,
 		});
