@@ -74,8 +74,7 @@ e.g. `README.md`
 ## Options
 ### TARGET_PATHS
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README.md'`  
-e.g. `'README.md,README.ja.md'`  
+default: `'README*.md'`  
 e.g. `.`
 
 ### TOC_TITLE
@@ -90,11 +89,11 @@ e.g. `feat: update TOC`
 
 ### COMMIT_NAME
 Git commit name.  
-default: `'GitHub'`  
+default: `'github-actions[bot]'`  
 
 ### COMMIT_EMAIL
 Git commit email.  
-default: `'noreply@github.com'`  
+default: `'41898282+github-actions[bot]@users.noreply.github.com'`  
 
 ### PR_BRANCH_PREFIX
 PullRequest branch prefix.  
@@ -108,7 +107,7 @@ e.g. `toc-${PR_NUMBER}`
 
 ### PR_TITLE
 PullRequest title.  
-default: `'docs: Update TOC'`  
+default: `'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})'`  
 e.g. `feat: update TOC (${PR_HEAD_REF})`  
 [Context variables](#context-variables)
 
@@ -175,10 +174,10 @@ INCLUDE_LABELS: |
 ### Conditions
 #### condition1
 - push to branch (not tag)
-  - branch name ([`BRANCH_PREFIX`](#target_branch_prefix))
+  - branch name ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 #### condition2
 - [specified labels](#include_labels) included?
-- branch name ([`BRANCH_PREFIX`](#target_branch_prefix))
+- branch name ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 
 ## Addition
 ### Commit

@@ -73,8 +73,7 @@
 ## オプション
 ### TARGET_PATHS
 対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README.md'`  
-例：`'README.md,README.ja.md'`  
+default: `'README*.md'`  
 例：`.`
 
 ### TOC_TITLE
@@ -89,11 +88,11 @@ default: `'docs: Update TOC'`
 
 ### COMMIT_NAME
 コミット名  
-default: `'GitHub'`  
+default: `'github-actions[bot]'`  
 
 ### COMMIT_EMAIL
 コミットメールアドレス  
-default: `'noreply@github.com'`  
+default: `'41898282+github-actions[bot]@users.noreply.github.com'`  
 
 ### PR_BRANCH_PREFIX
 プルリクエストのブランチプリフィックス  
@@ -107,7 +106,7 @@ default: `'update-toc-${PR_ID}'`
 
 ### PR_TITLE
 プルリクエストのタイトル  
-default: `'docs: Update TOC'`  
+default: `'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})'`  
 例：`feat: update TOC (${PR_HEAD_REF})`  
 [Context variables](#context-variables)
 
@@ -174,11 +173,10 @@ INCLUDE_LABELS: |
 ### Conditions
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
-  - ブランチ名 ([`BRANCH_PREFIX`](#target_branch_prefix))
-- `PR_BRANCH_NAME` が設定されていない
+  - ブランチ名 ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 #### condition2
 - [指定したラベル](#include_labels)が付与されているかどうか
-- ブランチ名 ([`BRANCH_PREFIX`](#target_branch_prefix))
+- ブランチ名 ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 
 ## 補足
 ### コミット
@@ -226,7 +224,7 @@ jobs:
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
 
-`closed`アクティビティタイプが設定されている場合、このアクションは不要になったときにプルリクエストを閉じます。
+`closed`アクティビティタイプが設定されている場合、このアクションは不要になったプルリクエストを閉じます。
 
 ```yaml
 on:
@@ -259,10 +257,10 @@ jobs:
 ### Context PR variables
 | name | description |
 |:---|:---|
-| PR_LINK | Link to PR |
-| COMMANDS_OUTPUT | Result of TOC command |
+| PR_LINK | プルリクエストへのリンク |
+| COMMANDS_OUTPUT | TOC コマンドの結果 |
 | FILES_SUMMARY | 例：`Changed 2 files` |
-| FILES | Changed file list |
+| FILES | 変更されたファイル一覧 |
 
 ## このアクションを使用しているリポジトリの例
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
