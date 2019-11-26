@@ -1,12 +1,15 @@
-on: push
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
 name: TOC Generator
+
 jobs:
   toc:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
       - name: TOC Generator
-        uses: technote-space/toc-generator@test/v1
+        uses: technote-space/toc-generator@gh-actions
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          TARGET_PATHS: 'README.md,README.ja.md'

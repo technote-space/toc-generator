@@ -1,37 +1,84 @@
 name: TOC Generator
+
 description: GitHub Action to generate TOC.
+
 author: technote-space
+
 inputs:
   GITHUB_TOKEN:
     description: Secret GitHub API token to use for making API requests.
     required: true
+
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
-    default: 'README.md'
+    default: 'README*.md'
   TOC_TITLE:
     description: TOC Title
     default: '**Table of Contents**'
+
   COMMIT_MESSAGE:
     description: Commit message.
+    required: true
     default: 'docs: Update TOC'
+  COMMIT_NAME:
+    description: Git commit name.
+    default: 'github-actions[bot]'
+  COMMIT_EMAIL:
+    description: Git commit email.
+    default: '41898282+github-actions[bot]@users.noreply.github.com'
+
+  PR_BRANCH_PREFIX:
+    description: PullRequest branch prefix.
+    default: 'toc-generator/'
+  PR_BRANCH_NAME:
+    description: PullRequest branch name.
+    default: 'update-toc-${PR_ID}'
+  PR_TITLE:
+    description: PullRequest title.
+    required: true
+    default: 'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})'
+  PR_BODY:
+    description: PullRequest body.
+    required: true
+    default: |
+      ## Base PullRequest
+
+      ${PR_TITLE} (${PR_NUMBER_REF})
+
+      ## Command results
+      <details>
+        <summary>Details: </summary>
+
+        ${COMMANDS_OUTPUT}
+
+      </details>
+
+      ## Changed files
+      <details>
+        <summary>${FILES_SUMMARY}: </summary>
+
+        ${FILES}
+
+      </details>
+
+      <hr>
+
+      [:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+  PR_CLOSE_MESSAGE:
+    description: Message body when closing PullRequest.
+    default: 'This PR is no longer needed because the package looks up-to-date.'
+
+  TARGET_BRANCH_PREFIX:
+    description: Filter by branch name. (e.g. release/)
+    default: ''
   INCLUDE_LABELS:
     description: Labels used to check if the PullRequest has it.
     default: ''
-  BRANCH_PREFIX:
-    description: Branch name prefix.
-    default: ''
-  DELETE_PACKAGE:
-    description: Whether to delete package file before install DocToc for performance.
-    default: '1'
-  PR_BRANCH_NAME:
-    description: PullRequest branch name.
-    default: ''
-  PR_TITLE:
-    description: PullRequest title.
-    default: 'docs: Update TOC'
+
 branding:
   icon: 'book-open'
   color: 'blue'
+
 runs:
   using: node12
   main: lib/main.js

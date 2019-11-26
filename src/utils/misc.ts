@@ -1,13 +1,19 @@
-import fs from 'fs';
 import path from 'path';
-import { Context } from '@actions/github/lib/context';
-import { Utils, ContextHelper } from '@technote-space/github-action-helper';
-import { isTargetEvent, isTargetLabels } from '@technote-space/filter-github-action';
+import { Utils, Logger } from '@technote-space/github-action-pr-helper';
+import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import { getInput } from '@actions/core' ;
-import { TARGET_EVENTS, DEFAULT_COMMIT_MESSAGE, DEFAULT_TARGET_PATHS, DEFAULT_PR_TITLE } from '../constant';
+import { ACTION_NAME, ACTION_OWNER, ACTION_REPO } from '../constant';
+import { TARGET_EVENTS, DEFAULT_TARGET_PATHS } from '../constant';
 
-const {getWorkspace, getArrayInput, getPrefixRegExp, getBranch, getBoolValue} = Utils;
-const {isPr, isPush}                                                          = ContextHelper;
+const {getWorkspace, getArrayInput, replaceAll} = Utils;
+
+export const replaceDirectory = (message: string): string => {
+	const workDir = path.resolve(getWorkspace());
+	return [
+		{key: ` -C ${workDir}`, value: ''},
+		{key: workDir, value: '[Working Directory]'},
+	].reduce((value, target) => replaceAll(value, target.key, target.value), message);
+};
 
 const getTargetPaths = (): string[] => {
 	const paths = getArrayInput('TARGET_PATHS');
@@ -17,10 +23,6 @@ const getTargetPaths = (): string[] => {
 	return paths.filter(target => target && !target.startsWith('/') && !target.includes('..'));
 };
 
-export const isCloned = (): boolean => fs.existsSync(path.resolve(getWorkspace(), '.git'));
-
-export const getWorkDir = (): string => isCloned() ? path.resolve(getWorkspace()) : path.resolve(getWorkspace(), '.work');
-
 const getTocTitle = (): string => getInput('TOC_TITLE') || '';
 
 export const getDocTocArgs = (): string | false => {
@@ -29,94 +31,45 @@ export const getDocTocArgs = (): string | false => {
 		return false;
 	}
 
-	const workDir = getWorkDir();
+	const workDir = getWorkspace();
 	const title   = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
 	return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
 
-export const getCommitMessage = (): string => getInput('COMMIT_MESSAGE') || DEFAULT_COMMIT_MESSAGE;
+const getExecuteCommands = (logger: Logger): string[] => {
+	const args = getDocTocArgs();
+	if (false === args) {
+		logger.warn('There is no valid target. Please check if [TARGET_PATHS] is set correctly.');
+		return [];
+	}
 
-/**
- * @return {{string, Function}[]} replacer
- */
-const contextVariables = (): { key: string; replace: (Context) => string }[] => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const getPrParam = (context: Context, extractor: (pr: { [key: string]: any }) => string): string => {
-		if (!context.payload.pull_request) {
-			throw new Error('Invalid context.');
-		}
-		return extractor(context.payload.pull_request);
-	};
 	return [
-		{key: 'PR_NUMBER', replace: (context: Context): string => getPrParam(context, pr => pr.number)},
-		{key: 'PR_ID', replace: (context: Context): string => getPrParam(context, pr => pr.id)},
-		{key: 'PR_HEAD_REF', replace: (context: Context): string => getPrParam(context, pr => pr.head.ref)},
-		{key: 'PR_BASE_REF', replace: (context: Context): string => getPrParam(context, pr => pr.base.ref)},
+		`doctoc ${args} --github`,
 	];
 };
 
-/**
- * @param {string} variable variable
- * @param {Context} context context
- * @return {string} replaced
- */
-const replaceContextVariables = (variable: string, context: Context): string => contextVariables().reduce((acc, value) => acc.replace(`\${${value.key}}`, value.replace(context)), variable);
-
-export const getPrBranchName = (context: Context): string => replaceContextVariables(getInput('PR_BRANCH_NAME'), context) || '';
-
-export const getPrTitle = (context: Context): string => replaceContextVariables(getInput('PR_TITLE'), context) || DEFAULT_PR_TITLE;
-
-export const getPrLink = (context: Context): string[] => context.payload.pull_request ? [
-	`[${context.payload.pull_request.title}](${context.payload.pull_request.html_url})`,
-	'',
-] : [];
-
-export const getPrBody = (context: Context, files: string[]): string => [
-	'## Updated TOC',
-	'',
-].concat(getPrLink(context)).concat([
-	'<details>',
-	'',
-	// eslint-disable-next-line no-magic-numbers
-	'<summary>Changed ' + (files.length > 1 ? 'files' : 'file') + '</summary>',
-	'',
-]).concat(files.map(file => `- ${file}`)).concat([
-	'',
-	'</details>',
-]).join('\n');
-
-export const isDisabledDeletePackage = (): boolean => !getBoolValue(getInput('DELETE_PACKAGE'));
-
-const getBranchPrefix = (): string => getInput('BRANCH_PREFIX') || '';
-
-const getBranchPrefixRegExp = (): RegExp => getPrefixRegExp(getBranchPrefix());
-
-export const isValidBranch = (branch: string): boolean => !getBranchPrefix() || getBranchPrefixRegExp().test(branch);
-
-const isSetPrBranchName = (): boolean => !!getInput('PR_BRANCH_NAME');
-
-export const isCreatePR = (context: Context): boolean => isPr(context) && isSetPrBranchName();
-
-export const isClosePR = (context: Context): boolean => isPr(context) && context.payload.action === 'closed';
-
-export const isTargetContext = (context: Context): boolean => {
-	if (!isTargetEvent(TARGET_EVENTS, context)) {
-		return false;
-	}
-
-	if (isClosePR(context)) {
-		return isSetPrBranchName();
-	}
-
-	if (isSetPrBranchName()) {
-		if (!isCreatePR(context)) {
-			return false;
-		}
-	}
-
-	if (isPush(context)) {
-		return isValidBranch(getBranch(context));
-	}
-
-	return isTargetLabels(getArrayInput('INCLUDE_LABELS'), [], context);
+export const getRunnerArguments = (): MainArguments => {
+	const logger = new Logger(replaceDirectory);
+	return {
+		rootDir: path.resolve(__dirname, '../..'),
+		logger: logger,
+		actionName: ACTION_NAME,
+		actionOwner: ACTION_OWNER,
+		actionRepo: ACTION_REPO,
+		globalInstallPackages: ['doctoc'],
+		executeCommands: getExecuteCommands(logger),
+		commitMessage: getInput('COMMIT_MESSAGE'),
+		commitName: getInput('COMMIT_NAME'),
+		commitEmail: getInput('COMMIT_EMAIL'),
+		prBranchPrefix: getInput('PR_BRANCH_PREFIX'),
+		prBranchName: getInput('PR_BRANCH_NAME'),
+		prTitle: getInput('PR_TITLE'),
+		prBody: getInput('PR_BODY'),
+		prCloseMessage: getInput('PR_CLOSE_MESSAGE'),
+		filterGitStatus: 'M',
+		filterExtensions: ['md'],
+		targetBranchPrefix: getInput('TARGET_BRANCH_PREFIX'),
+		includeLabels: getArrayInput('INCLUDE_LABELS'),
+		targetEvents: TARGET_EVENTS,
+	};
 };

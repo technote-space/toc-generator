@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { Context } from '@actions/github/lib/context';
 import nock from 'nock';
-import path from 'path';
+import { resolve } from 'path';
 import {
 	generateContext,
 	testEnv,
@@ -9,26 +9,29 @@ import {
 	disableNetConnect,
 	spyOnStdout,
 	stdoutCalledWith,
-	stdoutContains,
 	getApiFixture,
 	setChildProcessParams,
 	testChildProcess,
 } from '@technote-space/github-action-test-helper';
-import { Logger } from '@technote-space/github-action-helper';
-import { execute } from '../../src/utils/process';
+import { main, Logger } from '@technote-space/github-action-pr-helper';
+import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+import { clearCache } from '@technote-space/github-action-pr-helper/dist/utils/command';
+import { getRunnerArguments } from '../../src/utils/misc';
 
-const rootDir   = path.resolve(__dirname, '..', 'fixtures');
-const setExists = testFs();
+const rootDir     = resolve(__dirname, '..', '..');
+const fixturesDir = resolve(__dirname, '..', 'fixtures');
+const setExists   = testFs();
 beforeEach(() => {
 	Logger.resetForTesting();
+	clearCache();
 });
 
-const context = (action: string, event = 'pull_request'): Context => generateContext({
+const context     = (action: string, event = 'pull_request', ref = 'heads/test'): Context => generateContext({
 	owner: 'hello',
 	repo: 'world',
 	event,
 	action,
-	ref: 'heads/test',
+	ref,
 	sha: '7638417db6d59f3c431d3e1f261cc637155684cd',
 }, {
 	payload: {
@@ -41,113 +44,225 @@ const context = (action: string, event = 'pull_request'): Context => generateCon
 			base: {
 				ref: 'master',
 			},
+			labels: [],
 		},
 	},
 });
+const getMainArgs = (override?: object): MainArguments => Object.assign({}, getRunnerArguments(), override ?? {});
 
-describe('execute', () => {
+describe('main', () => {
 	disableNetConnect(nock);
-	testEnv();
+	testEnv(rootDir);
 	testChildProcess();
 
+	it('should do nothing if tag push', async() => {
+		process.env.INPUT_GITHUB_TOKEN = 'test-token';
+		const mockStdout               = spyOnStdout();
+
+		nock('https://api.github.com')
+			.persist()
+			.get('/repos/hello/world')
+			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'));
+
+		await main(getMainArgs({
+			rootDir: undefined,
+			context: context('', 'push', 'tags/v1.2.3'),
+		}));
+
+		stdoutCalledWith(mockStdout, [
+			'> This is not target event.',
+		]);
+	});
+
+	it('should do nothing if it is not target branch', async() => {
+		process.env.INPUT_GITHUB_TOKEN         = 'test-token';
+		process.env.INPUT_TARGET_BRANCH_PREFIX = 'prefix/';
+		const mockStdout                       = spyOnStdout();
+
+		nock('https://api.github.com')
+			.persist()
+			.get('/repos/hello/world')
+			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'));
+
+		await main(getMainArgs({
+			rootDir: undefined,
+			context: context('opened', 'pull_request', 'test/change'),
+		}));
+
+		stdoutCalledWith(mockStdout, [
+			'> This is not target event.',
+		]);
+	});
+
 	it('should close pull request', async() => {
+		process.env.GITHUB_WORKSPACE     = resolve('test');
 		process.env.INPUT_GITHUB_TOKEN   = 'test-token';
 		process.env.INPUT_PR_BRANCH_NAME = 'close/test';
 		const mockStdout                 = spyOnStdout();
 
 		nock('https://api.github.com')
 			.persist()
-			.get('/repos/hello/world/pulls?head=hello%3Aclose%2Ftest')
-			.reply(200, () => getApiFixture(rootDir, 'pulls.list'))
+			.get('/repos/hello/world')
+			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
+			.get('/repos/hello/world/pulls?head=hello%3Atoc-generator%2Fclose%2Ftest')
+			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
+			.post('/repos/hello/world/issues/1347/comments')
+			.reply(201, () => getApiFixture(fixturesDir, 'issues.comment.create'))
 			.patch('/repos/hello/world/pulls/1347')
-			.reply(200, () => getApiFixture(rootDir, 'pulls.update'))
-			.delete('/repos/hello/world/git/refs/heads/close/test')
-			.reply(204, () => getApiFixture(rootDir, 'pulls.update'));
+			.reply(200, () => getApiFixture(fixturesDir, 'pulls.update'))
+			.delete('/repos/hello/world/git/refs/heads/toc-generator/close/test')
+			.reply(204, () => getApiFixture(fixturesDir, 'pulls.update'));
 
-		await execute(new Logger(), context('closed'));
+		await main(getMainArgs({
+			rootDir: undefined,
+			context: context('closed'),
+		}));
 
 		stdoutCalledWith(mockStdout, [
-			'::group::Closing PullRequest... [close/test]',
+			'::group::Closing PullRequest... [toc-generator/close/test]',
 			'::endgroup::',
-			'::group::Deleting reference... [refs/heads/close/test]',
+			'::group::Deleting reference... [refs/heads/toc-generator/close/test]',
 			'::endgroup::',
-		]);
-	});
-
-	it('should do nothing', async() => {
-		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		process.env.INPUT_TARGET_PATHS = '/test';
-		const mockStdout               = spyOnStdout();
-		setExists(true);
-
-		await execute(new Logger(), context('synchronize'));
-
-		stdoutCalledWith(mockStdout, [
-			'::group::Running DocToc and getting changed files',
-			'::warning::There is no valid target. Please check if [TARGET_PATHS] is set correctly.',
-		]);
-	});
-
-	it('should create pull request', async() => {
-		process.env.INPUT_GITHUB_TOKEN   = 'test-token';
-		process.env.INPUT_PR_BRANCH_NAME = 'create/test';
-		const mockStdout                 = spyOnStdout();
-		setChildProcessParams({stdout: 'M  __tests__/fixtures/test.md'});
-		setExists(true);
-
-		nock('https://api.github.com')
-			.persist()
-			.post('/repos/hello/world/git/blobs')
-			.reply(201, () => {
-				return getApiFixture(rootDir, 'repos.git.blobs');
-			})
-			.get('/repos/hello/world/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd')
-			.reply(200, () => getApiFixture(rootDir, 'repos.git.commits.get'))
-			.post('/repos/hello/world/git/trees')
-			.reply(201, () => getApiFixture(rootDir, 'repos.git.trees'))
-			.post('/repos/hello/world/git/commits')
-			.reply(201, () => getApiFixture(rootDir, 'repos.git.commits'))
-			.post('/repos/hello/world/git/refs')
-			.reply(201, () => getApiFixture(rootDir, 'repos.git.refs.create'))
-			.get('/repos/hello/world/pulls?head=hello%3Acreate%2Ftest')
-			.reply(200, () => getApiFixture(rootDir, 'pulls.list'))
-			.patch('/repos/hello/world/pulls/1347')
-			.reply(200, () => getApiFixture(rootDir, 'pulls.update'));
-
-		await execute(new Logger(), context('synchronize'));
-
-		stdoutContains(mockStdout, [
-			'::group::Creating reference... [refs/heads/create/test] [7638417db6d59f3c431d3e1f261cc637155684cd]',
-			'::group::Updating PullRequest... [create/test] -> [heads/test]',
 		]);
 	});
 
 	it('should create commit', async() => {
+		process.env.GITHUB_WORKSPACE   = resolve('test');
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
 		const mockStdout               = spyOnStdout();
-		setChildProcessParams({stdout: 'M  __tests__/fixtures/test.md'});
+		setChildProcessParams({
+			stdout: (command: string): string => {
+				if (command.endsWith('status --short -uno')) {
+					return 'M  __tests__/fixtures/test.md';
+				}
+				if (command.includes(' branch -a ')) {
+					return 'test';
+				}
+				return '';
+			},
+		});
 		setExists(true);
 
 		nock('https://api.github.com')
 			.persist()
-			.post('/repos/hello/world/git/blobs')
-			.reply(201, () => {
-				return getApiFixture(rootDir, 'repos.git.blobs');
-			})
-			.get('/repos/hello/world/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd')
-			.reply(200, () => getApiFixture(rootDir, 'repos.git.commits.get'))
-			.post('/repos/hello/world/git/trees')
-			.reply(201, () => getApiFixture(rootDir, 'repos.git.trees'))
-			.post('/repos/hello/world/git/commits')
-			.reply(201, () => getApiFixture(rootDir, 'repos.git.commits'))
-			.patch('/repos/hello/world/git/refs/' + encodeURIComponent('heads/test'))
-			.reply(200, () => getApiFixture(rootDir, 'repos.git.refs.update'));
+			.get('/repos/hello/world')
+			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'));
 
-		await execute(new Logger(), context('', 'push'));
+		await main(getMainArgs({
+			rootDir: undefined,
+			context: context('', 'push'),
+		}));
 
-		stdoutContains(mockStdout, [
-			'::group::Creating commit... [cd8274d15fa3ae2ab983129fb037999f264ba9a7]',
-			'::group::Updating ref... [heads%2Ftest] [7638417db6d59f3c431d3e1f261cc637155684cd]',
+		stdoutCalledWith(mockStdout, [
+			'::group::Initializing working directory...',
+			'[command]rm -rdf ./* ./.[!.]*',
+			'::endgroup::',
+			'::group::Cloning [test] branch from the remote repo...',
+			'[command]git clone --branch=test',
+			'[command]git branch -a | grep -E \'^\\*\' | cut -b 3-',
+			'  >> test',
+			'[command]ls -la',
+			'::endgroup::',
+			'::group::Running commands...',
+			'[command]sudo npm install -g doctoc',
+			'[command]doctoc [Working Directory]/README*.md --title \'**Table of Contents**\' --github',
+			'::endgroup::',
+			'::group::Checking diff...',
+			'[command]git add --all',
+			'[command]git status --short -uno',
+			'::endgroup::',
+			'::group::Configuring git committer to be github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>',
+			'[command]git config user.name "github-actions[bot]"',
+			'[command]git config user.email "41898282+github-actions[bot]@users.noreply.github.com"',
+			'::endgroup::',
+			'::group::Committing...',
+			'[command]git commit -qm "docs: Update TOC"',
+			'[command]git show --stat-count=10 HEAD',
+			'::endgroup::',
+			'::group::Pushing to hello/world@test...',
+			'[command]git push origin "test":"refs/heads/test"',
+			'::endgroup::',
+		]);
+	});
+
+	it('should create pull request', async() => {
+		process.env.GITHUB_WORKSPACE   = resolve('test');
+		process.env.INPUT_GITHUB_TOKEN = 'test-token';
+		const mockStdout               = spyOnStdout();
+		setChildProcessParams({
+			stdout: (command: string): string => {
+				if (command.endsWith('status --short -uno')) {
+					return 'M  __tests__/fixtures/test.md';
+				}
+				if (command.includes(' diff ')) {
+					return '__tests__/fixtures/test.md';
+				}
+				if (command.includes(' branch -a ')) {
+					return 'test';
+				}
+				return '';
+			},
+		});
+		setExists(true);
+
+		nock('https://api.github.com')
+			.persist()
+			.get('/repos/hello/world')
+			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
+			.get('/repos/hello/world/pulls?head=hello%3Atoc-generator%2Fupdate-toc-21031067')
+			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
+			.post('/repos/hello/world/issues/1347/comments')
+			.reply(201)
+			.get('/repos/hello/world/pulls/1347')
+			.reply(200, () => getApiFixture(fixturesDir, 'pulls.get'));
+
+		await main(getMainArgs({
+			rootDir: undefined,
+			context: context('synchronize'),
+		}));
+
+		stdoutCalledWith(mockStdout, [
+			'::group::Initializing working directory...',
+			'[command]rm -rdf ./* ./.[!.]*',
+			'::endgroup::',
+			'::group::Cloning [toc-generator/update-toc-21031067] branch from the remote repo...',
+			'[command]git clone --branch=toc-generator/update-toc-21031067',
+			'[command]git branch -a | grep -E \'^\\*\' | cut -b 3-',
+			'  >> test',
+			'> remote branch [toc-generator/update-toc-21031067] not found.',
+			'> now branch: test',
+			'::endgroup::',
+			'::group::Cloning [change] from the remote repo...',
+			'[command]git clone --branch=change',
+			'[command]git checkout -b "toc-generator/update-toc-21031067"',
+			'[command]ls -la',
+			'::endgroup::',
+			'::group::Running commands...',
+			'[command]sudo npm install -g doctoc',
+			'[command]doctoc [Working Directory]/README*.md --title \'**Table of Contents**\' --github',
+			'::endgroup::',
+			'::group::Checking diff...',
+			'[command]git add --all',
+			'[command]git status --short -uno',
+			'::endgroup::',
+			'::group::Configuring git committer to be github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>',
+			'[command]git config user.name "github-actions[bot]"',
+			'[command]git config user.email "41898282+github-actions[bot]@users.noreply.github.com"',
+			'::endgroup::',
+			'::group::Committing...',
+			'[command]git commit -qm "docs: Update TOC"',
+			'[command]git show --stat-count=10 HEAD',
+			'::endgroup::',
+			'::group::Checking references diff...',
+			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/change:refs/remotes/origin/change',
+			'[command]git diff HEAD..origin/change --name-only --diff-filter=M',
+			'::endgroup::',
+			'::group::Pushing to hello/world@toc-generator/update-toc-21031067...',
+			'[command]git push origin "toc-generator/update-toc-21031067":"refs/heads/toc-generator/update-toc-21031067"',
+			'::endgroup::',
+			'::group::Creating comment to PullRequest... [toc-generator/update-toc-21031067] -> [heads/test]',
+			'::endgroup::',
+			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
 		]);
 	});
 });
