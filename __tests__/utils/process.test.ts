@@ -262,6 +262,7 @@ describe('main', () => {
 			'::endgroup::',
 			'::group::Creating comment to PullRequest... [toc-generator/update-toc-21031067] -> [heads/test]',
 			'::endgroup::',
+			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
 		]);
 	});
 });
