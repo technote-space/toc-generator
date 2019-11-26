@@ -74,8 +74,7 @@ e.g. `README.md`
 ## Options
 ### TARGET_PATHS
 Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README.md'`  
-e.g. `'README.md,README.ja.md'`  
+default: `'README*.md'`  
 e.g. `.`
 
 ### TOC_TITLE

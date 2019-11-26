@@ -73,8 +73,7 @@
 ## オプション
 ### TARGET_PATHS
 対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README.md'`  
-例：`'README.md,README.ja.md'`  
+default: `'README*.md'`  
 例：`.`
 
 ### TOC_TITLE

@@ -11,7 +11,7 @@ inputs:
 
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
-    default: 'README.md'
+    default: 'README*.md'
   TOC_TITLE:
     description: TOC Title
     default: '**Table of Contents**'
