@@ -58,7 +58,7 @@ describe('getRunnerArguments', () => {
 			commitMessage: 'docs: Update TOC',
 			commitName: 'github-actions[bot]',
 			executeCommands: [
-				`doctoc ${rootDir}/README.md --title '**Table of Contents**' --github`,
+				`doctoc ${rootDir}/README*.md --title '**Table of Contents**' --github`,
 			],
 			filterExtensions: [
 				'md',
