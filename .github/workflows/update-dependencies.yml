@@ -21,8 +21,6 @@ jobs:
             yarn upgrade
             yarn audit
           COMMIT_MESSAGE: 'chore: update npm dependencies'
-          COMMIT_NAME: Technote
-          COMMIT_EMAIL: technote.space@gmail.com
           PR_BRANCH_NAME: 'chore-npm-update-${PR_ID}'
           PR_TITLE: 'chore: update npm dependencies (${PR_HEAD_REF} -> ${PR_BASE_REF})'
           TARGET_BRANCH_PREFIX: release/

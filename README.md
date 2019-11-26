@@ -256,6 +256,8 @@ jobs:
 [Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
 
 ### Context PR variables
+- [Context variables](#context-variables)
+
 | name | description |
 |:---|:---|
 | PR_LINK | Link to PR |
