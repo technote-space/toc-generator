@@ -1,6 +1,6 @@
 import { Context } from '@actions/github/lib/context';
 
-export const DEFAULT_TARGET_PATHS = 'README.md';
+export const DEFAULT_TARGET_PATHS = 'README*.md';
 export const ACTION_NAME          = 'TOC Generator';
 export const ACTION_OWNER         = 'technote-space';
 export const ACTION_REPO          = 'toc-generator';

@@ -223,6 +223,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
+
 If the `closed` activity type is set, this action closes the PR when it is no longer needed.  
 
 ```yaml
