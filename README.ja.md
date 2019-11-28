@@ -106,8 +106,8 @@ default: `'update-toc-${PR_ID}'`
 
 ### PR_TITLE
 プルリクエストのタイトル  
-default: `'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})'`  
-例：`feat: update TOC (${PR_HEAD_REF})`  
+default: `'docs: Update TOC (${PR_MERGE_REF})'`  
+例：`feat: update TOC`  
 [Context variables](#context-variables)
 
 ### PR_BODY
@@ -250,11 +250,14 @@ jobs:
 | PR_ID | pull_request.id (例：`21031067`) |
 | PR_HEAD_REF | pull_request.head.ref (例：`change`) |
 | PR_BASE_REF | pull_request.base.ref (例：`master`) |
+| PR_MERGE_REF | pull_request.base.ref (例：`change -> master`) |
 | PR_TITLE | pull_request.title (例：`Update the README with new information.`) |
 
 [Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
 
 ### Context PR variables
+- [Context variables](#context-variables)
+
 | name | description |
 |:---|:---|
 | PR_LINK | プルリクエストへのリンク |

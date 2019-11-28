@@ -55,6 +55,9 @@ logger.endProcess();
 // 
 // > output info
 // ::endgroup::
+
+logger.getColorString('colored text', 'green'); // Color: 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white'
+logger.getColorString('colored text', 'yellow', 'underline'); // Attribute: 'bold' | 'underline' | 'italic'
 ```
 
 ### Command
