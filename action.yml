@@ -36,7 +36,7 @@ inputs:
   PR_TITLE:
     description: PullRequest title.
     required: true
-    default: 'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})'
+    default: 'docs: Update TOC (${PR_MERGE_REF})'
   PR_BODY:
     description: PullRequest body.
     required: true

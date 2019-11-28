@@ -22,5 +22,7 @@ jobs:
             yarn audit
           COMMIT_MESSAGE: 'chore: update npm dependencies'
           PR_BRANCH_NAME: 'chore-npm-update-${PR_ID}'
-          PR_TITLE: 'chore: update npm dependencies (${PR_HEAD_REF} -> ${PR_BASE_REF})'
+          PR_TITLE: 'chore: update npm dependencies (${PR_MERGE_REF})'
+          PR_DEFAULT_BRANCH_PREFIX: release/
+          PR_DEFAULT_BRANCH_NAME: ${PATCH_VERSION}
           TARGET_BRANCH_PREFIX: release/
