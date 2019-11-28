@@ -96,7 +96,7 @@ describe('getRunnerArguments', () => {
 			prBranchName: 'update-toc-${PR_ID}',
 			prBranchPrefix: 'toc-generator/',
 			prCloseMessage: 'This PR is no longer needed because the package looks up-to-date.',
-			prTitle: 'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})',
+			prTitle: 'docs: Update TOC (${PR_MERGE_REF})',
 			targetBranchPrefix: '',
 			targetEvents: TARGET_EVENTS,
 		});

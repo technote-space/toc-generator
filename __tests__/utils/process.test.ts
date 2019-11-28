@@ -104,13 +104,19 @@ describe('main', () => {
 			.persist()
 			.get('/repos/hello/world')
 			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
-			.get('/repos/hello/world/pulls?head=hello%3Atoc-generator%2Fclose%2Ftest')
+			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=change&per_page=100&page=1')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
-			.post('/repos/hello/world/issues/1347/comments')
+			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=change&per_page=100&page=2')
+			.reply(200, () => [])
+			.get('/repos/hello/world/pulls?sort=created&direction=asc&head=hello%3Amaster&per_page=100&page=1')
+			.reply(200, () => [])
+			.get('/repos/octocat/Hello-World/pulls?head=octocat%3Atoc-generator%2Fclose%2Ftest')
+			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
+			.post('/repos/octocat/Hello-World/issues/1347/comments')
 			.reply(201, () => getApiFixture(fixturesDir, 'issues.comment.create'))
-			.patch('/repos/hello/world/pulls/1347')
+			.patch('/repos/octocat/Hello-World/pulls/1347')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.update'))
-			.delete('/repos/hello/world/git/refs/heads/toc-generator/close/test')
+			.delete('/repos/octocat/Hello-World/git/refs/heads/toc-generator/close/test')
 			.reply(204, () => getApiFixture(fixturesDir, 'pulls.update'));
 
 		await main(getMainArgs({
@@ -119,9 +125,38 @@ describe('main', () => {
 		}));
 
 		stdoutCalledWith(mockStdout, [
-			'::group::Closing PullRequest... [toc-generator/close/test]',
+			'::group::Target PullRequest Ref [new-topic]',
+			'> Initializing working directory...',
+			'[command]rm -rdf ./* ./.[!.]*',
+			'  >> stdout',
+			'> Cloning [toc-generator/close/test] branch from the remote repo...',
+			'[command]git clone --branch=toc-generator/close/test',
+			'> remote branch [toc-generator/close/test] not found.',
+			'> now branch: ',
+			'> Cloning [new-topic] from the remote repo...',
+			'[command]git clone --branch=new-topic',
+			'[command]git checkout -b "toc-generator/close/test"',
+			'  >> stdout',
+			'[command]ls -la',
+			'  >> stdout',
+			'> Running commands...',
+			'[command]sudo npm install -g doctoc',
+			'  >> stdout',
+			'[command]doctoc [Working Directory]/README*.md --title \'**Table of Contents**\' --github',
+			'  >> stdout',
+			'> Checking diff...',
+			'[command]git add --all',
+			'  >> stdout',
+			'[command]git status --short -uno',
+			'> There is no diff.',
+			'> Checking references diff...',
+			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/new-topic:refs/remotes/origin/new-topic',
+			'[command]git diff HEAD..origin/new-topic --name-only --diff-filter=M',
+			'> Closing PullRequest... [toc-generator/close/test]',
+			'> Deleting reference... [refs/heads/toc-generator/close/test]',
 			'::endgroup::',
-			'::group::Deleting reference... [refs/heads/toc-generator/close/test]',
+			'::group::Total:1  Succeeded:1  Failed:0  Skipped:0',
+			'> \x1b[32;40;0m✔\x1b[0m\t[new-topic] There is no reference diff',
 			'::endgroup::',
 		]);
 	});
