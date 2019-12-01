@@ -36,7 +36,7 @@ inputs:
   PR_TITLE:
     description: PullRequest title.
     required: true
-    default: 'docs: Update TOC (${PR_HEAD_REF} -> ${PR_BASE_REF})'
+    default: 'docs: Update TOC (${PR_MERGE_REF})'
   PR_BODY:
     description: PullRequest body.
     required: true
@@ -64,6 +64,18 @@ inputs:
       <hr>
 
       [:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+  PR_DEFAULT_BRANCH_PREFIX:
+    description: PullRequest branch prefix for default branch.
+    default: ''
+  PR_DEFAULT_BRANCH_NAME:
+    description: PullRequest branch name for default branch.
+    default: ''
+  PR_DEFAULT_BRANCH_TITLE:
+    description: PullRequest title for default branch.
+    default: ''
+  PR_DEFAULT_BRANCH_BODY:
+    description: PullRequest body for default branch.
+    default: ''
   PR_CLOSE_MESSAGE:
     description: Message body when closing PullRequest.
     default: 'This PR is no longer needed because the package looks up-to-date.'
