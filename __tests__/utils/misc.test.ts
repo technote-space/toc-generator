@@ -93,30 +93,38 @@ describe('getRunnerArguments', () => {
 				'',
 				'[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})',
 			].join('\n'),
+			prBodyForDefaultBranch: '',
 			prBranchName: 'update-toc-${PR_ID}',
+			prBranchNameForDefaultBranch: '',
 			prBranchPrefix: 'toc-generator/',
+			prBranchPrefixForDefaultBranch: '',
 			prCloseMessage: 'This PR is no longer needed because the package looks up-to-date.',
 			prTitle: 'docs: Update TOC (${PR_MERGE_REF})',
+			prTitleForDefaultBranch: '',
 			targetBranchPrefix: '',
 			targetEvents: TARGET_EVENTS,
 		});
 	});
 
 	it('should return args', () => {
-		process.env.INPUT_COMMIT_NAME          = 'test name';
-		process.env.INPUT_COMMIT_EMAIL         = 'test email';
-		process.env.INPUT_COMMIT_MESSAGE       = 'test message';
-		process.env.INPUT_PR_BRANCH_PREFIX     = 'prefix/';
-		process.env.INPUT_PR_BRANCH_NAME       = 'test-branch-${PR_ID}';
-		process.env.INPUT_PR_TITLE             = 'test: create pull request (${PR_NUMBER})';
-		process.env.INPUT_PR_BODY              = 'pull request body';
-		process.env.INPUT_PR_CLOSE_MESSAGE     = 'close message';
-		process.env.INPUT_PR_DATE_FORMAT1      = 'YYYY-MM-DD HH:mm:ss';
-		process.env.INPUT_PR_DATE_FORMAT2      = 'YYYY-MM-DD';
-		process.env.INPUT_TARGET_BRANCH_PREFIX = 'feature/';
-		process.env.INPUT_DELETE_PACKAGE       = '1';
-		process.env.INPUT_INCLUDE_LABELS       = 'label1, label2\nlabel3';
-		process.env.INPUT_TARGET_PATHS         = '/';
+		process.env.INPUT_COMMIT_NAME              = 'test name';
+		process.env.INPUT_COMMIT_EMAIL             = 'test email';
+		process.env.INPUT_COMMIT_MESSAGE           = 'test message';
+		process.env.INPUT_PR_BRANCH_PREFIX         = 'prefix/';
+		process.env.INPUT_PR_BRANCH_NAME           = 'test-branch-${PR_ID}';
+		process.env.INPUT_PR_TITLE                 = 'test: create pull request (${PR_NUMBER})';
+		process.env.INPUT_PR_BODY                  = 'pull request body';
+		process.env.INPUT_PR_DEFAULT_BRANCH_PREFIX = 'prefix-default-branch/';
+		process.env.INPUT_PR_DEFAULT_BRANCH_NAME   = 'test-default-branch-branch-${PR_ID}';
+		process.env.INPUT_PR_DEFAULT_BRANCH_TITLE  = 'test-default-branch: create pull request (${PR_NUMBER})';
+		process.env.INPUT_PR_DEFAULT_BRANCH_BODY   = 'pull request body (default-branch)';
+		process.env.INPUT_PR_CLOSE_MESSAGE         = 'close message';
+		process.env.INPUT_PR_DATE_FORMAT1          = 'YYYY-MM-DD HH:mm:ss';
+		process.env.INPUT_PR_DATE_FORMAT2          = 'YYYY-MM-DD';
+		process.env.INPUT_TARGET_BRANCH_PREFIX     = 'feature/';
+		process.env.INPUT_DELETE_PACKAGE           = '1';
+		process.env.INPUT_INCLUDE_LABELS           = 'label1, label2\nlabel3';
+		process.env.INPUT_TARGET_PATHS             = '/';
 
 		const args = getRunnerArguments();
 		delete args.logger;
@@ -142,10 +150,14 @@ describe('getRunnerArguments', () => {
 				'label3',
 			],
 			prBody: 'pull request body',
+			prBodyForDefaultBranch: 'pull request body (default-branch)',
 			prBranchName: 'test-branch-${PR_ID}',
+			prBranchNameForDefaultBranch: 'test-default-branch-branch-${PR_ID}',
 			prBranchPrefix: 'prefix/',
+			prBranchPrefixForDefaultBranch: 'prefix-default-branch/',
 			prCloseMessage: 'close message',
 			prTitle: 'test: create pull request (${PR_NUMBER})',
+			prTitleForDefaultBranch: 'test-default-branch: create pull request (${PR_NUMBER})',
 			targetBranchPrefix: 'feature/',
 			targetEvents: TARGET_EVENTS,
 		});
