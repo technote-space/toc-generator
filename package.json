@@ -33,7 +33,7 @@
     "jest-circus": "^24.9.0",
     "nock": "^11.7.0",
     "ts-jest": "^24.2.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.3"
   },
   "publishConfig": {
     "access": "public"
