@@ -371,24 +371,25 @@
   dependencies:
     "@actions/github" "^1.1.0"
 
-"@technote-space/github-action-helper@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.6.9.tgz#6e97f2e2c33035446adead23b2606de6ba180447"
-  integrity sha512-17Y+lSZNDH06FLulKti/07f7meIX4W3EtLmsHEM6ljS/aYEWpjIggM2XiLea4r+2faZ8Dwt84VvccXqrKZz+sg==
+"@technote-space/github-action-helper@^0.6.10":
+  version "0.6.10"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.6.10.tgz#a7324992a4bb1912f0846362bceaf14effb92621"
+  integrity sha512-q9rYV5EZ9EjlKx3jhDGJrOwURuECcSYQW/jb78xrjBW8HvoIAdFT39FLflu2SIgyagMqlDAaZiImEchT8mxVkg==
   dependencies:
     "@actions/core" "^1.2.0"
     "@actions/github" "^1.1.0"
+    shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.2.1.tgz#e738ab410331f4cdf42277d07af9fe6117084d43"
-  integrity sha512-DZyEXjhZrVjmXdOoh/IGvOWKNK5M8OFTPX5ZOqzx1Bgc71ozbT/6K5wF8VLzKykvfoXXwLYTgRhfEgh4iID80Q==
+"@technote-space/github-action-pr-helper@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.2.2.tgz#e4dd02f2e5ede63c3dc8fc58277a5895acbeed49"
+  integrity sha512-qmhR0XSaBq5x0TMkfz8Q8lq9LLLR5G1n0fYdAD8BZSPTa85VgNokkby9WXJIWzlBiiTFO3atMVR43mw+eFCOqw==
   dependencies:
     "@actions/core" "^1.2.0"
     "@actions/github" "^1.1.0"
     "@technote-space/filter-github-action" "^0.1.11"
-    "@technote-space/github-action-helper" "^0.6.9"
+    "@technote-space/github-action-helper" "^0.6.10"
     moment "^2.24.0"
 
 "@technote-space/github-action-test-helper@^0.0.25":
@@ -847,7 +848,7 @@ bs-logger@0.x:
   dependencies:
     fast-json-stable-stringify "2.x"
 
-bser@^2.0.0:
+bser@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/bser/-/bser-2.1.1.tgz#e6787da20ece9d07998533cfd9de6f5c38f4bc05"
   integrity sha512-gQxTNE/GAfIIrmHLUE3oJyp5FO6HRBfhjnw4/wMmA63ZGDJnWBmgY/lyQBpnDUkGmAhbSe39tx2d/iTOAfglwQ==
@@ -1509,11 +1510,11 @@ fast-levenshtein@~2.0.6:
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
 fb-watchman@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/fb-watchman/-/fb-watchman-2.0.0.tgz#54e9abf7dfa2f26cd9b1636c588c1afc05de5d58"
-  integrity sha1-VOmr99+i8mzZsWNsWIwa/AXeXVg=
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fb-watchman/-/fb-watchman-2.0.1.tgz#fc84fb39d2709cf3ff6d743706157bb5708a8a85"
+  integrity sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
   dependencies:
-    bser "^2.0.0"
+    bser "2.1.1"
 
 figures@^3.0.0:
   version "3.1.0"
@@ -3642,6 +3643,11 @@ shebang-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
+
+shell-escape@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/shell-escape/-/shell-escape-0.2.0.tgz#68fd025eb0490b4f567a027f0bf22480b5f84133"
+  integrity sha1-aP0CXrBJC09WegJ/C/IkgLX4QTM=
 
 shellwords@^0.1.1:
   version "0.1.1"
