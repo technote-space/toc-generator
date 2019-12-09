@@ -372,9 +372,9 @@
     "@actions/github" "^1.1.0"
 
 "@technote-space/github-action-helper@^0.6.12":
-  version "0.6.15"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.6.15.tgz#1bd43ff2161d4662455c66ce4896d0e422daed81"
-  integrity sha512-4zOs0DRAH23B+E8z0BpnZadmpIifbpQWeUwCLqNQkUoTQuOQfrBd9MKT8nych6a1p6ImWDychkJ7vCDw/arcyw==
+  version "0.6.18"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.6.18.tgz#9927271bcf3d8ccdb074ccdb3636feaa6ca3a5d2"
+  integrity sha512-/kn9+S1+foXJR5julVcX/w5ehprurwsL8frwpQMV3c6b2Y4PEB8Q9jUOo+RGtl4E9lQeoYmtjQmk24S5r7xP/A==
   dependencies:
     "@actions/core" "^1.2.0"
     "@actions/github" "^1.1.0"
@@ -470,10 +470,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
   integrity sha512-Il2DtDVRGDcqjDtE+rF8iqg1CArehSK84HZJCT7AMITlyXRBpuPhqGLDQMowraqqu1coEaimg4ZOqggt6L6L+A==
 
-"@types/node@>= 8", "@types/node@^12.12.14":
-  version "12.12.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.14.tgz#1c1d6e3c75dba466e0326948d56e8bd72a1903d2"
-  integrity sha512-u/SJDyXwuihpwjXy7hOOghagLEV1KdAST6syfnOk6QZAMzZuWZqXy5aYYZbh8Jdpd4escVFP0MvftHNDb9pruA==
+"@types/node@>= 8", "@types/node@^12.12.15":
+  version "12.12.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.15.tgz#8dfb6ce22fedd469128137640a3aa8f17415422f"
+  integrity sha512-Pv+vWicyFd07Hw/SmNnTUguqrHgDfMtjabvD9sQyxeqbpCEg8CmViLBaVPHtNsoBgZECrRf5/pgV6FJIBrGSjw==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
