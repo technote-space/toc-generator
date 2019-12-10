@@ -25,9 +25,9 @@
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.0.27",
     "@types/jest": "^24.0.23",
-    "@types/node": "^12.12.15",
-    "@typescript-eslint/eslint-plugin": "^2.10.0",
-    "@typescript-eslint/parser": "^2.10.0",
+    "@types/node": "^12.12.16",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
     "eslint": "^6.7.2",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
