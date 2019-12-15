@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-helper",
-  "version": "0.6.20",
+  "version": "0.6.21",
   "description": "Helper to filter GitHub Action.",
   "author": "Technote <technote.space@gmail.com> (https://technote.space)",
   "license": "MIT",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.0.27",
     "@types/jest": "^24.0.23",
-    "@types/node": "^12.12.16",
+    "@types/node": "^12.12.17",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",
     "eslint": "^6.7.2",

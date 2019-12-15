@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-pr-helper",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "PullRequest Helper for GitHub Actions.",
   "author": "Technote <technote.space@gmail.com> (https://technote.space)",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "@actions/core": "^1.2.0",
     "@actions/github": "^2.0.0",
     "@technote-space/filter-github-action": "^0.1.12",
-    "@technote-space/github-action-helper": "^0.6.20",
+    "@technote-space/github-action-helper": "^0.6.21",
     "moment": "^2.24.0"
   },
   "devDependencies": {
