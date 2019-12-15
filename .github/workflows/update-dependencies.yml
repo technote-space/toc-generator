@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: 0 17 * * *
+    - cron: 0 17 * * 5
   pull_request:
     types: [opened, synchronize, reopened, closed]
 

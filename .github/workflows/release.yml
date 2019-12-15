@@ -13,14 +13,13 @@ jobs:
           fetch-depth: 3
 
       - name: Release GitHub Actions
-        uses: technote-space/release-github-actions@v1
+        uses: technote-space/release-github-actions@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_NAME: Technote
-          COMMIT_EMAIL: technote.space@gmail.com
           OUTPUT_BUILD_INFO_FILENAME: build.json
           TEST_TAG_PREFIX: test/
           ORIGINAL_TAG_PREFIX: original/
+          CLEAN_TEST_TAG: true
 
       - uses: 8398a7/action-slack@v1
         with:
