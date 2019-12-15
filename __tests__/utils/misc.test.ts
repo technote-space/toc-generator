@@ -30,15 +30,21 @@ describe('getDocTocArgs', () => {
 		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --title \'**Table of Contents**\'');
 	});
 
-	it('should get default DocToc args', () => {
-		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
-		expect(getDocTocArgs()).toBe('/tmp/workspace/README*.md --notitle');
+	it('should get DocToc args (no title)', () => {
+		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
+		process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
+		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --notitle');
 	});
 
 	it('should return false', () => {
 		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
 		process.env.INPUT_TARGET_PATHS = '..';
 		expect(getDocTocArgs()).toBe(false);
+	});
+
+	it('should throw error', () => {
+		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+		expect(() => getDocTocArgs()).toThrow('Input required and not supplied: TARGET_PATHS');
 	});
 });
 

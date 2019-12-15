@@ -15,7 +15,6 @@ import {
 } from '@technote-space/github-action-test-helper';
 import { main, Logger } from '@technote-space/github-action-pr-helper';
 import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
-import { clearCache } from '@technote-space/github-action-pr-helper/dist/utils/command';
 import { getRunnerArguments } from '../../src/utils/misc';
 
 const rootDir     = resolve(__dirname, '..', '..');
@@ -23,7 +22,6 @@ const fixturesDir = resolve(__dirname, '..', 'fixtures');
 const setExists   = testFs();
 beforeEach(() => {
 	Logger.resetForTesting();
-	clearCache();
 });
 
 const context     = (action: string, event = 'pull_request', ref = 'heads/test'): Context => generateContext({
@@ -110,6 +108,8 @@ describe('main', () => {
 			.reply(200, () => [])
 			.get('/repos/hello/world/pulls?sort=created&direction=asc&head=hello%3Amaster&per_page=100&page=1')
 			.reply(200, () => [])
+			.get('/repos/octocat/Hello-World')
+			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
 			.get('/repos/octocat/Hello-World/pulls?head=octocat%3Atoc-generator%2Fclose%2Ftest')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
 			.post('/repos/octocat/Hello-World/issues/1347/comments')
@@ -126,26 +126,23 @@ describe('main', () => {
 
 		stdoutCalledWith(mockStdout, [
 			'::group::Target PullRequest Ref [new-topic]',
-			'> Initializing working directory...',
-			'[command]rm -rdf ./* ./.[!.]*',
-			'  >> stdout',
 			'> Fetching...',
 			'[command]rm -rdf [Working Directory]',
 			'  >> stdout',
-			'[command]git init .',
+			'[command]git init \'.\'',
 			'  >> stdout',
 			'[command]git remote add origin',
 			'[command]git fetch origin',
 			'  >> stdout',
 			'> Switching branch to [toc-generator/close/test]...',
-			'[command]git checkout -b "toc-generator/close/test" "origin/toc-generator/close/test"',
+			'[command]git checkout -b toc-generator/close/test origin/toc-generator/close/test',
 			'  >> stdout',
 			'> remote branch [toc-generator/close/test] not found.',
 			'> now branch: ',
 			'> Cloning [new-topic] from the remote repo...',
-			'[command]git checkout -b "new-topic" "origin/new-topic"',
+			'[command]git checkout -b new-topic origin/new-topic',
 			'  >> stdout',
-			'[command]git checkout -b "toc-generator/close/test"',
+			'[command]git checkout -b toc-generator/close/test',
 			'  >> stdout',
 			'[command]ls -la',
 			'  >> stdout',
@@ -161,7 +158,7 @@ describe('main', () => {
 			'> There is no diff.',
 			'> Checking references diff...',
 			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/new-topic:refs/remotes/origin/new-topic',
-			'[command]git diff HEAD..origin/new-topic --name-only --diff-filter=M',
+			'[command]git diff \'HEAD..origin/new-topic\' --name-only \'--diff-filter=M\'',
 			'> Closing PullRequest... [toc-generator/close/test]',
 			'> Deleting reference... [refs/heads/toc-generator/close/test]',
 			'::endgroup::',
@@ -180,8 +177,8 @@ describe('main', () => {
 				if (command.endsWith('status --short -uno')) {
 					return 'M  __tests__/fixtures/test.md';
 				}
-				if (command.includes(' branch -a ')) {
-					return 'test';
+				if (command.includes(' branch -a')) {
+					return '* test';
 				}
 				return '';
 			},
@@ -199,19 +196,16 @@ describe('main', () => {
 		}));
 
 		stdoutCalledWith(mockStdout, [
-			'::group::Initializing working directory...',
-			'[command]rm -rdf ./* ./.[!.]*',
-			'::endgroup::',
 			'::group::Fetching...',
 			'[command]rm -rdf [Working Directory]',
-			'[command]git init .',
+			'[command]git init \'.\'',
 			'[command]git remote add origin',
 			'[command]git fetch origin',
 			'::endgroup::',
 			'::group::Switching branch to [test]...',
-			'[command]git checkout -b "test" "origin/test"',
-			'[command]git branch -a | grep -E \'^\\*\' | cut -b 3-',
-			'  >> test',
+			'[command]git checkout -b test origin/test',
+			'[command]git branch -a',
+			'  >> * test',
 			'[command]ls -la',
 			'::endgroup::',
 			'::group::Running commands...',
@@ -223,15 +217,15 @@ describe('main', () => {
 			'[command]git status --short -uno',
 			'::endgroup::',
 			'::group::Configuring git committer to be github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>',
-			'[command]git config user.name "github-actions[bot]"',
-			'[command]git config user.email "41898282+github-actions[bot]@users.noreply.github.com"',
+			'[command]git config \'user.name\' \'github-actions[bot]\'',
+			'[command]git config \'user.email\' \'41898282+github-actions[bot]@users.noreply.github.com\'',
 			'::endgroup::',
 			'::group::Committing...',
-			'[command]git commit -qm "docs: Update TOC"',
-			'[command]git show --stat-count=10 HEAD',
+			'[command]git commit -qm \'docs: Update TOC\'',
+			'[command]git show \'--stat-count=10\' HEAD',
 			'::endgroup::',
 			'::group::Pushing to hello/world@test...',
-			'[command]git push origin "test":"refs/heads/test"',
+			'[command]git push origin test:refs/heads/test',
 			'::endgroup::',
 		]);
 	});
@@ -248,8 +242,8 @@ describe('main', () => {
 				if (command.includes(' diff ')) {
 					return '__tests__/fixtures/test.md';
 				}
-				if (command.includes(' branch -a ')) {
-					return 'test';
+				if (command.includes(' branch -a')) {
+					return '* test';
 				}
 				return '';
 			},
@@ -273,25 +267,22 @@ describe('main', () => {
 		}));
 
 		stdoutCalledWith(mockStdout, [
-			'::group::Initializing working directory...',
-			'[command]rm -rdf ./* ./.[!.]*',
-			'::endgroup::',
 			'::group::Fetching...',
 			'[command]rm -rdf [Working Directory]',
-			'[command]git init .',
+			'[command]git init \'.\'',
 			'[command]git remote add origin',
 			'[command]git fetch origin',
 			'::endgroup::',
 			'::group::Switching branch to [toc-generator/update-toc-21031067]...',
-			'[command]git checkout -b "toc-generator/update-toc-21031067" "origin/toc-generator/update-toc-21031067"',
-			'[command]git branch -a | grep -E \'^\\*\' | cut -b 3-',
-			'  >> test',
+			'[command]git checkout -b toc-generator/update-toc-21031067 origin/toc-generator/update-toc-21031067',
+			'[command]git branch -a',
+			'  >> * test',
 			'> remote branch [toc-generator/update-toc-21031067] not found.',
 			'> now branch: test',
 			'::endgroup::',
 			'::group::Cloning [change] from the remote repo...',
-			'[command]git checkout -b "change" "origin/change"',
-			'[command]git checkout -b "toc-generator/update-toc-21031067"',
+			'[command]git checkout -b change origin/change',
+			'[command]git checkout -b toc-generator/update-toc-21031067',
 			'[command]ls -la',
 			'::endgroup::',
 			'::group::Running commands...',
@@ -303,19 +294,19 @@ describe('main', () => {
 			'[command]git status --short -uno',
 			'::endgroup::',
 			'::group::Configuring git committer to be github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>',
-			'[command]git config user.name "github-actions[bot]"',
-			'[command]git config user.email "41898282+github-actions[bot]@users.noreply.github.com"',
+			'[command]git config \'user.name\' \'github-actions[bot]\'',
+			'[command]git config \'user.email\' \'41898282+github-actions[bot]@users.noreply.github.com\'',
 			'::endgroup::',
 			'::group::Committing...',
-			'[command]git commit -qm "docs: Update TOC"',
-			'[command]git show --stat-count=10 HEAD',
+			'[command]git commit -qm \'docs: Update TOC\'',
+			'[command]git show \'--stat-count=10\' HEAD',
 			'::endgroup::',
 			'::group::Checking references diff...',
 			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/change:refs/remotes/origin/change',
-			'[command]git diff HEAD..origin/change --name-only --diff-filter=M',
+			'[command]git diff \'HEAD..origin/change\' --name-only \'--diff-filter=M\'',
 			'::endgroup::',
 			'::group::Pushing to hello/world@toc-generator/update-toc-21031067...',
-			'[command]git push origin "toc-generator/update-toc-21031067":"refs/heads/toc-generator/update-toc-21031067"',
+			'[command]git push origin toc-generator/update-toc-21031067:refs/heads/toc-generator/update-toc-21031067',
 			'::endgroup::',
 			'::group::Creating comment to PullRequest... [toc-generator/update-toc-21031067] -> [heads/test]',
 			'::endgroup::',

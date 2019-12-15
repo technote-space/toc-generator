@@ -12,9 +12,11 @@ inputs:
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
     default: 'README*.md'
+    required: true
   TOC_TITLE:
     description: TOC Title
     default: '**Table of Contents**'
+    required: false
 
   COMMIT_MESSAGE:
     description: Commit message.
@@ -23,16 +25,20 @@ inputs:
   COMMIT_NAME:
     description: Git commit name.
     default: 'github-actions[bot]'
+    required: true
   COMMIT_EMAIL:
     description: Git commit email.
     default: '41898282+github-actions[bot]@users.noreply.github.com'
+    required: true
 
   PR_BRANCH_PREFIX:
     description: PullRequest branch prefix.
     default: 'toc-generator/'
+    required: true
   PR_BRANCH_NAME:
     description: PullRequest branch name.
     default: 'update-toc-${PR_ID}'
+    required: true
   PR_TITLE:
     description: PullRequest title.
     required: true
@@ -64,28 +70,58 @@ inputs:
       <hr>
 
       [:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+  PR_COMMENT_BODY:
+    description: PullRequest body.
+    required: false
+    default: |
+      ## Command results
+      <details>
+        <summary>Details: </summary>
+
+        ${COMMANDS_OUTPUT}
+
+      </details>
+
+      ## Changed files
+      <details>
+        <summary>${FILES_SUMMARY}: </summary>
+
+        ${FILES}
+
+      </details>
+
+      <hr>
+
+      [:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
   PR_DEFAULT_BRANCH_PREFIX:
     description: PullRequest branch prefix for default branch.
     default: ''
+    required: false
   PR_DEFAULT_BRANCH_NAME:
     description: PullRequest branch name for default branch.
     default: ''
+    required: false
   PR_DEFAULT_BRANCH_TITLE:
     description: PullRequest title for default branch.
     default: ''
+    required: false
   PR_DEFAULT_BRANCH_BODY:
     description: PullRequest body for default branch.
     default: ''
+    required: false
   PR_CLOSE_MESSAGE:
     description: Message body when closing PullRequest.
     default: 'This PR is no longer needed because the package looks up-to-date.'
+    required: false
 
   TARGET_BRANCH_PREFIX:
     description: Filter by branch name. (e.g. release/)
     default: ''
+    required: false
   INCLUDE_LABELS:
     description: Labels used to check if the PullRequest has it.
     default: ''
+    required: false
 
 branding:
   icon: 'book-open'

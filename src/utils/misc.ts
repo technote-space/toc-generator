@@ -3,7 +3,7 @@ import { Utils, Logger } from '@technote-space/github-action-pr-helper';
 import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import { getInput } from '@actions/core' ;
 import { ACTION_NAME, ACTION_OWNER, ACTION_REPO } from '../constant';
-import { TARGET_EVENTS, DEFAULT_TARGET_PATHS } from '../constant';
+import { TARGET_EVENTS } from '../constant';
 
 const {getWorkspace, getArrayInput, replaceAll} = Utils;
 
@@ -15,15 +15,9 @@ export const replaceDirectory = (message: string): string => {
 	].reduce((value, target) => replaceAll(value, target.key, target.value), message);
 };
 
-const getTargetPaths = (): string[] => {
-	const paths = getArrayInput('TARGET_PATHS');
-	if (!paths.length) {
-		return [DEFAULT_TARGET_PATHS];
-	}
-	return paths.filter(target => target && !target.startsWith('/') && !target.includes('..'));
-};
+const getTargetPaths = (): string[] => getArrayInput('TARGET_PATHS', true).filter(target => target && !target.startsWith('/') && !target.includes('..'));
 
-const getTocTitle = (): string => getInput('TOC_TITLE') || '';
+const getTocTitle = (): string => getInput('TOC_TITLE');
 
 export const getDocTocArgs = (): string | false => {
 	const paths = getTargetPaths();
