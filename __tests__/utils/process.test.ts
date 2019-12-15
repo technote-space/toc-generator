@@ -11,7 +11,7 @@ import {
 	stdoutCalledWith,
 	getApiFixture,
 	setChildProcessParams,
-	testChildProcess, stdoutContains,
+	testChildProcess,
 } from '@technote-space/github-action-test-helper';
 import { main, Logger } from '@technote-space/github-action-pr-helper';
 import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
