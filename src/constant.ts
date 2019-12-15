@@ -1,10 +1,9 @@
 import { Context } from '@actions/github/lib/context';
 
-export const DEFAULT_TARGET_PATHS = 'README*.md';
-export const ACTION_NAME          = 'TOC Generator';
-export const ACTION_OWNER         = 'technote-space';
-export const ACTION_REPO          = 'toc-generator';
-export const TARGET_EVENTS        = {
+export const ACTION_NAME   = 'TOC Generator';
+export const ACTION_OWNER  = 'technote-space';
+export const ACTION_REPO   = 'toc-generator';
+export const TARGET_EVENTS = {
 	'push': [
 		(context: Context): boolean => /^refs\/heads\//.test(context.ref),
 	],
