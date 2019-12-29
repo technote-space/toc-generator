@@ -7,11 +7,6 @@ jobs:
     name: Release GitHub Actions
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 3
-
       - name: Release GitHub Actions
         uses: technote-space/release-github-actions@v2
         with:

@@ -127,8 +127,6 @@ describe('main', () => {
 		stdoutCalledWith(mockStdout, [
 			'::group::Target PullRequest Ref [new-topic]',
 			'> Fetching...',
-			'[command]rm -rdf [Working Directory]',
-			'  >> stdout',
 			'[command]git init \'.\'',
 			'  >> stdout',
 			'[command]git remote add origin',
