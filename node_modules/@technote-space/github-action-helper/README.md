@@ -58,6 +58,7 @@ logger.endProcess();
 
 logger.getColorString('colored text', 'green'); // Color: 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white'
 logger.getColorString('colored text', 'yellow', 'underline'); // Attribute: 'bold' | 'underline' | 'italic'
+logger.c('colored text', 'yellow', 'underline'); // alias
 ```
 
 ### Command
