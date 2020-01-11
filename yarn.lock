@@ -15,7 +15,7 @@
     "@octokit/graphql" "^2.0.1"
     "@octokit/rest" "^16.15.0"
 
-"@actions/github@^2.0.0":
+"@actions/github@^2.0.0", "@actions/github@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@actions/github/-/github-2.0.1.tgz#2870f56c28f042effc04e9ebf0df1f1af23715f7"
   integrity sha512-C7dAsCkpPi1HxTzLldz+oY+9c5G+nnaK7xgk8KA83VVGlrGK7d603E3snUAFocWrqEu/uvdYD82ytggjcpYSQA==
@@ -389,12 +389,12 @@
     "@actions/github" "^1.1.0"
 
 "@technote-space/github-action-helper@^0.6.25":
-  version "0.6.26"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.6.26.tgz#677825a4533f3cce9ef10d82e9a8c67306096847"
-  integrity sha512-EDvESKFzcboGGp/RwXprhzJNUI9c8U35Tqvhc38JD0r1cXIFkelKwENSBrrTOn8M2acTeyBBZF5U9Ecz+cJrmg==
+  version "0.6.28"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.6.28.tgz#49198ee49e2a2dc0c3a8a6b577e22454fd4ea148"
+  integrity sha512-dGwyFcdmY6+rKmVDsYMx39/a+v7pDOCOUP+niHapWGEWt6NvMi1boD/pFUI+HEw4Gn8gVw4S4qJd0uwIFUxSEw==
   dependencies:
-    "@actions/core" "^1.2.0"
-    "@actions/github" "^2.0.0"
+    "@actions/core" "^1.2.1"
+    "@actions/github" "^2.0.1"
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
