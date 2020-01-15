@@ -26,6 +26,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [PR_BRANCH_NAME](#pr_branch_name)
   - [PR_TITLE](#pr_title)
   - [PR_BODY](#pr_body)
+  - [PR_COMMENT_BODY](#pr_comment_body)
   - [PR_CLOSE_MESSAGE](#pr_close_message)
   - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
   - [INCLUDE_LABELS](#include_labels)
@@ -41,9 +42,6 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Context PR variables](#context-pr-variables)
 - [Sample repositories using this Action](#sample-repositories-using-this-action)
 - [Author](#author)
-- [Test](#test)
-  - [Test1](#test1)
-  - [Test2](#test2)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
