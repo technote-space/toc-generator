@@ -26,6 +26,7 @@
   - [PR_BRANCH_NAME](#pr_branch_name)
   - [PR_TITLE](#pr_title)
   - [PR_BODY](#pr_body)
+  - [PR_COMMENT_BODY](#pr_comment_body)
   - [PR_CLOSE_MESSAGE](#pr_close_message)
   - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
   - [INCLUDE_LABELS](#include_labels)
