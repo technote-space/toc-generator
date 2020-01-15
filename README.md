@@ -89,11 +89,13 @@ e.g. `feat: update TOC`
 
 ### COMMIT_NAME
 Git commit name.  
-default: `'github-actions[bot]'`  
+default: `'${github.actor}'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### COMMIT_EMAIL
 Git commit email.  
-default: `'41898282+github-actions[bot]@users.noreply.github.com'`  
+default: `'${github.actor}@users.noreply.github.com'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### PR_BRANCH_PREFIX
 PullRequest branch prefix.  

@@ -87,12 +87,14 @@ default: `'docs: Update TOC'`
 例：`feat: update TOC`
 
 ### COMMIT_NAME
-コミット名  
-default: `'github-actions[bot]'`  
+コミット時に設定する名前  
+default: `'${github.actor}'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### COMMIT_EMAIL
-コミットメールアドレス  
-default: `'41898282+github-actions[bot]@users.noreply.github.com'`  
+コミット時に設定するメールアドレス  
+default: `'${github.actor}@users.noreply.github.com'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### PR_BRANCH_PREFIX
 プルリクエストのブランチプリフィックス  

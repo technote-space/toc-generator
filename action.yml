@@ -24,12 +24,10 @@ inputs:
     default: 'docs: Update TOC'
   COMMIT_NAME:
     description: Git commit name.
-    default: 'github-actions[bot]'
-    required: true
+    required: false
   COMMIT_EMAIL:
     description: Git commit email.
-    default: '41898282+github-actions[bot]@users.noreply.github.com'
-    required: true
+    required: false
 
   PR_BRANCH_PREFIX:
     description: PullRequest branch prefix.
