@@ -142,6 +142,32 @@ ${PR_TITLE} (${PR_NUMBER_REF})
 ```
 [Context PR variables](#context-pr-variables)
 
+### PR_COMMENT_BODY
+プルリクエストの本文（コメント用）  
+default:
+```
+## Command results
+<details>
+  <summary>Details: </summary>
+
+  ${COMMANDS_OUTPUT}
+
+</details>
+
+## Changed files
+<details>
+  <summary>${FILES_SUMMARY}: </summary>
+
+  ${FILES}
+
+</details>
+
+<hr>
+
+[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+```
+[Context PR variables](#context-pr-variables)
+
 ### PR_CLOSE_MESSAGE
 プルリクエストを閉じるときのメッセージ  
 default: `'This PR is no longer needed because the package looks up-to-date.'`
