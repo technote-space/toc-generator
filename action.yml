@@ -24,9 +24,11 @@ inputs:
     default: 'docs: Update TOC'
   COMMIT_NAME:
     description: Git commit name.
+    default: ''
     required: false
   COMMIT_EMAIL:
     description: Git commit email.
+    default: ''
     required: false
 
   PR_BRANCH_PREFIX:
