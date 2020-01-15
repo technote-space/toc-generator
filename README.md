@@ -43,8 +43,6 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Author](#author)
 - [Test](#test)
   - [Test1](#test1)
-  - [Test2](#test2)
-  - [Test3](#test3)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
