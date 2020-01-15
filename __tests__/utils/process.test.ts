@@ -32,6 +32,7 @@ const context     = (action: string, event = 'pull_request', ref = 'heads/test')
 	ref,
 	sha: '7638417db6d59f3c431d3e1f261cc637155684cd',
 }, {
+	actor: 'test-actor',
 	payload: {
 		'pull_request': {
 			number: 11,
@@ -214,9 +215,9 @@ describe('main', () => {
 			'[command]git add --all',
 			'[command]git status --short -uno',
 			'::endgroup::',
-			'::group::Configuring git committer to be github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>',
-			'[command]git config \'user.name\' \'github-actions[bot]\'',
-			'[command]git config \'user.email\' \'41898282+github-actions[bot]@users.noreply.github.com\'',
+			'::group::Configuring git committer to be test-actor <test-actor@users.noreply.github.com>',
+			'[command]git config \'user.name\' test-actor',
+			'[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
 			'::endgroup::',
 			'::group::Committing...',
 			'[command]git commit -qm \'docs: Update TOC\'',
@@ -225,6 +226,7 @@ describe('main', () => {
 			'::group::Pushing to hello/world@test...',
 			'[command]git push origin test:refs/heads/test',
 			'::endgroup::',
+			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
 		]);
 	});
 
@@ -253,6 +255,8 @@ describe('main', () => {
 			.get('/repos/hello/world')
 			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
 			.get('/repos/hello/world/pulls?head=hello%3Atoc-generator%2Fupdate-toc-21031067')
+			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
+			.get('/repos/hello/world/pulls?head=hello%3Atest')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
 			.post('/repos/hello/world/issues/1347/comments')
 			.reply(201)
@@ -291,9 +295,9 @@ describe('main', () => {
 			'[command]git add --all',
 			'[command]git status --short -uno',
 			'::endgroup::',
-			'::group::Configuring git committer to be github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>',
-			'[command]git config \'user.name\' \'github-actions[bot]\'',
-			'[command]git config \'user.email\' \'41898282+github-actions[bot]@users.noreply.github.com\'',
+			'::group::Configuring git committer to be test-actor <test-actor@users.noreply.github.com>',
+			'[command]git config \'user.name\' test-actor',
+			'[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
 			'::endgroup::',
 			'::group::Committing...',
 			'[command]git commit -qm \'docs: Update TOC\'',
@@ -306,7 +310,7 @@ describe('main', () => {
 			'::group::Pushing to hello/world@toc-generator/update-toc-21031067...',
 			'[command]git push origin toc-generator/update-toc-21031067:refs/heads/toc-generator/update-toc-21031067',
 			'::endgroup::',
-			'::group::Creating comment to PullRequest... [toc-generator/update-toc-21031067] -> [heads/test]',
+			'::group::Creating comment to PullRequest...',
 			'::endgroup::',
 			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
 		]);

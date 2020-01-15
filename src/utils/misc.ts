@@ -63,6 +63,7 @@ export const getRunnerArguments = (): MainArguments => {
 		prBranchNameForDefaultBranch: getInput('PR_DEFAULT_BRANCH_NAME'),
 		prTitleForDefaultBranch: getInput('PR_DEFAULT_BRANCH_TITLE'),
 		prBodyForDefaultBranch: getInput('PR_DEFAULT_BRANCH_BODY'),
+		prBodyForComment: getInput('PR_COMMENT_BODY'),
 		prCloseMessage: getInput('PR_CLOSE_MESSAGE'),
 		filterGitStatus: 'M',
 		filterExtensions: ['md'],

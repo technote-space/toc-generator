@@ -23,7 +23,7 @@ categories:
   - title: ':sparkles: All Changes'
     labels:
       - 'Type: Release'
-exclude-lables:
+exclude-labels:
   - 'dependencies'
 template: |
   ## What’s Changed

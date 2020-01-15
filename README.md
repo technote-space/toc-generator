@@ -26,6 +26,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [PR_BRANCH_NAME](#pr_branch_name)
   - [PR_TITLE](#pr_title)
   - [PR_BODY](#pr_body)
+  - [PR_COMMENT_BODY](#pr_comment_body)
   - [PR_CLOSE_MESSAGE](#pr_close_message)
   - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
   - [INCLUDE_LABELS](#include_labels)
@@ -89,11 +90,13 @@ e.g. `feat: update TOC`
 
 ### COMMIT_NAME
 Git commit name.  
-default: `'github-actions[bot]'`  
+default: `'${github.actor}'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### COMMIT_EMAIL
 Git commit email.  
-default: `'41898282+github-actions[bot]@users.noreply.github.com'`  
+default: `'${github.actor}@users.noreply.github.com'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### PR_BRANCH_PREFIX
 PullRequest branch prefix.  
@@ -119,6 +122,32 @@ default:
 
 ${PR_TITLE} (${PR_NUMBER_REF})
 
+## Command results
+<details>
+  <summary>Details: </summary>
+
+  ${COMMANDS_OUTPUT}
+
+</details>
+
+## Changed files
+<details>
+  <summary>${FILES_SUMMARY}: </summary>
+
+  ${FILES}
+
+</details>
+
+<hr>
+
+[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+```
+[Context PR variables](#context-pr-variables)
+
+### PR_COMMENT_BODY
+PullRequest body for comment.  
+default:
+```
 ## Command results
 <details>
   <summary>Details: </summary>

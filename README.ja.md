@@ -26,6 +26,7 @@
   - [PR_BRANCH_NAME](#pr_branch_name)
   - [PR_TITLE](#pr_title)
   - [PR_BODY](#pr_body)
+  - [PR_COMMENT_BODY](#pr_comment_body)
   - [PR_CLOSE_MESSAGE](#pr_close_message)
   - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
   - [INCLUDE_LABELS](#include_labels)
@@ -87,12 +88,14 @@ default: `'docs: Update TOC'`
 例：`feat: update TOC`
 
 ### COMMIT_NAME
-コミット名  
-default: `'github-actions[bot]'`  
+コミット時に設定する名前  
+default: `'${github.actor}'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### COMMIT_EMAIL
-コミットメールアドレス  
-default: `'41898282+github-actions[bot]@users.noreply.github.com'`  
+コミット時に設定するメールアドレス  
+default: `'${github.actor}@users.noreply.github.com'`  
+[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### PR_BRANCH_PREFIX
 プルリクエストのブランチプリフィックス  
@@ -118,6 +121,32 @@ default:
 
 ${PR_TITLE} (${PR_NUMBER_REF})
 
+## Command results
+<details>
+  <summary>Details: </summary>
+
+  ${COMMANDS_OUTPUT}
+
+</details>
+
+## Changed files
+<details>
+  <summary>${FILES_SUMMARY}: </summary>
+
+  ${FILES}
+
+</details>
+
+<hr>
+
+[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+```
+[Context PR variables](#context-pr-variables)
+
+### PR_COMMENT_BODY
+プルリクエストの本文（コメント用）  
+default:
+```
 ## Command results
 <details>
   <summary>Details: </summary>
