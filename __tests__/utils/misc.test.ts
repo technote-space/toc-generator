@@ -60,9 +60,9 @@ describe('getRunnerArguments', () => {
 			actionName: 'TOC Generator',
 			actionOwner: 'technote-space',
 			actionRepo: 'toc-generator',
-			commitEmail: '41898282+github-actions[bot]@users.noreply.github.com',
 			commitMessage: 'docs: Update TOC',
-			commitName: 'github-actions[bot]',
+			commitName: '',
+			commitEmail: '',
 			executeCommands: [
 				`doctoc ${rootDir}/README*.md --title '**Table of Contents**' --github`,
 			],
