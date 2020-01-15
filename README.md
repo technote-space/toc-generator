@@ -143,6 +143,32 @@ ${PR_TITLE} (${PR_NUMBER_REF})
 ```
 [Context PR variables](#context-pr-variables)
 
+### PR_COMMENT_BODY
+PullRequest body for comment.  
+default:
+```
+## Command results
+<details>
+  <summary>Details: </summary>
+
+  ${COMMANDS_OUTPUT}
+
+</details>
+
+## Changed files
+<details>
+  <summary>${FILES_SUMMARY}: </summary>
+
+  ${FILES}
+
+</details>
+
+<hr>
+
+[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
+```
+[Context PR variables](#context-pr-variables)
+
 ### PR_CLOSE_MESSAGE
 Message body when closing PullRequest.  
 default: `'This PR is no longer needed because the package looks up-to-date.'`
