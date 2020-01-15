@@ -225,8 +225,8 @@ describe('main', () => {
 			'::endgroup::',
 			'::group::Pushing to hello/world@test...',
 			'[command]git push origin test:refs/heads/test',
-			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
 			'::endgroup::',
+			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
 		]);
 	});
 
