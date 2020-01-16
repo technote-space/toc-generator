@@ -8,8 +8,10 @@ import {
 } from '../../src/utils/misc';
 import {TARGET_EVENTS} from '../../src/constant';
 
+const rootDir = path.resolve(__dirname, '../..');
+
 describe('replaceDirectory', () => {
-	testEnv();
+	testEnv(rootDir);
 
 	it('should replace working directory', () => {
 		process.env.GITHUB_WORKSPACE = 'test-dir';
@@ -21,18 +23,19 @@ describe('replaceDirectory', () => {
 });
 
 describe('getDocTocArgs', () => {
-	testEnv();
+	testEnv(rootDir);
 
 	it('should get DocToc args', () => {
 		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
 		process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
-		process.env.INPUT_TOC_TITLE = '**Table of Contents**';
-		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --title \'**Table of Contents**\'');
+		process.env.INPUT_TOC_TITLE = '**test title**';
+		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --title \'**test title**\'');
 	});
 
 	it('should get DocToc args (no title)', () => {
 		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
 		process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
+		process.env.INPUT_TOC_TITLE = '';
 		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --notitle');
 	});
 
@@ -44,12 +47,12 @@ describe('getDocTocArgs', () => {
 
 	it('should throw error', () => {
 		process.env.GITHUB_WORKSPACE = '/tmp/workspace';
+		process.env.INPUT_TARGET_PATHS = '';
 		expect(() => getDocTocArgs()).toThrow('Input required and not supplied: TARGET_PATHS');
 	});
 });
 
 describe('getRunnerArguments', () => {
-	const rootDir = path.resolve(__dirname, '../..');
 	testEnv(rootDir);
 
 	it('should return args', () => {
