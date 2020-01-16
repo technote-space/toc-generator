@@ -310,7 +310,3 @@ jobs:
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
 [Blog](https://technote.space)
-
-## Test
-### Test1
-### Test2
