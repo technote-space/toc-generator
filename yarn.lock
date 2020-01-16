@@ -373,25 +373,25 @@
   dependencies:
     "@actions/github" "^2.0.1"
 
-"@technote-space/github-action-helper@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.7.0.tgz#8d2f35afe87d02b454256947eb4b327cb8a5833a"
-  integrity sha512-GB5BBYB9d+sYmzVgzmtFiWneHTjh3PXLq1B4A5jTz19U0x5Ai4PeSTJZE/tOJzLyTwqzmQpM2zen5ZM39T+kRA==
+"@technote-space/github-action-helper@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.7.1.tgz#44d23bb8a0ce7cbe47ec656672585cb4e005a12a"
+  integrity sha512-v4+nDv+Vkhffw0h83kChvaQzbwkbM5MGh19a7YlbMKnJ4aejj/6a2Ex0G1RfZ2pC57K1BodJqQ2lWMCUCuYu5Q==
   dependencies:
     "@actions/core" "^1.2.1"
     "@actions/github" "^2.0.1"
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^0.2.16":
-  version "0.2.16"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.2.16.tgz#e17b027acc602808c84e8817ab7753baf65131f8"
-  integrity sha512-glw5d3Zy49+IKZT5YnONzrr/+SNHa7nWW2U/gGNPKFw26+j+PQJDQvp1WWB5pA6BX2AEpWoSS/v/Wb2W6GeULQ==
+"@technote-space/github-action-pr-helper@^0.2.17":
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.2.17.tgz#f153eec6f08916069629c44b63d9c83b86a1f147"
+  integrity sha512-yZ/+3S3EvTViACbsBNn892s7Lof/794d7imuoFlkUq+tBDaOrRnetVN44wN2YFS/MCFe4T2Z1N2u6bMYKtXZpA==
   dependencies:
     "@actions/core" "^1.2.1"
     "@actions/github" "^2.0.1"
     "@technote-space/filter-github-action" "^0.1.13"
-    "@technote-space/github-action-helper" "^0.7.0"
+    "@technote-space/github-action-helper" "^0.7.1"
     moment "^2.24.0"
 
 "@technote-space/github-action-test-helper@^0.0.28":
@@ -2607,9 +2607,9 @@ kind-of@^5.0.0:
   integrity sha512-NGEErnH6F2vUuXDh+OlbcKW7/wOcfdRHaZ7VWtqCztfHri/++YKmP51OdWeGPuqCOba6kk2OTe5d02VmTB80Pw==
 
 kind-of@^6.0.0, kind-of@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
-  integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
+  integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
 kleur@^3.0.3:
   version "3.0.3"
