@@ -360,44 +360,44 @@
     universal-user-agent "^4.0.0"
 
 "@octokit/types@^2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-2.0.2.tgz#0888497f5a664e28b0449731d5e88e19b2a74f90"
-  integrity sha512-StASIL2lgT3TRjxv17z9pAqbnI7HGu9DrJlg3sEBFfCLaMEqp+O3IQPUF6EZtQ4xkAu2ml6kMBBCtGxjvmtmuQ==
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-2.1.0.tgz#fe3ea39ed7d20ec06954a9314d4f17aa93e033a3"
+  integrity sha512-n1GUYFgKm5glcy0E+U5jnqAFY2p04rnK4A0YhuM70C7Vm9Vyx+xYwd/WOTEr8nUJcbPSR/XL+/26+rirY6jJQA==
   dependencies:
     "@types/node" ">= 8"
 
-"@technote-space/filter-github-action@^0.1.13":
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.1.14.tgz#5397453e22acb299f2c8eac260782401d127ec20"
-  integrity sha512-98LC37wgp0VBMJUPSchUIrrbCSxU/JKqgyp+bYLbzD5bR2bSV1OnPgpOM93tZR2vknnF8PZtDg5/dQ/c3iMLJQ==
+"@technote-space/filter-github-action@^0.1.15":
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.1.15.tgz#bc91b638bde893e7935c7aa61537ef9ae52bdc9b"
+  integrity sha512-hNT44B8bSIJ3dA9bSrR+DaAWDom9HzY8JCVihOMmaqfH/KL6CjHeMk20BS1H1Qh2L5u6sZzY2ZIX63sN43hKcQ==
   dependencies:
     "@actions/github" "^2.0.1"
 
-"@technote-space/github-action-helper@^0.7.1":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.7.2.tgz#d47351206d56fd81979df8ccfbd7d399bb19a755"
-  integrity sha512-h9zhFWAA6Ka6aCZu0JoCLkZyAjHcdy1rJrI92x2KZLt7lfJtePNMyHs3BJSPfZPXORu1Rvkv6pzi/OJjcbXqcQ==
+"@technote-space/github-action-helper@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.7.3.tgz#95024a311aad90b27dfa03a41e72f3338aec92dc"
+  integrity sha512-Ow4hyZwUt5ehqwJ3atwiLKpUwZohmzNcqWN70QWRaA+xrW6OPE2BTkPwVaqbz7HpfCgVmu1/KJyWwdBJ4RXxcw==
   dependencies:
     "@actions/core" "^1.2.1"
     "@actions/github" "^2.0.1"
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^0.2.17":
-  version "0.2.17"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.2.17.tgz#f153eec6f08916069629c44b63d9c83b86a1f147"
-  integrity sha512-yZ/+3S3EvTViACbsBNn892s7Lof/794d7imuoFlkUq+tBDaOrRnetVN44wN2YFS/MCFe4T2Z1N2u6bMYKtXZpA==
+"@technote-space/github-action-pr-helper@^0.2.18":
+  version "0.2.18"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.2.18.tgz#eda5377fc3f2a7d3401435c5b3fd36d2b8750d0b"
+  integrity sha512-RZ8N9kRQvRhKnO6j6ODRddIoxMWhuMj9ZE8Ez0evciYv9B1DC/ZecBrFajOhL1J0W0K1myz+L5mfH+WqSfLJYA==
   dependencies:
     "@actions/core" "^1.2.1"
     "@actions/github" "^2.0.1"
-    "@technote-space/filter-github-action" "^0.1.13"
-    "@technote-space/github-action-helper" "^0.7.1"
+    "@technote-space/filter-github-action" "^0.1.15"
+    "@technote-space/github-action-helper" "^0.7.3"
     moment "^2.24.0"
 
-"@technote-space/github-action-test-helper@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-test-helper/-/github-action-test-helper-0.1.0.tgz#871616f573eb477bcc7e5616d1420f5916df061f"
-  integrity sha512-pFCa80Nx0MluJIVEW3Bl8q83bexUrdK0IIkVPo5mC7N3vqDAgwKYm4CRKI49L4sTW6Hy9/0sBGTrkP34MvsJlw==
+"@technote-space/github-action-test-helper@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-test-helper/-/github-action-test-helper-0.1.1.tgz#6480b5516cc7e9291685226caa31f58671e3e11f"
+  integrity sha512-K6ebxvzskzjTZeK75Ymbg0F0CyZRLMAewjHiiWguyn1HfIKGllJxLhS0TSApJo3092+VsDSiPCYTeL+nQTMEVg==
   dependencies:
     "@actions/github" "^2.0.1"
     js-yaml "^3.13.1"
