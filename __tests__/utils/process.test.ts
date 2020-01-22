@@ -24,7 +24,7 @@ beforeEach(() => {
 	Logger.resetForTesting();
 });
 
-const context     = (action: string, event = 'pull_request', ref = 'heads/test'): Context => generateContext({
+const context     = (action: string, event = 'pull_request', ref = 'pull/55/merge'): Context => generateContext({
 	owner: 'hello',
 	repo: 'world',
 	event,
@@ -34,11 +34,12 @@ const context     = (action: string, event = 'pull_request', ref = 'heads/test')
 }, {
 	actor: 'test-actor',
 	payload: {
+		number: 11,
 		'pull_request': {
 			number: 11,
 			id: 21031067,
 			head: {
-				ref: 'change',
+				ref: 'feature/new-feature',
 			},
 			base: {
 				ref: 'master',
@@ -85,7 +86,7 @@ describe('main', () => {
 
 		await main(getMainArgs({
 			rootDir: undefined,
-			context: context('opened', 'pull_request', 'test/change'),
+			context: context('opened', 'pull_request'),
 		}));
 
 		stdoutCalledWith(mockStdout, [
@@ -103,9 +104,9 @@ describe('main', () => {
 			.persist()
 			.get('/repos/hello/world')
 			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
-			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=change&per_page=100&page=1')
+			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=feature%2Fnew-feature&per_page=100&page=1')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
-			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=change&per_page=100&page=2')
+			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=feature%2Fnew-feature&per_page=100&page=2')
 			.reply(200, () => [])
 			.get('/repos/hello/world/pulls?sort=created&direction=asc&head=hello%3Amaster&per_page=100&page=1')
 			.reply(200, () => [])
@@ -174,8 +175,8 @@ describe('main', () => {
 				if (command.endsWith('status --short -uno')) {
 					return 'M  __tests__/fixtures/test.md';
 				}
-				if (command.includes(' branch -a')) {
-					return '* test';
+				if (command.includes(' rev-parse')) {
+					return 'test';
 				}
 				return '';
 			},
@@ -189,7 +190,7 @@ describe('main', () => {
 
 		await main(getMainArgs({
 			rootDir: undefined,
-			context: context('', 'push'),
+			context: context('', 'push', 'heads/test'),
 		}));
 
 		stdoutCalledWith(mockStdout, [
@@ -201,8 +202,8 @@ describe('main', () => {
 			'::endgroup::',
 			'::group::Switching branch to [test]...',
 			'[command]git checkout -b test origin/test',
-			'[command]git branch -a',
-			'  >> * test',
+			'[command]git rev-parse --abbrev-ref HEAD',
+			'  >> test',
 			'[command]ls -la',
 			'::endgroup::',
 			'::group::Running commands...',
@@ -223,7 +224,7 @@ describe('main', () => {
 			'::group::Pushing to hello/world@test...',
 			'[command]git push origin test:refs/heads/test',
 			'::endgroup::',
-			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
+			'> \x1b[32;40;0m✔\x1b[0m\t[feature/new-feature] updated',
 		]);
 	});
 
@@ -239,8 +240,8 @@ describe('main', () => {
 				if (command.includes(' diff ')) {
 					return '__tests__/fixtures/test.md';
 				}
-				if (command.includes(' branch -a')) {
-					return '* test';
+				if (command.includes(' rev-parse')) {
+					return 'test';
 				}
 				return '';
 			},
@@ -274,13 +275,13 @@ describe('main', () => {
 			'::endgroup::',
 			'::group::Switching branch to [toc-generator/update-toc-21031067]...',
 			'[command]git checkout -b toc-generator/update-toc-21031067 origin/toc-generator/update-toc-21031067',
-			'[command]git branch -a',
-			'  >> * test',
+			'[command]git rev-parse --abbrev-ref HEAD',
+			'  >> test',
 			'> remote branch [toc-generator/update-toc-21031067] not found.',
 			'> now branch: test',
 			'::endgroup::',
-			'::group::Cloning [change] from the remote repo...',
-			'[command]git checkout -b change origin/change',
+			'::group::Cloning [feature/new-feature] from the remote repo...',
+			'[command]git checkout -b feature/new-feature origin/feature/new-feature',
 			'[command]git checkout -b toc-generator/update-toc-21031067',
 			'[command]ls -la',
 			'::endgroup::',
@@ -300,15 +301,15 @@ describe('main', () => {
 			'[command]git show \'--stat-count=10\' HEAD',
 			'::endgroup::',
 			'::group::Checking references diff...',
-			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/change:refs/remotes/origin/change',
-			'[command]git diff \'HEAD..origin/change\' --name-only \'--diff-filter=M\'',
+			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/feature/new-feature:refs/remotes/origin/feature/new-feature',
+			'[command]git diff \'HEAD..origin/feature/new-feature\' --name-only \'--diff-filter=M\'',
 			'::endgroup::',
 			'::group::Pushing to hello/world@toc-generator/update-toc-21031067...',
 			'[command]git push origin toc-generator/update-toc-21031067:refs/heads/toc-generator/update-toc-21031067',
 			'::endgroup::',
 			'::group::Creating comment to PullRequest...',
 			'::endgroup::',
-			'> \x1b[32;40;0m✔\x1b[0m\t[change] updated',
+			'> \x1b[32;40;0m✔\x1b[0m\t[feature/new-feature] updated',
 		]);
 	});
 });
