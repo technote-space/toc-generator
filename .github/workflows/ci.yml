@@ -13,20 +13,34 @@ jobs:
     name: ESLint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 3
-      - name: Cache node modules
+      - uses: technote-space/get-diff-action@v1
+        with:
+          PREFIX_FILTER: |
+            src/
+            __tests__/
+          SUFFIX_FILTER: .ts
+          FILES: .eslintrc
+      - name: Get Yarn Cache Directory
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+        if: env.GIT_DIFF
+      - name: Cache node dependencies
         uses: actions/cache@v1
         with:
-          path: ~/.cache/yarn
+          path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+        if: env.GIT_DIFF
       - name: Install Package dependencies
         run: yarn install
+        if: env.GIT_DIFF
       - name: Check code style
-        run: yarn lint
+        run: yarn eslint ${{ env.GIT_DIFF }}
+        if: env.GIT_DIFF
       - uses: 8398a7/action-slack@v1
         with:
           type: failure
@@ -43,30 +57,47 @@ jobs:
       matrix:
         node: ['10', '11', '12']
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 3
+      - uses: technote-space/get-diff-action@v1
+        with:
+          PREFIX_FILTER: |
+            src/
+            __tests__/
+          SUFFIX_FILTER: .ts
+          FILES: |
+            yarn.lock
+            jest.config.js
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - name: Cache node modules
+        if: env.GIT_DIFF || github.event_name == 'push'
+      - name: Get Yarn Cache Directory
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+        if: env.GIT_DIFF || github.event_name == 'push'
+      - name: Cache node dependencies
         uses: actions/cache@v1
         with:
-          path: ~/.cache/yarn
+          path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+        if: env.GIT_DIFF || github.event_name == 'push'
       - name: Install Package dependencies
         run: yarn install
+        if: env.GIT_DIFF || github.event_name == 'push'
       - name: Run tests
         run: yarn cover
+        if: env.GIT_DIFF || github.event_name == 'push'
       - name: Codecov
         run: curl -s https://codecov.io/bash | bash -s -- -t $CODECOV_TOKEN -f $COVERAGE_FILE
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           COVERAGE_FILE: ./coverage/lcov.info
-        if: matrix.node == '12'
+        if: matrix.node == '12' && (env.GIT_DIFF || github.event_name == 'push')
       - uses: 8398a7/action-slack@v1
         with:
           type: failure

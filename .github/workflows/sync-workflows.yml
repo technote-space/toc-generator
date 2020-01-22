@@ -1,0 +1,31 @@
+on:
+  schedule:
+    - cron: 0 15 * * 4
+  repository_dispatch:
+    types: [sync-workflows]
+
+name: Sync workflows
+jobs:
+  release:
+    name: Sync workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync workflows
+        uses: technote-space/create-pr-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          EXECUTE_COMMANDS: |
+            rm -rdf .github/workflows/.tmp
+            mkdir -p .github/workflows/.tmp
+            cp -f .github/workflows/sync-workflows.yml .github/workflows/.tmp/ > /dev/null 2>&1 || :
+            rm -f .github/workflows/*.yml
+            git clone --depth=1 https://github.com/technote-space/github-actions-workflows.git .github/workflows/.tmp/workflows
+            cp .github/workflows/.tmp/workflows/gh-actions/*.yml .github/workflows/
+            cp -f .github/workflows/.tmp/sync-workflows.yml .github/workflows/sync-workflows.yml > /dev/null 2>&1 || :
+            sed -i 's/cron:.\+$/cron: 0 19 * * */' .github/workflows/update-dependencies.yml
+            rm -rdf .github/workflows/.tmp
+          COMMIT_MESSAGE: 'chore: sync workflows'
+          PR_BRANCH_PREFIX: chore/
+          PR_BRANCH_NAME: 'chore-sync-workflows'
+          PR_TITLE: 'chore: sync workflows'
+          ONLY_DEFAULT_BRANCH: true
