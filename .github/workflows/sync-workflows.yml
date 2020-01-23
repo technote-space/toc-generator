@@ -23,6 +23,7 @@ jobs:
             cp .github/workflows/.tmp/workflows/gh-actions/*.yml .github/workflows/
             cp -f .github/workflows/.tmp/sync-workflows.yml .github/workflows/sync-workflows.yml > /dev/null 2>&1 || :
             sed -i 's/cron:.\+$/cron: 0 19 * * */' .github/workflows/update-dependencies.yml
+            find .github/workflows -maxdepth 1 -type f -name '*.yml' -print0 | xargs -0 readlink -f | while read -r file; do sed -i 's/uses: \(technote-space\/toc-generator\)@.\+$/uses: \1@gh-actions/' $file; done
             rm -rdf .github/workflows/.tmp
           COMMIT_MESSAGE: 'chore: sync workflows'
           PR_BRANCH_PREFIX: chore/
