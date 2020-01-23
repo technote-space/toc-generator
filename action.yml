@@ -6,8 +6,11 @@ author: technote-space
 
 inputs:
   GITHUB_TOKEN:
-    description: Secret GitHub API token to use for making API requests.
+    description: Secret GitHub API token used to make API requests or git authentication.
     required: true
+  API_TOKEN:
+    description: Secret GitHub API token used to make API requests.
+    required: false
 
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
