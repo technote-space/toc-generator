@@ -1,4 +1,7 @@
-on: create
+on:
+  create:
+  repository_dispatch:
+    types: [release]
 
 name: Release
 
