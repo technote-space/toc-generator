@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/toc-generator",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "GitHub Action to generate TOC.",
   "author": "Technote <technote.space@gmail.com> (https://technote.space)",
   "license": "MIT",
@@ -19,8 +19,8 @@
   },
   "main": "lib/main.js",
   "dependencies": {
-    "@actions/core": "^1.2.1",
-    "@technote-space/github-action-pr-helper": "^0.3.3"
+    "@actions/core": "^1.2.2",
+    "@technote-space/github-action-pr-helper": "^0.3.6"
   },
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.1.4",
