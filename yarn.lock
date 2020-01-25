@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@actions/core@^1.2.1", "@actions/core@^1.2.2":
+"@actions/core@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.2.2.tgz#3c4848d50378f9e3bcb67bcf97813382ec7369ee"
   integrity sha512-IbCx7oefq+Gi6FWbSs2Fnw8VkEI6Y4gvjrYprY3RV//ksq/KPMlClOerJ4jRosyal6zkUIc8R9fS/cpRMlGClg==
@@ -444,12 +444,12 @@
     "@actions/github" "^2.0.1"
 
 "@technote-space/github-action-helper@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.8.1.tgz#cd419086827304fba9ea194b7c2937a53f9e9af9"
-  integrity sha512-BezxGoONFTukIVLHDVo1MYv6JOMcDii6lxGajeFUObvbngYMeBICROpCyVrlE8e6dw69qE3xefrZf/DlcGWghw==
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.8.2.tgz#4a9327ff0004f9709ba1169902b90cc37169ceae"
+  integrity sha512-jbWKHyH9acJVDN7Bt6jzNXuhcEs4oSFQ9he8oax9qkY91+wYVIBh6RFLPnSh9ehtW/WnXfxsvXX/9LRVqqxiLw==
   dependencies:
-    "@actions/core" "^1.2.1"
-    "@actions/github" "^2.0.1"
+    "@actions/core" "^1.2.2"
+    "@actions/github" "^2.1.0"
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
@@ -1875,9 +1875,9 @@ inherits@2:
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
 inquirer@^7.0.0:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.0.3.tgz#f9b4cd2dff58b9f73e8d43759436ace15bed4567"
-  integrity sha512-+OiOVeVydu4hnCGLCSX+wedovR/Yzskv9BFqUNNKq9uU2qg7LCcCo3R86S2E7WLo0y/x2pnEZfZe1CoYnORUAw==
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.0.4.tgz#99af5bde47153abca23f5c7fc30db247f39da703"
+  integrity sha512-Bu5Td5+j11sCkqfqmUTiwv+tWisMtP0L7Q8WrqA2C/BbBhy1YTdFrvjjlrKq8oagA/tLQBski2Gcx/Sqyi2qSQ==
   dependencies:
     ansi-escapes "^4.2.1"
     chalk "^2.4.2"
