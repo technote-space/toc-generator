@@ -104,9 +104,9 @@ describe('main', () => {
 			.persist()
 			.get('/repos/hello/world')
 			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
-			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=feature%2Fnew-feature&per_page=100&page=1')
+			.get('/repos/hello/world/pulls?sort=created&direction=asc&per_page=100&page=1')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
-			.get('/repos/hello/world/pulls?sort=created&direction=asc&base=feature%2Fnew-feature&per_page=100&page=2')
+			.get('/repos/hello/world/pulls?sort=created&direction=asc&per_page=100&page=2')
 			.reply(200, () => [])
 			.get('/repos/hello/world/pulls?sort=created&direction=asc&head=hello%3Amaster&per_page=100&page=1')
 			.reply(200, () => [])
@@ -160,8 +160,9 @@ describe('main', () => {
 			'> Closing PullRequest... [toc-generator/close/test]',
 			'> Deleting reference... [refs/heads/toc-generator/close/test]',
 			'::endgroup::',
-			'::group::Total:1  Succeeded:1  Failed:0  Skipped:0',
+			'::group::Total:2  Succeeded:1  Failed:0  Skipped:1',
 			'> \x1b[32;40;0m✔\x1b[0m\t[new-topic] has been closed because there is no reference diff',
+			'> \x1b[33;40;0m→\x1b[0m\t[master] duplicated (toc-generator/close/test)',
 			'::endgroup::',
 		]);
 	});
