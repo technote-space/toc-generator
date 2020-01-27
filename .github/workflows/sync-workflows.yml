@@ -21,7 +21,7 @@ jobs:
             git clone --depth=1 https://github.com/technote-space/github-actions-workflows.git .github/workflows/.tmp/workflows
 
             bash .github/workflows/.tmp/workflows/gh-actions/copy.sh
-            sed -i 's/cron:.\+$/cron: 0 3 * * 6/' .github/workflows/update-dependencies.yml
+            sed -i 's/cron:.\+$/cron: 0 3 * * 2,6/' .github/workflows/update-dependencies.yml
 
             rm -rdf .github/workflows/.tmp
           COMMIT_MESSAGE: 'chore: sync workflows'
