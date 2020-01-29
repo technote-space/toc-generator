@@ -38,7 +38,7 @@ const getExecuteCommands = (logger: Logger): string[] => {
 	}
 
 	return [
-		`npx doctoc ${args} --github`,
+		`doctoc ${args} --github`,
 	];
 };
 
@@ -50,6 +50,7 @@ export const getRunnerArguments = (): MainArguments => {
 		actionName: ACTION_NAME,
 		actionOwner: ACTION_OWNER,
 		actionRepo: ACTION_REPO,
+		globalInstallPackages: ['doctoc'],
 		executeCommands: getExecuteCommands(logger),
 		commitMessage: getInput('COMMIT_MESSAGE'),
 		commitName: getInput('COMMIT_NAME'),
