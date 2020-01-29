@@ -41,6 +41,9 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)
 - [Sample repositories using this Action](#sample-repositories-using-this-action)
+- [Test](#test)
+  - [Test1](#test1)
+  - [Test2](#test2)
 - [Author](#author)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
