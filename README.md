@@ -307,10 +307,6 @@ jobs:
 - [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
   - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
 
-## Test
-### Test1
-### Test2
-
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
 [Blog](https://technote.space)
