@@ -93,7 +93,10 @@ jobs:
         run: yarn cover
         if: env.GIT_DIFF || github.event_name == 'push'
       - name: Codecov
-        run: curl -s https://codecov.io/bash | bash -s -- -t $CODECOV_TOKEN -f $COVERAGE_FILE
+        run: |
+          if [ -n "$CODECOV_TOKEN" ]; then
+            curl -s https://codecov.io/bash | bash -s -- -t $CODECOV_TOKEN -f $COVERAGE_FILE
+          fi
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           COVERAGE_FILE: ./coverage/lcov.info
