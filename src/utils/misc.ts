@@ -27,7 +27,7 @@ export const getDocTocArgs = (): string | false => {
 
 	const workDir = getWorkspace();
 	const title   = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
-	return getTargetPaths().map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
+	return paths.map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
 };
 
 const getExecuteCommands = (logger: Logger): string[] => {
