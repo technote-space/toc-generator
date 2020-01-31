@@ -114,17 +114,17 @@ describe('executeDoctoc', () => {
 			doctocDir,
 		], title, logger)).toEqual({
 			changed: [
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.create1.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.create2.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.update.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/expected/README.update.options.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/expected/README.update.wrap.md',
+				resolve(doctocDir, 'README.create1.md'),
+				resolve(doctocDir, 'README.create2.md'),
+				resolve(doctocDir, 'README.update.md'),
+				resolve(doctocDir, 'expected/README.update.options.md'),
+				resolve(doctocDir, 'expected/README.update.wrap.md'),
 			],
 			unchanged: [
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.not.update.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/expected/README.create1.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/expected/README.create2.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/expected/README.update.md',
+				resolve(doctocDir, 'README.not.update.md'),
+				resolve(doctocDir, 'expected/README.create1.md'),
+				resolve(doctocDir, 'expected/README.create2.md'),
+				resolve(doctocDir, 'expected/README.update.md'),
 			],
 		});
 	});
@@ -134,12 +134,12 @@ describe('executeDoctoc', () => {
 			resolve(doctocDir, 'README*.md'),
 		], title, logger)).toEqual({
 			changed: [
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.create1.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.create2.md',
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.update.md',
+				resolve(doctocDir, 'README.create1.md'),
+				resolve(doctocDir, 'README.create2.md'),
+				resolve(doctocDir, 'README.update.md'),
 			],
 			unchanged: [
-				'/var/www/html/gh-actions/toc-generator/__tests__/fixtures/doctoc/README.not.update.md',
+				resolve(doctocDir, 'README.not.update.md'),
 			],
 		});
 	});
