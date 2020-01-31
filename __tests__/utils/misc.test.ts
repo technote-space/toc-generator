@@ -67,15 +67,12 @@ describe('getRunnerArguments', () => {
 			commitName: '',
 			commitEmail: '',
 			executeCommands: [
-				`doctoc ${rootDir}/README*.md --title '**Table of Contents**' --github`,
+				`yarn doctoc ${rootDir}/README*.md --title '**Table of Contents**' --github`,
 			],
 			filterExtensions: [
 				'md',
 			],
 			filterGitStatus: 'M',
-			globalInstallPackages: [
-				'doctoc',
-			],
 			includeLabels: [],
 			prBody: [
 				'## Base PullRequest',
@@ -172,9 +169,6 @@ describe('getRunnerArguments', () => {
 				'md',
 			],
 			filterGitStatus: 'M',
-			globalInstallPackages: [
-				'doctoc',
-			],
 			includeLabels: [
 				'label1',
 				'label2',
