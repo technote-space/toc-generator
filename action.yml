@@ -20,6 +20,15 @@ inputs:
     description: TOC Title
     default: '**Table of Contents**'
     required: false
+  FOLDING:
+    description: Whether to fold.
+    required: false
+  MAX_HEADER_LEVEL:
+    description: Max header level.
+    required: false
+  ENTRY_PREFIX:
+    description: Entry prefix.
+    required: false
 
   COMMIT_MESSAGE:
     description: Commit message.
