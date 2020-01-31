@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "@technote-space/github-action-pr-helper": "^0.3.7",
+    "@technote-space/github-action-pr-helper": "^0.4.1",
     "doctoc": "^1.4.0"
   },
   "devDependencies": {
