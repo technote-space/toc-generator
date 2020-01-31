@@ -1,5 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { Context } from '@actions/github/lib/context';
+import fs from 'fs';
 import nock from 'nock';
 import { resolve } from 'path';
 import {
@@ -13,16 +14,20 @@ import {
 	setChildProcessParams,
 	testChildProcess,
 } from '@technote-space/github-action-test-helper';
-import { main, Logger } from '@technote-space/github-action-pr-helper';
+import { main } from '@technote-space/github-action-pr-helper';
+import { Logger } from '@technote-space/github-action-helper';
 import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import { getRunnerArguments } from '../../src/utils/misc';
 
-const rootDir     = resolve(__dirname, '..', '..');
+const rootDir     = resolve(__dirname, '../..');
+const doctocDir   = resolve(__dirname, '../fixtures/doctoc');
 const fixturesDir = resolve(__dirname, '..', 'fixtures');
+const title       = '**test title**';
 const setExists   = testFs();
 beforeEach(() => {
 	Logger.resetForTesting();
 });
+jest.spyOn(fs, 'writeFileSync').mockImplementation(jest.fn());
 
 const context     = (action: string, event = 'pull_request', ref = 'pull/55/merge'): Context => generateContext({
 	owner: 'hello',
@@ -95,9 +100,10 @@ describe('main', () => {
 	});
 
 	it('should close pull request', async() => {
-		process.env.GITHUB_WORKSPACE     = resolve('test');
+		process.env.GITHUB_WORKSPACE     = doctocDir;
 		process.env.INPUT_GITHUB_TOKEN   = 'test-token';
 		process.env.INPUT_PR_BRANCH_NAME = 'close/test';
+		process.env.INPUT_TOC_TITLE      = title;
 		const mockStdout                 = spyOnStdout();
 
 		nock('https://api.github.com')
@@ -147,8 +153,18 @@ describe('main', () => {
 			'[command]ls -la',
 			'  >> stdout',
 			'> Running commands...',
-			'[command]yarn doctoc [Working Directory]/README*.md --title \'**Table of Contents**\' --github',
-			'  >> stdout',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.create1.md" for github.com.',
+			'> "[Working Directory]/README.create1.md" will be updated',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.create2.md" for github.com.',
+			'> "[Working Directory]/README.create2.md" will be updated',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.not.update.md" for github.com.',
+			'> "[Working Directory]/README.not.update.md" is up to date',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.update.md" for github.com.',
+			'> "[Working Directory]/README.update.md" will be updated',
 			'> Checking diff...',
 			'[command]git add --all',
 			'  >> stdout',
@@ -168,8 +184,9 @@ describe('main', () => {
 	});
 
 	it('should create commit', async() => {
-		process.env.GITHUB_WORKSPACE   = resolve('test');
+		process.env.GITHUB_WORKSPACE   = doctocDir;
 		process.env.INPUT_GITHUB_TOKEN = 'test-token';
+		process.env.INPUT_TOC_TITLE    = title;
 		const mockStdout               = spyOnStdout();
 		setChildProcessParams({
 			stdout: (command: string): string => {
@@ -208,7 +225,18 @@ describe('main', () => {
 			'[command]ls -la',
 			'::endgroup::',
 			'::group::Running commands...',
-			'[command]yarn doctoc [Working Directory]/README*.md --title \'**Table of Contents**\' --github',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.create1.md" for github.com.',
+			'> "[Working Directory]/README.create1.md" will be updated',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.create2.md" for github.com.',
+			'> "[Working Directory]/README.create2.md" will be updated',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.not.update.md" for github.com.',
+			'> "[Working Directory]/README.not.update.md" is up to date',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.update.md" for github.com.',
+			'> "[Working Directory]/README.update.md" will be updated',
 			'::endgroup::',
 			'::group::Checking diff...',
 			'[command]git add --all',
@@ -230,9 +258,14 @@ describe('main', () => {
 	});
 
 	it('should create pull request', async() => {
-		process.env.GITHUB_WORKSPACE   = resolve('test');
-		process.env.INPUT_GITHUB_TOKEN = 'test-token';
-		const mockStdout               = spyOnStdout();
+		process.env.GITHUB_WORKSPACE       = doctocDir;
+		process.env.INPUT_GITHUB_TOKEN     = 'test-token';
+		process.env.INPUT_TOC_TITLE        = title;
+		process.env.INPUT_TARGET_PATHS     = 'README.update.md';
+		process.env.INPUT_FOLDING          = 'true';
+		process.env.INPUT_MAX_HEADER_LEVEL = '1';
+		process.env.INPUT_ENTRY_PREFIX     = '☆';
+		const mockStdout                   = spyOnStdout();
 		setChildProcessParams({
 			stdout: (command: string): string => {
 				if (command.endsWith('status --short -uno')) {
@@ -287,7 +320,9 @@ describe('main', () => {
 			'[command]ls -la',
 			'::endgroup::',
 			'::group::Running commands...',
-			'[command]yarn doctoc [Working Directory]/README*.md --title \'**Table of Contents**\' --github',
+			'::endgroup::',
+			'::group::DocToccing single file "[Working Directory]/README.update.md" for github.com.',
+			'> "[Working Directory]/README.update.md" will be updated',
 			'::endgroup::',
 			'::group::Checking diff...',
 			'[command]git add --all',
