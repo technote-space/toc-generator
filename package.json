@@ -23,8 +23,10 @@
   ],
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "@technote-space/github-action-pr-helper": "^0.3.7",
-    "doctoc": "^1.4.0"
+    "@technote-space/github-action-pr-helper": "^0.4.1",
+    "doctoc": "^1.4.0",
+    "node-glob": "^1.2.0",
+    "update-section": "^0.3.3"
   },
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.1.4",

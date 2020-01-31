@@ -1,51 +1,53 @@
-import path from 'path';
-import { Utils, Logger } from '@technote-space/github-action-pr-helper';
-import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+import { resolve, join } from 'path';
+import { homedir } from 'os';
+import { Utils, Logger } from '@technote-space/github-action-helper';
+import { ExecuteTask, MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import { getInput } from '@actions/core' ;
-import { ACTION_NAME, ACTION_OWNER, ACTION_REPO } from '../constant';
-import { TARGET_EVENTS } from '../constant';
+import { doctoc } from './doctoc';
+import { ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS } from '../constant';
 
-const {getWorkspace, getArrayInput, replaceAll} = Utils;
+const {getWorkspace, getArrayInput, replaceAll, getBoolValue} = Utils;
 
 export const replaceDirectory = (message: string): string => {
-	const workDir = path.resolve(getWorkspace());
+	const workDir = resolve(getWorkspace());
 	return [
 		{key: ` -C ${workDir}`, value: ''},
 		{key: workDir, value: '[Working Directory]'},
 	].reduce((value, target) => replaceAll(value, target.key, target.value), message);
 };
 
-const getTargetPaths = (): string[] => getArrayInput('TARGET_PATHS', true).filter(target => target && !target.startsWith('/') && !target.includes('..'));
+const getTargetPaths = (): Array<string> => getArrayInput('TARGET_PATHS', true).filter(target => target && !target.startsWith('/') && !target.includes('..'));
 
 const getTocTitle = (): string => getInput('TOC_TITLE');
 
-export const getDocTocArgs = (): string | false => {
+export const isNoTitle = (title: string): boolean => '' === title;
+
+export const isFolding = (title: string): boolean => !isNoTitle(title) && getBoolValue(getInput('FOLDING'));
+
+export const wrapTitle = (title: string): string => isFolding(title) ? `<summary>${title.replace(/^([*_]*)(.+)\1$/, '$2')}</summary>` : title;
+
+export const wrapToc = (toc: string, title: string): string => isFolding(title) ? `<details>\n${toc}\n</details>` : toc;
+
+export const getMaxHeaderLevel = (): number | undefined => /^\d+$/.test(getInput('MAX_HEADER_LEVEL')) ? Number.parseInt(getInput('MAX_HEADER_LEVEL')) : undefined;
+
+export const getEntryPrefix = (): string => getInput('ENTRY_PREFIX');
+
+const getExecuteCommands = (logger: Logger): Array<ExecuteTask> => {
 	const paths = getTargetPaths();
 	if (!paths.length) {
-		return false;
-	}
-
-	const workDir = getWorkspace();
-	const title   = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
-	return paths.map(item => path.resolve(workDir, item)).join(' ') + (title ? ` --title '${title}'` : ' --notitle');
-};
-
-const getExecuteCommands = (logger: Logger): string[] => {
-	const args = getDocTocArgs();
-	if (false === args) {
 		logger.warn('There is no valid target. Please check if [TARGET_PATHS] is set correctly.');
 		return [];
 	}
 
-	return [
-		`yarn doctoc ${args} --github`,
-	];
+	const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
+
+	return [doctoc(paths, title, logger)];
 };
 
 export const getRunnerArguments = (): MainArguments => {
 	const logger = new Logger(replaceDirectory);
 	return {
-		rootDir: path.resolve(__dirname, '../..'),
+		rootDir: resolve(__dirname, '../..'),
 		logger: logger,
 		actionName: ACTION_NAME,
 		actionOwner: ACTION_OWNER,
@@ -71,3 +73,8 @@ export const getRunnerArguments = (): MainArguments => {
 		targetEvents: TARGET_EVENTS,
 	};
 };
+
+// eslint-disable-next-line no-magic-numbers
+export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
+
+export const cleanPath = (path: string): string => homeExpanded(path).replace(/\s/g, '\\ ');
