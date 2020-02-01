@@ -10,15 +10,20 @@
 This is a `GitHub Action` to generate TOC (Table of Contents),  
 which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if changed.
 
+## Table of Contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
+<details>
+<summary>Details</summary>
 
 - [Screenshot](#screenshot)
 - [Installation](#installation)
 - [Options](#options)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
+  - [MAX_HEADER_LEVEL](#max_header_level)
+  - [FOLDING](#folding)
   - [COMMIT_MESSAGE](#commit_message)
   - [COMMIT_NAME](#commit_name)
   - [COMMIT_EMAIL](#commit_email)
@@ -33,8 +38,6 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
-    - [condition1](#condition1)
-    - [condition2](#condition2)
 - [Addition](#addition)
   - [Commit](#commit)
   - [Create PullRequest](#create-pullrequest)
@@ -43,6 +46,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Sample repositories using this Action](#sample-repositories-using-this-action)
 - [Author](#author)
 
+</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Screenshot
@@ -82,6 +86,16 @@ e.g. `.`
 TOC Title.  
 default: `'**Table of Contents**'`  
 e.g. `''`
+
+### MAX_HEADER_LEVEL
+Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
+default: ``  
+e.g. `3`
+
+### FOLDING
+Whether to make TOC foldable.  
+default: `false`  
+e.g. `'true'`
 
 ### COMMIT_MESSAGE
 Commit message.  

@@ -1,8 +1,12 @@
 {
   "name": "@technote-space/toc-generator",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "GitHub Action to generate TOC.",
-  "author": "Technote <technote.space@gmail.com> (https://technote.space)",
+  "author": {
+    "name": "Technote",
+    "email": "technote.space@gmail.com",
+    "url": "https://technote.space"
+  },
   "license": "MIT",
   "keywords": [
     "github",
@@ -17,22 +21,28 @@
   "bugs": {
     "url": "https://github.com/technote-space/toc-generator/issues"
   },
-  "main": "lib/main.js",
+  "files": [
+    "lib",
+    "action.yml"
+  ],
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "@technote-space/github-action-pr-helper": "^0.3.6"
+    "@technote-space/github-action-pr-helper": "^0.4.2",
+    "doctoc": "^1.4.0",
+    "fast-glob": "^3.1.1",
+    "update-section": "^0.3.3"
   },
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.1.4",
-    "@types/jest": "^25.1.0",
-    "@types/node": "^13.5.1",
+    "@types/jest": "^25.1.1",
+    "@types/node": "^13.7.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "jest-circus": "^25.1.0",
     "nock": "^11.7.2",
-    "ts-jest": "^25.0.0",
+    "ts-jest": "^25.1.0",
     "typescript": "^3.7.5"
   },
   "publishConfig": {
@@ -41,7 +51,7 @@
   "scripts": {
     "build": "tsc",
     "test": "yarn lint && yarn cover",
-    "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts'",
+    "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts' --cache",
     "lint:fix": "eslint --fix 'src/**/*.ts' '__tests__/**/*.ts'",
     "cover": "jest --coverage",
     "update": "ncu -u && yarn install && yarn upgrade && yarn audit"

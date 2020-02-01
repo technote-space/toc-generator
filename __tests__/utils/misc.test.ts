@@ -1,10 +1,18 @@
 /* eslint-disable no-magic-numbers */
+import os from 'os';
 import path from 'path';
 import { testEnv } from '@technote-space/github-action-test-helper';
 import {
 	replaceDirectory,
-	getDocTocArgs,
 	getRunnerArguments,
+	isNoTitle,
+	isFolding,
+	wrapTitle,
+	wrapToc,
+	getMaxHeaderLevel,
+	getEntryPrefix,
+	homeExpanded,
+	cleanPath,
 } from '../../src/utils/misc';
 import { TARGET_EVENTS } from '../../src/constant';
 
@@ -22,42 +30,14 @@ describe('replaceDirectory', () => {
 	});
 });
 
-describe('getDocTocArgs', () => {
-	testEnv(rootDir);
-
-	it('should get DocToc args', () => {
-		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
-		process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
-		process.env.INPUT_TOC_TITLE    = '**test title**';
-		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --title \'**test title**\'');
-	});
-
-	it('should get DocToc args (no title)', () => {
-		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
-		process.env.INPUT_TARGET_PATHS = 'README.md,.github/CONTRIBUTING.md,/test/README.md';
-		process.env.INPUT_TOC_TITLE    = '';
-		expect(getDocTocArgs()).toBe('/tmp/workspace/README.md /tmp/workspace/.github/CONTRIBUTING.md --notitle');
-	});
-
-	it('should return false', () => {
-		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
-		process.env.INPUT_TARGET_PATHS = '..';
-		expect(getDocTocArgs()).toBe(false);
-	});
-
-	it('should throw error', () => {
-		process.env.GITHUB_WORKSPACE   = '/tmp/workspace';
-		process.env.INPUT_TARGET_PATHS = '';
-		expect(() => getDocTocArgs()).toThrow('Input required and not supplied: TARGET_PATHS');
-	});
-});
-
 describe('getRunnerArguments', () => {
 	testEnv(rootDir);
 
 	it('should return args', () => {
 		const args = getRunnerArguments();
 		delete args.logger;
+		expect(args).toHaveProperty('executeCommands');
+		delete args.executeCommands;
 		expect(args).toEqual({
 			rootDir: rootDir,
 			actionName: 'TOC Generator',
@@ -66,16 +46,10 @@ describe('getRunnerArguments', () => {
 			commitMessage: 'docs: Update TOC',
 			commitName: '',
 			commitEmail: '',
-			executeCommands: [
-				`doctoc ${rootDir}/README*.md --title '**Table of Contents**' --github`,
-			],
 			filterExtensions: [
 				'md',
 			],
 			filterGitStatus: 'M',
-			globalInstallPackages: [
-				'doctoc',
-			],
 			includeLabels: [],
 			prBody: [
 				'## Base PullRequest',
@@ -172,9 +146,6 @@ describe('getRunnerArguments', () => {
 				'md',
 			],
 			filterGitStatus: 'M',
-			globalInstallPackages: [
-				'doctoc',
-			],
 			includeLabels: [
 				'label1',
 				'label2',
@@ -193,5 +164,109 @@ describe('getRunnerArguments', () => {
 			targetBranchPrefix: 'feature/',
 			targetEvents: TARGET_EVENTS,
 		});
+	});
+});
+
+describe('isNoTitle', () => {
+	it('should return false', () => {
+		expect(isNoTitle('test title')).toBe(false);
+	});
+
+	it('should return true', () => {
+		expect(isNoTitle('')).toBe(true);
+	});
+});
+
+describe('isFolding', () => {
+	testEnv(rootDir);
+
+	it('should return false 1', () => {
+		expect(isFolding('')).toBe(false);
+	});
+
+	it('should return false 2', () => {
+		expect(isFolding('test title')).toBe(false);
+	});
+
+	it('should return true', () => {
+		process.env.INPUT_FOLDING = 'true';
+		expect(isFolding('test title')).toBe(true);
+	});
+});
+
+describe('wrapTitle', () => {
+	testEnv(rootDir);
+
+	it('should wrap title', () => {
+		process.env.INPUT_FOLDING = 'true';
+		expect(wrapTitle('test title')).toBe('<summary>test title</summary>');
+	});
+
+	it('should not wrap title', () => {
+		expect(wrapTitle('test title')).toBe('test title');
+	});
+});
+
+describe('wrapToc', () => {
+	testEnv(rootDir);
+
+	it('should wrap toc', () => {
+		process.env.INPUT_FOLDING = 'true';
+		expect(wrapToc('toc', 'test title')).toBe('<details>\ntoc\n</details>');
+	});
+
+	it('should not wrap toc', () => {
+		expect(wrapToc('toc', 'test title')).toBe('toc');
+	});
+});
+
+describe('getMaxHeaderLevel', () => {
+	testEnv(rootDir);
+
+	it('should get max header level', () => {
+		process.env.INPUT_MAX_HEADER_LEVEL = '3';
+		expect(getMaxHeaderLevel()).toBe(3);
+	});
+
+	it('should not get max header level', () => {
+		expect(getMaxHeaderLevel()).toBeUndefined();
+	});
+});
+
+describe('getEntryPrefix', () => {
+	testEnv(rootDir);
+
+	it('should get entry prefix', () => {
+		process.env.INPUT_ENTRY_PREFIX = '*';
+		expect(getEntryPrefix()).toBe('*');
+	});
+
+	it('should not get entry prefix', () => {
+		expect(getEntryPrefix()).toBe('');
+	});
+});
+
+describe('homeExpanded', () => {
+	testEnv(rootDir);
+
+	it('should return home path', () => {
+		const spy = jest.spyOn(os, 'homedir').mockImplementation(() => '/home/test');
+		expect(homeExpanded('~/test.txt')).toBe('/home/test/test.txt');
+		spy.mockRestore();
+	});
+
+	it('should return absolute path', () => {
+		process.env.GITHUB_WORKSPACE = '/test-dir/';
+		expect(homeExpanded('test.txt')).toBe('/test-dir/test.txt');
+	});
+});
+
+describe('cleanPath', () => {
+	testEnv(rootDir);
+
+	it('should return clean path', () => {
+		const spy = jest.spyOn(os, 'homedir').mockImplementation(() => '/home/test');
+		expect(cleanPath('~/t e s t.txt')).toBe('/home/test/t\\ e\\ s\\ t.txt');
+		spy.mockRestore();
 	});
 });
