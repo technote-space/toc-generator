@@ -11,9 +11,7 @@ export const transformAndSave = (files: Array<{ path: string }>, title: string, 
 	const changed     = transformed.filter(item => item.transformed);
 	const unchanged   = transformed.filter(item => !item.transformed);
 
-	unchanged.forEach(item => logger.info('"%s" is up to date', item.path));
 	changed.forEach(item => {
-		logger.info('"%s" will be updated', item.path);
 		writeFileSync(item.path, item.data, 'utf8');
 	});
 
@@ -29,11 +27,11 @@ const parsePaths = (paths: Array<string>): Array<string> => sync(paths.map(path 
 export const executeDoctoc = (paths: Array<string>, title: string, logger: Logger): { changed: Array<string>; unchanged: Array<string> } => parsePaths(paths).map(path => {
 	const stat = statSync(path);
 	if (stat.isDirectory()) {
-		logger.startProcess('DocToccing "%s" and its sub directories for github.com.', path);
+		logger.displayCommand('DocToccing "%s" and its sub directories.', path);
 		return transformAndSave(file.findMarkdownFiles(path), title, logger);
 	}
 
-	logger.startProcess('DocToccing single file "%s" for github.com.', path);
+	logger.displayCommand('DocToccing single file "%s".', path);
 	return transformAndSave([{path}], title, logger);
 }).reduce((acc, value) => ({
 	changed: acc.changed.concat(value.changed.map(item => item.path)),

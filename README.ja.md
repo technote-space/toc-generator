@@ -10,6 +10,8 @@
 これは目次を生成する`GitHub Action`です。  
 [DocToc](https://github.com/thlorenz/doctoc) を実行し変更があればコミットします。  
 
+## Table of Contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <details>
@@ -81,6 +83,16 @@ default: `'README*.md'`
 目次タイトル  
 default: `'**Table of Contents**'`  
 例：`''`
+
+### MAX_HEADER_LEVEL
+Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
+default: ``  
+例：`3`
+
+### FOLDING
+目次を折りたたみ式にするかどうか  
+default: `false`  
+例：`'true'`
 
 ### COMMIT_MESSAGE
 コミットメッセージ  
