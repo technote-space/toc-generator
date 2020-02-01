@@ -1,6 +1,6 @@
 import { Logger, Utils } from '@technote-space/github-action-helper';
 import { writeFileSync, statSync } from 'fs';
-import { sync } from '@technote-space/fast-glob';
+import { sync } from 'fast-glob';
 import file from 'doctoc/lib/file';
 import { cleanPath } from './misc';
 import { transformWithWrap } from './transform';
@@ -45,7 +45,11 @@ export const executeDoctoc = (paths: Array<string>, title: string, logger: Logge
 
 export const doctoc = (paths: Array<string>, title: string, logger: Logger): ExecuteTask => {
 	return async(): Promise<CommandOutput> => {
+		// process.cwd is not available in Worker threads.
+		const cwd     = process.cwd;
+		process.cwd   = (): string => Utils.getWorkspace();
 		const results = executeDoctoc(paths, title, logger);
+		process.cwd   = cwd;
 		return {
 			command: 'Run doctoc',
 			stdout: [

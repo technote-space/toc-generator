@@ -27,9 +27,9 @@
   ],
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "@technote-space/fast-glob": "^3.1.4",
     "@technote-space/github-action-pr-helper": "^0.4.1",
     "doctoc": "^1.4.0",
+    "fast-glob": "^3.1.1",
     "update-section": "^0.3.3"
   },
   "devDependencies": {
