@@ -1,6 +1,6 @@
 import { Logger, Utils } from '@technote-space/github-action-helper';
 import { writeFileSync, statSync } from 'fs';
-import { sync } from 'fast-glob';
+import { sync } from '@technote-space/fast-glob';
 import file from 'doctoc/lib/file';
 import { cleanPath } from './misc';
 import { transformWithWrap } from './transform';
