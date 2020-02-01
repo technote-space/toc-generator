@@ -16,3 +16,4 @@ jobs:
           TARGET_BRANCH_PREFIX: release/
           FOLDING: true
           MAX_HEADER_LEVEL: 3
+          TOC_TITLE: Details
