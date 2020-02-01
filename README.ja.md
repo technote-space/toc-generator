@@ -22,6 +22,8 @@
 - [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
   - [TARGET_PATHS](#target_paths)
   - [TOC_TITLE](#toc_title)
+  - [MAX_HEADER_LEVEL](#max_header_level)
+  - [FOLDING](#folding)
   - [COMMIT_MESSAGE](#commit_message)
   - [COMMIT_NAME](#commit_name)
   - [COMMIT_EMAIL](#commit_email)
