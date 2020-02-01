@@ -104,6 +104,23 @@ describe('transformAndSave', () => {
 			unchanged: [],
 		});
 	});
+
+	it('should set options', () => {
+		process.env.INPUT_FOLDING          = 'true';
+		process.env.INPUT_MAX_HEADER_LEVEL = '3';
+		process.env.INPUT_ENTRY_PREFIX     = '☆';
+
+		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title, logger)).toEqual({
+			changed: [
+				{
+					data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.options.md'), 'utf8'),
+					path: resolve(doctocDir, 'README.update.md'),
+					transformed: true,
+				},
+			],
+			unchanged: [],
+		});
+	});
 });
 
 describe('executeDoctoc', () => {
