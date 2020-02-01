@@ -1,6 +1,6 @@
 import { Logger, Utils } from '@technote-space/github-action-helper';
 import { writeFileSync, statSync } from 'fs';
-import { sync } from 'glob';
+import { sync } from 'fast-glob';
 import file from 'doctoc/lib/file';
 import { cleanPath } from './misc';
 import { transformWithWrap } from './transform';
@@ -20,7 +20,11 @@ export const transformAndSave = (files: Array<{ path: string }>, title: string, 
 	return {changed, unchanged};
 };
 
-const parsePaths = (paths: Array<string>): Array<string> => Utils.uniqueArray<string>(paths.reduce((acc, path) => acc.concat(sync(cleanPath(path), {baseNameMatch: true})), [] as Array<string>));
+const parsePaths = (paths: Array<string>): Array<string> => sync(paths.map(path => cleanPath(path)), {
+	onlyFiles: false,
+	caseSensitiveMatch: false,
+	cwd: Utils.getWorkspace(),
+});
 
 export const executeDoctoc = (paths: Array<string>, title: string, logger: Logger): { changed: Array<string>; unchanged: Array<string> } => parsePaths(paths).map(path => {
 	const stat = statSync(path);
