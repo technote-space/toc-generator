@@ -6,7 +6,7 @@ import { cleanPath } from './misc';
 import { transformWithWrap } from './transform';
 import { CommandOutput, ExecuteTask } from '@technote-space/github-action-pr-helper/dist/types';
 
-export const transformAndSave = (files: Array<{ path: string }>, title: string, logger: Logger): { changed: Array<{ path: string }>; unchanged: Array<{ path: string }> } => {
+export const transformAndSave = (files: Array<{ path: string }>, title: string): { changed: Array<{ path: string }>; unchanged: Array<{ path: string }> } => {
 	const transformed = files.map(file => transformWithWrap(file.path, title));
 	const changed     = transformed.filter(item => item.transformed);
 	const unchanged   = transformed.filter(item => !item.transformed);
@@ -28,11 +28,11 @@ export const executeDoctoc = (paths: Array<string>, title: string, logger: Logge
 	const stat = statSync(path);
 	if (stat.isDirectory()) {
 		logger.displayCommand('DocToccing "%s" and its sub directories.', path);
-		return transformAndSave(file.findMarkdownFiles(path), title, logger);
+		return transformAndSave(file.findMarkdownFiles(path), title);
 	}
 
 	logger.displayCommand('DocToccing single file "%s".', path);
-	return transformAndSave([{path}], title, logger);
+	return transformAndSave([{path}], title);
 }).reduce((acc, value) => ({
 	changed: acc.changed.concat(value.changed.map(item => item.path)),
 	unchanged: acc.unchanged.concat(value.unchanged.map(item => item.path)),
