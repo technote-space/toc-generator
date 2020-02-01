@@ -1,8 +1,12 @@
 {
   "name": "@technote-space/github-action-pr-helper",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "PullRequest Helper for GitHub Actions.",
-  "author": "Technote <technote.space@gmail.com> (https://technote.space)",
+  "author": {
+    "name": "Technote",
+    "email": "technote.space@gmail.com",
+    "url": "https://technote.space"
+  },
   "license": "MIT",
   "keywords": [
     "github",
@@ -31,7 +35,7 @@
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.1.4",
     "@types/jest": "^25.1.1",
-    "@types/node": "^13.5.3",
+    "@types/node": "^13.7.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "eslint": "^6.8.0",
@@ -47,7 +51,7 @@
   "scripts": {
     "build": "tsc",
     "test": "yarn lint && yarn cover",
-    "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts'",
+    "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts' --cache",
     "lint:fix": "eslint --fix 'src/**/*.ts' '__tests__/**/*.ts'",
     "cover": "jest --coverage",
     "update": "ncu -u && yarn install && yarn upgrade && yarn audit"

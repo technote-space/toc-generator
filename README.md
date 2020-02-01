@@ -10,6 +10,8 @@
 This is a `GitHub Action` to generate TOC (Table of Contents),  
 which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if changed.
 
+## Table of Contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
@@ -82,6 +84,16 @@ e.g. `.`
 TOC Title.  
 default: `'**Table of Contents**'`  
 e.g. `''`
+
+### MAX_HEADER_LEVEL
+Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
+default: ``  
+e.g. `3`
+
+### FOLDING
+Whether to make TOC foldable.  
+default: `false`  
+e.g. `'true'`
 
 ### COMMIT_MESSAGE
 Commit message.  
