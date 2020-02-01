@@ -83,6 +83,16 @@ TOC Title.
 default: `'**Table of Contents**'`  
 e.g. `''`
 
+### MAX_HEADER_LEVEL
+Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
+default: ``  
+e.g. `3`
+
+### FOLDING
+Whether to make it foldable.  
+default: `false`  
+e.g. `'true'`
+
 ### COMMIT_MESSAGE
 Commit message.  
 default: `'docs: Update TOC'`  
