@@ -18,11 +18,11 @@ describe('transformAndSave', () => {
 	testEnv(rootDir);
 
 	it('should return empty', () => {
-		expect(transformAndSave([], title, logger)).toEqual({changed: [], unchanged: []});
+		expect(transformAndSave([], title)).toEqual({changed: [], unchanged: []});
 	});
 
 	it('should run doctoc', () => {
-		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title, logger)).toEqual({
+		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title)).toEqual({
 			changed: [
 				{
 					data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.md'), 'utf8'),
@@ -35,7 +35,7 @@ describe('transformAndSave', () => {
 	});
 
 	it('should not run doctoc', () => {
-		expect(transformAndSave([{path: resolve(doctocDir, 'README.not.update.md')}], title, logger)).toEqual({
+		expect(transformAndSave([{path: resolve(doctocDir, 'README.not.update.md')}], title)).toEqual({
 			changed: [],
 			unchanged: [
 				{
@@ -52,7 +52,7 @@ describe('transformAndSave', () => {
 			{path: resolve(doctocDir, 'README.create2.md')},
 			{path: resolve(doctocDir, 'README.update.md')},
 			{path: resolve(doctocDir, 'README.not.update.md')},
-		], title, logger)).toEqual({
+		], title)).toEqual({
 			changed: [
 				{
 					data: fs.readFileSync(resolve(doctocDir, 'expected/README.create1.md'), 'utf8'),
@@ -82,7 +82,7 @@ describe('transformAndSave', () => {
 	it('should wrap', () => {
 		process.env.INPUT_FOLDING = 'true';
 
-		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title, logger)).toEqual({
+		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title)).toEqual({
 			changed: [
 				{
 					data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.wrap.md'), 'utf8'),
@@ -93,7 +93,7 @@ describe('transformAndSave', () => {
 			unchanged: [],
 		});
 
-		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], 'test title', logger)).toEqual({
+		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], 'test title')).toEqual({
 			changed: [
 				{
 					data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.wrap.md'), 'utf8'),
@@ -110,7 +110,7 @@ describe('transformAndSave', () => {
 		process.env.INPUT_MAX_HEADER_LEVEL = '3';
 		process.env.INPUT_ENTRY_PREFIX     = '☆';
 
-		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title, logger)).toEqual({
+		expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title)).toEqual({
 			changed: [
 				{
 					data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.options.md'), 'utf8'),
