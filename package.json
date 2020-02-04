@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/toc-generator",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "GitHub Action to generate TOC.",
   "author": {
     "name": "Technote",
