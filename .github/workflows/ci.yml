@@ -12,10 +12,11 @@ jobs:
   eslint:
     name: ESLint
     runs-on: ubuntu-latest
+    env:
+      LINT: 1
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
+      - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
           PREFIX_FILTER: |
@@ -23,6 +24,7 @@ jobs:
             __tests__/
           SUFFIX_FILTER: .ts
           FILES: .eslintrc
+        if: "! contains(env.COMMIT_MESSAGE, '[skip ci]') && ! contains(env.COMMIT_MESSAGE, '[ci skip]')"
       - name: Get Yarn Cache Directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -58,8 +60,7 @@ jobs:
         node: ['10', '11', '12']
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
+      - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
           PREFIX_FILTER: |
@@ -69,6 +70,7 @@ jobs:
           FILES: |
             yarn.lock
             jest.config.js
+        if: "! contains(env.COMMIT_MESSAGE, '[skip ci]') && ! contains(env.COMMIT_MESSAGE, '[ci skip]')"
       - name: Setup node
         uses: actions/setup-node@v1
         with:
