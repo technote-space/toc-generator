@@ -6,7 +6,6 @@ categories:
     labels:
       - 'Type: Feature'
       - 'Type: Refactoring'
-      - 'Type: CI/CD'
   - title: ':bug: Bug Fixes'
     labels:
       - 'Type: Bug'
@@ -14,6 +13,7 @@ categories:
   - title: ':wrench: Maintenance'
     labels:
       - 'Type: Maintenance'
+      - 'Type: CI/CD'
   - title: ':green_book: Docs'
     labels:
       - 'Type: Documentation'

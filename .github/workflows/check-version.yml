@@ -1,5 +1,7 @@
 on: push
+
 name: Check package version
+
 jobs:
   checkVersion:
     name: Check package version
