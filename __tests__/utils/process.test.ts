@@ -14,8 +14,8 @@ import {
 	setChildProcessParams,
 	testChildProcess,
 } from '@technote-space/github-action-test-helper';
-import { main } from '@technote-space/github-action-pr-helper';
 import { Logger } from '@technote-space/github-action-helper';
+import { main } from '@technote-space/github-action-pr-helper';
 import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import { getRunnerArguments } from '../../src/utils/misc';
 
@@ -71,7 +71,7 @@ describe('main', () => {
 
 		await main(getMainArgs({
 			rootDir: undefined,
-			context: context('', 'push', 'tags/v1.2.3'),
+			context: context('', 'push', 'refs/tags/v1.2.3'),
 		}));
 
 		stdoutCalledWith(mockStdout, [
@@ -207,7 +207,7 @@ describe('main', () => {
 
 		await main(getMainArgs({
 			rootDir: undefined,
-			context: context('', 'push', 'heads/test'),
+			context: context('', 'push', 'refs/heads/test'),
 		}));
 
 		stdoutCalledWith(mockStdout, [
