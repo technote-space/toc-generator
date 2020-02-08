@@ -1,7 +1,9 @@
 on:
   pull_request:
     types: [opened]
+
 name: Pull Request opened
+
 jobs:
   assignToProject:
     name: Assign PullRequest to Project

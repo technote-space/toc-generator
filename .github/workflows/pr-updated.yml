@@ -1,0 +1,56 @@
+on: pull_request
+
+name: Pull Request updated
+
+jobs:
+  triage:
+    name: Pull Request Labeler
+    runs-on: ubuntu-latest
+    if: "! startsWith(github.event.pull_request.head.ref, 'release/v')"
+    steps:
+      - name: Pull Request Labeler
+        uses: actions/labeler@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  assignToProject:
+    name: Assign PullRequest to Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-git-comment-action@v1
+      - name: Assign PullRequest to Project
+        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
+        uses: technote-space/create-project-card-action@v1
+        with:
+          PROJECT: Backlog
+          COLUMN: To do
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IGNORE_CONTEXT_CHECK: true
+
+  assignAuthor:
+    name: Assign author to PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-git-comment-action@v1
+      - name: Assign Author to PR
+        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
+        uses: technote-space/assign-author@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IGNORE_CONTEXT_CHECK: true
+
+  addLabelsByBranch:
+    name: PR Labeler
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-git-comment-action@v1
+      - name: PR Labeler
+        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
+        uses: technote-space/pr-labeler-action@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IGNORE_CONTEXT_CHECK: true
+
