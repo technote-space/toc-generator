@@ -2,7 +2,7 @@ on:
   schedule:
     - cron: 0 3 * * 2,6
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, reopened, closed]
   repository_dispatch:
     types: [update-deps]
 
@@ -16,6 +16,7 @@ jobs:
         uses: technote-space/create-pr-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXECUTE_COMMANDS: |
             npx npm-check-updates -u --packageFile package.json
             yarn install

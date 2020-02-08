@@ -1,10 +1,4 @@
-on:
-  pull_request:
-  push:
-    branches:
-      - master
-    tags:
-      - "!*"
+on: push
 
 name: CI
 
@@ -12,10 +6,13 @@ jobs:
   eslint:
     name: ESLint
     runs-on: ubuntu-latest
+    env:
+      LINT: 1
     steps:
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::1"
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
+      - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
           PREFIX_FILTER: |
@@ -23,10 +20,15 @@ jobs:
             __tests__/
           SUFFIX_FILTER: .ts
           FILES: .eslintrc
+        if: "! contains(env.COMMIT_MESSAGE, '[skip ci]') && ! contains(env.COMMIT_MESSAGE, '[ci skip]')"
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::"
+        if: "! env.GIT_DIFF"
+
       - name: Get Yarn Cache Directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-        if: env.GIT_DIFF
+        if: env.RUNNING
       - name: Cache node dependencies
         uses: actions/cache@v1
         with:
@@ -34,16 +36,16 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-        if: env.GIT_DIFF
+        if: env.RUNNING
       - name: Install Package dependencies
         run: yarn install
-        if: env.GIT_DIFF
+        if: env.RUNNING
       - name: Check code style
         run: yarn eslint ${{ env.GIT_DIFF }}
-        if: env.GIT_DIFF
-      - uses: 8398a7/action-slack@v1
+        if: env.RUNNING
+      - uses: 8398a7/action-slack@v2
         with:
-          type: failure
+          status: failure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -55,11 +57,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['10', '11', '12']
+        node: ['11', '12']
     steps:
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::1"
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
+      - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
           PREFIX_FILTER: |
@@ -69,15 +72,23 @@ jobs:
           FILES: |
             yarn.lock
             jest.config.js
+        if: "! contains(env.COMMIT_MESSAGE, '[skip ci]') && ! contains(env.COMMIT_MESSAGE, '[ci skip]')"
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::"
+        if: "! env.GIT_DIFF"
+      - name: Set running flag
+        if: matrix.node == '12' && startsWith(github.ref, 'refs/tags/')
+        run: echo "::set-env name=RUNNING::1"
+
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-        if: env.GIT_DIFF || github.event_name == 'push'
+        if: env.RUNNING
       - name: Get Yarn Cache Directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-        if: env.GIT_DIFF || github.event_name == 'push'
+        if: env.RUNNING
       - name: Cache node dependencies
         uses: actions/cache@v1
         with:
@@ -85,13 +96,13 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-        if: env.GIT_DIFF || github.event_name == 'push'
+        if: env.RUNNING
       - name: Install Package dependencies
         run: yarn install
-        if: env.GIT_DIFF || github.event_name == 'push'
+        if: env.RUNNING
       - name: Run tests
         run: yarn cover
-        if: env.GIT_DIFF || github.event_name == 'push'
+        if: env.RUNNING
       - name: Codecov
         run: |
           if [ -n "$CODECOV_TOKEN" ]; then
@@ -100,23 +111,145 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           COVERAGE_FILE: ./coverage/lcov.info
-        if: matrix.node == '12' && (env.GIT_DIFF || github.event_name == 'push')
-      - uses: 8398a7/action-slack@v1
+        if: env.RUNNING && matrix.node == '12'
+      - uses: 8398a7/action-slack@v2
         with:
-          type: failure
+          status: failure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: failure()
 
-  slack:
-    name: Slack
+  release:
+    name: Release GitHub Actions
     needs: jest
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
     steps:
-      - uses: 8398a7/action-slack@v1
+      - uses: actions/checkout@v2
+      - name: Get Yarn Cache Directory
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache node dependencies
+        uses: actions/cache@v1
         with:
-          type: success
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Release GitHub Actions
+        uses: technote-space/release-github-actions@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OUTPUT_BUILD_INFO_FILENAME: build.json
+          TEST_TAG_PREFIX: test/
+          ORIGINAL_TAG_PREFIX: original/
+          CLEAN_TEST_TAG: true
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: failure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  package:
+    name: Publish Package
+    needs: jest
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    strategy:
+      matrix:
+        target: ['npm', 'gpr']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+        if: matrix.target == 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com
+        if: matrix.target == 'gpr'
+      - name: Get Yarn Cache Directory
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache node dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Check package version
+        uses: technote-space/package-version-check-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_DISABLED: 1
+      - name: Install Package dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Publish
+        run: |
+          if [ -n "$NPM_AUTH_TOKEN" ]; then
+            npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+            npm publish
+          fi
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        if: matrix.target == 'npm'
+      - name: Publish
+        run: |
+          if [ -n "$NPM_AUTH_TOKEN" ]; then
+            npm publish
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: matrix.target == 'gpr'
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: failure
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  publishRelease:
+    name: Create Release
+    needs: [release, package]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get version
+        run: echo "::set-env name=TAG_NAME::${HEAD_REF#refs/tags/}"
+        env:
+          HEAD_REF: ${{ github.ref }}
+      - name: Create Release
+        id: drafter
+        uses: technote-space/release-drafter@v6
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          DRAFT: false
+          NAME: ${{ env.TAG_NAME }}
+          TAG: ${{ env.TAG_NAME }}
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          text: ${{ format('<{0}>', steps.drafter.outputs.html_url) }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always() && steps.drafter.outputs.html_url
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always() && ! steps.drafter.outputs.html_url
