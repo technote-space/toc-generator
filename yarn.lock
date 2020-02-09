@@ -479,25 +479,25 @@
     "@actions/core" "^1.2.2"
     "@actions/github" "^2.1.0"
 
-"@technote-space/github-action-helper@^0.8.5":
-  version "0.8.7"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-0.8.7.tgz#684faa03240159cc7bd8e52ca13016d174ea5932"
-  integrity sha512-gBFwZSi7ZL3HDDi8WYu99CIXE3UPeBQuZCqtJCk8ZlbEjByPYtlEgvxE1Hxd+xNuS2D+SXdZikYbEY2moagCgw==
+"@technote-space/github-action-helper@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-1.0.1.tgz#a60fb6191d8191ee8b06e202d60fe41bce90b9d6"
+  integrity sha512-FJzTEWg2Nfwu28xAH+Mk7rUJ2F913ii+X1d1gNLtrenYC5/+LqIRghUZxHAhyNwEIk+UA56fgOO0TM9OqAtpQw==
   dependencies:
     "@actions/core" "^1.2.2"
     "@actions/github" "^2.1.0"
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.4.6.tgz#da58f23ea77c6f23a16bb4de3a8da146c433e619"
-  integrity sha512-zijOAW5SbJciPPpKxfiFGHLkw4ZNMQxpHaxBfDEc/9PHpt2hO+Vbos2L4utyz7FwOW5nKnfGonwIASNBUVvtrg==
+"@technote-space/github-action-pr-helper@^0.4.7":
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-0.4.7.tgz#96f245b66dcaddc5b23497dca795a80ed0d50f55"
+  integrity sha512-uI4B9cwpi99iZi+mv/fJ3jSYuY7+UCyaWZiq0SFFJbOyqGbgxCwaIapTY9qfIYYIuSjvokJJWBnoOvSkKDMZMw==
   dependencies:
     "@actions/core" "^1.2.2"
     "@actions/github" "^2.1.0"
     "@technote-space/filter-github-action" "^0.2.1"
-    "@technote-space/github-action-helper" "^0.8.5"
+    "@technote-space/github-action-helper" "^1.0.1"
     moment "^2.24.0"
 
 "@technote-space/github-action-test-helper@^0.2.1":
@@ -4402,9 +4402,9 @@ v8-compile-cache@^2.0.3:
   integrity sha512-usZBT3PW+LOjM25wbqIlZwPeJV+3OSz3M1k1Ws8snlW39dZyYL9lOGC5FgPVHfk0jKmjiDV8Z0mIbVQPiwFs7g==
 
 v8-to-istanbul@^4.0.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/v8-to-istanbul/-/v8-to-istanbul-4.1.1.tgz#cc2a6737bb6ee2941ceed38027d7b93083dc9a3a"
-  integrity sha512-eDRcudafj/GAV2MSoDNmsV/deeIY9bJ94QuVOzZDEbBd4uX+5v/kODX+p/fqZ74/VYLK1BZv8BPJlNnCV8vDhw==
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/v8-to-istanbul/-/v8-to-istanbul-4.1.2.tgz#387d173be5383dbec209d21af033dcb892e3ac82"
+  integrity sha512-G9R+Hpw0ITAmPSr47lSlc5A1uekSYzXxTMlFxso2xoffwo4jQnzbv1p9yXIinO8UMZKfAFewaCHwWvnH4Jb4Ug==
   dependencies:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
