@@ -15,10 +15,13 @@ jobs:
       - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREFIX_FILTER: |
             src/
             __tests__/
-          SUFFIX_FILTER: .ts
+          SUFFIX_FILTER: |
+            .js
+            .ts
           FILES: .eslintrc
         if: "! contains(env.COMMIT_MESSAGE, '[skip ci]') && ! contains(env.COMMIT_MESSAGE, '[ci skip]')"
       - name: Set running flag
@@ -65,10 +68,14 @@ jobs:
       - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREFIX_FILTER: |
             src/
             __tests__/
-          SUFFIX_FILTER: .ts
+          SUFFIX_FILTER: |
+            .js
+            .ts
+            .snap
           FILES: |
             yarn.lock
             jest.config.js
@@ -79,6 +86,11 @@ jobs:
       - name: Set running flag
         if: matrix.node == '12' && startsWith(github.ref, 'refs/tags/')
         run: echo "::set-env name=RUNNING::1"
+      - name: Set running flag
+        run: |
+          if [[ ! -f package.json ]] || ! < package.json jq -r '.scripts | keys[]' | grep -qe '^cover$'; then
+            echo "::set-env name=RUNNING::"
+          fi
 
       - name: Setup node
         uses: actions/setup-node@v1
