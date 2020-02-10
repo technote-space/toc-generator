@@ -75,6 +75,6 @@ export const getRunnerArguments = (): MainArguments => {
 };
 
 // eslint-disable-next-line no-magic-numbers
-export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
+export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(getWorkspace(), path);
 
 export const cleanPath = (path: string): string => homeExpanded(path).replace(/\s/g, '\\ ');

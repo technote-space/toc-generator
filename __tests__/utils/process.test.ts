@@ -29,7 +29,7 @@ beforeEach(() => {
 });
 jest.spyOn(fs, 'writeFileSync').mockImplementation(jest.fn());
 
-const context     = (action: string, event = 'pull_request', ref = 'pull/55/merge'): Context => generateContext({
+const context     = (action: string, event = 'pull_request', ref = 'refs/pull/55/merge'): Context => generateContext({
 	owner: 'hello',
 	repo: 'world',
 	event,
@@ -212,8 +212,6 @@ describe('main', () => {
 
 		stdoutCalledWith(mockStdout, [
 			'::group::Fetching...',
-			'[command]rm -rdf [Working Directory]',
-			'[command]git init \'.\'',
 			'[command]git remote add origin',
 			'[command]git fetch origin',
 			'::endgroup::',
@@ -300,8 +298,6 @@ describe('main', () => {
 
 		stdoutCalledWith(mockStdout, [
 			'::group::Fetching...',
-			'[command]rm -rdf [Working Directory]',
-			'[command]git init \'.\'',
 			'[command]git remote add origin',
 			'[command]git fetch origin',
 			'::endgroup::',
