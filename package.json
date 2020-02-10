@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/toc-generator",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "GitHub Action to generate TOC.",
   "author": {
     "name": "Technote",
@@ -27,22 +27,22 @@
   ],
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "@technote-space/github-action-pr-helper": "^0.4.2",
+    "@technote-space/github-action-pr-helper": "^0.4.7",
     "doctoc": "^1.4.0",
     "fast-glob": "^3.1.1",
     "update-section": "^0.3.3"
   },
   "devDependencies": {
-    "@technote-space/github-action-test-helper": "^0.1.4",
-    "@types/jest": "^25.1.1",
+    "@technote-space/github-action-test-helper": "^0.2.1",
+    "@types/jest": "^25.1.2",
     "@types/node": "^13.7.0",
-    "@typescript-eslint/eslint-plugin": "^2.18.0",
-    "@typescript-eslint/parser": "^2.18.0",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "jest-circus": "^25.1.0",
-    "nock": "^11.7.2",
-    "ts-jest": "^25.1.0",
+    "nock": "^11.8.2",
+    "ts-jest": "^25.2.0",
     "typescript": "^3.7.5"
   },
   "publishConfig": {
