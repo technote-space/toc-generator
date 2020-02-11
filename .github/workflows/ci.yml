@@ -175,22 +175,34 @@ jobs:
       matrix:
         target: ['npm', 'gpr']
     steps:
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::1"
+      - name: Set running flag
+        run: |
+          if [ -z "$NPM_AUTH_TOKEN" ]; then
+            run: echo "::set-env name=RUNNING::"
+          fi
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
       - uses: actions/checkout@v2
+        if: env.RUNNING
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-        if: matrix.target == 'npm'
+        if: env.RUNNING && matrix.target == 'npm'
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com
-        if: matrix.target == 'gpr'
+        if: env.RUNNING && matrix.target == 'gpr'
       - name: Get Yarn Cache Directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+        if: env.RUNNING
       - name: Cache node dependencies
         uses: actions/cache@v1
         with:
@@ -198,34 +210,32 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
+        if: env.RUNNING
       - name: Check package version
         uses: technote-space/package-version-check-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_DISABLED: 1
+        if: env.RUNNING
       - name: Install Package dependencies
         run: yarn install
+        if: env.RUNNING
       - name: Build
         run: yarn build
+        if: env.RUNNING
       - name: Publish
         run: |
-          if [ -n "$NPM_AUTH_TOKEN" ]; then
-            npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-            npm publish
-          fi
+          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+          npm publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        if: matrix.target == 'npm'
+        if: env.RUNNING && matrix.target == 'npm'
       - name: Publish
         run: |
-          if [ -n "$NPM_AUTH_TOKEN" ]; then
-            npm publish
-          fi
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        if: matrix.target == 'gpr'
+        if: env.RUNNING && matrix.target == 'gpr'
       - uses: 8398a7/action-slack@v2
         with:
           status: failure
