@@ -180,7 +180,7 @@ jobs:
       - name: Set running flag
         run: |
           if [ -z "$NPM_AUTH_TOKEN" ]; then
-            run: echo "::set-env name=RUNNING::"
+            echo "::set-env name=RUNNING::"
           fi
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
