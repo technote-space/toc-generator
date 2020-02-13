@@ -1,21 +1,22 @@
 on:
   pull_request:
-    branches:
-      - master
-    types: [closed]
+    types: [synchronize]
 
-name: Add version tag
+name: Add test tag
 
 jobs:
   tag:
-    name: Add version tag
+    name: Add test tag
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-git-comment-action@v1
       - name: Get version
         run: echo "::set-env name=TAG_NAME::${HEAD_REF#release/}"
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        if: "contains(env.COMMIT_MESSAGE, 'trigger workflow') || contains(env.COMMIT_MESSAGE, 'chore: update ')"
       - uses: actions/github-script@0.4.0
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
@@ -23,6 +24,7 @@ jobs:
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: `refs/tags/${process.env.TAG_NAME}`,
+              ref: `refs/tags/test/${process.env.TAG_NAME}`,
               sha: context.sha
             })
+        if: "contains(env.COMMIT_MESSAGE, 'trigger workflow') || contains(env.COMMIT_MESSAGE, 'chore: update ')"

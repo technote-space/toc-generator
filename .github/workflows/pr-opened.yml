@@ -33,3 +33,24 @@ jobs:
         uses: technote-space/pr-labeler-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  checkVersion:
+    name: Check package version
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.pull_request.head.ref, 'release/')
+    steps:
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::1"
+      - uses: actions/checkout@v2
+      - name: Set running flag
+        run: |
+          if [[ ! -f package.json ]] || [[ $(< package.json jq -r '.version == null') == 'true' ]]; then
+            echo "::set-env name=RUNNING::"
+          fi
+
+      - name: Check package version
+        uses: technote-space/package-version-check-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH_PREFIX: release/
+        if: env.RUNNING
