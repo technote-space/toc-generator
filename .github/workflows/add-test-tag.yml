@@ -13,9 +13,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
       - name: Get version
-        run: echo "::set-env name=TAG_NAME::${HEAD_REF#release/}"
+        run: echo "::set-env name=TAG_NAME::${HEAD_REF#release/}.${RUN_ID}"
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          RUN_ID: ${{ github.run_id }}
         if: "contains(env.COMMIT_MESSAGE, 'trigger workflow') || contains(env.COMMIT_MESSAGE, 'chore: update ')"
       - uses: actions/github-script@0.4.0
         with:
