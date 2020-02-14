@@ -1,4 +1,6 @@
-on: pull_request
+on:
+  pull_request:
+    types: [opened, synchronize]
 
 name: Pull Request updated
 
@@ -6,16 +8,31 @@ jobs:
   triage:
     name: Pull Request Labeler
     runs-on: ubuntu-latest
-    if: "! startsWith(github.event.pull_request.head.ref, 'release/v')"
+    if: "! startsWith(github.event.pull_request.head.ref, 'release/')"
     steps:
       - name: Pull Request Labeler
         uses: actions/labeler@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+  history:
+    name: Pull Request Body
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.pull_request.head.ref, 'release/')
+    steps:
+      - name: Pull Request Body
+        uses: technote-space/pr-commit-body-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXCLUDE_MESSAGES: |
+            trigger workflow
+            Update TOC
+            Update package version
+
   assignToProject:
     name: Assign PullRequest to Project
     runs-on: ubuntu-latest
+    if: github.event.action == 'synchronize'
     steps:
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
@@ -31,6 +48,7 @@ jobs:
   assignAuthor:
     name: Assign author to PR
     runs-on: ubuntu-latest
+    if: github.event.action == 'synchronize'
     steps:
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
@@ -44,6 +62,7 @@ jobs:
   addLabelsByBranch:
     name: PR Labeler
     runs-on: ubuntu-latest
+    if: github.event.action == 'synchronize'
     steps:
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
@@ -53,3 +72,29 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IGNORE_CONTEXT_CHECK: true
+
+  checkVersion:
+    name: Check package version
+    runs-on: ubuntu-latest
+    if: github.event.action == 'synchronize' && startsWith(github.event.pull_request.head.ref, 'release/')
+    steps:
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::"
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-git-comment-action@v1
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::1"
+        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
+      - name: Set running flag
+        run: |
+          if [[ ! -f package.json ]] || [[ $(< package.json jq -r '.version == null') == 'true' ]]; then
+            echo "::set-env name=RUNNING::"
+          fi
+
+      - name: Check package version
+        uses: technote-space/package-version-check-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH_PREFIX: release/
+          IGNORE_CONTEXT_CHECK: true
+        if: env.RUNNING
