@@ -26,6 +26,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: `refs/tags/test/${process.env.TAG_NAME}`,
-              sha: context.sha
+              sha: context.payload.pull_request.head.sha
             })
         if: "contains(env.COMMIT_MESSAGE, 'trigger workflow') || contains(env.COMMIT_MESSAGE, 'chore: update ')"

@@ -28,6 +28,7 @@ jobs:
             trigger workflow
             Update TOC
             Update package version
+          TITLE: '## Changes'
 
   assignToProject:
     name: Assign PullRequest to Project
