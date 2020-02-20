@@ -13,8 +13,8 @@ jobs:
         uses: technote-space/create-project-card-action@v1
         with:
           PROJECT: Backlog
-          COLUMN: To do
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COLUMN: In progress
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
   assignAuthor:
     name: Assign author to PR
