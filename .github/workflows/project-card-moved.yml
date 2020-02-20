@@ -1,6 +1,6 @@
 on:
   project_card:
-    types: [moved]
+    types: [created, moved]
 
 name: Project Card Event
 
