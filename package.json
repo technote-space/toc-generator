@@ -29,7 +29,7 @@
     "@actions/core": "^1.2.2",
     "@technote-space/github-action-pr-helper": "^1.0.0",
     "doctoc": "^1.4.0",
-    "fast-glob": "^3.2.1",
+    "fast-glob": "^3.2.2",
     "update-section": "^0.3.3"
   },
   "devDependencies": {
