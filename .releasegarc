@@ -1,0 +1,8 @@
+{
+  "inputs": {
+    "OUTPUT_BUILD_INFO_FILENAME": "build.json",
+    "TEST_TAG_PREFIX": "test/",
+    "ORIGINAL_TAG_PREFIX": "original/",
+    "CLEAN_TEST_TAG": "true"
+  }
+}
