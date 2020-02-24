@@ -17,7 +17,7 @@ jobs:
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           RUN_ID: ${{ github.run_id }}
-        if: "contains(env.COMMIT_MESSAGE, 'trigger workflow') || contains(env.COMMIT_MESSAGE, 'chore: update ')"
+        if: "contains(env.COMMIT_MESSAGE, 'chore: update ')"
       - uses: actions/github-script@0.4.0
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
@@ -28,4 +28,4 @@ jobs:
               ref: `refs/tags/test/${process.env.TAG_NAME}`,
               sha: context.payload.pull_request.head.sha
             })
-        if: "contains(env.COMMIT_MESSAGE, 'trigger workflow') || contains(env.COMMIT_MESSAGE, 'chore: update ')"
+        if: "contains(env.COMMIT_MESSAGE, 'chore: update ')"
