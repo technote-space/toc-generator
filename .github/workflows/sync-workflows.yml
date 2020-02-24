@@ -14,7 +14,6 @@ jobs:
         uses: technote-space/create-pr-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXECUTE_COMMANDS: |
             rm -rdf .github/workflows/.tmp
             mkdir -p .github/workflows/.tmp
