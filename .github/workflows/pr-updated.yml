@@ -18,7 +18,7 @@ jobs:
   history:
     name: Pull Request Body
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request.head.ref, 'release/')
+    if: startsWith(github.event.pull_request.head.ref, 'release/') || github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
     steps:
       - name: Pull Request Body
         uses: technote-space/pr-commit-body-action@v1
@@ -29,73 +29,5 @@ jobs:
             Update TOC
             Update package version
           TITLE: '## Changes'
-
-  assignToProject:
-    name: Assign PullRequest to Project
-    runs-on: ubuntu-latest
-    if: github.event.action == 'synchronize'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: technote-space/get-git-comment-action@v1
-      - name: Assign PullRequest to Project
-        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
-        uses: technote-space/create-project-card-action@v1
-        with:
-          PROJECT: Backlog
-          COLUMN: To do
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          IGNORE_CONTEXT_CHECK: true
-
-  assignAuthor:
-    name: Assign author to PR
-    runs-on: ubuntu-latest
-    if: github.event.action == 'synchronize'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: technote-space/get-git-comment-action@v1
-      - name: Assign Author to PR
-        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
-        uses: technote-space/assign-author@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          IGNORE_CONTEXT_CHECK: true
-
-  addLabelsByBranch:
-    name: PR Labeler
-    runs-on: ubuntu-latest
-    if: github.event.action == 'synchronize'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: technote-space/get-git-comment-action@v1
-      - name: PR Labeler
-        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
-        uses: technote-space/pr-labeler-action@v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          IGNORE_CONTEXT_CHECK: true
-
-  checkVersion:
-    name: Check package version
-    runs-on: ubuntu-latest
-    if: github.event.action == 'synchronize' && startsWith(github.event.pull_request.head.ref, 'release/')
-    steps:
-      - name: Set running flag
-        run: echo "::set-env name=RUNNING::"
-      - uses: actions/checkout@v2
-      - uses: technote-space/get-git-comment-action@v1
-      - name: Set running flag
-        run: echo "::set-env name=RUNNING::1"
-        if: contains(env.COMMIT_MESSAGE, 'trigger workflow')
-      - name: Set running flag
-        run: |
-          if [[ ! -f package.json ]] || [[ $(< package.json jq -r '.version == null') == 'true' ]]; then
-            echo "::set-env name=RUNNING::"
-          fi
-
-      - name: Check package version
-        uses: technote-space/package-version-check-action@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH_PREFIX: release/
-          IGNORE_CONTEXT_CHECK: true
-        if: env.RUNNING
+          LINK_ISSUE_KEYWORD: ${{ (startsWith(github.event.pull_request.head.ref, 'release/') && 'closes') || '' }}
+          FILTER_PR: true
