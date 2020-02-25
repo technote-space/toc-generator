@@ -167,6 +167,8 @@ const {
 	useNpm,
 	replaceAll,
 	generateNewPatchVersion,
+	generateNewMinorVersion,
+	generateNewMajorVersion,
 	arrayChunk,
 } = Utils;
 
@@ -195,6 +197,8 @@ console.log(getArrayInput('TEST'));  // e.g. ['test1', 'test2']
 console.log(useNpm('dir')); // e.g. true
 console.log(replaceAll('test1-test2-test3', 'test', 'abc')); // e.g. abc1-abc2-abc3
 console.log(generateNewPatchVersion('v1.2.3')); // v1.2.4
+console.log(generateNewMinorVersion('v1.2.3')); // v1.3.0
+console.log(generateNewMajorVersion('v1.2.3')); // v2.0.0
 console.log(arrayChunk([1, 2, 3, 4, 5, 6, 7], 3)); // [[1, 2, 3], [4, 5, 6], [7]]
 async function run () {
     await sleep(1000);

@@ -98,7 +98,7 @@ default: `false`
 
 ### COMMIT_MESSAGE
 コミットメッセージ  
-default: `'docs: Update TOC'`  
+default: `'docs: update TOC'`  
 例：`feat: update TOC`
 
 ### COMMIT_NAME
