@@ -99,7 +99,7 @@ e.g. `'true'`
 
 ### COMMIT_MESSAGE
 Commit message.  
-default: `'docs: Update TOC'`  
+default: `'docs: update TOC'`  
 e.g. `feat: update TOC`
 
 ### COMMIT_NAME
