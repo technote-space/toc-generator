@@ -33,7 +33,7 @@ inputs:
   COMMIT_MESSAGE:
     description: Commit message.
     required: true
-    default: 'docs: Update TOC'
+    default: 'docs: update TOC'
   COMMIT_NAME:
     description: Git commit name.
     default: ''
