@@ -33,7 +33,7 @@ inputs:
   COMMIT_MESSAGE:
     description: Commit message.
     required: true
-    default: 'docs: Update TOC'
+    default: 'docs: update TOC'
   COMMIT_NAME:
     description: Git commit name.
     default: ''
@@ -54,7 +54,7 @@ inputs:
   PR_TITLE:
     description: PullRequest title.
     required: true
-    default: 'docs: Update TOC (${PR_MERGE_REF})'
+    default: 'docs: update TOC (${PR_MERGE_REF})'
   PR_BODY:
     description: PullRequest body.
     required: true
