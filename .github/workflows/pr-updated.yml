@@ -26,8 +26,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXCLUDE_MESSAGES: |
             trigger workflow
-            Update TOC
-            Update package version
+            update TOC
+            update package version
           TITLE: '## Changes'
           LINK_ISSUE_KEYWORD: ${{ (startsWith(github.event.pull_request.head.ref, 'release/') && 'closes') || '' }}
           FILTER_PR: true
