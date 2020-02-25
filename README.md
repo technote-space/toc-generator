@@ -124,7 +124,7 @@ e.g. `toc-${PR_NUMBER}`
 
 ### PR_TITLE
 PullRequest title.  
-default: `'docs: Update TOC (${PR_MERGE_REF})'`  
+default: `'docs: update TOC (${PR_MERGE_REF})'`  
 e.g. `feat: update TOC`  
 [Context variables](#context-variables)
 
@@ -295,7 +295,7 @@ jobs:
 | PR_HEAD_REF | pull_request.head.ref (e.g. `change`) |
 | PR_BASE_REF | pull_request.base.ref (e.g. `master`) |
 | PR_MERGE_REF | pull_request.base.ref (e.g. `change -> master`) |
-| PR_TITLE | pull_request.title (e.g. `Update the README with new information.`) |
+| PR_TITLE | pull_request.title (e.g. `update the README with new information.`) |
 
 [Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
 
