@@ -6,6 +6,7 @@ name: Pull Request opened
 
 jobs:
   assignToProject:
+    if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
     name: Assign PullRequest to Project
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +38,7 @@ jobs:
   checkVersion:
     name: Check package version
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request.head.ref, 'release/')
+    if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
       - name: Set running flag
         run: echo "::set-env name=RUNNING::1"

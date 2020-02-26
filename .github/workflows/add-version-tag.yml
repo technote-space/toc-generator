@@ -10,7 +10,7 @@ jobs:
   tag:
     name: Add version tag
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
       - name: Get version
         run: echo "::set-env name=TAG_NAME::${HEAD_REF#release/}"

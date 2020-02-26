@@ -18,7 +18,7 @@ jobs:
   history:
     name: Pull Request Body
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request.head.ref, 'release/') || github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
+    if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
     steps:
       - name: Pull Request Body
         uses: technote-space/pr-commit-body-action@v1
@@ -31,3 +31,16 @@ jobs:
           TITLE: '## Changes'
           LINK_ISSUE_KEYWORD: ${{ (startsWith(github.event.pull_request.head.ref, 'release/') && 'closes') || '' }}
           FILTER_PR: true
+
+  manageRelease:
+    name: Manage release
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.event.pull_request.head.ref, 'release/')
+    steps:
+      - name: Manage release
+        uses: technote-space/manage-release-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          EXCLUDE_MESSAGES: |
+            update package version
+            update packages
