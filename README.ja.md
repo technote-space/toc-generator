@@ -104,12 +104,12 @@ default: `'docs: update TOC'`
 ### COMMIT_NAME
 コミット時に設定する名前  
 default: `'${github.actor}'`  
-[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
+[About Github Context](https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### COMMIT_EMAIL
 コミット時に設定するメールアドレス  
 default: `'${github.actor}@users.noreply.github.com'`  
-[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
+[About Github Context](https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
 
 ### PR_BRANCH_PREFIX
 プルリクエストのブランチプリフィックス  
@@ -211,7 +211,7 @@ INCLUDE_LABELS: |
 |pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
 |pull_request: \[closed]||
 
-- 次のアクティビティタイプは明示的に指定する必要があります。 ([詳細](https://help.github.com/en/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows#pull-request-event-pull_request))
+- 次のアクティビティタイプは明示的に指定する必要があります。 ([詳細](https://help.github.com/ja/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows#pull-request-event-pull_request))
   - `labeled`, `unlabeled`, `closed`
 ### Conditions
 #### condition1
@@ -229,9 +229,9 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
 これはブランチプロテクションを設定していると問題になる場合があります。  
 
 もしアクションをトリガーしたい場合は代わりに`personal access token`を使用してください。  
-1. public_repo または repo の権限で [Personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) を生成  
+1. public_repo または repo の権限で [Personal access token](https://help.github.com/ja/articles/creating-a-personal-access-token-for-the-command-line) を生成  
 (repo はプライベートリポジトリで必要です)  
-1. [ACCESS_TOKENとして保存](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables)
+1. [ACCESS_TOKENとして保存](https://help.github.com/ja/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 1. `GITHUB_TOKEN`の代わりに`ACCESS_TOKEN`を使用  
    例：`.github/workflows/toc.yml`
    ```yaml
