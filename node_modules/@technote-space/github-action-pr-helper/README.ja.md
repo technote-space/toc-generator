@@ -27,9 +27,9 @@ GitHub Actions 用のプルリクヘルパー
 
 ## 使用方法
 1. インストール  
-   1. npm  
+   * npm  
    `npm i @technote-space/github-action-pr-helper`
-   1. yarn  
+   * yarn  
    `yarn add @technote-space/github-action-pr-helper`
 1. 使用
 ```typescript

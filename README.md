@@ -124,7 +124,7 @@ e.g. `toc-${PR_NUMBER}`
 
 ### PR_TITLE
 PullRequest title.  
-default: `'docs: Update TOC (${PR_MERGE_REF})'`  
+default: `'docs: update TOC (${PR_MERGE_REF})'`  
 e.g. `feat: update TOC`  
 [Context variables](#context-variables)
 
@@ -232,7 +232,7 @@ This can be a problem if you have branch protection configured.
 If you want to trigger actions, use a personal access token instead.  
 1. Generate a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) with the public_repo or repo scope.  
 (repo is required for private repositories).  
-1. [Save as ACCESS_TOKEN](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables)
+1. [Save as ACCESS_TOKEN](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 1. Use `ACCESS_TOKEN` instead of `GITHUB_TOKEN`.  
    e.g. `.github/workflows/toc.yml`
    ```yaml
@@ -295,7 +295,7 @@ jobs:
 | PR_HEAD_REF | pull_request.head.ref (e.g. `change`) |
 | PR_BASE_REF | pull_request.base.ref (e.g. `master`) |
 | PR_MERGE_REF | pull_request.base.ref (e.g. `change -> master`) |
-| PR_TITLE | pull_request.title (e.g. `Update the README with new information.`) |
+| PR_TITLE | pull_request.title (e.g. `update the README with new information.`) |
 
 [Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
 

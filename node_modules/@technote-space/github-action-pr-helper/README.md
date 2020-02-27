@@ -27,9 +27,9 @@ PullRequest Helper for GitHub Actions.
 
 ## Usage
 1. Install  
-   1. npm  
+   * npm  
    `npm i @technote-space/github-action-pr-helper`
-   1. yarn  
+   * yarn  
    `yarn add @technote-space/github-action-pr-helper`
 1. Use
 ```typescript
