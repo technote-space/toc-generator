@@ -28,6 +28,7 @@ jobs:
             trigger workflow
             update TOC
             update package version
+            update wp version
           TITLE: '## Changes'
           LINK_ISSUE_KEYWORD: ${{ (startsWith(github.event.pull_request.head.ref, 'release/') && 'closes') || '' }}
           FILTER_PR: true
@@ -35,10 +36,10 @@ jobs:
   manageRelease:
     name: Manage release
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && github.event.pull_request.head.ref == 'release/next'
     steps:
       - name: Manage release
-        uses: technote-space/manage-release-action@v1
+        uses: technote-space/release-type-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           EXCLUDE_MESSAGES: |

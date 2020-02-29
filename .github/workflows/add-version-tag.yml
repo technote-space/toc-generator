@@ -13,9 +13,15 @@ jobs:
     if: github.event.pull_request.merged == true && github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
       - name: Get version
-        run: echo "::set-env name=TAG_NAME::${HEAD_REF#release/}"
+        uses: technote-space/get-next-version-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event.pull_request.head.ref == 'release/next'
+      - name: Get version
+        run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        if: startsWith(github.event.pull_request.head.ref, 'release/v')
       - uses: actions/github-script@0.4.0
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
@@ -23,6 +29,7 @@ jobs:
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: `refs/tags/${process.env.TAG_NAME}`,
+              ref: `refs/tags/${process.env.NEXT_VERSION}`,
               sha: context.sha
             })
+        if: env.NEXT_VERSION
