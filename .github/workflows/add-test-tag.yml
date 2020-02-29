@@ -13,11 +13,21 @@ jobs:
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
       - name: Get version
-        run: echo "::set-env name=TAG_NAME::${HEAD_REF#release/}.${RUN_ID}"
+        uses: technote-space/get-next-version-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: "github.event.pull_request.head.ref == 'release/next' && (contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies'))"
+      - name: Get version
+        run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        if: "startsWith(github.event.pull_request.head.ref, 'release/v') && (contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies'))"
+      - name: Get tag name
+        run: echo "::set-env name=TAG_NAME::${NEXT_VERSION}.${RUN_ID}"
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           RUN_ID: ${{ github.run_id }}
-        if: "contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies')"
+        if: env.NEXT_VERSION
       - uses: actions/github-script@0.4.0
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
@@ -28,4 +38,4 @@ jobs:
               ref: `refs/tags/test/${process.env.TAG_NAME}`,
               sha: context.payload.pull_request.head.sha
             })
-        if: "contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies')"
+        if: env.TAG_NAME

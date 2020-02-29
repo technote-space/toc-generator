@@ -25,7 +25,7 @@ jobs:
           PR_BRANCH_NAME: 'chore-npm-update-${PR_ID}'
           PR_TITLE: 'chore: update npm dependencies (${PR_MERGE_REF})'
           PR_DEFAULT_BRANCH_PREFIX: release/
-          PR_DEFAULT_BRANCH_NAME: ${PATCH_VERSION}
+          PR_DEFAULT_BRANCH_NAME: next
           PR_DEFAULT_BRANCH_TITLE: 'feat: release ${PATCH_VERSION}'
           TARGET_BRANCH_PREFIX: release/
-          AUTO_MERGE_THRESHOLD_DAYS: 30
+          AUTO_MERGE_THRESHOLD_DAYS: 14
