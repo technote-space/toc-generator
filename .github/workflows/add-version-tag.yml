@@ -16,7 +16,7 @@ jobs:
         uses: technote-space/get-next-version-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: github.event.pull_request.head.ref == 'release/next'
+        if: "! startsWith(github.event.pull_request.head.ref, 'release/v')"
       - name: Get version
         run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
         env:
