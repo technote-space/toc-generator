@@ -8,7 +8,7 @@ jobs:
   triage:
     name: Pull Request Labeler
     runs-on: ubuntu-latest
-    if: "! startsWith(github.event.pull_request.head.ref, 'release/')"
+    if: "! startsWith(github.head_ref, 'release/')"
     steps:
       - name: Pull Request Labeler
         uses: actions/labeler@v2
@@ -30,13 +30,13 @@ jobs:
             update package version
             update wp version
           TITLE: '## Changes'
-          LINK_ISSUE_KEYWORD: ${{ (startsWith(github.event.pull_request.head.ref, 'release/') && 'closes') || '' }}
+          LINK_ISSUE_KEYWORD: ${{ (startsWith(github.head_ref, 'release/') && 'closes') || '' }}
           FILTER_PR: true
 
   manageRelease:
     name: Manage release
     runs-on: ubuntu-latest
-    if: "github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.event.pull_request.head.ref, 'release/') && ! startsWith(github.event.pull_request.head.ref, 'release/v')"
+    if: "github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/') && ! startsWith(github.head_ref, 'release/v')"
     steps:
       - name: Manage release
         uses: technote-space/release-type-action@v1
@@ -49,7 +49,7 @@ jobs:
   checkVersion:
     name: Check package version
     runs-on: ubuntu-latest
-    if: "github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.event.pull_request.head.ref, 'release/') && ! startsWith(github.event.pull_request.head.ref, 'release/v')"
+    if: "github.event.action == 'synchronize' && github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/') && ! startsWith(github.head_ref, 'release/v')"
     steps:
       - name: Set running flag
         run: echo "::set-env name=RUNNING::1"
@@ -64,6 +64,9 @@ jobs:
         uses: technote-space/get-next-version-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXCLUDE_MESSAGES: |
+            update package version
+            update packages
         if: env.RUNNING
       - name: Check package version
         uses: technote-space/package-version-check-action@v1
