@@ -112,7 +112,7 @@ e.g. `README.md`
 - branch name ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 
 ## Addition
-### Commit
+### GITHUB_TOKEN
 The `GITHUB_TOKEN` that is provided as a part of `GitHub Actions` doesn't have authorization to create any successive events.  
 So it won't spawn actions which triggered by push.  
 
