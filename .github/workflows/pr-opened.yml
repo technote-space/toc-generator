@@ -10,8 +10,7 @@ jobs:
     name: Assign PullRequest to Project
     runs-on: ubuntu-latest
     steps:
-      - name: Assign PullRequest to Project
-        uses: technote-space/create-project-card-action@v1
+      - uses: technote-space/create-project-card-action@v1
         with:
           PROJECT: Backlog
           COLUMN: In progress
@@ -21,16 +20,10 @@ jobs:
     name: Assign author to PR
     runs-on: ubuntu-latest
     steps:
-      - name: Assign Author to PR
-        uses: technote-space/assign-author@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: technote-space/assign-author@v1
 
   addLabelsByBranch:
     name: PR Labeler
     runs-on: ubuntu-latest
     steps:
-      - name: PR Labeler
-        uses: technote-space/pr-labeler-action@v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: technote-space/pr-labeler-action@v3

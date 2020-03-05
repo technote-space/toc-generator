@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "! startsWith(github.head_ref, 'release/')"
     steps:
-      - name: Pull Request Labeler
-        uses: actions/labeler@v2
+      - uses: actions/labeler@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -20,10 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
     steps:
-      - name: Pull Request Body
-        uses: technote-space/pr-commit-body-action@v1
+      - uses: technote-space/pr-commit-body-action@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXCLUDE_MESSAGES: |
             trigger workflow
             update TOC
@@ -38,8 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/') && ! startsWith(github.head_ref, 'release/v')"
     steps:
-      - name: Manage release
-        uses: technote-space/release-type-action@v1
+      - uses: technote-space/release-type-action@v1
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           EXCLUDE_MESSAGES: |
@@ -63,7 +59,6 @@ jobs:
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXCLUDE_MESSAGES: |
             update package version
             update packages
