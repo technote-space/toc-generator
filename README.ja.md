@@ -96,7 +96,7 @@
 - ブランチ名 ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 
 ## 補足
-### コミット
+### GITHUB_TOKEN
 GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作成する権限がありません。  
 したがって、プッシュによってトリガーされるビルドアクションなどは実行されません。  
 
