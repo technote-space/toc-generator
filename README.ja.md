@@ -49,9 +49,6 @@
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## スクリーンショット
-![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
-
 ## インストール
 1. 目次の位置を指定 (option)  
    ```markdown
@@ -69,9 +66,11 @@
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
    ```
+
+## スクリーンショット
+![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## オプション
 | name | description | default | required | e.g. |
@@ -132,8 +131,7 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
            with:
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
@@ -148,8 +146,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -166,8 +163,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ### Context variables

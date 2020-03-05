@@ -49,9 +49,6 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Screenshot
-![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
-
 ## Installation
 1. Specify location of TOC (option)  
 e.g. `README.md`  
@@ -70,9 +67,11 @@ e.g. `README.md`
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
    ```
+
+## Screenshot
+![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## Options
 | name | description | default | required | e.g. |
@@ -133,8 +132,7 @@ If you want to trigger actions, use a personal access token instead.
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
            with:
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
@@ -149,8 +147,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -167,8 +164,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ### Context variables
