@@ -15,7 +15,9 @@ jobs:
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXCLUDE_MESSAGES: |
+            update package version
+            update packages
         if: "! startsWith(github.head_ref, 'release/v') && (contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies'))"
       - name: Get version
         run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"

@@ -15,7 +15,6 @@ jobs:
       - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREFIX_FILTER: |
             src/
             __tests__/
@@ -64,7 +63,6 @@ jobs:
       - uses: technote-space/get-git-comment-action@v1
       - uses: technote-space/get-diff-action@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREFIX_FILTER: |
             src/
             __tests__/
@@ -199,7 +197,6 @@ jobs:
       - name: Check package version
         uses: technote-space/package-version-check-action@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_DISABLED: 1
         if: env.RUNNING
       - name: Install Package dependencies
@@ -255,8 +252,6 @@ jobs:
     if: always()
     steps:
       - uses: technote-space/workflow-conclusion-action@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: 8398a7/action-slack@v2
         with:
           status: failure
