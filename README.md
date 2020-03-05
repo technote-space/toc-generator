@@ -72,8 +72,6 @@ e.g. `README.md`
        steps:
          - name: TOC Generator
            uses: technote-space/toc-generator@v2
-           with:
-             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
 
 ## Options
@@ -233,7 +231,7 @@ If you want to trigger actions, use a personal access token instead.
 1. Generate a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) with the public_repo or repo scope.  
 (repo is required for private repositories).  
 1. [Save as ACCESS_TOKEN](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
-1. Use `ACCESS_TOKEN` instead of `GITHUB_TOKEN`.  
+1. Add input to use `ACCESS_TOKEN` instead of `GITHUB_TOKEN`.  
    e.g. `.github/workflows/toc.yml`
    ```yaml
    on: push
@@ -246,7 +244,6 @@ If you want to trigger actions, use a personal access token instead.
          - name: TOC Generator
            uses: technote-space/toc-generator@v2
            with:
-             # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
 
@@ -262,8 +259,6 @@ jobs:
    steps:
      - name: TOC Generator
        uses: technote-space/toc-generator@v2
-       with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -282,8 +277,6 @@ jobs:
    steps:
      - name: TOC Generator
        uses: technote-space/toc-generator@v2
-       with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Context variables
