@@ -24,7 +24,7 @@
   - [対象イベント](#%E5%AF%BE%E8%B1%A1%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)
   - [Conditions](#conditions)
 - [補足](#%E8%A3%9C%E8%B6%B3)
-  - [コミット](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88)
+  - [GITHUB_TOKEN](#github_token)
   - [プルリクエストの作成](#%E3%83%97%E3%83%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)

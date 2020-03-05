@@ -24,7 +24,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Target event](#target-event)
   - [Conditions](#conditions)
 - [Addition](#addition)
-  - [Commit](#commit)
+  - [GITHUB_TOKEN](#github_token)
   - [Create PullRequest](#create-pullrequest)
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)
