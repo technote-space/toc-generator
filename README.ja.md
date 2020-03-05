@@ -71,8 +71,6 @@
        steps:
          - name: TOC Generator
            uses: technote-space/toc-generator@v2
-           with:
-             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
 
 ## オプション
@@ -232,7 +230,7 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
 1. public_repo または repo の権限で [Personal access token](https://help.github.com/ja/articles/creating-a-personal-access-token-for-the-command-line) を生成  
 (repo はプライベートリポジトリで必要です)  
 1. [ACCESS_TOKENとして保存](https://help.github.com/ja/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
-1. `GITHUB_TOKEN`の代わりに`ACCESS_TOKEN`を使用  
+1. `GITHUB_TOKEN`の代わりに`ACCESS_TOKEN`を使用するように設定  
    例：`.github/workflows/toc.yml`
    ```yaml
    on: push
@@ -245,7 +243,6 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
          - name: TOC Generator
            uses: technote-space/toc-generator@v2
            with:
-             # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
 
@@ -261,8 +258,6 @@ jobs:
    steps:
      - name: TOC Generator
        uses: technote-space/toc-generator@v2
-       with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -281,8 +276,6 @@ jobs:
    steps:
      - name: TOC Generator
        uses: technote-space/toc-generator@v2
-       with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Context variables
