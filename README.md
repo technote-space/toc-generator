@@ -17,29 +17,14 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 <details>
 <summary>Details</summary>
 
-- [Screenshot](#screenshot)
 - [Installation](#installation)
+- [Screenshot](#screenshot)
 - [Options](#options)
-  - [TARGET_PATHS](#target_paths)
-  - [TOC_TITLE](#toc_title)
-  - [MAX_HEADER_LEVEL](#max_header_level)
-  - [FOLDING](#folding)
-  - [COMMIT_MESSAGE](#commit_message)
-  - [COMMIT_NAME](#commit_name)
-  - [COMMIT_EMAIL](#commit_email)
-  - [PR_BRANCH_PREFIX](#pr_branch_prefix)
-  - [PR_BRANCH_NAME](#pr_branch_name)
-  - [PR_TITLE](#pr_title)
-  - [PR_BODY](#pr_body)
-  - [PR_COMMENT_BODY](#pr_comment_body)
-  - [PR_CLOSE_MESSAGE](#pr_close_message)
-  - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
-  - [INCLUDE_LABELS](#include_labels)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
 - [Addition](#addition)
-  - [Commit](#commit)
+  - [GITHUB_TOKEN](#github_token)
   - [Create PullRequest](#create-pullrequest)
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)
@@ -48,9 +33,6 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## Screenshot
-![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## Installation
 1. Specify location of TOC (option)  
@@ -70,137 +52,31 @@ e.g. `README.md`
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
    ```
 
+## Screenshot
+![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
+
 ## Options
-### TARGET_PATHS
-Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README*.md'`  
-e.g. `.`
-
-### TOC_TITLE
-TOC Title.  
-default: `'**Table of Contents**'`  
-e.g. `''`
-
-### MAX_HEADER_LEVEL
-Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
-default: ``  
-e.g. `3`
-
-### FOLDING
-Whether to make TOC foldable.  
-default: `false`  
-e.g. `'true'`
-
-### COMMIT_MESSAGE
-Commit message.  
-default: `'docs: update TOC'`  
-e.g. `feat: update TOC`
-
-### COMMIT_NAME
-Git commit name.  
-default: `'${github.actor}'`  
-[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### COMMIT_EMAIL
-Git commit email.  
-default: `'${github.actor}@users.noreply.github.com'`  
-[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### PR_BRANCH_PREFIX
-PullRequest branch prefix.  
-default: `'toc-generator/'`
-
-### PR_BRANCH_NAME
-PullRequest branch name.  
-default: `'update-toc-${PR_ID}'`  
-e.g. `toc-${PR_NUMBER}`  
-[Context variables](#context-variables)
-
-### PR_TITLE
-PullRequest title.  
-default: `'docs: update TOC (${PR_MERGE_REF})'`  
-e.g. `feat: update TOC`  
-[Context variables](#context-variables)
-
-### PR_BODY
-PullRequest body.  
-default:
-```
-## Base PullRequest
-
-${PR_TITLE} (${PR_NUMBER_REF})
-
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_COMMENT_BODY
-PullRequest body for comment.  
-default:
-```
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_CLOSE_MESSAGE
-Message body when closing PullRequest.  
-default: `'This PR is no longer needed because the package looks up-to-date.'`
-
-### TARGET_BRANCH_PREFIX
-Filter by branch name.  
-default: `''`  
-e.g. `'release/'`
-
-### INCLUDE_LABELS
-Labels used to check if the PullRequest has it.  
-default: `''`  
-e.g. `'Label1, Label2'`  
-e.g. 
-```yaml
-INCLUDE_LABELS: |
-  Test Label1
-  Test Label2
-```
+| name | description | default | required | e.g. |
+|:---:|:---|:---:|:---:|:---:|
+|TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
+|TOC_TITLE|TOC Title|`**Table of Contents**`| |`''`|
+|MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
+|FOLDING|Whether to make TOC foldable|`false`| |`true`|
+|COMMIT_MESSAGE|Commit message|`docs: update TOC`|true|`feat: update TOC`|
+|COMMIT_NAME|Git commit name|`${github.actor}`| | |
+|COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
+|PR_BRANCH_PREFIX|PullRequest branch prefix|`toc-generator/`|true| |
+|PR_BRANCH_NAME|PullRequest branch name<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
+|PR_TITLE|PullRequest title<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
+|PR_BODY|PullRequest body<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
+|PR_COMMENT_BODY|PullRequest body for comment<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
+|PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR is no longer needed because the package looks up-to-date.`| | |
+|TARGET_BRANCH_PREFIX|Filter by branch name| | |`release/`|
+|INCLUDE_LABELS|Labels used to check if the PullRequest has it| | |`Label1, Label2`|
+|GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
 ## Action event details
 ### Target event
@@ -221,7 +97,7 @@ INCLUDE_LABELS: |
 - branch name ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 
 ## Addition
-### Commit
+### GITHUB_TOKEN
 The `GITHUB_TOKEN` that is provided as a part of `GitHub Actions` doesn't have authorization to create any successive events.  
 So it won't spawn actions which triggered by push.  
 
@@ -241,8 +117,7 @@ If you want to trigger actions, use a personal access token instead.
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
            with:
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
@@ -257,8 +132,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -275,8 +149,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ### Context variables

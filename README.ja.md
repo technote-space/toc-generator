@@ -17,29 +17,14 @@
 <details>
 <summary>Details</summary>
 
-- [スクリーンショット](#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88)
 - [インストール](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [スクリーンショット](#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88)
 - [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
-  - [TARGET_PATHS](#target_paths)
-  - [TOC_TITLE](#toc_title)
-  - [MAX_HEADER_LEVEL](#max_header_level)
-  - [FOLDING](#folding)
-  - [COMMIT_MESSAGE](#commit_message)
-  - [COMMIT_NAME](#commit_name)
-  - [COMMIT_EMAIL](#commit_email)
-  - [PR_BRANCH_PREFIX](#pr_branch_prefix)
-  - [PR_BRANCH_NAME](#pr_branch_name)
-  - [PR_TITLE](#pr_title)
-  - [PR_BODY](#pr_body)
-  - [PR_COMMENT_BODY](#pr_comment_body)
-  - [PR_CLOSE_MESSAGE](#pr_close_message)
-  - [TARGET_BRANCH_PREFIX](#target_branch_prefix)
-  - [INCLUDE_LABELS](#include_labels)
 - [Action イベント詳細](#action-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E8%A9%B3%E7%B4%B0)
   - [対象イベント](#%E5%AF%BE%E8%B1%A1%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)
   - [Conditions](#conditions)
 - [補足](#%E8%A3%9C%E8%B6%B3)
-  - [コミット](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88)
+  - [GITHUB_TOKEN](#github_token)
   - [プルリクエストの作成](#%E3%83%97%E3%83%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)
@@ -48,9 +33,6 @@
 
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## スクリーンショット
-![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## インストール
 1. 目次の位置を指定 (option)  
@@ -69,137 +51,31 @@
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
    ```
 
+## スクリーンショット
+![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
+
 ## オプション
-### TARGET_PATHS
-対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README*.md'`  
-例：`.`
-
-### TOC_TITLE
-目次タイトル  
-default: `'**Table of Contents**'`  
-例：`''`
-
-### MAX_HEADER_LEVEL
-Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
-default: ``  
-例：`3`
-
-### FOLDING
-目次を折りたたみ式にするかどうか  
-default: `false`  
-例：`'true'`
-
-### COMMIT_MESSAGE
-コミットメッセージ  
-default: `'docs: update TOC'`  
-例：`feat: update TOC`
-
-### COMMIT_NAME
-コミット時に設定する名前  
-default: `'${github.actor}'`  
-[About Github Context](https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### COMMIT_EMAIL
-コミット時に設定するメールアドレス  
-default: `'${github.actor}@users.noreply.github.com'`  
-[About Github Context](https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### PR_BRANCH_PREFIX
-プルリクエストのブランチプリフィックス  
-default: `'toc-generator/'`
-
-### PR_BRANCH_NAME
-プルリクエストのブランチ名  
-default: `'update-toc-${PR_ID}'`  
-例：`toc-${PR_NUMBER}`  
-[Context variables](#context-variables)
-
-### PR_TITLE
-プルリクエストのタイトル  
-default: `'docs: update TOC (${PR_MERGE_REF})'`  
-例：`feat: update TOC`  
-[Context variables](#context-variables)
-
-### PR_BODY
-プルリクエストの本文  
-default:
-```
-## Base PullRequest
-
-${PR_TITLE} (${PR_NUMBER_REF})
-
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_COMMENT_BODY
-プルリクエストの本文（コメント用）  
-default:
-```
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_CLOSE_MESSAGE
-プルリクエストを閉じるときのメッセージ  
-default: `'This PR is no longer needed because the package looks up-to-date.'`
-
-### TARGET_BRANCH_PREFIX
-ブランチ名のフィルタ  
-default: `''`  
-例：`'release/'`
-
-### INCLUDE_LABELS
-プルリクエストに付与されているかチェックするラベル  
-default: `''`  
-例：`'Label1, Label2'`  
-例：
-```yaml
-INCLUDE_LABELS: |
-  Test Label1
-  Test Label2
-```
+| name | description | default | required | e.g. |
+|:---:|:---|:---:|:---:|:---:|
+|TARGET_PATHS|対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
+|TOC_TITLE|目次タイトル|`**Table of Contents**`| |`''`|
+|MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
+|FOLDING|目次を折りたたみ式にするかどうか|`false`| |`true`|
+|COMMIT_MESSAGE|コミットメッセージ|`docs: update TOC`|true|`feat: update TOC`|
+|COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
+|COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| | |
+|PR_BRANCH_PREFIX|プルリクエストのブランチプリフィックス|`toc-generator/`|true| |
+|PR_BRANCH_NAME|プルリクエストのブランチ名<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
+|PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
+|PR_BODY|プルリクエストの本文<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
+|PR_COMMENT_BODY|プルリクエストの本文（コメント用）<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
+|PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR is no longer needed because the package looks up-to-date.`| | |
+|TARGET_BRANCH_PREFIX|ブランチ名のフィルタ| | |`release/`|
+|INCLUDE_LABELS|プルリクエストに付与されているかチェックするラベル| | |`Label1, Label2`|
+|GITHUB_TOKEN|アクセストークン|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
 ## Action イベント詳細
 ### 対象イベント
@@ -220,7 +96,7 @@ INCLUDE_LABELS: |
 - ブランチ名 ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
 
 ## 補足
-### コミット
+### GITHUB_TOKEN
 GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作成する権限がありません。  
 したがって、プッシュによってトリガーされるビルドアクションなどは実行されません。  
 
@@ -240,8 +116,7 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - name: TOC Generator
-           uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v2
            with:
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
@@ -256,8 +131,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -274,8 +148,7 @@ jobs:
    name: TOC Generator
    runs-on: ubuntu-latest
    steps:
-     - name: TOC Generator
-       uses: technote-space/toc-generator@v2
+     - uses: technote-space/toc-generator@v2
 ```
 
 ### Context variables
