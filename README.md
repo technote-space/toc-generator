@@ -75,132 +75,24 @@ e.g. `README.md`
    ```
 
 ## Options
-### TARGET_PATHS
-Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README*.md'`  
-e.g. `.`
-
-### TOC_TITLE
-TOC Title.  
-default: `'**Table of Contents**'`  
-e.g. `''`
-
-### MAX_HEADER_LEVEL
-Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
-default: ``  
-e.g. `3`
-
-### FOLDING
-Whether to make TOC foldable.  
-default: `false`  
-e.g. `'true'`
-
-### COMMIT_MESSAGE
-Commit message.  
-default: `'docs: update TOC'`  
-e.g. `feat: update TOC`
-
-### COMMIT_NAME
-Git commit name.  
-default: `'${github.actor}'`  
-[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### COMMIT_EMAIL
-Git commit email.  
-default: `'${github.actor}@users.noreply.github.com'`  
-[About Github Context](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### PR_BRANCH_PREFIX
-PullRequest branch prefix.  
-default: `'toc-generator/'`
-
-### PR_BRANCH_NAME
-PullRequest branch name.  
-default: `'update-toc-${PR_ID}'`  
-e.g. `toc-${PR_NUMBER}`  
-[Context variables](#context-variables)
-
-### PR_TITLE
-PullRequest title.  
-default: `'docs: update TOC (${PR_MERGE_REF})'`  
-e.g. `feat: update TOC`  
-[Context variables](#context-variables)
-
-### PR_BODY
-PullRequest body.  
-default:
-```
-## Base PullRequest
-
-${PR_TITLE} (${PR_NUMBER_REF})
-
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_COMMENT_BODY
-PullRequest body for comment.  
-default:
-```
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_CLOSE_MESSAGE
-Message body when closing PullRequest.  
-default: `'This PR is no longer needed because the package looks up-to-date.'`
-
-### TARGET_BRANCH_PREFIX
-Filter by branch name.  
-default: `''`  
-e.g. `'release/'`
-
-### INCLUDE_LABELS
-Labels used to check if the PullRequest has it.  
-default: `''`  
-e.g. `'Label1, Label2'`  
-e.g. 
-```yaml
-INCLUDE_LABELS: |
-  Test Label1
-  Test Label2
-```
+| name | description | default | required | e.g. |
+|:---:|:---|:---:|:---:|:---:|
+|TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
+|TOC_TITLE|TOC Title|`**Table of Contents**`| |`''`|
+|MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
+|FOLDING|Whether to make TOC foldable|`false`| |`true`|
+|COMMIT_MESSAGE|Commit message|`docs: update TOC`|true|`feat: update TOC`|
+|COMMIT_NAME|Git commit name|`${github.actor}`| | |
+|COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
+|PR_BRANCH_PREFIX|PullRequest branch prefix|`toc-generator/`|true| |
+|PR_BRANCH_NAME|PullRequest branch name<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
+|PR_TITLE|PullRequest title<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
+|PR_BODY|PullRequest body<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
+|PR_COMMENT_BODY|PullRequest body for comment<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
+|PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR is no longer needed because the package looks up-to-date.`| | |
+|TARGET_BRANCH_PREFIX|Filter by branch name| | |`release/`|
+|INCLUDE_LABELS|Labels used to check if the PullRequest has it| | |`Label1, Label2`|
+|GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
 ## Action event details
 ### Target event

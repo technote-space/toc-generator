@@ -74,132 +74,24 @@
    ```
 
 ## オプション
-### TARGET_PATHS
-対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))  
-default: `'README*.md'`  
-例：`.`
-
-### TOC_TITLE
-目次タイトル  
-default: `'**Table of Contents**'`  
-例：`''`
-
-### MAX_HEADER_LEVEL
-Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))  
-default: ``  
-例：`3`
-
-### FOLDING
-目次を折りたたみ式にするかどうか  
-default: `false`  
-例：`'true'`
-
-### COMMIT_MESSAGE
-コミットメッセージ  
-default: `'docs: update TOC'`  
-例：`feat: update TOC`
-
-### COMMIT_NAME
-コミット時に設定する名前  
-default: `'${github.actor}'`  
-[About Github Context](https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### COMMIT_EMAIL
-コミット時に設定するメールアドレス  
-default: `'${github.actor}@users.noreply.github.com'`  
-[About Github Context](https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#github-context)
-
-### PR_BRANCH_PREFIX
-プルリクエストのブランチプリフィックス  
-default: `'toc-generator/'`
-
-### PR_BRANCH_NAME
-プルリクエストのブランチ名  
-default: `'update-toc-${PR_ID}'`  
-例：`toc-${PR_NUMBER}`  
-[Context variables](#context-variables)
-
-### PR_TITLE
-プルリクエストのタイトル  
-default: `'docs: update TOC (${PR_MERGE_REF})'`  
-例：`feat: update TOC`  
-[Context variables](#context-variables)
-
-### PR_BODY
-プルリクエストの本文  
-default:
-```
-## Base PullRequest
-
-${PR_TITLE} (${PR_NUMBER_REF})
-
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_COMMENT_BODY
-プルリクエストの本文（コメント用）  
-default:
-```
-## Command results
-<details>
-  <summary>Details: </summary>
-
-  ${COMMANDS_OUTPUT}
-
-</details>
-
-## Changed files
-<details>
-  <summary>${FILES_SUMMARY}: </summary>
-
-  ${FILES}
-
-</details>
-
-<hr>
-
-[:octocat: Repo](${ACTION_URL}) | [:memo: Issues](${ACTION_URL}/issues) | [:department_store: Marketplace](${ACTION_MARKETPLACE_URL})
-```
-[Context PR variables](#context-pr-variables)
-
-### PR_CLOSE_MESSAGE
-プルリクエストを閉じるときのメッセージ  
-default: `'This PR is no longer needed because the package looks up-to-date.'`
-
-### TARGET_BRANCH_PREFIX
-ブランチ名のフィルタ  
-default: `''`  
-例：`'release/'`
-
-### INCLUDE_LABELS
-プルリクエストに付与されているかチェックするラベル  
-default: `''`  
-例：`'Label1, Label2'`  
-例：
-```yaml
-INCLUDE_LABELS: |
-  Test Label1
-  Test Label2
-```
+| name | description | default | required | e.g. |
+|:---:|:---|:---:|:---:|:---:|
+|TARGET_PATHS|対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
+|TOC_TITLE|目次タイトル|`**Table of Contents**`| |`''`|
+|MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
+|FOLDING|目次を折りたたみ式にするかどうか|`false`| |`true`|
+|COMMIT_MESSAGE|コミットメッセージ|`docs: update TOC`|true|`feat: update TOC`|
+|COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
+|COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| | |
+|PR_BRANCH_PREFIX|プルリクエストのブランチプリフィックス|`toc-generator/`|true| |
+|PR_BRANCH_NAME|プルリクエストのブランチ名<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
+|PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
+|PR_BODY|プルリクエストの本文<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
+|PR_COMMENT_BODY|プルリクエストの本文（コメント用）<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
+|PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR is no longer needed because the package looks up-to-date.`| | |
+|TARGET_BRANCH_PREFIX|ブランチ名のフィルタ| | |`release/`|
+|INCLUDE_LABELS|プルリクエストに付与されているかチェックするラベル| | |`Label1, Label2`|
+|GITHUB_TOKEN|アクセストークン|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
 ## Action イベント詳細
 ### 対象イベント
