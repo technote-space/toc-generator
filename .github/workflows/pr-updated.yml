@@ -1,6 +1,4 @@
-on:
-  pull_request:
-    types: [opened, synchronize]
+on: pull_request
 
 name: Pull Request updated
 
@@ -70,3 +68,23 @@ jobs:
           BRANCH_PREFIX: release/
           NEXT_VERSION: ${{ env.NEXT_VERSION }}
         if: env.NEXT_VERSION
+
+  checkPublish:
+    name: Check publish
+    runs-on: ubuntu-latest
+    if: "github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/')"
+    steps:
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING::1"
+      - name: Set running flag
+        run: |
+          if [ -z "$NPM_AUTH_TOKEN" ]; then
+            echo "::set-env name=RUNNING::"
+          fi
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - uses: actions/checkout@v2
+        if: env.RUNNING
+      - uses: technote-space/can-npm-publish-action@v1
+        if: env.RUNNING

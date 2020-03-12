@@ -9,6 +9,9 @@ jobs:
     env:
       LINT: 1
     steps:
+      - uses: technote-space/auto-cancel-redundant-job@v1
+        with:
+          EXCLUDE_MERGED: 'true'
       - name: Set running flag
         run: echo "::set-env name=RUNNING::1"
       - uses: actions/checkout@v2
@@ -141,8 +144,9 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Release GitHub Actions
-        uses: technote-space/release-github-actions@v3
+        uses: technote-space/release-github-actions@v4
         with:
+          BRANCH_NAME: 'releases/${MAJOR}, gh-actions'
           OUTPUT_BUILD_INFO_FILENAME: build.json
           TEST_TAG_PREFIX: test/
           ORIGINAL_TAG_PREFIX: original/
@@ -166,9 +170,11 @@ jobs:
           fi
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - uses: actions/checkout@v2
+        if: env.RUNNING
       - name: Set running flag
         run: npx can-npm-publish || echo "::set-env name=RUNNING::"
-        if: matrix.target == 'npm'
+        if: env.RUNNING && matrix.target == 'npm'
       - name: Set running flag
         run: |
           LATEST=`npm view . version`
@@ -178,10 +184,8 @@ jobs:
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: matrix.target == 'gpr'
+        if: env.RUNNING && matrix.target == 'gpr'
 
-      - uses: actions/checkout@v2
-        if: env.RUNNING
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
