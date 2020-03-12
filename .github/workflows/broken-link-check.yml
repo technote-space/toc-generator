@@ -1,0 +1,17 @@
+on:
+  schedule:
+    - cron: 0 0 3 * *
+  repository_dispatch:
+    types: [check-link]
+
+name: Broken Link Check
+jobs:
+  check:
+    name: Broken Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/auto-cancel-redundant-job@v1
+        with:
+          EXCLUDE_MERGED: 'true'
+      - name: Broken Link Check
+        uses: technote-space/broken-link-checker-action@v1

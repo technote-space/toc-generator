@@ -4,11 +4,11 @@ on:
       - master
     types: [closed]
 
-name: Add version tag
+name: Add release tag
 
 jobs:
   tag:
-    name: Add version tag
+    name: Add release tag
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/')
     steps:
@@ -32,6 +32,17 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: `refs/tags/${process.env.NEXT_VERSION}`,
+              sha: context.sha
+            })
+        if: env.NEXT_VERSION
+      - uses: actions/github-script@0.4.0
+        with:
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+          script: |
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/heads/release/next-${process.env.NEXT_VERSION}`,
               sha: context.sha
             })
         if: env.NEXT_VERSION
