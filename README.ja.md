@@ -72,7 +72,7 @@
 |PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
 |PR_BODY|プルリクエストの本文<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
 |PR_COMMENT_BODY|プルリクエストの本文（コメント用）<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
-|PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR is no longer needed because the package looks up-to-date.`| | |
+|PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR has been closed because it is no longer needed.`| | |
 |TARGET_BRANCH_PREFIX|ブランチ名のフィルタ| | |`release/`|
 |INCLUDE_LABELS|プルリクエストに付与されているかチェックするラベル| | |`Label1, Label2`|
 |GITHUB_TOKEN|アクセストークン|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|

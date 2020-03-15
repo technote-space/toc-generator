@@ -102,7 +102,7 @@ describe('getRunnerArguments', () => {
 			prBranchNameForDefaultBranch: '',
 			prBranchPrefix: 'toc-generator/',
 			prBranchPrefixForDefaultBranch: '',
-			prCloseMessage: 'This PR is no longer needed because the package looks up-to-date.',
+			prCloseMessage: 'This PR has been closed because it is no longer needed.',
 			prTitle: 'docs: update TOC (${PR_MERGE_REF})',
 			prTitleForDefaultBranch: '',
 			targetBranchPrefix: '',
