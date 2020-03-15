@@ -73,7 +73,7 @@ e.g. `README.md`
 |PR_TITLE|PullRequest title<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
 |PR_BODY|PullRequest body<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
 |PR_COMMENT_BODY|PullRequest body for comment<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
-|PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR is no longer needed because the package looks up-to-date.`| | |
+|PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR has been closed because it is no longer needed.`| | |
 |TARGET_BRANCH_PREFIX|Filter by branch name| | |`release/`|
 |INCLUDE_LABELS|Labels used to check if the PullRequest has it| | |`Label1, Label2`|
 |GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|

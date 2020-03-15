@@ -124,7 +124,7 @@ inputs:
     required: false
   PR_CLOSE_MESSAGE:
     description: Message body when closing PullRequest.
-    default: 'This PR is no longer needed because the package looks up-to-date.'
+    default: 'This PR has been closed because it is no longer needed.'
     required: false
 
   TARGET_BRANCH_PREFIX:
