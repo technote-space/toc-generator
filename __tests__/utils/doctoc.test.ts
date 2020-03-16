@@ -52,6 +52,7 @@ describe('transformAndSave', () => {
 			{path: resolve(doctocDir, 'README.create2.md')},
 			{path: resolve(doctocDir, 'README.update.md')},
 			{path: resolve(doctocDir, 'README.not.update.md')},
+			{path: resolve(doctocDir, 'README.toc-me.md')},
 		], title)).toEqual({
 			changed: [
 				{
@@ -67,6 +68,11 @@ describe('transformAndSave', () => {
 				{
 					data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.md'), 'utf8'),
 					path: resolve(doctocDir, 'README.update.md'),
+					transformed: true,
+				},
+				{
+					data: fs.readFileSync(resolve(doctocDir, 'expected/README.toc-me.md'), 'utf8'),
+					path: resolve(doctocDir, 'README.toc-me.md'),
 					transformed: true,
 				},
 			],
@@ -133,6 +139,7 @@ describe('executeDoctoc', () => {
 			changed: [
 				resolve(doctocDir, 'README.create1.md'),
 				resolve(doctocDir, 'README.create2.md'),
+				resolve(doctocDir, 'README.toc-me.md'),
 				resolve(doctocDir, 'README.update.md'),
 				resolve(doctocDir, 'expected/README.update.options.md'),
 				resolve(doctocDir, 'expected/README.update.wrap.md'),
@@ -141,6 +148,7 @@ describe('executeDoctoc', () => {
 				resolve(doctocDir, 'README.not.update.md'),
 				resolve(doctocDir, 'expected/README.create1.md'),
 				resolve(doctocDir, 'expected/README.create2.md'),
+				resolve(doctocDir, 'expected/README.toc-me.md'),
 				resolve(doctocDir, 'expected/README.update.md'),
 			],
 		});
@@ -153,6 +161,7 @@ describe('executeDoctoc', () => {
 			changed: [
 				resolve(doctocDir, 'README.create1.md'),
 				resolve(doctocDir, 'README.create2.md'),
+				resolve(doctocDir, 'README.toc-me.md'),
 				resolve(doctocDir, 'README.update.md'),
 			],
 			unchanged: [

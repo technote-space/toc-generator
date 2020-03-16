@@ -6,23 +6,21 @@ import { getInput } from '@actions/core' ;
 import { doctoc } from './doctoc';
 import { ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS } from '../constant';
 
-const {getWorkspace, getArrayInput, replaceAll, getBoolValue} = Utils;
-
 export const replaceDirectory = (message: string): string => {
-	const workDir = resolve(getWorkspace());
+	const workDir = resolve(Utils.getWorkspace());
 	return [
 		{key: ` -C ${workDir}`, value: ''},
 		{key: workDir, value: '[Working Directory]'},
-	].reduce((value, target) => replaceAll(value, target.key, target.value), message);
+	].reduce((value, target) => Utils.replaceAll(value, target.key, target.value), message);
 };
 
-const getTargetPaths = (): Array<string> => getArrayInput('TARGET_PATHS', true).filter(target => target && !target.startsWith('/') && !target.includes('..'));
+const getTargetPaths = (): Array<string> => Utils.getArrayInput('TARGET_PATHS', true).filter(target => target && !target.startsWith('/') && !target.includes('..'));
 
 const getTocTitle = (): string => getInput('TOC_TITLE');
 
 export const isNoTitle = (title: string): boolean => '' === title;
 
-export const isFolding = (title: string): boolean => !isNoTitle(title) && getBoolValue(getInput('FOLDING'));
+export const isFolding = (title: string): boolean => !isNoTitle(title) && Utils.getBoolValue(getInput('FOLDING'));
 
 export const wrapTitle = (title: string): string => isFolding(title) ? `<summary>${title.replace(/^([*_]*)(.+)\1$/, '$2')}</summary>` : title;
 
@@ -69,12 +67,16 @@ export const getRunnerArguments = (): MainArguments => {
 		filterGitStatus: 'M',
 		filterExtensions: ['md'],
 		targetBranchPrefix: getInput('TARGET_BRANCH_PREFIX'),
-		includeLabels: getArrayInput('INCLUDE_LABELS'),
+		includeLabels: Utils.getArrayInput('INCLUDE_LABELS'),
 		targetEvents: TARGET_EVENTS,
 	};
 };
 
 // eslint-disable-next-line no-magic-numbers
-export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(getWorkspace(), path);
+export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
 
 export const cleanPath = (path: string): string => homeExpanded(path).replace(/\s/g, '\\ ');
+
+// to avoid removing space
+const getRawInput          = (name: string): string => String(process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`]);
+export const getArrayInput = (name: string): Array<string> => Utils.uniqueArray(getRawInput(name).split(/\r?\n/).filter(item => item));

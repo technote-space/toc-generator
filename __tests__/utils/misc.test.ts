@@ -13,6 +13,7 @@ import {
 	getEntryPrefix,
 	homeExpanded,
 	cleanPath,
+	getArrayInput,
 } from '../../src/utils/misc';
 import { TARGET_EVENTS } from '../../src/constant';
 
@@ -268,5 +269,15 @@ describe('cleanPath', () => {
 		const spy = jest.spyOn(os, 'homedir').mockImplementation(() => '/home/test');
 		expect(cleanPath('~/t e s t.txt')).toBe('/home/test/t\\ e\\ s\\ t.txt');
 		spy.mockRestore();
+	});
+});
+
+describe('getArrayInput', () => {
+	testEnv(rootDir);
+
+	it('should return array input', () => {
+		expect(getArrayInput('OPENING_COMMENT')).toEqual([
+			'<!-- toc ',
+		]);
 	});
 });
