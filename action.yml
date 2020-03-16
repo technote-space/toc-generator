@@ -30,6 +30,14 @@ inputs:
   ENTRY_PREFIX:
     description: Entry prefix.
     required: false
+  OPENING_COMMENT:
+    description: Opening comment (for other than except DocToc)
+    required: false
+    default: '<!-- toc '
+  CLOSING_COMMENT:
+    description: Closing comment (for other than except DocToc)
+    required: false
+    default: '<!-- tocstop '
 
   COMMIT_MESSAGE:
     description: Commit message.
