@@ -31,11 +31,11 @@ inputs:
     description: Entry prefix.
     required: false
   OPENING_COMMENT:
-    description: Opening comment (for other than except DocToc)
+    description: Opening comment (for other than DocToc)
     required: false
     default: '<!-- toc '
   CLOSING_COMMENT:
-    description: Closing comment (for other than except DocToc)
+    description: Closing comment (for other than DocToc)
     required: false
     default: '<!-- tocstop '
 
