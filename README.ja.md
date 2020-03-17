@@ -75,6 +75,8 @@
 |PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR has been closed because it is no longer needed.`| | |
 |TARGET_BRANCH_PREFIX|ブランチ名のフィルタ| | |`release/`|
 |INCLUDE_LABELS|プルリクエストに付与されているかチェックするラベル| | |`Label1, Label2`|
+|OPENING_COMMENT|開始コメント (DocToc以外のため)|`<!-- toc `| | |
+|CLOSING_COMMENT|終了コメント (DocToc以外のため)|`<!-- tocstop `| | |
 |GITHUB_TOKEN|アクセストークン|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
 ## Action イベント詳細

@@ -76,6 +76,8 @@ e.g. `README.md`
 |PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR has been closed because it is no longer needed.`| | |
 |TARGET_BRANCH_PREFIX|Filter by branch name| | |`release/`|
 |INCLUDE_LABELS|Labels used to check if the PullRequest has it| | |`Label1, Label2`|
+|OPENING_COMMENT|Opening comment (for other than DocToc)|`<!-- toc `| | |
+|CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| | |
 |GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
 ## Action event details
