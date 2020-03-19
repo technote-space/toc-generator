@@ -12,6 +12,9 @@ jobs:
     name: Update npm dependencies
     runs-on: ubuntu-latest
     steps:
+      - uses: technote-space/load-config-action@v1
+        with:
+          CONFIG_FILENAME: workflow-settings.json
       - uses: technote-space/auto-cancel-redundant-job@v1
         with:
           EXCLUDE_MERGED: 'true'
@@ -49,9 +52,7 @@ jobs:
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
-          EXCLUDE_MESSAGES: |
-            update package version
-            update packages
+          EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
         if: "env.RUNNING && ! startsWith(github.head_ref, 'release/v')"
       - name: Get version
         run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"

@@ -17,13 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
     steps:
+      - uses: technote-space/load-config-action@v1
+        with:
+          CONFIG_FILENAME: workflow-settings.json
       - uses: technote-space/pr-commit-body-action@v1
         with:
-          EXCLUDE_MESSAGES: |
-            trigger workflow
-            update TOC
-            update package version
-            update wp version
+          EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
           TITLE: '## Changes'
           LINK_ISSUE_KEYWORD: ${{ (startsWith(github.head_ref, 'release/') && 'closes') || '' }}
           FILTER_PR: true
@@ -33,18 +32,22 @@ jobs:
     runs-on: ubuntu-latest
     if: "github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/') && ! startsWith(github.head_ref, 'release/v')"
     steps:
+      - uses: technote-space/load-config-action@v1
+        with:
+          CONFIG_FILENAME: workflow-settings.json
       - uses: technote-space/release-type-action@v1
         with:
+          EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          EXCLUDE_MESSAGES: |
-            update package version
-            update packages
 
   checkVersion:
     name: Check package version
     runs-on: ubuntu-latest
     if: "github.event.action == 'synchronize' && github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/') && ! startsWith(github.head_ref, 'release/v')"
     steps:
+      - uses: technote-space/load-config-action@v1
+        with:
+          CONFIG_FILENAME: workflow-settings.json
       - name: Set running flag
         run: echo "::set-env name=RUNNING::1"
       - uses: actions/checkout@v2
@@ -57,9 +60,7 @@ jobs:
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
-          EXCLUDE_MESSAGES: |
-            update package version
-            update packages
+          EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
         if: env.RUNNING
       - name: Check package version
         uses: technote-space/package-version-check-action@v1

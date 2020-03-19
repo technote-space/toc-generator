@@ -1,0 +1,9 @@
+{
+  "EXCLUDE_MESSAGES": [
+    "update package version",
+    "update packages",
+    "update wp version",
+    "trigger workflow",
+    "update TOC"
+  ]
+}
