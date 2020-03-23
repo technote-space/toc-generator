@@ -10,14 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/')
     steps:
+      - uses: technote-space/load-config-action@v1
+        with:
+          CONFIG_FILENAME: workflow-settings.json
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
-          EXCLUDE_MESSAGES: |
-            update package version
-            update packages
+          EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
         if: "! startsWith(github.head_ref, 'release/v') && (contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies'))"
       - name: Get version
         run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
