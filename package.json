@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "@actions/core": "^1.2.3",
-    "@technote-space/github-action-pr-helper": "^1.5.4",
+    "@technote-space/github-action-pr-helper": "^1.5.7",
     "doctoc": "^1.4.0",
     "fast-glob": "^3.2.2",
     "update-section": "^0.3.3"
@@ -36,9 +36,9 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@technote-space/github-action-test-helper": "^0.3.1",
-    "@technote-space/release-github-actions-cli": "^1.5.2",
+    "@technote-space/release-github-actions-cli": "^1.5.3",
     "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.2",
+    "@types/node": "^13.9.3",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "eslint": "^6.8.0",
