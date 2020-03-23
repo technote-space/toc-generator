@@ -23,7 +23,7 @@ jobs:
       - uses: technote-space/pr-commit-body-action@v1
         with:
           EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
-          TITLE: '## Changes'
+          TITLE: ${{ env.PR_BODY_TITLE }}
           LINK_ISSUE_KEYWORD: ${{ (startsWith(github.head_ref, 'release/') && 'closes') || '' }}
           FILTER_PR: true
 

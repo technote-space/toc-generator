@@ -5,5 +5,13 @@
     "update wp version",
     "trigger workflow",
     "update TOC"
-  ]
+  ],
+  "PROJECT": "Backlog",
+  "ISSUE_COLUMN": "To do",
+  "PR_COLUMN": "In progress",
+  "PR_BODY_TITLE": "## Changes",
+  "TOC_FOLDING": "1",
+  "TOC_MAX_HEADER_LEVEL": "3",
+  "TOC_TITLE": "Details",
+  "BRANCH_PREFIX": "release/"
 }
