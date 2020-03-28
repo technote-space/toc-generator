@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/filter-github-action",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Helper to filter GitHub Action.",
   "author": {
     "name": "Technote",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.3.1",
     "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.1",
+    "@types/node": "^13.9.2",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "eslint": "^6.8.0",

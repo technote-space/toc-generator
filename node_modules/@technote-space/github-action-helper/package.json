@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-helper",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Helper to filter GitHub Action.",
   "author": {
     "name": "Technote",
@@ -36,15 +36,15 @@
     "@commitlint/config-conventional": "^8.3.4",
     "@technote-space/github-action-test-helper": "^0.3.1",
     "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.1",
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
+    "@types/node": "^13.9.2",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
     "eslint": "^6.8.0",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "jest-circus": "^25.1.0",
     "lint-staged": "^10.0.8",
-    "nock": "^12.0.2",
+    "nock": "^12.0.3",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
