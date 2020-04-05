@@ -18,6 +18,10 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 <summary>Details</summary>
 
 - [Installation](#installation)
+- [Test1](#test1)
+  - [test1-1](#test1-1)
+  - [test1-2](#test1-2)
+- [Test2](#test2)
 - [Screenshot](#screenshot)
 - [Options](#options)
 - [Action event details](#action-event-details)
