@@ -18,6 +18,10 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 <summary>Details</summary>
 
 - [Installation](#installation)
+- [Test1](#test1)
+  - [test1-1](#test1-1)
+  - [test1-2](#test1-2)
+- [Test2](#test2)
 - [Screenshot](#screenshot)
 - [Options](#options)
 - [Action event details](#action-event-details)
@@ -81,8 +85,8 @@ e.g. `README.md`
 |PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR has been closed because it is no longer needed.`| | |
 |TARGET_BRANCH_PREFIX|Filter by branch name| | |`release/`|
 |INCLUDE_LABELS|Labels used to check if the PullRequest has it| | |`Label1, Label2`|
-|OPENING_COMMENT|Opening comment (for other than DocToc)|`<!-- toc `| | |
-|CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| | |
+|OPENING_COMMENT|Opening comment (for other than DocToc)|`<!-- START doctoc `| | |
+|CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- END doctoc `| | |
 |GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
 ## Action event details
