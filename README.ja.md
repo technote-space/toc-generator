@@ -92,10 +92,10 @@
 ### Conditions
 #### condition1
 - ブランチへのプッシュ (タグのプッシュではない)
-  - ブランチ名 ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
+  - ブランチ名 ([`TARGET_BRANCH_PREFIX`](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3))
 #### condition2
-- [指定したラベル](#include_labels)が付与されているかどうか
-- ブランチ名 ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
+- 指定したラベルが付与されているかどうか ([`INCLUDE_LABELS`](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3))
+- ブランチ名 ([`TARGET_BRANCH_PREFIX`](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3))
 
 ## 補足
 ### GITHUB_TOKEN
