@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-pr-helper",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "PullRequest Helper for GitHub Actions.",
   "author": {
     "name": "Technote",
@@ -36,17 +36,17 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@technote-space/github-action-test-helper": "^0.3.3",
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.5",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "eslint": "^6.8.0",
     "husky": "^4.2.3",
-    "jest": "^25.2.4",
-    "jest-circus": "^25.2.4",
-    "lint-staged": "^10.1.0",
+    "jest": "^25.2.7",
+    "jest-circus": "^25.2.7",
+    "lint-staged": "^10.1.1",
     "nock": "^12.0.3",
-    "ts-jest": "^25.3.0",
+    "ts-jest": "^25.3.1",
     "typescript": "^3.8.3"
   },
   "publishConfig": {
