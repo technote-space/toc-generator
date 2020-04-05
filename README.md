@@ -93,10 +93,10 @@ e.g. `README.md`
 ### Conditions
 #### condition1
 - push to branch (not tag)
-  - branch name ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
+  - branch name ([`TARGET_BRANCH_PREFIX`](#options))
 #### condition2
-- [specified labels](#include_labels) included?
-- branch name ([`TARGET_BRANCH_PREFIX`](#target_branch_prefix))
+- specified labels included? ([`INCLUDE_LABELS`](#options))
+- branch name ([`TARGET_BRANCH_PREFIX`](#options))
 
 ## Addition
 ### GITHUB_TOKEN

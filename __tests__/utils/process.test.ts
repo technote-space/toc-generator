@@ -112,17 +112,13 @@ describe('main', () => {
 			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
 			.get('/repos/hello/world/pulls?sort=created&direction=asc')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
-			.get('/repos/hello/world/pulls?sort=created&direction=asc&head=hello%3Amaster')
-			.reply(200, () => [])
-			.get('/repos/octocat/Hello-World')
-			.reply(200, () => getApiFixture(fixturesDir, 'repos.get'))
-			.get('/repos/octocat/Hello-World/pulls?head=octocat%3Atoc-generator%2Fclose%2Ftest')
+			.get('/repos/hello/world/pulls?head=hello%3Atoc-generator%2Fclose%2Ftest')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.list'))
-			.post('/repos/octocat/Hello-World/issues/1347/comments')
+			.post('/repos/hello/world/issues/1347/comments')
 			.reply(201, () => getApiFixture(fixturesDir, 'issues.comment.create'))
-			.patch('/repos/octocat/Hello-World/pulls/1347')
+			.patch('/repos/hello/world/pulls/1347')
 			.reply(200, () => getApiFixture(fixturesDir, 'pulls.update'))
-			.delete('/repos/octocat/Hello-World/git/refs/heads/toc-generator/close/test')
+			.delete('/repos/hello/world/git/refs/heads/toc-generator/close/test')
 			.reply(204, () => getApiFixture(fixturesDir, 'pulls.update'));
 
 		await main(getMainArgs({
@@ -131,7 +127,7 @@ describe('main', () => {
 		}));
 
 		stdoutCalledWith(mockStdout, [
-			'::group::Target PullRequest Ref [new-topic]',
+			'::group::Target PullRequest Ref [master]',
 			'> Fetching...',
 			'[command]git init \'.\'',
 			'  >> stdout',
@@ -145,13 +141,13 @@ describe('main', () => {
 			'  >> stdout',
 			'> remote branch [toc-generator/close/test] not found.',
 			'> now branch: ',
-			'> Cloning [new-topic] from the remote repo...',
+			'> Cloning [master] from the remote repo...',
 			'[command]git init \'.\'',
 			'  >> stdout',
 			'[command]git remote add origin',
-			'[command]git fetch --no-tags origin \'refs/heads/new-topic:refs/remotes/origin/new-topic\'',
+			'[command]git fetch --no-tags origin \'refs/heads/master:refs/remotes/origin/master\'',
 			'  >> stdout',
-			'[command]git checkout -b new-topic origin/new-topic',
+			'[command]git checkout -b master origin/master',
 			'  >> stdout',
 			'[command]git checkout -b toc-generator/close/test',
 			'  >> stdout',
@@ -177,14 +173,14 @@ describe('main', () => {
 			'[command]git status --short -uno',
 			'> There is no diff.',
 			'> Checking references diff...',
-			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/new-topic:refs/remotes/origin/new-topic',
-			'[command]git diff \'HEAD..origin/new-topic\' --name-only \'--diff-filter=M\'',
+			'[command]git fetch --prune --no-recurse-submodules origin +refs/heads/master:refs/remotes/origin/master',
+			'[command]git diff \'HEAD..origin/master\' --name-only \'--diff-filter=M\'',
 			'> Closing PullRequest... [toc-generator/close/test]',
 			'> Deleting reference... [refs/heads/toc-generator/close/test]',
 			'::endgroup::',
 			'::group::Total:2  Succeeded:1  Failed:0  Skipped:1',
-			'> \x1b[32;40;0m✔\x1b[0m\t[new-topic] has been closed because there is no reference diff',
-			'> \x1b[33;40;0m→\x1b[0m\t[master] duplicated (toc-generator/close/test)',
+			'> \x1b[33;40;0m→\x1b[0m\t[octocat:new-topic] PR from fork',
+			'> \x1b[32;40;0m✔\x1b[0m\t[master] has been closed because there is no reference diff',
 			'::endgroup::',
 		]);
 	});
