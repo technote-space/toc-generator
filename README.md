@@ -55,6 +55,11 @@ e.g. `README.md`
          - uses: technote-space/toc-generator@v2
    ```
 
+## Test1
+### test1-1
+### test1-2
+## Test2
+
 ## Screenshot
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
