@@ -9,8 +9,8 @@ const matchesStart = (line: string): boolean => Utils.getRegExp(OPENING_COMMENT)
 const matchesEnd   = (line: string): boolean => Utils.getRegExp(CLOSING_COMMENT).test(line);
 
 export const normalizeMarkerComment = (contents: string): string => {
-	const replacedOpening = getArrayInput('OPENING_COMMENT').reduce((acc, comment) => Utils.replaceAll(acc, Utils.getRegExp(comment), OPENING_COMMENT), contents);
-	return getArrayInput('CLOSING_COMMENT').reduce((acc, comment) => Utils.replaceAll(acc, Utils.getRegExp(comment), CLOSING_COMMENT), replacedOpening);
+	const replacedOpening = getArrayInput('OPENING_COMMENT').reduce((acc, comment) => acc.split('\n').map(line => line.replace(Utils.getPrefixRegExp(comment), OPENING_COMMENT)).join('\n'), contents);
+	return getArrayInput('CLOSING_COMMENT').reduce((acc, comment) => acc.split('\n').map(line => line.replace(Utils.getPrefixRegExp(comment), CLOSING_COMMENT)).join('\n'), replacedOpening);
 };
 
 export const transformWithWrap = (path: string, title: string): { transformed: boolean; path: string; data?: string } => {
