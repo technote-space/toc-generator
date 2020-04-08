@@ -9,6 +9,7 @@ jobs:
     if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
     name: TOC Generator
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
       - uses: technote-space/load-config-action@v1
         with:

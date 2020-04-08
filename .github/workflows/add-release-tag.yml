@@ -2,6 +2,7 @@ on:
   pull_request:
     branches:
       - master
+      - develop/v*
     types: [closed]
 
 name: Add release tag
@@ -10,6 +11,7 @@ jobs:
   tag:
     name: Add release tag
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     if: github.event.pull_request.merged == true && github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/')
     steps:
       - uses: technote-space/load-config-action@v1

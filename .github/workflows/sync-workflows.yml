@@ -9,9 +9,10 @@ jobs:
   release:
     name: Sync workflows
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Sync workflows
-        uses: technote-space/create-pr-action@v1
+        uses: technote-space/create-pr-action@v2
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           EXECUTE_COMMANDS: |
