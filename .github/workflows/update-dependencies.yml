@@ -11,6 +11,8 @@ jobs:
   update:
     name: Update npm dependencies
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: "! startsWith(github.head_ref, 'release/v')"
     steps:
       - uses: technote-space/load-config-action@v1
         with:

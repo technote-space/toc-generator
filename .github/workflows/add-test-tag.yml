@@ -8,6 +8,7 @@ jobs:
   tag:
     name: Add test tag
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/')
     steps:
       - uses: technote-space/load-config-action@v1

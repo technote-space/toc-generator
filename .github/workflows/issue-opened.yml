@@ -8,6 +8,7 @@ jobs:
   assign:
     name: Assign issues to project
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
       - uses: technote-space/load-config-action@v1
         with:
@@ -20,5 +21,6 @@ jobs:
   assignAuthor:
     name: Assign author to issue
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
       - uses: technote-space/assign-author@v1
