@@ -9,6 +9,7 @@ jobs:
   release:
     name: Sync workflows
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Sync workflows
         uses: technote-space/create-pr-action@v1
