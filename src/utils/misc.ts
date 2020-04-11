@@ -69,6 +69,7 @@ export const getRunnerArguments = (): MainArguments => {
 		targetBranchPrefix: getInput('TARGET_BRANCH_PREFIX'),
 		includeLabels: Utils.getArrayInput('INCLUDE_LABELS'),
 		targetEvents: TARGET_EVENTS,
+		notCreatePr: !Utils.getBoolValue(getInput('CREATE_PR')),
 	};
 };
 
