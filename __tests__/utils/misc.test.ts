@@ -49,6 +49,7 @@ describe('getRunnerArguments', () => {
 			commitEmail: '',
 			filterExtensions: [
 				'md',
+				'markdown',
 			],
 			filterGitStatus: 'M',
 			includeLabels: [],
@@ -145,6 +146,7 @@ describe('getRunnerArguments', () => {
 			executeCommands: [],
 			filterExtensions: [
 				'md',
+				'markdown',
 			],
 			filterGitStatus: 'M',
 			includeLabels: [
