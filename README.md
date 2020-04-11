@@ -68,6 +68,7 @@ e.g. `README.md`
 |COMMIT_MESSAGE|Commit message|`docs: update TOC`|true|`feat: update TOC`|
 |COMMIT_NAME|Git commit name|`${github.actor}`| | |
 |COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
+|CREATE_PR|Whether to create PullRequest|`true`| |`false`|
 |PR_BRANCH_PREFIX|PullRequest branch prefix|`toc-generator/`|true| |
 |PR_BRANCH_NAME|PullRequest branch name<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
 |PR_TITLE|PullRequest title<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
@@ -125,7 +126,8 @@ If you want to trigger actions, use a personal access token instead.
    ```
 
 ### Create PullRequest
-If you set `pull_request` event like following yaml, changes will be committed to PullRequest.  
+If you set `CREATE_PR` to `true` (default) and set `pull_request` event, changes will be committed to PullRequest.  
+
 ```yaml
 on: pull_request
 name: TOC Generator

@@ -49,9 +49,11 @@ describe('getRunnerArguments', () => {
 			commitEmail: '',
 			filterExtensions: [
 				'md',
+				'markdown',
 			],
 			filterGitStatus: 'M',
 			includeLabels: [],
+			notCreatePr: false,
 			prBody: [
 				'## Base PullRequest',
 				'',
@@ -131,6 +133,7 @@ describe('getRunnerArguments', () => {
 		process.env.INPUT_DELETE_PACKAGE           = '1';
 		process.env.INPUT_INCLUDE_LABELS           = 'label1, label2\nlabel3';
 		process.env.INPUT_TARGET_PATHS             = '/';
+		process.env.INPUT_CREATE_PR                = 'false';
 
 		const args = getRunnerArguments();
 		delete args.logger;
@@ -145,8 +148,10 @@ describe('getRunnerArguments', () => {
 			executeCommands: [],
 			filterExtensions: [
 				'md',
+				'markdown',
 			],
 			filterGitStatus: 'M',
+			notCreatePr: true,
 			includeLabels: [
 				'label1',
 				'label2',

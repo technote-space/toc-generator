@@ -65,10 +65,11 @@ export const getRunnerArguments = (): MainArguments => {
 		prBodyForComment: getInput('PR_COMMENT_BODY'),
 		prCloseMessage: getInput('PR_CLOSE_MESSAGE'),
 		filterGitStatus: 'M',
-		filterExtensions: ['md'],
+		filterExtensions: ['md', 'markdown'],
 		targetBranchPrefix: getInput('TARGET_BRANCH_PREFIX'),
 		includeLabels: Utils.getArrayInput('INCLUDE_LABELS'),
 		targetEvents: TARGET_EVENTS,
+		notCreatePr: !Utils.getBoolValue(getInput('CREATE_PR')),
 	};
 };
 

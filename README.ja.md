@@ -67,6 +67,7 @@
 |COMMIT_MESSAGE|コミットメッセージ|`docs: update TOC`|true|`feat: update TOC`|
 |COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
 |COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| | |
+|CREATE_PR|プルリクエストを作成するかどうか|`true`| |`false`|
 |PR_BRANCH_PREFIX|プルリクエストのブランチプリフィックス|`toc-generator/`|true| |
 |PR_BRANCH_NAME|プルリクエストのブランチ名<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
 |PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
@@ -124,7 +125,8 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
    ```
 
 ### プルリクエストの作成
-下のyamlのように`pull_request`イベントを設定した場合、変更はプルリクエストにコミットされます。  
+`CREATE_PR` に `true` (default) を設定 かつ `pull_request` イベントを設定した場合は、変更はプルリクエストにコミットされます。  
+
 ```yaml
 on: pull_request
 name: TOC Generator

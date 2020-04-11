@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Set variables
+        run: |
+          echo "::set-env name=MINUTE::$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $(({} % 60))')"
+          echo "::set-env name=HOUR::$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $(({} % 24))')"
+          echo "::set-env name=DAY::$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $(({} % 7))')"
+
       - name: Sync workflows
         uses: technote-space/create-pr-action@v2
         with:
@@ -21,7 +27,7 @@ jobs:
             git clone --depth=1 https://github.com/technote-space/github-actions-workflows.git .github/workflows/.tmp/workflows
 
             bash .github/workflows/.tmp/workflows/gh-actions/copy.sh
-            sed -i 's/cron:.\+$/cron: 0 3 * * 2,6/' .github/workflows/update-dependencies.yml
+            sed -i "s/cron:.\+$/cron: ${MINUTE} ${HOUR} * * ${DAY}/" .github/workflows/update-dependencies.yml
 
             rm -rdf .github/workflows/.tmp
           COMMIT_MESSAGE: 'chore: sync workflows'
