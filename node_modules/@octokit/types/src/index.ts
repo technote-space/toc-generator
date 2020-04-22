@@ -17,3 +17,4 @@ export * from "./StrategyInterface";
 export * from "./Url";
 export * from "./VERSION";
 export * from "./GetResponseTypeFromEndpointMethod";
+export * from "./generated/Endpoints";
