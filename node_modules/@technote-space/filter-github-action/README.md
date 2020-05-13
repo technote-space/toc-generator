@@ -97,7 +97,7 @@ console.log( isTargetLabels( includes, excludes, context ) );
 ### Ignore check
 ```
 with:
-  IGNORE_CONTEXT_CHECK: true
+  IGNORE_CONTEXT_CHECK: 1
 ```
 
 ## Author
