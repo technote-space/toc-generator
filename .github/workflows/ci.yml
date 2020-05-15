@@ -56,11 +56,11 @@ jobs:
   cover:
     name: Coverage
     needs: eslint
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     timeout-minutes: 10
     strategy:
       matrix:
-        node: ['11', '12']
+        os: [ubuntu-latest, ubuntu-16.04, macos-latest]
     steps:
       - name: Set running flag
         run: echo "::set-env name=RUNNING::1"
@@ -83,13 +83,13 @@ jobs:
         run: echo "::set-env name=RUNNING::"
         if: "! env.GIT_DIFF"
       - name: Set running flag
-        if: "matrix.node == '12' && ! startsWith(github.ref, 'refs/tags/') && github.event.base_ref == format('refs/heads/{0}', github.event.repository.default_branch)"
+        if: "matrix.os == 'ubuntu-latest' && ! startsWith(github.ref, 'refs/tags/') && github.event.base_ref == format('refs/heads/{0}', github.event.repository.default_branch)"
         run: echo "::set-env name=RUNNING::1"
       - name: Set running flag
-        if: "matrix.node == '12' && ! startsWith(github.ref, 'refs/tags/') && startsWith(github.base_ref, 'refs/heads/develop/v')"
+        if: "matrix.os == 'ubuntu-latest' && ! startsWith(github.ref, 'refs/tags/') && startsWith(github.base_ref, 'refs/heads/develop/v')"
         run: echo "::set-env name=RUNNING::1"
       - name: Set running flag
-        if: matrix.node == '12' && startsWith(github.ref, 'refs/tags/v')
+        if: matrix.os == 'ubuntu-latest' && startsWith(github.ref, 'refs/tags/v')
         run: echo "::set-env name=RUNNING::1"
       - name: Set running flag
         run: |
@@ -97,11 +97,6 @@ jobs:
             echo "::set-env name=RUNNING::"
           fi
 
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-        if: env.RUNNING
       - name: Get Yarn Cache Directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -128,7 +123,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           COVERAGE_FILE: ./coverage/lcov.info
-        if: env.RUNNING && matrix.node == '12'
+        if: env.RUNNING && matrix.os == 'ubuntu-latest'
 
   release:
     name: Release GitHub Actions
