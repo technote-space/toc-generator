@@ -760,9 +760,9 @@
     universal-user-agent "^5.0.0"
 
 "@octokit/rest@^16.43.1":
-  version "16.43.1"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.43.1.tgz#3b11e7d1b1ac2bbeeb23b08a17df0b20947eda6b"
-  integrity sha512-gfFKwRT/wFxq5qlNjnW2dh+qh74XgTQ2B179UX5K1HYCluioWj8Ndbgqw2PVqa1NnVJkGHp2ovMpVn/DImlmkw==
+  version "16.43.2"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.43.2.tgz#c53426f1e1d1044dee967023e3279c50993dd91b"
+  integrity sha512-ngDBevLbBTFfrHZeiS7SAMAZ6ssuVmXuya+F/7RaVvlysgGa1JKJkKWY+jV6TCJYcW0OALfJ7nTIGXcBXzycfQ==
   dependencies:
     "@octokit/auth-token" "^2.4.0"
     "@octokit/plugin-paginate-rest" "^1.1.1"
@@ -825,12 +825,12 @@
     "@actions/github" "^3.0.0"
 
 "@technote-space/github-action-helper@^2.0.10":
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-2.0.10.tgz#35ef805ba946e4fef0cd4e34f58ed979dbb51832"
-  integrity sha512-vFciyc2+w0QuSNmrl6IBONsu3wGbBMLSL9O8MkOWq3TnqRJDjkbiPozxmhxJu8gxPkc5tLKqzF0g6llue0a6pg==
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-2.0.11.tgz#c8d968b0ab17575629f66ac3113c82008d8530db"
+  integrity sha512-dTNlA4muJDDLcYZ7pXd7ZwPJnI0MBEMkaZVSy4dwCeyqY3zlHWji/oE4lZBDHNsjuueY+6jfJFY0ZRPNRN0T/A==
   dependencies:
     "@actions/core" "^1.2.4"
-    "@actions/github" "^2.2.0"
+    "@actions/github" "^3.0.0"
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
@@ -865,9 +865,9 @@
     js-yaml "^3.14.0"
 
 "@technote-space/release-github-actions@^6.0.5":
-  version "6.0.6"
-  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-6.0.6.tgz#f76440972afbede52eda520d361cd06d34b5aef1"
-  integrity sha512-Cvv50YCGlfJEMf+/1AfdSBrFa+JtplTnCZIwpDfkg942Wq/0MYab27eUeoHwSYLskgn3rcMgsZE+2B+k8FvJTg==
+  version "6.0.7"
+  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-6.0.7.tgz#69c575cf34ee31b4d95ccd99e751d83fb19033b7"
+  integrity sha512-/vh7swx3GEuwWR0eSkD2MLrwzvcYwEmJ9JcTR92nnKCxEWUVGUbAIQfD+ZbPKsRZBWlsr6aFG/7VZDHWkZ6ijw==
   dependencies:
     "@actions/core" "^1.2.4"
     "@actions/github" "^3.0.0"
@@ -964,9 +964,9 @@
     "@types/istanbul-lib-report" "*"
 
 "@types/jest@^26.0.0":
-  version "26.0.0"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.0.tgz#a6d7573dffa9c68cbbdf38f2e0de26f159e11134"
-  integrity sha512-/yeMsH9HQ1RLORlXAwoLXe8S98xxvhNtUz3yrgrwbaxYjT+6SFPZZRksmRKRA6L5vsUtSHeN71viDOTTyYAD+g==
+  version "26.0.3"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.3.tgz#79534e0e94857171c0edc596db0ebe7cb7863251"
+  integrity sha512-v89ga1clpVL/Y1+YI0eIu1VMW+KU7Xl8PhylVtDKVWaSUHBHYPLXMQGBdrpHewaKoTvlXkksbYqPgz8b4cmRZg==
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
@@ -982,9 +982,9 @@
   integrity sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
 
 "@types/node@*", "@types/node@>= 8", "@types/node@^14.0.13":
-  version "14.0.13"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.13.tgz#ee1128e881b874c371374c1f72201893616417c9"
-  integrity sha512-rouEWBImiRaSJsVA+ITTFM6ZxibuAlTuNOCyxVbwreu6k6+ujs7DfnU9o+PShFhET78pMBl3eH+AGSI5eOTkPA==
+  version "14.0.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.14.tgz#24a0b5959f16ac141aeb0c5b3cd7a15b7c64cbce"
+  integrity sha512-syUgf67ZQpaJj01/tRTknkMNoBBLWJOBODF0Zm4NrXmiSuxjymFrxnTu1QVYRubhVkRcZLYZG8STTwJRdVm/WQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -3295,9 +3295,9 @@ jest-mock@^26.1.0:
     "@jest/types" "^26.1.0"
 
 jest-pnp-resolver@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.1.tgz#ecdae604c077a7fbc70defb6d517c3c1c898923a"
-  integrity sha512-pgFw2tm54fzgYvc/OHrnysABEObZCUNFnhjoRjaVOCN8NYc032/gVjPaHD4Aq6ApkSieWtfKAFQtmDKAmhupnQ==
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.2.tgz#b704ac0ae028a89108a4d040b3f919dfddc8e33c"
+  integrity sha512-olV41bKSMm8BdnuMsewT4jqlZ8+3TCARAXjZGT9jcoSnrfUnRCqnMoF9XEeoWjbzObpqF9dRhHQj0Xb9QdF6/w==
 
 jest-regex-util@^26.0.0:
   version "26.0.0"
