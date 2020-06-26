@@ -1,17 +1,17 @@
-import { resolve, join } from 'path';
-import { homedir } from 'os';
-import { Utils, Logger } from '@technote-space/github-action-helper';
-import { ExecuteTask, MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
-import { getInput } from '@actions/core' ;
-import { doctoc } from './doctoc';
-import { ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS } from '../constant';
+import {resolve, join} from 'path';
+import {homedir} from 'os';
+import {Utils, Logger} from '@technote-space/github-action-helper';
+import {ExecuteTask, MainArguments} from '@technote-space/github-action-pr-helper/dist/types';
+import {getInput} from '@actions/core' ;
+import {doctoc} from './doctoc';
+import {ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS} from '../constant';
 
 export const replaceDirectory = (message: string): string => {
-	const workDir = resolve(Utils.getWorkspace());
-	return [
-		{key: ` -C ${workDir}`, value: ''},
-		{key: workDir, value: '[Working Directory]'},
-	].reduce((value, target) => Utils.replaceAll(value, target.key, target.value), message);
+  const workDir = resolve(Utils.getWorkspace());
+  return [
+    {key: ` -C ${workDir}`, value: ''},
+    {key: workDir, value: '[Working Directory]'},
+  ].reduce((value, target) => Utils.replaceAll(value, target.key, target.value), message);
 };
 
 const getTargetPaths = (): Array<string> => Utils.getArrayInput('TARGET_PATHS', true).filter(target => target && !target.startsWith('/') && !target.includes('..'));
@@ -31,46 +31,46 @@ export const getMaxHeaderLevel = (): number | undefined => /^\d+$/.test(getInput
 export const getEntryPrefix = (): string => getInput('ENTRY_PREFIX');
 
 const getExecuteCommands = (logger: Logger): Array<ExecuteTask> => {
-	const paths = getTargetPaths();
-	if (!paths.length) {
-		logger.warn('There is no valid target. Please check if [TARGET_PATHS] is set correctly.');
-		return [];
-	}
+  const paths = getTargetPaths();
+  if (!paths.length) {
+    logger.warn('There is no valid target. Please check if [TARGET_PATHS] is set correctly.');
+    return [];
+  }
 
-	const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
+  const title = getTocTitle().replace('\'', '\\\'').replace('"', '\\"');
 
-	return [doctoc(paths, title, logger)];
+  return [doctoc(paths, title, logger)];
 };
 
 export const getRunnerArguments = (): MainArguments => {
-	const logger = new Logger(replaceDirectory);
-	return {
-		rootDir: resolve(__dirname, '../..'),
-		logger: logger,
-		actionName: ACTION_NAME,
-		actionOwner: ACTION_OWNER,
-		actionRepo: ACTION_REPO,
-		executeCommands: getExecuteCommands(logger),
-		commitMessage: getInput('COMMIT_MESSAGE'),
-		commitName: getInput('COMMIT_NAME'),
-		commitEmail: getInput('COMMIT_EMAIL'),
-		prBranchPrefix: getInput('PR_BRANCH_PREFIX'),
-		prBranchName: getInput('PR_BRANCH_NAME'),
-		prTitle: getInput('PR_TITLE'),
-		prBody: getInput('PR_BODY'),
-		prBranchPrefixForDefaultBranch: getInput('PR_DEFAULT_BRANCH_PREFIX'),
-		prBranchNameForDefaultBranch: getInput('PR_DEFAULT_BRANCH_NAME'),
-		prTitleForDefaultBranch: getInput('PR_DEFAULT_BRANCH_TITLE'),
-		prBodyForDefaultBranch: getInput('PR_DEFAULT_BRANCH_BODY'),
-		prBodyForComment: getInput('PR_COMMENT_BODY'),
-		prCloseMessage: getInput('PR_CLOSE_MESSAGE'),
-		filterGitStatus: 'M',
-		filterExtensions: ['md', 'markdown'],
-		targetBranchPrefix: getInput('TARGET_BRANCH_PREFIX'),
-		includeLabels: Utils.getArrayInput('INCLUDE_LABELS'),
-		targetEvents: TARGET_EVENTS,
-		notCreatePr: !Utils.getBoolValue(getInput('CREATE_PR')),
-	};
+  const logger = new Logger(replaceDirectory);
+  return {
+    rootDir: resolve(__dirname, '../..'),
+    logger: logger,
+    actionName: ACTION_NAME,
+    actionOwner: ACTION_OWNER,
+    actionRepo: ACTION_REPO,
+    executeCommands: getExecuteCommands(logger),
+    commitMessage: getInput('COMMIT_MESSAGE'),
+    commitName: getInput('COMMIT_NAME'),
+    commitEmail: getInput('COMMIT_EMAIL'),
+    prBranchPrefix: getInput('PR_BRANCH_PREFIX'),
+    prBranchName: getInput('PR_BRANCH_NAME'),
+    prTitle: getInput('PR_TITLE'),
+    prBody: getInput('PR_BODY'),
+    prBranchPrefixForDefaultBranch: getInput('PR_DEFAULT_BRANCH_PREFIX'),
+    prBranchNameForDefaultBranch: getInput('PR_DEFAULT_BRANCH_NAME'),
+    prTitleForDefaultBranch: getInput('PR_DEFAULT_BRANCH_TITLE'),
+    prBodyForDefaultBranch: getInput('PR_DEFAULT_BRANCH_BODY'),
+    prBodyForComment: getInput('PR_COMMENT_BODY'),
+    prCloseMessage: getInput('PR_CLOSE_MESSAGE'),
+    filterGitStatus: 'M',
+    filterExtensions: ['md', 'markdown'],
+    targetBranchPrefix: getInput('TARGET_BRANCH_PREFIX'),
+    includeLabels: Utils.getArrayInput('INCLUDE_LABELS'),
+    targetEvents: TARGET_EVENTS,
+    notCreatePr: !Utils.getBoolValue(getInput('CREATE_PR')),
+  };
 };
 
 // eslint-disable-next-line no-magic-numbers
