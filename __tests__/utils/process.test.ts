@@ -119,7 +119,7 @@ describe('main', () => {
       .reply(201, () => getApiFixture(fixturesDir, 'issues.comment.create'))
       .patch('/repos/hello/world/pulls/1347')
       .reply(200, () => getApiFixture(fixturesDir, 'pulls.update'))
-      .delete('/repos/hello/world/git/refs/heads/toc-generator/close/test')
+      .delete('/repos/hello/world/git/refs/' + encodeURIComponent('heads/toc-generator/close/test'))
       .reply(204, () => getApiFixture(fixturesDir, 'pulls.update'));
 
     await main(getMainArgs({

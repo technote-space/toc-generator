@@ -39,6 +39,7 @@ describe('transformAndSave', () => {
       changed: [],
       unchanged: [
         {
+          data: '',
           path: resolve(doctocDir, 'README.not.update.md'),
           transformed: false,
         },
@@ -78,6 +79,7 @@ describe('transformAndSave', () => {
       ],
       unchanged: [
         {
+          data: '',
           path: resolve(doctocDir, 'README.not.update.md'),
           transformed: false,
         },
