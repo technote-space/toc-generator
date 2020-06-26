@@ -13,7 +13,7 @@ export const normalizeMarkerComment = (contents: string): string => {
   return getArrayInput('CLOSING_COMMENT').reduce((acc, comment) => acc.split('\n').map(line => line.replace(Utils.getPrefixRegExp(comment), CLOSING_COMMENT)).join('\n'), replacedOpening);
 };
 
-export const transformWithWrap = (path: string, title: string): { transformed: boolean; path: string; data?: string } => {
+export const transformWithWrap = (path: string, title: string): { transformed: boolean; path: string; data: string } => {
   const content = normalizeMarkerComment(readFileSync(path, 'utf8'));
   const {toc}   = transform(content, undefined, getMaxHeaderLevel(), wrapTitle(title), isNoTitle(title), getEntryPrefix());
 
@@ -26,5 +26,5 @@ export const transformWithWrap = (path: string, title: string): { transformed: b
     return {path, transformed, data};
   }
 
-  return {path, transformed};
+  return {path, transformed, data: ''};
 };
