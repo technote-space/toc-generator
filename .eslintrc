@@ -114,9 +114,8 @@
 		],
 		"indent": [
 			"error",
-			"tab",
+			2,
 			{
-				"MemberExpression": "off",
 				"SwitchCase": 1
 			}
 		],
