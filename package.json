@@ -28,7 +28,7 @@
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@technote-space/github-action-helper": "^3.0.3",
-    "@technote-space/github-action-pr-helper": "^1.8.1",
+    "@technote-space/github-action-pr-helper": "^1.8.2",
     "doctoc": "^1.4.0",
     "fast-glob": "^3.2.4",
     "update-section": "^0.3.3"
@@ -48,9 +48,9 @@
     "jest": "^26.1.0",
     "jest-circus": "^26.1.0",
     "lint-staged": "^10.2.11",
-    "nock": "^13.0.1",
+    "nock": "^13.0.2",
     "ts-jest": "^26.1.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   },
   "publishConfig": {
     "access": "public"
