@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/filter-github-action",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "Helper to filter GitHub Action.",
   "author": {
     "name": "Technote",
@@ -31,15 +31,15 @@
   },
   "devDependencies": {
     "@technote-space/github-action-test-helper": "^0.5.1",
-    "@types/jest": "^26.0.3",
-    "@types/node": "^14.0.14",
-    "@typescript-eslint/eslint-plugin": "^3.5.0",
-    "@typescript-eslint/parser": "^3.5.0",
-    "eslint": "^7.3.1",
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.20",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
+    "eslint": "^7.4.0",
     "jest": "^26.1.0",
     "jest-circus": "^26.1.0",
     "ts-jest": "^26.1.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   },
   "publishConfig": {
     "access": "public"
