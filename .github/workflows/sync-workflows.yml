@@ -3,6 +3,7 @@ on:
     - cron: 0 14 * * 4
   repository_dispatch:
     types: [sync-workflows]
+  workflow_dispatch:
 
 name: Sync workflows
 jobs:
