@@ -5,6 +5,7 @@ on:
     types: [opened, reopened, closed]
   repository_dispatch:
     types: [update-deps]
+  workflow_dispatch:
 
 name: Update dependencies
 jobs:
