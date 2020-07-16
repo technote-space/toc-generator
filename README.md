@@ -7,7 +7,7 @@
 
 *Read this in other languages: [English](README.md), [日本語](README.ja.md).*
 
-This is a `GitHub Action` to generate TOC (Table of Contents),  
+This is a `GitHub Actions` to generate TOC (Table of Contents),  
 which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if changed.
 
 ## Table of Contents
