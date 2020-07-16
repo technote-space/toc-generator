@@ -7,7 +7,7 @@
 
 *Read this in other languages: [English](README.md), [日本語](README.ja.md).*
 
-これは目次を生成する`GitHub Action`です。  
+これは目次を生成する`GitHub Actions`です。  
 [DocToc](https://github.com/thlorenz/doctoc) を実行し変更があればコミットします。  
 
 ## Table of Contents
