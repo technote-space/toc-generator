@@ -27,8 +27,8 @@
   ],
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@technote-space/github-action-helper": "^3.0.4",
-    "@technote-space/github-action-pr-helper": "^1.8.3",
+    "@technote-space/github-action-helper": "^3.1.0",
+    "@technote-space/github-action-pr-helper": "^1.8.5",
     "doctoc": "^1.4.0",
     "fast-glob": "^3.2.4",
     "update-section": "^0.3.3"
@@ -37,20 +37,20 @@
     "@actions/github": "^4.0.0",
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
-    "@technote-space/github-action-test-helper": "^0.5.2",
+    "@technote-space/github-action-test-helper": "^0.5.3",
     "@technote-space/release-github-actions-cli": "^1.6.8",
-    "@types/jest": "^26.0.4",
-    "@types/node": "^14.0.23",
-    "@typescript-eslint/eslint-plugin": "^3.6.1",
-    "@typescript-eslint/parser": "^3.6.1",
-    "eslint": "^7.4.0",
+    "@types/jest": "^26.0.5",
+    "@types/node": "^14.0.24",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
     "jest-circus": "^26.1.0",
     "lint-staged": "^10.2.11",
     "nock": "^13.0.2",
-    "ts-jest": "^26.1.2",
-    "typescript": "^3.9.6"
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
   },
   "publishConfig": {
     "access": "public"
