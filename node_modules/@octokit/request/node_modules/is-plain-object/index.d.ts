@@ -1,3 +1,3 @@
-declare function isPlainObject(o: any): asserts o is object;
+declare function isPlainObject(o: any): boolean;
 
 export default isPlainObject;
