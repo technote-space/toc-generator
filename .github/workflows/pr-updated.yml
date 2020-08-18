@@ -1,4 +1,4 @@
-on: pull_request
+on: pull_request_target
 
 name: Pull Request updated
 
@@ -55,6 +55,8 @@ jobs:
       - name: Set running flag
         run: echo "::set-env name=RUNNING::1"
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - name: Set running flag
         run: |
           if [[ ! -f package.json ]] || [[ $(< package.json jq -r '.version == null') == 'true' ]]; then
@@ -96,6 +98,8 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
         if: env.RUNNING
       - uses: technote-space/can-npm-publish-action@v1
         if: env.RUNNING

@@ -16,4 +16,4 @@ jobs:
         with:
           EXCLUDE_MERGED: 'true'
       - name: Broken Link Check
-        uses: technote-space/broken-link-checker-action@v1
+        uses: technote-space/broken-link-checker-action@v2
