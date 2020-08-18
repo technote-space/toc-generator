@@ -15,13 +15,21 @@ jobs:
     timeout-minutes: 10
     if: "! startsWith(github.head_ref, 'release/v')"
     steps:
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING1::"
+      - name: Set running flag
+        run: echo "::set-env name=RUNNING1::1"
+        if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
       - uses: technote-space/load-config-action@v1
+        if: env.RUNNING1
         with:
           CONFIG_FILENAME: workflow-settings.json
       - uses: technote-space/auto-cancel-redundant-job@v1
+        if: env.RUNNING1
         with:
           EXCLUDE_MERGED: 'true'
       - name: Update dependencies
+        if: env.RUNNING1
         id: update_deps
         uses: technote-space/create-pr-action@v2
         with:
@@ -39,27 +47,27 @@ jobs:
           AUTO_MERGE_THRESHOLD_DAYS: 14
 
       - name: Set running flag
-        run: echo "::set-env name=RUNNING::"
+        run: echo "::set-env name=RUNNING2::"
       - name: Set running flag
-        run: echo "::set-env name=RUNNING::1"
-        if: steps.update_deps.outputs.result != 'succeeded' && github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.head.user.id == github.event.pull_request.base.user.id && startsWith(github.head_ref, 'release/')
+        run: echo "::set-env name=RUNNING2::1"
+        if: env.RUNNING1 && steps.update_deps.outputs.result != 'succeeded' && github.event_name == 'pull_request' && github.event.action != 'closed' && startsWith(github.head_ref, 'release/')
       - uses: actions/checkout@v2
-        if: env.RUNNING
+        if: env.RUNNING2
       - name: Set running flag
         run: |
           if [[ ! -f package.json ]] || [[ $(< package.json jq -r '.version == null') == 'true' ]]; then
-            echo "::set-env name=RUNNING::"
+            echo "::set-env name=RUNNING2::"
           fi
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
           EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
-        if: "env.RUNNING && ! startsWith(github.head_ref, 'release/v')"
+        if: "env.RUNNING2 && ! startsWith(github.head_ref, 'release/v')"
       - name: Get version
         run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
         env:
           HEAD_REF: ${{ github.head_ref }}
-        if: env.RUNNING && startsWith(github.head_ref, 'release/v')
+        if: env.RUNNING2 && startsWith(github.head_ref, 'release/v')
       - name: Check package version
         uses: technote-space/package-version-check-action@v1
         with:

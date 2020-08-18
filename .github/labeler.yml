@@ -4,6 +4,8 @@ typescript:
   - '**/*.ts'
 php:
   - '**/*.php'
+python:
+  - '**/*.py'
 
 'Type: Testing':
   - '**/tests/*'
