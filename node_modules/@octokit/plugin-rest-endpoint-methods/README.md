@@ -57,7 +57,7 @@ Parameter and response types for all endpoint methods exported as `{ RestEndpoin
 Example
 
 ```ts
-import { RestEndpointMethodTypes } from "@octokit/rest-endpoint-methods";
+import { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 
 type UpdateLabelParameters = RestEndpointMethodTypes["issues"]["updateLabel"]["parameters"];
 type UpdateLabelResponse = RestEndpointMethodTypes["issues"]["updateLabel"]["response"];
