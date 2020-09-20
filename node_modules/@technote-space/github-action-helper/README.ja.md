@@ -18,12 +18,12 @@ GitHub Actions 用のヘルパー
 <summary>Details</summary>
 
 - [使用方法](#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95)
-  - [Logger](#logger)
   - [Command](#command)
   - [ApiHelper](#apihelper)
   - [GitHelper](#githelper)
   - [Utils](#utils)
   - [ContextHelper](#contexthelper)
+  - [依存](#%E4%BE%9D%E5%AD%98)
 - [Author](#author)
 
 </details>
@@ -31,43 +31,20 @@ GitHub Actions 用のヘルパー
 
 ## 使用方法
 1. インストール  
-`npm i @technote-space/github-action-helper`
+   1. npm  
+      `npm i @technote-space/github-action-helper`
+   1. yarn  
+      `yarn add @technote-space/github-action-helper`
+   
 1. 使用
 ```typescript
-import { Logger, Command, ApiHelper, GitHelper, Utils, ContextHelper } from '@technote-space/github-action-helper';
-```
-
-### Logger
-```typescript
-import { Logger } from '@technote-space/github-action-helper';
-
-const logger = new Logger();
-logger.startProcess('Process name');
-logger.displayCommand('command');
-logger.displayStdout('stdout1\nstdout2');
-logger.displayStderr('stderr1\nstderr2');
-logger.log();
-logger.info('output info');
-logger.endProcess();
-
-// ::group::Process name
-// [command]command
-//   >> stdout1
-//   >> stdout2
-// ::warning::  >> stderr1
-// ::warning::  >> stderr2
-// 
-// > output info
-// ::endgroup::
-
-logger.getColorString('colored text', 'green'); // Color: 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white'
-logger.getColorString('colored text', 'yellow', 'underline'); // Attribute: 'bold' | 'underline' | 'italic'
-logger.c('colored text', 'yellow', 'underline'); // alias
+import { Command, ApiHelper, GitHelper, Utils, ContextHelper } from '@technote-space/github-action-helper';
 ```
 
 ### Command
 ```typescript
-import { Logger, Command } from '@technote-space/github-action-helper';
+import { Command } from '@technote-space/github-action-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
 
 const logger = new Logger();
 const command = new Command(logger);
@@ -95,7 +72,8 @@ run().catch(error => console.error(error));
 
 ### ApiHelper
 ```typescript
-import { Logger, ApiHelper } from '@technote-space/github-action-helper';
+import { ApiHelper } from '@technote-space/github-action-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
 import { context } from '@actions/github';
 import { GitHub } from '@actions/github' ;
 import { getInput } from '@actions/core';
@@ -111,7 +89,8 @@ run().catch(error => console.error(error));
 
 ### GitHelper
 ```typescript
-import { Logger, GitHelper } from '@technote-space/github-action-helper';
+import { GitHelper } from '@technote-space/github-action-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
 import { context } from '@actions/github';
 import path from 'path';
 const workDir = path.resolve(__dirname, '..');
@@ -208,7 +187,8 @@ run().catch(error => console.error(error));
 
 ### ContextHelper
 ```typescript
-import { Logger, ContextHelper } from '@technote-space/github-action-helper';
+import { ContextHelper } from '@technote-space/github-action-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
 import { context } from '@actions/github';
 
 const {
@@ -235,6 +215,9 @@ console.log(getTagName(context));  // e.g. 'v1.2.3'
 console.log(getSender(context));  // e.g. 'octocat'
 showActionInfo('root dir', new Logger(), context);
 ```
+
+### 依存
+[@technote-space/github-action-log-helper](https://github.com/technote-space/github-action-log-helper)
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
