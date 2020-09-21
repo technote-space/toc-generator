@@ -1,6 +1,7 @@
 import {resolve, join} from 'path';
 import {homedir} from 'os';
-import {Utils, Logger} from '@technote-space/github-action-helper';
+import {Utils} from '@technote-space/github-action-helper';
+import {Logger} from '@technote-space/github-action-log-helper';
 import {ExecuteTask, MainArguments} from '@technote-space/github-action-pr-helper/dist/types';
 import {getInput} from '@actions/core' ;
 import {doctoc} from './doctoc';

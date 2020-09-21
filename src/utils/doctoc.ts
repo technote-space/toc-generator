@@ -1,4 +1,5 @@
-import {Logger, Utils} from '@technote-space/github-action-helper';
+import {Utils} from '@technote-space/github-action-helper';
+import {Logger} from '@technote-space/github-action-log-helper';
 import {writeFileSync, statSync} from 'fs';
 import {sync} from 'fast-glob';
 import file from 'doctoc/lib/file';
