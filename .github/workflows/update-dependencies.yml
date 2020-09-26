@@ -58,6 +58,9 @@ jobs:
           if [[ ! -f package.json ]] || [[ $(< package.json jq -r '.version == null') == 'true' ]]; then
             echo "::set-env name=RUNNING2::"
           fi
+      - name: Sort
+        run: npx sort-package-json
+        if: env.RUNNING2
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
