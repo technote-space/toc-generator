@@ -6,6 +6,11 @@ php:
   - '**/*.php'
 python:
   - '**/*.py'
+cpp:
+  - '**/*.cpp'
+  - '**/*.cxx'
+  - '**/*.cc'
+  - '**/*.cp'
 
 'Type: Testing':
   - '**/tests/*'
