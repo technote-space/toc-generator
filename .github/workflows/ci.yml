@@ -17,14 +17,9 @@ jobs:
         run: echo "RUNNING=1" >> $GITHUB_ENV
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
-      - uses: technote-space/get-diff-action@v3
+      - uses: technote-space/get-diff-action@v4
         with:
-          PREFIX_FILTER: |
-            src/
-            __tests__/
-          SUFFIX_FILTER: |
-            .js
-            .ts
+          PATTERNS: +(src|__tests__)/**/*.+(js|ts)
           FILES: |
             yarn.lock
             .eslintrc
@@ -68,15 +63,9 @@ jobs:
         run: echo "RUNNING=1" >> $GITHUB_ENV
       - uses: actions/checkout@v2
       - uses: technote-space/get-git-comment-action@v1
-      - uses: technote-space/get-diff-action@v3
+      - uses: technote-space/get-diff-action@v4
         with:
-          PREFIX_FILTER: |
-            src/
-            __tests__/
-          SUFFIX_FILTER: |
-            .js
-            .ts
-            .snap
+          PATTERNS: +(src|__tests__)/**/*.+(js|ts|snap)
           FILES: |
             yarn.lock
             jest.config.js
