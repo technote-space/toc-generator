@@ -24,7 +24,7 @@ jobs:
           EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
         if: "! startsWith(github.head_ref, 'release/v')"
       - name: Get version
-        run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
+        run: echo "NEXT_VERSION=${HEAD_REF#release/}" >> $GITHUB_ENV
         env:
           HEAD_REF: ${{ github.head_ref }}
         if: startsWith(github.head_ref, 'release/v')

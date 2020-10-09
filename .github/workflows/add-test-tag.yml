@@ -22,12 +22,12 @@ jobs:
           EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
         if: "! startsWith(github.head_ref, 'release/v') && (contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies'))"
       - name: Get version
-        run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
+        run: echo "NEXT_VERSION=${HEAD_REF#release/}" >> $GITHUB_ENV
         env:
           HEAD_REF: ${{ github.head_ref }}
         if: "startsWith(github.head_ref, 'release/v') && (contains(env.COMMIT_MESSAGE, 'chore: update dependencies') || contains(env.COMMIT_MESSAGE, 'chore: update npm dependencies'))"
       - name: Get tag name
-        run: echo "::set-env name=TAG_NAME::${NEXT_VERSION}.${RUN_ID}"
+        run: echo "TAG_NAME=${NEXT_VERSION}.${RUN_ID}" >> $GITHUB_ENV
         env:
           HEAD_REF: ${{ github.head_ref }}
           RUN_ID: ${{ github.run_id }}

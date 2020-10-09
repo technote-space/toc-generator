@@ -16,9 +16,9 @@ jobs:
     if: "! startsWith(github.head_ref, 'release/v')"
     steps:
       - name: Set running flag
-        run: echo "::set-env name=RUNNING1::"
+        run: echo "RUNNING1=" >> $GITHUB_ENV
       - name: Set running flag
-        run: echo "::set-env name=RUNNING1::1"
+        run: echo "RUNNING1=1" >> $GITHUB_ENV
         if: github.event.pull_request.head.user.id == github.event.pull_request.base.user.id
       - uses: technote-space/load-config-action@v1
         if: env.RUNNING1
@@ -47,16 +47,16 @@ jobs:
           AUTO_MERGE_THRESHOLD_DAYS: 14
 
       - name: Set running flag
-        run: echo "::set-env name=RUNNING2::"
+        run: echo "RUNNING2=" >> $GITHUB_ENV
       - name: Set running flag
-        run: echo "::set-env name=RUNNING2::1"
+        run: echo "RUNNING2=1" >> $GITHUB_ENV
         if: env.RUNNING1 && steps.update_deps.outputs.result != 'succeeded' && github.event_name == 'pull_request' && github.event.action != 'closed' && startsWith(github.head_ref, 'release/')
       - uses: actions/checkout@v2
         if: env.RUNNING2
       - name: Set running flag
         run: |
           if [[ ! -f package.json ]] || [[ $(< package.json jq -r '.version == null') == 'true' ]]; then
-            echo "::set-env name=RUNNING2::"
+            echo "RUNNING2=" >> $GITHUB_ENV
           fi
       - name: Sort
         run: npx sort-package-json
@@ -67,7 +67,7 @@ jobs:
           EXCLUDE_MESSAGES: ${{ env.EXCLUDE_MESSAGES }}
         if: "env.RUNNING2 && ! startsWith(github.head_ref, 'release/v')"
       - name: Get version
-        run: echo "::set-env name=NEXT_VERSION::${HEAD_REF#release/}"
+        run: echo "NEXT_VERSION=${HEAD_REF#release/}" >> $GITHUB_ENV
         env:
           HEAD_REF: ${{ github.head_ref }}
         if: env.RUNNING2 && startsWith(github.head_ref, 'release/v')
