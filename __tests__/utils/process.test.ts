@@ -180,8 +180,8 @@ describe('main', () => {
       '> Deleting reference... [refs/heads/toc-generator/close/test]',
       '::endgroup::',
       '::group::Total:2  Succeeded:1  Failed:0  Skipped:1',
-      '> \x1b[33;40;0m→\x1b[0m\t[octocat:new-topic] PR from fork',
-      '> \x1b[32;40;0m✔\x1b[0m\t[master] has been closed because there is no reference diff',
+      '> \x1b[33;40m→\x1b[0m\t[octocat:new-topic] PR from fork',
+      '> \x1b[32;40m✔\x1b[0m\t[master] has been closed because there is no reference diff',
       '::endgroup::',
     ]);
   });
@@ -256,7 +256,7 @@ describe('main', () => {
       '[command]git push origin test:refs/heads/test',
       '::set-output name=result::succeeded',
       '::endgroup::',
-      '> \x1b[32;40;0m✔\x1b[0m\t[feature/new-feature] updated',
+      '> \x1b[32;40m✔\x1b[0m\t[feature/new-feature] updated',
     ]);
   });
 
@@ -350,7 +350,7 @@ describe('main', () => {
       '::group::Creating comment to PullRequest...',
       '::set-output name=result::succeeded',
       '::endgroup::',
-      '> \x1b[32;40;0m✔\x1b[0m\t[feature/new-feature] updated',
+      '> \x1b[32;40m✔\x1b[0m\t[feature/new-feature] updated',
     ]);
   });
 });
