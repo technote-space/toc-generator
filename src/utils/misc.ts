@@ -47,7 +47,7 @@ export const getRunnerArguments = (): MainArguments => {
   const logger = new Logger(replaceDirectory);
   return {
     rootDir: resolve(__dirname, '../..'),
-    logger: logger,
+    logger,
     actionName: ACTION_NAME,
     actionOwner: ACTION_OWNER,
     actionRepo: ACTION_REPO,
