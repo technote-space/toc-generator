@@ -14,9 +14,9 @@ jobs:
     steps:
       - name: Set variables
         run: |
-          echo "::set-env name=MINUTE::$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $(({} % 60))')"
-          echo "::set-env name=HOUR::$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $(({} % 24))')"
-          echo "::set-env name=DAY::$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $(({} % 7))')"
+          echo "MINUTE=$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $((1{} % 60))')" >> $GITHUB_ENV
+          echo "HOUR=$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $((1{} % 24))')" >> $GITHUB_ENV
+          echo "DAY=$(echo "${GITHUB_REPOSITORY}" | md5sum | tr -d -c 0-9 | xargs -I{} echo {}123456789 | cut -c 2-9 | xargs -I{} bash -c 'echo $((1{} % 7))')" >> $GITHUB_ENV
 
       - name: Sync workflows
         uses: technote-space/create-pr-action@v2
