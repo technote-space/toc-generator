@@ -1,30 +1,39 @@
 {
   "name": "@technote-space/toc-generator",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "GitHub Action to generate TOC.",
-  "author": {
-    "name": "Technote",
-    "email": "technote.space@gmail.com",
-    "url": "https://technote.space"
-  },
-  "license": "MIT",
   "keywords": [
     "github",
     "github actions",
     "toc"
   ],
   "homepage": "https://github.com/technote-space/toc-generator",
+  "bugs": {
+    "url": "https://github.com/technote-space/toc-generator/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/technote-space/toc-generator.git"
   },
-  "bugs": {
-    "url": "https://github.com/technote-space/toc-generator/issues"
+  "license": "MIT",
+  "author": {
+    "name": "Technote",
+    "email": "technote.space@gmail.com",
+    "url": "https://technote.space"
   },
   "files": [
     "lib",
     "action.yml"
   ],
+  "scripts": {
+    "build": "tsc",
+    "cover": "jest --coverage",
+    "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts' --cache",
+    "lint:fix": "eslint --fix 'src/**/*.ts' '__tests__/**/*.ts'",
+    "release": "yarn release-ga --test",
+    "test": "yarn lint && yarn cover",
+    "update": "npx npm-check-updates -u && yarn install && yarn upgrade && yarn audit"
+  },
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@technote-space/github-action-helper": "^4.0.4",
@@ -55,14 +64,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "build": "tsc",
-    "test": "yarn lint && yarn cover",
-    "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts' --cache",
-    "lint:fix": "eslint --fix 'src/**/*.ts' '__tests__/**/*.ts'",
-    "cover": "jest --coverage",
-    "update": "npx npm-check-updates -u && yarn install && yarn upgrade && yarn audit",
-    "release": "yarn release-ga --test"
   }
 }
