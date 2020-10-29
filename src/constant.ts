@@ -16,5 +16,3 @@ export const TARGET_EVENTS   = {
     'closed',
   ],
 };
-export const OPENING_COMMENT = '<!-- START doctoc ';
-export const CLOSING_COMMENT = '<!-- END doctoc ';
