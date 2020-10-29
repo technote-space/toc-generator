@@ -2,7 +2,7 @@ import {Utils} from '@technote-space/github-action-helper';
 import {Logger} from '@technote-space/github-action-log-helper';
 import {writeFileSync, statSync} from 'fs';
 import {sync} from 'fast-glob';
-import file from 'doctoc/lib/file';
+import {findMarkdownFiles} from '@technote-space/doctoc';
 import {cleanPath} from './misc';
 import {transformWithWrap} from './transform';
 import {CommandOutput, ExecuteTask} from '@technote-space/github-action-pr-helper/dist/types';
@@ -29,7 +29,7 @@ export const executeDoctoc = (paths: Array<string>, title: string, logger: Logge
   const stat = statSync(path);
   if (stat.isDirectory()) {
     logger.displayCommand('DocToccing "%s" and its sub directories.', path);
-    return transformAndSave(file.findMarkdownFiles(path), title);
+    return transformAndSave(findMarkdownFiles(path), title);
   }
 
   logger.displayCommand('DocToccing single file "%s".', path);
