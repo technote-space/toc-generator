@@ -21,11 +21,7 @@ const getTocTitle = (): string => getInput('TOC_TITLE');
 
 export const isNoTitle = (title: string): boolean => '' === title;
 
-export const isFolding = (title: string): boolean => !isNoTitle(title) && Utils.getBoolValue(getInput('FOLDING'));
-
-export const wrapTitle = (title: string): string => isFolding(title) ? `<summary>${title.replace(/^([*_]*)(.+)\1$/, '$2')}</summary>` : title;
-
-export const wrapToc = (toc: string, title: string): string => isFolding(title) ? `<details>\n${toc}\n</details>` : toc;
+export const isFolding = (): boolean => Utils.getBoolValue(getInput('FOLDING'));
 
 export const getMaxHeaderLevel = (): number | undefined => /^\d+$/.test(getInput('MAX_HEADER_LEVEL')) ? Number.parseInt(getInput('MAX_HEADER_LEVEL')) : undefined;
 

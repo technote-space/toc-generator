@@ -7,8 +7,6 @@ import {
   getRunnerArguments,
   isNoTitle,
   isFolding,
-  wrapTitle,
-  wrapToc,
   getMaxHeaderLevel,
   getEntryPrefix,
   homeExpanded,
@@ -186,43 +184,13 @@ describe('isNoTitle', () => {
 describe('isFolding', () => {
   testEnv(rootDir);
 
-  it('should return false 1', () => {
-    expect(isFolding('')).toBe(false);
-  });
-
-  it('should return false 2', () => {
-    expect(isFolding('test title')).toBe(false);
+  it('should return false', () => {
+    expect(isFolding()).toBe(false);
   });
 
   it('should return true', () => {
     process.env.INPUT_FOLDING = 'true';
-    expect(isFolding('test title')).toBe(true);
-  });
-});
-
-describe('wrapTitle', () => {
-  testEnv(rootDir);
-
-  it('should wrap title', () => {
-    process.env.INPUT_FOLDING = 'true';
-    expect(wrapTitle('test title')).toBe('<summary>test title</summary>');
-  });
-
-  it('should not wrap title', () => {
-    expect(wrapTitle('test title')).toBe('test title');
-  });
-});
-
-describe('wrapToc', () => {
-  testEnv(rootDir);
-
-  it('should wrap toc', () => {
-    process.env.INPUT_FOLDING = 'true';
-    expect(wrapToc('toc', 'test title')).toBe('<details>\ntoc\n</details>');
-  });
-
-  it('should not wrap toc', () => {
-    expect(wrapToc('toc', 'test title')).toBe('toc');
+    expect(isFolding()).toBe(true);
   });
 });
 
