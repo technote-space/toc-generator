@@ -769,10 +769,10 @@
   dependencies:
     emoji-regex "^9.2.0"
 
-"@technote-space/doctoc@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@technote-space/doctoc/-/doctoc-2.1.2.tgz#6d05af15370a1a1d0306bb7b85346a5b3c634e7d"
-  integrity sha512-cBiUrVUXPrJeQCVUy2gzrkUCW1/FyInGPR5zNOR9j0iB8s1UZS5TpehtjsfZsmnqsQvF+F8dx7pxH2pVAFG+Ew==
+"@technote-space/doctoc@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@technote-space/doctoc/-/doctoc-2.1.3.tgz#34004528ea74dd8b0c1e2111b25a5f28cc514fe2"
+  integrity sha512-AooglbDGzLeZ0ilIG8BPfyYxLYkX3Qk/1Ly4wTG1e1surkd/E5sXWWBAHK5E9cfAGqb1EzwZ6tkv06F+ORlIEw==
   dependencies:
     "@technote-space/anchor-markdown-header" "^1.1.2"
     "@textlint/markdown-to-ast" "^6.2.5"
@@ -871,9 +871,9 @@
     unified "^6.1.6"
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
-  version "7.1.10"
-  resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.10.tgz#ca58fc195dd9734e77e57c6f2df565623636ab40"
-  integrity sha512-x8OM8XzITIMyiwl5Vmo2B1cR1S1Ipkyv4mdlbJjMa1lmuKvKY9FrBbEANIaMlnWn5Rf7uO+rC/VgYabNkE17Hw==
+  version "7.1.11"
+  resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.11.tgz#7fae4660a009a4031e293f25b213f142d823b3c4"
+  integrity sha512-E5nSOzrjnvhURYnbOR2dClTqcyhPbPvtEwLHf7JJADKedPbcZsoJVfP+I2vBNfBjz4bnZIuhL/tNmRi5nJ7Jlw==
   dependencies:
     "@babel/parser" "^7.1.0"
     "@babel/types" "^7.0.0"
