@@ -24,7 +24,7 @@ jobs:
         if: env.RUNNING1
         with:
           CONFIG_FILENAME: workflow-settings.json
-      - uses: technote-space/auto-cancel-redundant-job@v1
+      - uses: technote-space/auto-cancel-redundant-workflow@v1
         if: env.RUNNING1
         with:
           EXCLUDE_MERGED: 'true'
