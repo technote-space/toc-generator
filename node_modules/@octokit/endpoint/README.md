@@ -32,11 +32,11 @@
 <tr><th>
 Browsers
 </th><td width=100%>
-Load <code>@octokit/endpoint</code> directly from <a href="https://cdn.pika.dev">cdn.pika.dev</a>
+Load <code>@octokit/endpoint</code> directly from <a href="https://cdn.skypack.dev">cdn.skypack.dev</a>
         
 ```html
 <script type="module">
-import { endpoint } from "https://cdn.pika.dev/@octokit/endpoint";
+import { endpoint } from "https://cdn.skypack.dev/@octokit/endpoint";
 </script>
 ```
 
