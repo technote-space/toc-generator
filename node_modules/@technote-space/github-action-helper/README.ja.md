@@ -123,7 +123,8 @@ import { context } from '@actions/github';
 
 const {
 	isCloned,
-	isSemanticVersioningTagName,
+	isValidSemanticVersioning,
+	normalizeVersion,
 	isBranch,
 	isRemoteBranch,
 	isPrRef,
@@ -152,7 +153,9 @@ const {
 } = Utils;
 
 console.log(isCloned('workDir'));  // e.g. true
-console.log(isSemanticVersioningTagName('v1.2.3'));  // e.g. true
+console.log(isValidSemanticVersioning('v1.2.3'));  // e.g. true
+console.log(normalizeVersion('v1.2-alpha'));  // e.g. 1.2.0-alpha
+console.log(normalizeVersion('v1.2-alpha', {onlyCore: true}));  // e.g. 1.2.0
 console.log(isBranch('refs/heads/feature/change'));  // e.g. true
 console.log(isRemoteBranch('refs/remotes/origin/feature/test'));  // e.g. true
 console.log(isPrRef('refs/pull/123/merge'));  // e.g. true
