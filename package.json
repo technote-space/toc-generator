@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@technote-space/doctoc": "^2.1.4",
-    "@technote-space/github-action-helper": "^4.2.7",
+    "@technote-space/doctoc": "^2.1.6",
+    "@technote-space/github-action-helper": "^4.3.1",
     "@technote-space/github-action-log-helper": "^0.1.8",
-    "@technote-space/github-action-pr-helper": "^1.11.4",
+    "@technote-space/github-action-pr-helper": "^1.11.6",
     "fast-glob": "^3.2.4"
   },
   "devDependencies": {
