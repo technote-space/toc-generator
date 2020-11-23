@@ -64,13 +64,14 @@
 |TOC_TITLE|目次タイトル|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
 |FOLDING|目次を折りたたみ式にするかどうか|`false`| |`true`|
-|COMMIT_MESSAGE|コミットメッセージ|`docs: update TOC`|true|`feat: update TOC`|
+|COMMIT_MESSAGE|コミットメッセージ|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
 |COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| | |
-|CREATE_PR|プルリクエストを作成するかどうか|`true`| |`false`|
+|CREATE_PR|プルリクエストを作成するかどうか|`false`| |`true`|
+|CHECK_ONLY_DEFAULT_BRANCH|デフォルトのブランチのみをチェックするかどうか|`false`| |`true`|
 |PR_BRANCH_PREFIX|プルリクエストのブランチプリフィックス|`toc-generator/`|true| |
 |PR_BRANCH_NAME|プルリクエストのブランチ名<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
-|PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
+|PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`chore(docs): update TOC (${PR_MERGE_REF})`|true|`docs: update TOC`|
 |PR_BODY|プルリクエストの本文<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
 |PR_COMMENT_BODY|プルリクエストの本文（コメント用）<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
 |PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR has been closed because it is no longer needed.`| | |
@@ -180,6 +181,55 @@ jobs:
 | COMMANDS_OUTPUT | TOC コマンドの結果 |
 | FILES_SUMMARY | 例：`Changed 2 files` |
 | FILES | 変更されたファイル一覧 |
+
+## 設定例
+### ブランチを制限しないでPush時にアクションを実行し直接コミット
+```yaml
+on: push
+name: TOC Generator
+jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+```
+
+### `release/` から始まるブランチのみを対象にPull Request更新時に実行しPull Requestを作成または更新
+```yaml
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+name: TOC Generator
+jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+        with:
+          CREATE_PR: true
+          TARGET_BRANCH_PREFIX: release/
+```
+
+### デフォルトブランチのみを対象にスケジュールでアクションを実行し直接コミット
+（他のワークフローの起動のために作成したTokenを使用）
+
+```yaml
+on:
+  schedule:
+    - cron: "0 23 * * *"
+name: TOC Generator
+jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          CHECK_ONLY_DEFAULT_BRANCH: true
+```
 
 ## このアクションを使用しているリポジトリの例
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
