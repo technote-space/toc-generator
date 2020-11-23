@@ -105,6 +105,7 @@ describe('main', () => {
     process.env.INPUT_GITHUB_TOKEN   = 'test-token';
     process.env.INPUT_PR_BRANCH_NAME = 'close/test';
     process.env.INPUT_TOC_TITLE      = title;
+    process.env.INPUT_CREATE_PR      = 'true';
     const mockStdout                 = spyOnStdout();
 
     nock('https://api.github.com')
@@ -182,6 +183,7 @@ describe('main', () => {
       '::group::Total:2  Succeeded:1  Failed:0  Skipped:1',
       '> \x1b[33;40m→\x1b[0m\t[octocat:new-topic] PR from fork',
       '> \x1b[32;40m✔\x1b[0m\t[master] has been closed because there is no reference diff',
+      '::set-output name=result::succeeded',
       '::endgroup::',
     ]);
   });
@@ -249,7 +251,7 @@ describe('main', () => {
       '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '::endgroup::',
       '::group::Committing...',
-      '[command]git commit -qm \'docs: update TOC\'',
+      '[command]git commit -qm \'chore(docs): update TOC\'',
       '[command]git show \'--stat-count=10\' HEAD',
       '::endgroup::',
       '::group::Pushing to hello/world@test...',
@@ -268,6 +270,7 @@ describe('main', () => {
     process.env.INPUT_FOLDING          = 'true';
     process.env.INPUT_MAX_HEADER_LEVEL = '1';
     process.env.INPUT_ENTRY_PREFIX     = '☆';
+    process.env.INPUT_CREATE_PR        = 'true';
     const mockStdout                   = spyOnStdout();
     setChildProcessParams({
       stdout: (command: string): string => {
@@ -337,7 +340,7 @@ describe('main', () => {
       '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '::endgroup::',
       '::group::Committing...',
-      '[command]git commit -qm \'docs: update TOC\'',
+      '[command]git commit -qm \'chore(docs): update TOC\'',
       '[command]git show \'--stat-count=10\' HEAD',
       '::endgroup::',
       '::group::Checking references diff...',

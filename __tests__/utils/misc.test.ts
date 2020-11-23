@@ -42,7 +42,8 @@ describe('getRunnerArguments', () => {
       actionName: 'TOC Generator',
       actionOwner: 'technote-space',
       actionRepo: 'toc-generator',
-      commitMessage: 'docs: update TOC',
+      checkOnlyDefaultBranch: false,
+      commitMessage: 'chore(docs): update TOC',
       commitName: '',
       commitEmail: '',
       filterExtensions: [
@@ -51,7 +52,7 @@ describe('getRunnerArguments', () => {
       ],
       filterGitStatus: 'M',
       includeLabels: [],
-      notCreatePr: false,
+      notCreatePr: true,
       prBody: [
         '## Base PullRequest',
         '',
@@ -104,7 +105,7 @@ describe('getRunnerArguments', () => {
       prBranchPrefix: 'toc-generator/',
       prBranchPrefixForDefaultBranch: '',
       prCloseMessage: 'This PR has been closed because it is no longer needed.',
-      prTitle: 'docs: update TOC (${PR_MERGE_REF})',
+      prTitle: 'chore(docs): update TOC (${PR_MERGE_REF})',
       prTitleForDefaultBranch: '',
       targetBranchPrefix: '',
       targetEvents: TARGET_EVENTS,
@@ -112,26 +113,27 @@ describe('getRunnerArguments', () => {
   });
 
   it('should return args', () => {
-    process.env.INPUT_COMMIT_NAME              = 'test name';
-    process.env.INPUT_COMMIT_EMAIL             = 'test email';
-    process.env.INPUT_COMMIT_MESSAGE           = 'test message';
-    process.env.INPUT_PR_BRANCH_PREFIX         = 'prefix/';
-    process.env.INPUT_PR_BRANCH_NAME           = 'test-branch-${PR_ID}';
-    process.env.INPUT_PR_TITLE                 = 'test: create pull request (${PR_NUMBER})';
-    process.env.INPUT_PR_BODY                  = 'pull request body';
-    process.env.INPUT_PR_DEFAULT_BRANCH_PREFIX = 'prefix-default-branch/';
-    process.env.INPUT_PR_DEFAULT_BRANCH_NAME   = 'test-default-branch-branch-${PR_ID}';
-    process.env.INPUT_PR_DEFAULT_BRANCH_TITLE  = 'test-default-branch: create pull request (${PR_NUMBER})';
-    process.env.INPUT_PR_DEFAULT_BRANCH_BODY   = 'pull request body (default-branch)';
-    process.env.INPUT_PR_COMMENT_BODY          = 'pull request body (comment)';
-    process.env.INPUT_PR_CLOSE_MESSAGE         = 'close message';
-    process.env.INPUT_PR_DATE_FORMAT1          = 'YYYY-MM-DD HH:mm:ss';
-    process.env.INPUT_PR_DATE_FORMAT2          = 'YYYY-MM-DD';
-    process.env.INPUT_TARGET_BRANCH_PREFIX     = 'feature/';
-    process.env.INPUT_DELETE_PACKAGE           = '1';
-    process.env.INPUT_INCLUDE_LABELS           = 'label1, label2\nlabel3';
-    process.env.INPUT_TARGET_PATHS             = '/';
-    process.env.INPUT_CREATE_PR                = 'false';
+    process.env.INPUT_COMMIT_NAME               = 'test name';
+    process.env.INPUT_COMMIT_EMAIL              = 'test email';
+    process.env.INPUT_COMMIT_MESSAGE            = 'test message';
+    process.env.INPUT_PR_BRANCH_PREFIX          = 'prefix/';
+    process.env.INPUT_PR_BRANCH_NAME            = 'test-branch-${PR_ID}';
+    process.env.INPUT_PR_TITLE                  = 'test: create pull request (${PR_NUMBER})';
+    process.env.INPUT_PR_BODY                   = 'pull request body';
+    process.env.INPUT_PR_DEFAULT_BRANCH_PREFIX  = 'prefix-default-branch/';
+    process.env.INPUT_PR_DEFAULT_BRANCH_NAME    = 'test-default-branch-branch-${PR_ID}';
+    process.env.INPUT_PR_DEFAULT_BRANCH_TITLE   = 'test-default-branch: create pull request (${PR_NUMBER})';
+    process.env.INPUT_PR_DEFAULT_BRANCH_BODY    = 'pull request body (default-branch)';
+    process.env.INPUT_PR_COMMENT_BODY           = 'pull request body (comment)';
+    process.env.INPUT_PR_CLOSE_MESSAGE          = 'close message';
+    process.env.INPUT_PR_DATE_FORMAT1           = 'YYYY-MM-DD HH:mm:ss';
+    process.env.INPUT_PR_DATE_FORMAT2           = 'YYYY-MM-DD';
+    process.env.INPUT_TARGET_BRANCH_PREFIX      = 'feature/';
+    process.env.INPUT_DELETE_PACKAGE            = '1';
+    process.env.INPUT_INCLUDE_LABELS            = 'label1, label2\nlabel3';
+    process.env.INPUT_TARGET_PATHS              = '/';
+    process.env.INPUT_CREATE_PR                 = 'false';
+    process.env.INPUT_CHECK_ONLY_DEFAULT_BRANCH = 'true';
 
     const args = getRunnerArguments();
     delete args.logger;
@@ -140,6 +142,7 @@ describe('getRunnerArguments', () => {
       actionName: 'TOC Generator',
       actionOwner: 'technote-space',
       actionRepo: 'toc-generator',
+      checkOnlyDefaultBranch: true,
       commitName: 'test name',
       commitEmail: 'test email',
       commitMessage: 'test message',
