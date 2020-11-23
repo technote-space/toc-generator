@@ -43,7 +43,7 @@ describe('getRunnerArguments', () => {
       actionOwner: 'technote-space',
       actionRepo: 'toc-generator',
       checkOnlyDefaultBranch: false,
-      commitMessage: 'docs: update TOC',
+      commitMessage: 'chore(docs): update TOC',
       commitName: '',
       commitEmail: '',
       filterExtensions: [
@@ -105,7 +105,7 @@ describe('getRunnerArguments', () => {
       prBranchPrefix: 'toc-generator/',
       prBranchPrefixForDefaultBranch: '',
       prCloseMessage: 'This PR has been closed because it is no longer needed.',
-      prTitle: 'docs: update TOC (${PR_MERGE_REF})',
+      prTitle: 'chore(docs): update TOC (${PR_MERGE_REF})',
       prTitleForDefaultBranch: '',
       targetBranchPrefix: '',
       targetEvents: TARGET_EVENTS,
