@@ -29,9 +29,9 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)
 - [Configuration Examples](#configuration-examples)
-  - [Execute actions at push without limiting the branch and commit directly](#execute-actions-at-push-without-limiting-the-branch-and-commit-directly)
-  - [Create or update a Pull Request by executing actions on a Pull Request update only for branches starting with `release/`.](#create-or-update-a-pull-request-by-executing-actions-on-a-pull-request-update-only-for-branches-starting-with-release)
-  - [Execute actions in the schedule for the default branch only and commit directly](#execute-actions-in-the-schedule-for-the-default-branch-only-and-commit-directly)
+  - [Example 1](#example-1)
+  - [Example 2](#example-2)
+  - [Example 3](#example-3)
 - [Sample repositories using this Action](#sample-repositories-using-this-action)
 - [Author](#author)
 
