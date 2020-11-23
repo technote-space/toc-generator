@@ -21,3 +21,4 @@ jobs:
           FOLDING: ${{ env.TOC_FOLDING }}
           MAX_HEADER_LEVEL: ${{ env.TOC_MAX_HEADER_LEVEL }}
           TOC_TITLE: ${{ env.TOC_TITLE }}
+          CREATE_PR: ${{ env.TOC_CREATE_PR }}
