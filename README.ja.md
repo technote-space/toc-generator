@@ -187,7 +187,9 @@ jobs:
 | FILES | 変更されたファイル一覧 |
 
 ## 設定例
-### ブランチを制限しないでPush時にアクションを実行し直接コミット
+### 例１
+ブランチを制限しないでPush時にアクションを実行し直接コミット
+
 ```yaml
 on: push
 name: TOC Generator
@@ -199,7 +201,9 @@ jobs:
       - uses: technote-space/toc-generator@v3
 ```
 
-### `release/` から始まるブランチのみを対象にPull Request更新時に実行しPull Requestを作成または更新
+### 例２
+`release/` から始まるブランチのみを対象にPull Request更新時に実行しPull Requestを作成または更新
+
 ```yaml
 on:
   pull_request:
@@ -216,7 +220,8 @@ jobs:
           TARGET_BRANCH_PREFIX: release/
 ```
 
-### デフォルトブランチのみを対象にスケジュールでアクションを実行し直接コミット
+### 例３
+デフォルトブランチのみを対象にスケジュールでアクションを実行し直接コミット  
 （他のワークフローの起動のために作成したTokenを使用）
 
 ```yaml

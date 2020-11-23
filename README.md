@@ -188,7 +188,9 @@ jobs:
 | FILES | Changed file list |
 
 ## Configuration Examples
-### Execute actions at push without limiting the branch and commit directly
+### Example 1
+Execute actions at push without limiting the branch and commit directly
+
 ```yaml
 on: push
 name: TOC Generator
@@ -200,7 +202,9 @@ jobs:
       - uses: technote-space/toc-generator@v3
 ```
 
-### Create or update a Pull Request by executing actions on a Pull Request update only for branches starting with `release/`.
+### Example 2
+Create or update a Pull Request by executing actions on a Pull Request update only for branches starting with `release/`.
+
 ```yaml
 on:
   pull_request:
@@ -217,7 +221,8 @@ jobs:
           TARGET_BRANCH_PREFIX: release/
 ```
 
-### Execute actions in the schedule for the default branch only and commit directly
+### Example 3
+Execute actions in the schedule for the default branch only and commit directly.  
 （Using the Token created for the launch of other workflows）
 
 ```yaml
