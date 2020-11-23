@@ -28,6 +28,10 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Create PullRequest](#create-pullrequest)
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)
+- [Configuration Examples](#configuration-examples)
+  - [Example 1](#example-1)
+  - [Example 2](#example-2)
+  - [Example 3](#example-3)
 - [Sample repositories using this Action](#sample-repositories-using-this-action)
 - [Author](#author)
 
@@ -184,7 +188,9 @@ jobs:
 | FILES | Changed file list |
 
 ## Configuration Examples
-### Execute actions at push without limiting the branch and commit directly
+### Example 1
+Execute actions at push without limiting the branch and commit directly
+
 ```yaml
 on: push
 name: TOC Generator
@@ -196,7 +202,9 @@ jobs:
       - uses: technote-space/toc-generator@v3
 ```
 
-### Create or update a Pull Request by executing actions on a Pull Request update only for branches starting with `release/`.
+### Example 2
+Create or update a Pull Request by executing actions on a Pull Request update only for branches starting with `release/`.
+
 ```yaml
 on:
   pull_request:
@@ -213,7 +221,8 @@ jobs:
           TARGET_BRANCH_PREFIX: release/
 ```
 
-### Execute actions in the schedule for the default branch only and commit directly
+### Example 3
+Execute actions in the schedule for the default branch only and commit directly.  
 （Using the Token created for the launch of other workflows）
 
 ```yaml

@@ -28,6 +28,10 @@
   - [プルリクエストの作成](#%E3%83%97%E3%83%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)
   - [Context variables](#context-variables)
   - [Context PR variables](#context-pr-variables)
+- [設定例](#%E8%A8%AD%E5%AE%9A%E4%BE%8B)
+  - [例１](#%E4%BE%8B%EF%BC%91)
+  - [例２](#%E4%BE%8B%EF%BC%92)
+  - [例３](#%E4%BE%8B%EF%BC%93)
 - [このアクションを使用しているリポジトリの例](#%E3%81%93%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BE%8B)
 - [Author](#author)
 
@@ -183,7 +187,9 @@ jobs:
 | FILES | 変更されたファイル一覧 |
 
 ## 設定例
-### ブランチを制限しないでPush時にアクションを実行し直接コミット
+### 例１
+ブランチを制限しないでPush時にアクションを実行し直接コミット
+
 ```yaml
 on: push
 name: TOC Generator
@@ -195,7 +201,9 @@ jobs:
       - uses: technote-space/toc-generator@v3
 ```
 
-### `release/` から始まるブランチのみを対象にPull Request更新時に実行しPull Requestを作成または更新
+### 例２
+`release/` から始まるブランチのみを対象にPull Request更新時に実行しPull Requestを作成または更新
+
 ```yaml
 on:
   pull_request:
@@ -212,7 +220,8 @@ jobs:
           TARGET_BRANCH_PREFIX: release/
 ```
 
-### デフォルトブランチのみを対象にスケジュールでアクションを実行し直接コミット
+### 例３
+デフォルトブランチのみを対象にスケジュールでアクションを実行し直接コミット  
 （他のワークフローの起動のために作成したTokenを使用）
 
 ```yaml
