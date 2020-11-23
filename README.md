@@ -52,7 +52,7 @@ e.g. `README.md`
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v3
    ```
 
 ## Screenshot
@@ -121,23 +121,25 @@ If you want to trigger actions, use a personal access token instead.
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v3
            with:
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
 
 ### Create PullRequest
-If you set `CREATE_PR` to `true` (default) and set `pull_request` event, changes will be committed to PullRequest.  
+If `CREATE_PR` is set to `true`, a PullRequest is created.  
 
 ```yaml
 on: pull_request
 name: TOC Generator
 jobs:
- generateTOC:
-   name: TOC Generator
-   runs-on: ubuntu-latest
-   steps:
-     - uses: technote-space/toc-generator@v2
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+        with:
+          CREATE_PR: true
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -150,11 +152,11 @@ on:
     types: [opened, synchronize, reopened, closed]
 name: TOC Generator
 jobs:
- generateTOC:
-   name: TOC Generator
-   runs-on: ubuntu-latest
-   steps:
-     - uses: technote-space/toc-generator@v2
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
 ```
 
 ### Context variables
