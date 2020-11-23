@@ -51,7 +51,7 @@ describe('getRunnerArguments', () => {
       ],
       filterGitStatus: 'M',
       includeLabels: [],
-      notCreatePr: false,
+      notCreatePr: true,
       prBody: [
         '## Base PullRequest',
         '',

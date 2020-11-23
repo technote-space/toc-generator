@@ -51,7 +51,7 @@
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v3
    ```
 
 ## スクリーンショット
@@ -120,23 +120,25 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - uses: technote-space/toc-generator@v2
+         - uses: technote-space/toc-generator@v3
            with:
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
 
 ### プルリクエストの作成
-`CREATE_PR` に `true` (default) を設定 かつ `pull_request` イベントを設定した場合は、変更はプルリクエストにコミットされます。  
+`CREATE_PR` に `true` を設定した場合は、プルリクエストが作成されます。  
 
 ```yaml
 on: pull_request
 name: TOC Generator
 jobs:
- generateTOC:
-   name: TOC Generator
-   runs-on: ubuntu-latest
-   steps:
-     - uses: technote-space/toc-generator@v2
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+        with:
+          CREATE_PR: true
 ```
 
 ![create pr](https://raw.githubusercontent.com/technote-space/toc-generator/images/create_pr.png)
@@ -149,11 +151,11 @@ on:
     types: [opened, synchronize, reopened, closed]
 name: TOC Generator
 jobs:
- generateTOC:
-   name: TOC Generator
-   runs-on: ubuntu-latest
-   steps:
-     - uses: technote-space/toc-generator@v2
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
 ```
 
 ### Context variables

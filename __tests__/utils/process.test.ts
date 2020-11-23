@@ -105,6 +105,7 @@ describe('main', () => {
     process.env.INPUT_GITHUB_TOKEN   = 'test-token';
     process.env.INPUT_PR_BRANCH_NAME = 'close/test';
     process.env.INPUT_TOC_TITLE      = title;
+    process.env.INPUT_CREATE_PR      = 'true';
     const mockStdout                 = spyOnStdout();
 
     nock('https://api.github.com')
@@ -268,6 +269,7 @@ describe('main', () => {
     process.env.INPUT_FOLDING          = 'true';
     process.env.INPUT_MAX_HEADER_LEVEL = '1';
     process.env.INPUT_ENTRY_PREFIX     = '☆';
+    process.env.INPUT_CREATE_PR        = 'true';
     const mockStdout                   = spyOnStdout();
     setChildProcessParams({
       stdout: (command: string): string => {
