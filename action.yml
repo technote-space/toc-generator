@@ -55,6 +55,9 @@ inputs:
   CREATE_PR:
     description: Whether to create PullRequest.
     required: false
+  CHECK_ONLY_DEFAULT_BRANCH:
+    description: Whether to check only default branch.
+    required: false
   PR_BRANCH_PREFIX:
     description: PullRequest branch prefix.
     default: 'toc-generator/'

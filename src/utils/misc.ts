@@ -67,6 +67,7 @@ export const getRunnerArguments = (): MainArguments => {
     includeLabels: Utils.getArrayInput('INCLUDE_LABELS'),
     targetEvents: TARGET_EVENTS,
     notCreatePr: !Utils.getBoolValue(getInput('CREATE_PR')),
+    checkOnlyDefaultBranch: Utils.getBoolValue(getInput('CHECK_ONLY_DEFAULT_BRANCH')),
   };
 };
 

@@ -183,6 +183,7 @@ describe('main', () => {
       '::group::Total:2  Succeeded:1  Failed:0  Skipped:1',
       '> \x1b[33;40m→\x1b[0m\t[octocat:new-topic] PR from fork',
       '> \x1b[32;40m✔\x1b[0m\t[master] has been closed because there is no reference diff',
+      '::set-output name=result::succeeded',
       '::endgroup::',
     ]);
   });

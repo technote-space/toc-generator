@@ -67,7 +67,8 @@
 |COMMIT_MESSAGE|コミットメッセージ|`docs: update TOC`|true|`feat: update TOC`|
 |COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
 |COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| | |
-|CREATE_PR|プルリクエストを作成するかどうか|`true`| |`false`|
+|CREATE_PR|プルリクエストを作成するかどうか|`false`| |`true`|
+|CHECK_ONLY_DEFAULT_BRANCH|デフォルトのブランチのみをチェックするかどうか|`false`| |`true`|
 |PR_BRANCH_PREFIX|プルリクエストのブランチプリフィックス|`toc-generator/`|true| |
 |PR_BRANCH_NAME|プルリクエストのブランチ名<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
 |PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`docs: update TOC (${PR_MERGE_REF})`|true|`feat: update TOC`|
