@@ -182,6 +182,55 @@ jobs:
 | FILES_SUMMARY | 例：`Changed 2 files` |
 | FILES | 変更されたファイル一覧 |
 
+## 設定例
+### ブランチを制限しないでPush時にアクションを実行し直接コミット
+```yaml
+on: push
+name: TOC Generator
+jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+```
+
+### `release/` から始まるブランチのみを対象にPull Request更新時に実行しPull Requestを作成または更新
+```yaml
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+name: TOC Generator
+jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+        with:
+          CREATE_PR: true
+          TARGET_BRANCH_PREFIX: release/
+```
+
+### デフォルトブランチのみを対象にスケジュールでアクションを実行し直接コミット
+（他のワークフローの起動のために作成したTokenを使用）
+
+```yaml
+on:
+  schedule:
+    - cron: "0 23 * * *"
+name: TOC Generator
+jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          CHECK_ONLY_DEFAULT_BRANCH: true
+```
+
 ## このアクションを使用しているリポジトリの例
 - [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
   - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
