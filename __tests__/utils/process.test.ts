@@ -107,6 +107,14 @@ describe('main', () => {
     process.env.INPUT_TOC_TITLE      = title;
     process.env.INPUT_CREATE_PR      = 'true';
     const mockStdout                 = spyOnStdout();
+    setChildProcessParams({
+      stdout: (command: string): string => {
+        if (command.includes(' diff ')) {
+          return '';
+        }
+        return 'stdout';
+      },
+    });
 
     nock('https://api.github.com')
       .persist()
@@ -134,6 +142,7 @@ describe('main', () => {
       '[command]git init \'.\'',
       '  >> stdout',
       '[command]git remote add origin',
+      '  >> stdout',
       '[command]git fetch --no-tags origin \'refs/heads/toc-generator/close/test:refs/remotes/origin/toc-generator/close/test\'',
       '  >> stdout',
       '[command]git reset --hard',
@@ -149,9 +158,12 @@ describe('main', () => {
       '[command]git init \'.\'',
       '  >> stdout',
       '[command]git remote add origin',
+      '  >> stdout',
       '[command]git fetch --no-tags origin \'refs/heads/master:refs/remotes/origin/master\'',
       '  >> stdout',
       '[command]git checkout -b master origin/master',
+      '  >> stdout',
+      '[command]git checkout master',
       '  >> stdout',
       '[command]git checkout -b toc-generator/close/test',
       '  >> stdout',
@@ -177,7 +189,8 @@ describe('main', () => {
       '[command]git status --short -uno',
       '> There is no diff.',
       '> Checking references diff...',
-      '[command]git fetch --prune --no-recurse-submodules origin +refs/heads/master:refs/remotes/origin/master',
+      '[command]git fetch --prune --no-tags --no-recurse-submodules origin +refs/heads/master:refs/remotes/origin/master',
+      '  >> stdout',
       '[command]git diff \'HEAD..origin/master\' --name-only \'--diff-filter=M\'',
       '> Closing PullRequest... [toc-generator/close/test]',
       '> Deleting reference... [refs/heads/toc-generator/close/test]',
@@ -226,6 +239,7 @@ describe('main', () => {
       '::endgroup::',
       '::group::Switching branch to [test]...',
       '[command]git checkout -b test origin/test',
+      '[command]git checkout test',
       '[command]git rev-parse --abbrev-ref HEAD',
       '  >> test',
       '[command]git merge --no-edit origin/test',
@@ -316,8 +330,6 @@ describe('main', () => {
       '::endgroup::',
       '::group::Switching branch to [toc-generator/update-toc-21031067]...',
       '[command]git checkout -b toc-generator/update-toc-21031067 origin/toc-generator/update-toc-21031067',
-      '[command]git rev-parse --abbrev-ref HEAD',
-      '  >> test',
       '[command]git checkout toc-generator/update-toc-21031067',
       '[command]git rev-parse --abbrev-ref HEAD',
       '  >> test',
@@ -328,6 +340,7 @@ describe('main', () => {
       '[command]git remote add origin',
       '[command]git fetch --no-tags origin \'refs/heads/feature/new-feature:refs/remotes/origin/feature/new-feature\'',
       '[command]git checkout -b feature/new-feature origin/feature/new-feature',
+      '[command]git checkout feature/new-feature',
       '[command]git checkout -b toc-generator/update-toc-21031067',
       '[command]ls -la',
       '::endgroup::',
@@ -349,7 +362,7 @@ describe('main', () => {
       '[command]git show \'--stat-count=10\' HEAD',
       '::endgroup::',
       '::group::Checking references diff...',
-      '[command]git fetch --prune --no-recurse-submodules origin +refs/heads/feature/new-feature:refs/remotes/origin/feature/new-feature',
+      '[command]git fetch --prune --no-tags --no-recurse-submodules origin +refs/heads/feature/new-feature:refs/remotes/origin/feature/new-feature',
       '[command]git diff \'HEAD..origin/feature/new-feature\' --name-only \'--diff-filter=M\'',
       '::endgroup::',
       '::group::Pushing to hello/world@toc-generator/update-toc-21031067...',
