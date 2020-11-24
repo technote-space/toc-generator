@@ -789,10 +789,10 @@
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
 
-"@technote-space/github-action-helper@^4.2.4", "@technote-space/github-action-helper@^4.2.7", "@technote-space/github-action-helper@^4.3.1":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-4.3.1.tgz#e079ae025b174bc77de07a03d698361f29a43dbf"
-  integrity sha512-hYfo9Oxx/mX114AJy66p75B8wK69/59f7wIfAh8Ck4Jnv22LtRFMUgkRwnD9+q1ob777UwBqFcykXOSYdHfKQg==
+"@technote-space/github-action-helper@^4.2.4", "@technote-space/github-action-helper@^4.2.7", "@technote-space/github-action-helper@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-4.4.1.tgz#ea8105c9edb0cab1c9af1f716bdc7e59c932f53b"
+  integrity sha512-ob4dlZqPU1o+VMC3WU3UXwC9Cm189NVM9jkWk5XeNEMLp8NS+SlNUdYhdAla6VcaEMUgJS6NXL76977ClvmFoQ==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
@@ -809,15 +809,15 @@
     "@actions/core" "^1.2.6"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.0.2.tgz#8c6eb76f5b2af97cb1b8d3712c271e16a1dc535e"
-  integrity sha512-VYN0jJjmi6seFfP3BWgGdr/BmAHSKNn9DRXyy8CFEG64XakPs+jSHIe5xLtVLqcO8fh5EuwBP8zq3E1/w81ckw==
+"@technote-space/github-action-pr-helper@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.0.4.tgz#4b5953c919f7e3e1f8eb1c39b5fee1dd57e5f9e2"
+  integrity sha512-gzhJX+Hz0pS8pzgW+LGr8PcmZVMwnuLQQ8lz3MSbHqxUFx7N6B6boooDN10hy54QgP7nlkRXyhH6G8R/dvUkZA==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
     "@technote-space/filter-github-action" "^0.5.8"
-    "@technote-space/github-action-helper" "^4.3.1"
+    "@technote-space/github-action-helper" "^4.4.1"
     moment "^2.29.1"
 
 "@technote-space/github-action-test-helper@^0.6.4":
