@@ -71,7 +71,7 @@ e.g. `README.md`
 |HTML_MODE|Whether it is html mode([Generated Example](./__tests__/fixtures/doctoc/expected/README.horizontal.md))|`false`| |`true`|
 |HTML_TEMPLATE|Html template for html mode|`<p align="center">${ITEMS}</p>`| | |
 |ITEM_TEMPLATE|Item template for html mode|`<a href="${LINK}">${TEXT}</a>`| | |
-|SEPARATOR|Separator for html mode|`<span>|</span>`| | |
+|SEPARATOR|Separator for html mode|<code>\<span>&#124;\</span></code>| | |
 |FOLDING|Whether to make TOC foldable([Generated Example](./__tests__/fixtures/doctoc/expected/README.update.wrap.md))|`false`| |`true`|
 |COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|Git commit name|`${github.actor}`| | |

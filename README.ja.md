@@ -70,7 +70,7 @@
 |HTML_MODE|Htmlモードかどうか([生成例](./__tests__/fixtures/doctoc/expected/README.horizontal.md))|`false`| |`true`|
 |HTML_TEMPLATE|Htmlテンプレート(Htmlモード)|`<p align="center">${ITEMS}</p>`| | |
 |ITEM_TEMPLATE|アイテムテンプレート(Htmlモード)|`<a href="${LINK}">${TEXT}</a>`| | |
-|SEPARATOR|セパレータ(Htmlモード)|`<span>|</span>`| | |
+|SEPARATOR|セパレータ(Htmlモード)|<code>\<span>&#124;\</span></code>| | |
 |FOLDING|目次を折りたたみ式にするかどうか([生成例](./__tests__/fixtures/doctoc/expected/README.update.wrap.md))|`false`| |`true`|
 |COMMIT_MESSAGE|コミットメッセージ|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
