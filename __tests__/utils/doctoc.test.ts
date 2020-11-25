@@ -129,6 +129,20 @@ describe('transformAndSave', () => {
       unchanged: [],
     });
   });
+
+  it('should run doctoc with html mode', () => {
+    process.env.INPUT_HTML_MODE = 'true';
+    expect(transformAndSave([{path: resolve(doctocDir, 'README.horizontal.md')}], title)).toEqual({
+      changed: [
+        {
+          data: fs.readFileSync(resolve(doctocDir, 'expected/README.horizontal.md'), 'utf8'),
+          path: resolve(doctocDir, 'README.horizontal.md'),
+          transformed: true,
+        },
+      ],
+      unchanged: [],
+    });
+  });
 });
 
 describe('executeDoctoc', () => {
@@ -141,8 +155,10 @@ describe('executeDoctoc', () => {
       changed: [
         resolve(doctocDir, 'README.create1.md'),
         resolve(doctocDir, 'README.create2.md'),
+        resolve(doctocDir, 'README.horizontal.md'),
         resolve(doctocDir, 'README.toc-me.md'),
         resolve(doctocDir, 'README.update.md'),
+        resolve(doctocDir, 'expected/README.horizontal.md'),
         resolve(doctocDir, 'expected/README.update.options.md'),
         resolve(doctocDir, 'expected/README.update.wrap.md'),
       ],
@@ -163,6 +179,7 @@ describe('executeDoctoc', () => {
       changed: [
         resolve(doctocDir, 'README.create1.md'),
         resolve(doctocDir, 'README.create2.md'),
+        resolve(doctocDir, 'README.horizontal.md'),
         resolve(doctocDir, 'README.toc-me.md'),
         resolve(doctocDir, 'README.update.md'),
       ],
