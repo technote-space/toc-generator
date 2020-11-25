@@ -38,6 +38,21 @@ inputs:
     description: Closing comment (for other than DocToc)
     required: false
     default: '<!-- tocstop '
+  HTML_MODE:
+    description: Whether it is html mode.
+    required: false
+  HTML_TEMPLATE:
+    description: Html template for html mode
+    required: false
+    default: <p align="center">${ITEMS}</p>
+  ITEM_TEMPLATE:
+    description: Item template for html mode
+    required: false
+    default: <a href="${LINK}">${TEXT}</a>
+  SEPARATOR:
+    description: Separator for html mode
+    required: false
+    default: <span>|</span>
 
   COMMIT_MESSAGE:
     description: Commit message.
