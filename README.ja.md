@@ -67,10 +67,10 @@
 |TARGET_PATHS|対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
 |TOC_TITLE|目次タイトル|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
-|HTML_MODE|Htmlモードかどうか([生成例](./__tests__/fixtures/doctoc/expected/README.horizontal.md))|`false`| |`true`|
-|HTML_TEMPLATE|Htmlテンプレート(Htmlモード)|`<p align="center">${ITEMS}</p>`| | |
-|ITEM_TEMPLATE|アイテムテンプレート(Htmlモード)|`<a href="${LINK}">${TEXT}</a>`| | |
-|SEPARATOR|セパレータ(Htmlモード)|<code>\<span>&#124;\</span></code>| | |
+|CUSTOM_MODE|Customモードかどうか([生成例](./__tests__/fixtures/doctoc/expected/README.horizontal2.md))|`false`| |`true`|
+|CUSTOM_TEMPLATE|Customテンプレート(Customモード)|`<p align="center">${ITEMS}</p>`| | |
+|ITEM_TEMPLATE|アイテムテンプレート(Customモード)|`<a href="${LINK}">${TEXT}</a>`| | |
+|SEPARATOR|セパレータ(Customモード)|<code>\<span>&#124;\</span></code>| | |
 |FOLDING|目次を折りたたみ式にするかどうか([生成例](./__tests__/fixtures/doctoc/expected/README.update.wrap.md))|`false`| |`true`|
 |COMMIT_MESSAGE|コミットメッセージ|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |

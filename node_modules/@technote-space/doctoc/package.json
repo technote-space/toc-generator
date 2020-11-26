@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/doctoc",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Generates TOC for markdown files of local git repo.",
   "keywords": [
     "github",
