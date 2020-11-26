@@ -28,7 +28,7 @@ jobs:
         env:
           HEAD_REF: ${{ github.head_ref }}
         if: startsWith(github.head_ref, 'release/v')
-      - uses: actions/github-script@0.4.0
+      - uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
           script: |
@@ -39,7 +39,7 @@ jobs:
               sha: context.sha
             })
         if: env.NEXT_VERSION
-      - uses: actions/github-script@0.4.0
+      - uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
           script: |
