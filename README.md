@@ -68,10 +68,10 @@ e.g. `README.md`
 |TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
 |TOC_TITLE|TOC Title|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
-|HTML_MODE|Whether it is html mode([Generated Example](./__tests__/fixtures/doctoc/expected/README.horizontal.md))|`false`| |`true`|
-|HTML_TEMPLATE|Html template for html mode|`<p align="center">${ITEMS}</p>`| | |
-|ITEM_TEMPLATE|Item template for html mode|`<a href="${LINK}">${TEXT}</a>`| | |
-|SEPARATOR|Separator for html mode|<code>\<span>&#124;\</span></code>| | |
+|CUSTOM_MODE|Whether it is custom mode([Generated Example](./__tests__/fixtures/doctoc/expected/README.horizontal2.md))|`false`| |`true`|
+|CUSTOM_TEMPLATE|Custom template for custom mode|`<p align="center">${ITEMS}</p>`| | |
+|ITEM_TEMPLATE|Item template for custom mode|`<a href="${LINK}">${TEXT}</a>`| | |
+|SEPARATOR|Separator for custom mode|<code>\<span>&#124;\</span></code>| | |
 |FOLDING|Whether to make TOC foldable([Generated Example](./__tests__/fixtures/doctoc/expected/README.update.wrap.md))|`false`| |`true`|
 |COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|Git commit name|`${github.actor}`| | |
