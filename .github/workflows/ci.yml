@@ -57,7 +57,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-16.04, macos-latest]
+        os: [ubuntu-16.04, ubuntu-latest, ubuntu-20.04, macos-latest]
     steps:
       - name: Set running flag
         run: echo "RUNNING=1" >> $GITHUB_ENV
@@ -164,6 +164,11 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - uses: actions/checkout@v2
         if: env.RUNNING
+      - name: Check package version
+        uses: technote-space/package-version-check-action@v1
+        with:
+          COMMIT_DISABLED: 1
+        if: env.RUNNING
       - name: Set running flag
         run: npx can-npm-publish || echo "RUNNING=" >> $GITHUB_ENV
         if: env.RUNNING && matrix.target == 'npm'
@@ -201,11 +206,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-        if: env.RUNNING
-      - name: Check package version
-        uses: technote-space/package-version-check-action@v1
-        with:
-          COMMIT_DISABLED: 1
         if: env.RUNNING
       - name: Install Package dependencies
         run: yarn install
@@ -260,7 +260,7 @@ jobs:
     timeout-minutes: 3
     if: always()
     steps:
-      - uses: technote-space/workflow-conclusion-action@v1
+      - uses: technote-space/workflow-conclusion-action@v2
       - uses: 8398a7/action-slack@v3
         with:
           status: failure
