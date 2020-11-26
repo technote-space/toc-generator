@@ -39,18 +39,24 @@ inputs:
     required: false
     default: '<!-- tocstop '
   HTML_MODE:
-    description: Whether it is html mode.
+    description: Whether it is html mode (deprecated).
     required: false
   HTML_TEMPLATE:
-    description: Html template for html mode
+    description: Html template for html mode (deprecated)
     required: false
     default: <p align="center">${ITEMS}</p>
+  CUSTOM_MODE:
+    description: Whether it is custom mode.
+    required: false
+  CUSTOM_TEMPLATE:
+    description: CUSTOM template for custom mode
+    required: false
   ITEM_TEMPLATE:
-    description: Item template for html mode
+    description: Item template for custom mode
     required: false
     default: <a href="${LINK}">${TEXT}</a>
   SEPARATOR:
-    description: Separator for html mode
+    description: Separator for custom mode
     required: false
     default: <span>|</span>
 

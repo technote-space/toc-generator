@@ -19,8 +19,8 @@ export const transformWithWrap = (path: string, title: string): { transformed: b
     entryPrefix: getEntryPrefix(),
     checkOpeningComments: Utils.uniqueArray(getArrayInput('OPENING_COMMENT').concat(CHECK_OPENING_COMMENT)),
     checkClosingComments: Utils.uniqueArray(getArrayInput('CLOSING_COMMENT').concat(CHECK_CLOSING_COMMENT)),
-    isHtml: Utils.getBoolValue(getInput('HTML_MODE')),
-    htmlTemplate: getInput('HTML_TEMPLATE'),
+    isCustomMode: Utils.getBoolValue(getInput('CUSTOM_MODE') || getInput('HTML_MODE')),
+    customTemplate: getInput('CUSTOM_TEMPLATE') || getInput('HTML_TEMPLATE'),
     itemTemplate: getInput('ITEM_TEMPLATE'),
     separator: getInput('SEPARATOR'),
   });
