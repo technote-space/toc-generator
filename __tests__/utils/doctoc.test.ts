@@ -130,12 +130,29 @@ describe('transformAndSave', () => {
     });
   });
 
-  it('should run doctoc with html mode', () => {
+  it('should run doctoc with custom mode', () => {
+    process.env.INPUT_CUSTOM_MODE     = 'true';
+    process.env.INPUT_CUSTOM_TEMPLATE = '<p align="center"><sub>${ITEMS}</sub></p>';
+    process.env.INPUT_ITEM_TEMPLATE   = '<a href="${LINK}">[${TEXT}]</a>';
+    process.env.INPUT_SEPARATOR       = '･';
+    expect(transformAndSave([{path: resolve(doctocDir, 'README.horizontal.md')}], title)).toEqual({
+      changed: [
+        {
+          data: fs.readFileSync(resolve(doctocDir, 'expected/README.horizontal1.md'), 'utf8'),
+          path: resolve(doctocDir, 'README.horizontal.md'),
+          transformed: true,
+        },
+      ],
+      unchanged: [],
+    });
+  });
+
+  it('should run doctoc with html mode (deprecated)', () => {
     process.env.INPUT_HTML_MODE = 'true';
     expect(transformAndSave([{path: resolve(doctocDir, 'README.horizontal.md')}], title)).toEqual({
       changed: [
         {
-          data: fs.readFileSync(resolve(doctocDir, 'expected/README.horizontal.md'), 'utf8'),
+          data: fs.readFileSync(resolve(doctocDir, 'expected/README.horizontal2.md'), 'utf8'),
           path: resolve(doctocDir, 'README.horizontal.md'),
           transformed: true,
         },
@@ -158,7 +175,8 @@ describe('executeDoctoc', () => {
         resolve(doctocDir, 'README.horizontal.md'),
         resolve(doctocDir, 'README.toc-me.md'),
         resolve(doctocDir, 'README.update.md'),
-        resolve(doctocDir, 'expected/README.horizontal.md'),
+        resolve(doctocDir, 'expected/README.horizontal1.md'),
+        resolve(doctocDir, 'expected/README.horizontal2.md'),
         resolve(doctocDir, 'expected/README.update.options.md'),
         resolve(doctocDir, 'expected/README.update.wrap.md'),
       ],
