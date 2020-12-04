@@ -64,6 +64,7 @@ const authentication = await auth();
 //   type: 'token',
 //   token: '1234567890abcdef1234567890abcdef12345678',
 //   tokenType: 'oauth'
+// }
 ```
 
 ## `createTokenAuth(token) options`
