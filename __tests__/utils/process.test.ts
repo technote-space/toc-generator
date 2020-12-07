@@ -76,11 +76,11 @@ describe('main', () => {
     }));
 
     stdoutCalledWith(mockStdout, [
-      '> This is not target event.',
+      '> This is not a target event.',
     ]);
   });
 
-  it('should do nothing if it is not target branch', async() => {
+  it('should do nothing if it is not a target branch', async() => {
     process.env.INPUT_GITHUB_TOKEN         = 'test-token';
     process.env.INPUT_TARGET_BRANCH_PREFIX = 'prefix/';
     const mockStdout                       = spyOnStdout();
@@ -96,7 +96,7 @@ describe('main', () => {
     }));
 
     stdoutCalledWith(mockStdout, [
-      '> This is not target event.',
+      '> This is not a target event.',
     ]);
   });
 
