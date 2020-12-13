@@ -64,7 +64,7 @@ e.g. `README.md`
 
 ## Options
 | name | description | default | required | e.g. |
-|:---:|:---|:---:|:---:|:---:|
+|:---|:---|:---|:---|:---|
 |TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
 |TOC_TITLE|TOC Title|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
@@ -109,7 +109,7 @@ e.g.
 ## Action event details
 ### Target event
 | eventName: action | condition |
-|:---:|:---:|
+|:---|:---|
 |push: *|[condition1](#condition1)|
 |pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
 |pull_request: \[closed]||
