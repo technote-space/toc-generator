@@ -20,6 +20,7 @@
 - [インストール](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [スクリーンショット](#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88)
 - [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
+  - [個別に指定](#%E5%80%8B%E5%88%A5%E3%81%AB%E6%8C%87%E5%AE%9A)
 - [Action イベント詳細](#action-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E8%A9%B3%E7%B4%B0)
   - [対象イベント](#%E5%AF%BE%E8%B1%A1%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)
   - [Conditions](#conditions)
@@ -63,15 +64,15 @@
 
 ## オプション
 | name | description | default | required | e.g. |
-|:---:|:---|:---:|:---:|:---:|
+|:---|:---|:---|:---|:---|
 |TARGET_PATHS|対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
 |TOC_TITLE|目次タイトル|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
-|CUSTOM_MODE|Customモードかどうか([生成例](./__tests__/fixtures/doctoc/expected/README.horizontal2.md))|`false`| |`true`|
+|CUSTOM_MODE|Customモードかどうか([生成例](samples/README.horizontal.md))|`false`| |`true`|
 |CUSTOM_TEMPLATE|Customテンプレート(Customモード)|`<p align="center">${ITEMS}</p>`| | |
 |ITEM_TEMPLATE|アイテムテンプレート(Customモード)|`<a href="${LINK}">${TEXT}</a>`| | |
 |SEPARATOR|セパレータ(Customモード)|<code>\<span>&#124;\</span></code>| | |
-|FOLDING|目次を折りたたみ式にするかどうか([生成例](./__tests__/fixtures/doctoc/expected/README.update.wrap.md))|`false`| |`true`|
+|FOLDING|目次を折りたたみ式にするかどうか|`false`| |`true`|
 |COMMIT_MESSAGE|コミットメッセージ|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
 |COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| | |
@@ -89,10 +90,26 @@
 |CLOSING_COMMENT|終了コメント (DocToc以外のため)|`<!-- tocstop `| | |
 |GITHUB_TOKEN|アクセストークン|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
+### 個別に指定
+[doctoc](https://github.com/technote-space/doctoc#example) に使用されているオプションはコメントで値を指定することが可能です。  
+異なる設定で複数の目次を生成したい場合は以下のように個別に値を指定してください。
+
+例： 
+```markdown
+<!-- START doctoc -->
+<!-- param::isNotitle::true:: -->
+<!-- param::isCustomMode::true:: -->
+
+<!-- END doctoc -->
+
+...
+
+```
+
 ## Action イベント詳細
 ### 対象イベント
 | eventName: action | condition |
-|:---:|:---:|
+|:---|:---|
 |push: *|[condition1](#condition1)|
 |pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
 |pull_request: \[closed]||

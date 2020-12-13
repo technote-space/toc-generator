@@ -20,6 +20,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Installation](#installation)
 - [Screenshot](#screenshot)
 - [Options](#options)
+  - [Specify options individually](#specify-options-individually)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
@@ -64,15 +65,15 @@ e.g. `README.md`
 
 ## Options
 | name | description | default | required | e.g. |
-|:---:|:---|:---:|:---:|:---:|
+|:---|:---|:---|:---|:---|
 |TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
 |TOC_TITLE|TOC Title|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
-|CUSTOM_MODE|Whether it is custom mode([Generated Example](./__tests__/fixtures/doctoc/expected/README.horizontal2.md))|`false`| |`true`|
+|CUSTOM_MODE|Whether it is custom mode([Generated Example](samples/README.horizontal.md))|`false`| |`true`|
 |CUSTOM_TEMPLATE|Custom template for custom mode|`<p align="center">${ITEMS}</p>`| | |
 |ITEM_TEMPLATE|Item template for custom mode|`<a href="${LINK}">${TEXT}</a>`| | |
 |SEPARATOR|Separator for custom mode|<code>\<span>&#124;\</span></code>| | |
-|FOLDING|Whether to make TOC foldable([Generated Example](./__tests__/fixtures/doctoc/expected/README.update.wrap.md))|`false`| |`true`|
+|FOLDING|Whether to make TOC foldable|`false`| |`true`|
 |COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|Git commit name|`${github.actor}`| | |
 |COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
@@ -90,10 +91,26 @@ e.g. `README.md`
 |CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| | |
 |GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
+### Specify options individually
+The options used for [doctoc](https://github.com/technote-space/doctoc#example) can be commented to specify values.  
+If you want to generate multiple TOCs with different settings, specify the values individually as follows.
+
+e.g.
+```markdown
+<!-- START doctoc -->
+<!-- param::isNotitle::true:: -->
+<!-- param::isCustomMode::true:: -->
+
+<!-- END doctoc -->
+
+...
+
+```
+
 ## Action event details
 ### Target event
 | eventName: action | condition |
-|:---:|:---:|
+|:---|:---|
 |push: *|[condition1](#condition1)|
 |pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
 |pull_request: \[closed]||
