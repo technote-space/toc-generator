@@ -17,7 +17,8 @@ jobs:
     steps:
       - uses: technote-space/load-config-action@v1
         with:
-          CONFIG_FILENAME: workflow-settings.json
+          CONFIG_FILENAME: workflow-settings.json, workflow-details.json
+          IGNORE_WARNING: 'true'
       - name: Get version
         uses: technote-space/get-next-version-action@v1
         with:
