@@ -160,6 +160,23 @@ describe('transformAndSave', () => {
       unchanged: [],
     });
   });
+
+  it('should override options', () => {
+    process.env.INPUT_FOLDING          = 'true';
+    process.env.INPUT_MAX_HEADER_LEVEL = '3';
+    process.env.INPUT_ENTRY_PREFIX     = '☆';
+
+    expect(transformAndSave([{path: resolve(doctocDir, 'README.params.md')}], title)).toEqual({
+      changed: [
+        {
+          data: fs.readFileSync(resolve(doctocDir, 'expected/README.params.md'), 'utf8'),
+          path: resolve(doctocDir, 'README.params.md'),
+          transformed: true,
+        },
+      ],
+      unchanged: [],
+    });
+  });
 });
 
 describe('executeDoctoc', () => {
@@ -173,10 +190,12 @@ describe('executeDoctoc', () => {
         resolve(doctocDir, 'README.create1.md'),
         resolve(doctocDir, 'README.create2.md'),
         resolve(doctocDir, 'README.horizontal.md'),
+        resolve(doctocDir, 'README.params.md'),
         resolve(doctocDir, 'README.toc-me.md'),
         resolve(doctocDir, 'README.update.md'),
         resolve(doctocDir, 'expected/README.horizontal1.md'),
         resolve(doctocDir, 'expected/README.horizontal2.md'),
+        resolve(doctocDir, 'expected/README.params.md'),
         resolve(doctocDir, 'expected/README.update.options.md'),
         resolve(doctocDir, 'expected/README.update.wrap.md'),
       ],
@@ -198,6 +217,7 @@ describe('executeDoctoc', () => {
         resolve(doctocDir, 'README.create1.md'),
         resolve(doctocDir, 'README.create2.md'),
         resolve(doctocDir, 'README.horizontal.md'),
+        resolve(doctocDir, 'README.params.md'),
         resolve(doctocDir, 'README.toc-me.md'),
         resolve(doctocDir, 'README.update.md'),
       ],
