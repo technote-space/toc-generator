@@ -14,6 +14,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- param::isCustomMode::true:: -->
 <details>
 <summary>Details</summary>
 
@@ -257,7 +258,7 @@ jobs:
 - [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
   - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
 - [`jina-ai/jina` Change Log](https://github.com/jina-ai/jina/blob/master/CHANGELOG.md)
-  - [autocommit.yml](https://github.com/jina-ai/jina/blob/master/.github/workflows/autocommit.yml)
+  - [autocommit.yml](https://github.com/jina-ai/jina/blob/master/.github/workflows/autocommit.yml#L67-L77)
 
 
 ## Author

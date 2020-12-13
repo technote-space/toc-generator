@@ -18,6 +18,7 @@ by github or other sites via a command line flag.
 
 - [Install](#install)
 - [Example](#example)
+- [Author](#author)
 
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -54,3 +55,6 @@ transform(readFileSync('README.md', {
 }));
 ```
 
+## Author
+[GitHub (Technote)](https://github.com/technote-space)  
+[Blog](https://technote.space)
