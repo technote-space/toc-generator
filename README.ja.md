@@ -64,7 +64,7 @@
 
 ## オプション
 | name | description | default | required | e.g. |
-|:---:|:---|:---:|:---:|:---:|
+|:---|:---|:---|:---|:---|
 |TARGET_PATHS|対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
 |TOC_TITLE|目次タイトル|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
@@ -109,7 +109,7 @@
 ## Action イベント詳細
 ### 対象イベント
 | eventName: action | condition |
-|:---:|:---:|
+|:---|:---|
 |push: *|[condition1](#condition1)|
 |pull_request: \[opened, synchronize, reopened, labeled, unlabeled]|[condition2](#condition2)|
 |pull_request: \[closed]||
