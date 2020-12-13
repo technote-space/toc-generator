@@ -255,6 +255,9 @@ jobs:
   - [toc.yml](https://github.com/technote-space/toc-generator/blob/master/.github/workflows/toc.yml)
 - [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
   - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
+- [`jina-ai/jina` Change Log](https://github.com/jina-ai/jina/blob/master/CHANGELOG.md)
+  - [autocommit.yml](https://github.com/jina-ai/jina/blob/master/.github/workflows/autocommit.yml)
+
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  

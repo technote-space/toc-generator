@@ -10,32 +10,28 @@
 This is a `GitHub Actions` to generate TOC (Table of Contents),  
 which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if changed.
 
-## Table of Contents
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<details>
-<summary>Details</summary>
+<!-- param::isFolding::false:: -->
+<!-- param::isNotitle::true:: -->
+<!-- param::isCustomMode::true:: -->
 
-- [Installation](#installation)
-- [Screenshot](#screenshot)
-- [Options](#options)
-- [Action event details](#action-event-details)
-  - [Target event](#target-event)
-  - [Conditions](#conditions)
-- [Addition](#addition)
-  - [GITHUB_TOKEN](#github_token)
-  - [Create PullRequest](#create-pullrequest)
-  - [Context variables](#context-variables)
-  - [Context PR variables](#context-pr-variables)
-- [Configuration Examples](#configuration-examples)
-  - [Example 1](#example-1)
-  - [Example 2](#example-2)
-  - [Example 3](#example-3)
-- [Sample repositories using this Action](#sample-repositories-using-this-action)
-- [Author](#author)
+<p align="center">
+<a href="#installation">Installation</a>
+<span>|</span>
+<a href="#screenshot">Screenshot</a>
+<span>|</span>
+<a href="#options">Options</a>
+<span>|</span>
+<a href="#action-event-details">Action event details</a>
+<span>|</span>
+<a href="#addition">Addition</a>
+<span>|</span>
+<a href="#configuration-examples">Configuration Examples</a>
+<span>|</span>
+<a href="#author">Author</a>
+</p>
 
-</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
@@ -244,21 +240,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           CHECK_ONLY_DEFAULT_BRANCH: true
 ```
-
-## Sample repositories using this Action
-- [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
-  - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
-- [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
-  - [toc.yml](https://github.com/technote-space/auto-card-labeler/blob/master/.github/workflows/toc.yml)
-- [Assign Author](https://github.com/technote-space/assign-author)
-  - [toc.yml](https://github.com/technote-space/assign-author/blob/master/.github/workflows/toc.yml)
-- [TOC Generator](https://github.com/technote-space/toc-generator)
-  - [toc.yml](https://github.com/technote-space/toc-generator/blob/master/.github/workflows/toc.yml)
-- [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
-  - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
-- [`jina-ai/jina` Change Log](https://github.com/jina-ai/jina/blob/master/CHANGELOG.md)
-  - [autocommit.yml](https://github.com/jina-ai/jina/blob/master/.github/workflows/autocommit.yml)
-
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
