@@ -15,28 +15,23 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 <!-- param::isFolding::false:: -->
 <!-- param::isNotitle::true:: -->
 <!-- param::isCustomMode::true:: -->
-<details>
-<summary>Details</summary>
 
-- [Installation](#installation)
-- [Screenshot](#screenshot)
-- [Options](#options)
-- [Action event details](#action-event-details)
-  - [Target event](#target-event)
-  - [Conditions](#conditions)
-- [Addition](#addition)
-  - [GITHUB_TOKEN](#github_token)
-  - [Create PullRequest](#create-pullrequest)
-  - [Context variables](#context-variables)
-  - [Context PR variables](#context-pr-variables)
-- [Configuration Examples](#configuration-examples)
-  - [Example 1](#example-1)
-  - [Example 2](#example-2)
-  - [Example 3](#example-3)
-- [Sample repositories using this Action](#sample-repositories-using-this-action)
-- [Author](#author)
+<p align="center">
+<a href="#installation">Installation</a>
+<span>|</span>
+<a href="#screenshot">Screenshot</a>
+<span>|</span>
+<a href="#options">Options</a>
+<span>|</span>
+<a href="#action-event-details">Action event details</a>
+<span>|</span>
+<a href="#addition">Addition</a>
+<span>|</span>
+<a href="#configuration-examples">Configuration Examples</a>
+<span>|</span>
+<a href="#author">Author</a>
+</p>
 
-</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
