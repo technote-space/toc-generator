@@ -16,8 +16,6 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- param::isFolding::false:: -->
 <!-- param::isNotitle::true:: -->
-<details>
-<summary>Details</summary>
 
 - [Installation](#installation)
 - [Screenshot](#screenshot)
@@ -34,10 +32,8 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Example 1](#example-1)
   - [Example 2](#example-2)
   - [Example 3](#example-3)
-- [Sample repositories using this Action](#sample-repositories-using-this-action)
 - [Author](#author)
 
-</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
