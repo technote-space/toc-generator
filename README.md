@@ -68,11 +68,11 @@ e.g. `README.md`
 |TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
 |TOC_TITLE|TOC Title|`**Table of Contents**`| |`''`|
 |MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
-|CUSTOM_MODE|Whether it is custom mode([Generated Example](./__tests__/fixtures/doctoc/expected/README.horizontal2.md))|`false`| |`true`|
+|CUSTOM_MODE|Whether it is custom mode([Generated Example](samples/README.horizontal.md))|`false`| |`true`|
 |CUSTOM_TEMPLATE|Custom template for custom mode|`<p align="center">${ITEMS}</p>`| | |
 |ITEM_TEMPLATE|Item template for custom mode|`<a href="${LINK}">${TEXT}</a>`| | |
 |SEPARATOR|Separator for custom mode|<code>\<span>&#124;\</span></code>| | |
-|FOLDING|Whether to make TOC foldable([Generated Example](./__tests__/fixtures/doctoc/expected/README.update.wrap.md))|`false`| |`true`|
+|FOLDING|Whether to make TOC foldable|`false`| |`true`|
 |COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|Git commit name|`${github.actor}`| | |
 |COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
@@ -89,6 +89,22 @@ e.g. `README.md`
 |OPENING_COMMENT|Opening comment (for other than DocToc)|`<!-- toc `| | |
 |CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| | |
 |GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
+
+### Individually specified option
+The options used for [doctoc](https://github.com/technote-space/doctoc#example) can be commented to specify values.  
+If you want to generate multiple TOCs with different settings, specify the values individually as follows.
+
+e.g.
+```markdown
+<!-- START doctoc -->
+<!-- param::isNotitle::true:: -->
+<!-- param::isCustomMode::true:: -->
+
+<!-- END doctoc -->
+
+...
+
+```
 
 ## Action event details
 ### Target event
