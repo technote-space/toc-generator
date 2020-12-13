@@ -12,7 +12,8 @@ jobs:
     steps:
       - uses: technote-space/load-config-action@v1
         with:
-          CONFIG_FILENAME: workflow-settings.json
+          CONFIG_FILENAME: workflow-settings.json, workflow-details.json
+          IGNORE_WARNING: 'true'
       - uses: technote-space/create-project-card-action@v1
         with:
           PROJECT: ${{ env.PROJECT }}

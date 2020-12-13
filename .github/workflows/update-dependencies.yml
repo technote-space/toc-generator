@@ -23,7 +23,8 @@ jobs:
       - uses: technote-space/load-config-action@v1
         if: env.RUNNING1
         with:
-          CONFIG_FILENAME: workflow-settings.json
+          CONFIG_FILENAME: workflow-settings.json, workflow-details.json
+          IGNORE_WARNING: 'true'
       - uses: technote-space/auto-cancel-redundant-workflow@v1
         if: env.RUNNING1
         with:
