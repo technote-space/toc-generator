@@ -20,6 +20,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Installation](#installation)
 - [Screenshot](#screenshot)
 - [Options](#options)
+  - [Specify options individually](#specify-options-individually)
 - [Action event details](#action-event-details)
   - [Target event](#target-event)
   - [Conditions](#conditions)
