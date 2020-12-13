@@ -90,7 +90,7 @@ e.g. `README.md`
 |CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| | |
 |GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
 
-### Individually specified option
+### Specify options individually
 The options used for [doctoc](https://github.com/technote-space/doctoc#example) can be commented to specify values.  
 If you want to generate multiple TOCs with different settings, specify the values individually as follows.
 
