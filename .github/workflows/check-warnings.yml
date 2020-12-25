@@ -16,15 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
+      - uses: technote-space/load-config-action@v1
+        with:
+          CONFIG_FILENAME: workflow-settings.json, workflow-details.json
+          IGNORE_WARNING: 'true'
       - uses: technote-space/download-annotations-action@v1
         id: annotations
         with:
           TARGET_RUN_ID: ${{ github.event.workflow_run.id }}
           INCLUDE_LEVELS: warning
-          EXCLUDE_MESSAGE_PATTERNS: |
-            *warning jest*
-            *Cloning into*
-            *has unmet peer dependency*
+          EXCLUDE_MESSAGE_PATTERNS: ${{ env.ANNOTATION_EXCLUDE_PATTERNS }}
       - name: Build attachments
         run: |
           arr1='[{"fields":[{"title":"repo","value":"<https://github.com/${{ github.repository }}|${{ github.repository }}>","short":true},{"title":"action","value":"<${{ github.event.workflow_run.html_url }}|summary>","short":true}]}]'
