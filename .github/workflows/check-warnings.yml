@@ -20,7 +20,7 @@ jobs:
         with:
           CONFIG_FILENAME: workflow-settings.json, workflow-details.json
           IGNORE_WARNING: 'true'
-      - uses: technote-space/download-annotations-action@v1
+      - uses: technote-space/download-annotations-action@v2
         id: annotations
         with:
           TARGET_RUN_ID: ${{ github.event.workflow_run.id }}

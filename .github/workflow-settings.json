@@ -17,10 +17,12 @@
   "TOC_TARGET_PATHS": "README*.md",
   "BRANCH_PREFIX": "release/",
   "ANNOTATION_EXCLUDE_PATTERNS": [
-    "warning jest",
-    "warning babel-jest",
+    ">> warning ",
     "Cloning into",
     "has unmet peer dependency",
-    "has incorrect peer dependency"
+    "has incorrect peer dependency",
+    "Using version",
+    "travis-ci",
+    "tests/bootstrap.php"
   ]
 }
