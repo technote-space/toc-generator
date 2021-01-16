@@ -49,6 +49,9 @@ export interface paths {
     patch: operations["apps/reset-token"];
     delete: operations["apps/delete-token"];
   };
+  "/applications/{client_id}/token/scoped": {
+    post: operations["apps/scope-token"];
+  };
   "/applications/{client_id}/tokens/{access_token}": {
     get: operations["apps/check-authorization"];
     post: operations["apps/reset-authorization"];
@@ -2077,6 +2080,53 @@ export interface operations {
     };
   };
   /**
+   * Exchanges a non-repository scoped user-to-server OAuth access token for a repository scoped user-to-server OAuth access token. You can specify which repositories the token can access and which permissions are granted to the token. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
+   */
+  "apps/scope-token": {
+    parameters: {
+      path: {
+        client_id: components["parameters"]["client-id"];
+      };
+    };
+    requestBody: {
+      "application/json": {
+        /**
+         * **Required.** The OAuth access token used to authenticate to the GitHub API.
+         */
+        access_token?: string;
+        /**
+         * The name of the user or organization to scope the user-to-server access token to. **Required** unless `target_id` is specified.
+         */
+        target?: string;
+        /**
+         * The ID of the user or organization to scope the user-to-server access token to. **Required** unless `target` is specified.
+         */
+        target_id?: number;
+        /**
+         * The list of repository IDs to scope the user-to-server access token to. `repositories` may not be specified if `repository_ids` is specified.
+         */
+        repositories?: string[];
+        /**
+         * The list of repository names to scope the user-to-server access token to. `repository_ids` may not be specified if `repositories` is specified.
+         */
+        repository_ids?: number[];
+        permissions?: components["schemas"]["app-permissions"];
+      };
+    };
+    responses: {
+      /**
+       * response
+       */
+      "200": {
+        "application/json": components["schemas"]["authorization"];
+      };
+      "401": unknown;
+      "403": unknown;
+      "404": unknown;
+      "422": unknown;
+    };
+  };
+  /**
    * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
    *
    * OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
@@ -2595,8 +2645,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          organizations?: components["schemas"]["organization-simple"][];
+          total_count: number;
+          organizations: components["schemas"]["organization-simple"][];
         };
       };
     };
@@ -2727,8 +2777,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          runner_groups?: components["schemas"]["runner-groups-enterprise"][];
+          total_count: number;
+          runner_groups: components["schemas"]["runner-groups-enterprise"][];
         };
       };
     };
@@ -2868,8 +2918,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          organizations?: components["schemas"]["organization-simple"][];
+          total_count: number;
+          organizations: components["schemas"]["organization-simple"][];
         };
       };
     };
@@ -2963,8 +3013,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          runners?: components["schemas"]["runner"][];
+          total_count: number;
+          runners: components["schemas"]["runner"][];
         };
       };
     };
@@ -3791,8 +3841,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          repositories?: components["schemas"]["repository"][];
+          total_count: number;
+          repositories: components["schemas"]["repository"][];
           repository_selection?: string;
         };
       };
@@ -4571,8 +4621,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          repositories?: components["schemas"]["repository"][];
+          total_count: number;
+          repositories: components["schemas"]["repository"][];
         };
       };
     };
@@ -4709,8 +4759,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          runner_groups?: components["schemas"]["runner-groups-org"][];
+          total_count: number;
+          runner_groups: components["schemas"]["runner-groups-org"][];
         };
       };
     };
@@ -4856,8 +4906,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          repositories?: components["schemas"]["repository"][];
+          total_count: number;
+          repositories: components["schemas"]["repository"][];
         };
       };
     };
@@ -4962,8 +5012,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          runners?: components["schemas"]["runner"][];
+          total_count: number;
+          runners: components["schemas"]["runner"][];
         };
       };
     };
@@ -5065,8 +5115,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          runners?: components["schemas"]["runner"][];
+          total_count: number;
+          runners: components["schemas"]["runner"][];
         };
       };
     };
@@ -5207,8 +5257,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          secrets?: components["schemas"]["organization-actions-secret"][];
+          total_count: number;
+          secrets: components["schemas"]["organization-actions-secret"][];
         };
       };
     };
@@ -5401,8 +5451,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          repositories?: components["schemas"]["minimal-repository"][];
+          total_count: number;
+          repositories: components["schemas"]["minimal-repository"][];
         };
       };
     };
@@ -5884,8 +5934,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          installations?: components["schemas"]["installation"][];
+          total_count: number;
+          installations: components["schemas"]["installation"][];
         };
       };
     };
@@ -8790,8 +8840,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          artifacts?: components["schemas"]["artifact"][];
+          total_count: number;
+          artifacts: components["schemas"]["artifact"][];
         };
       };
     };
@@ -9013,8 +9063,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          runners?: components["schemas"]["runner"][];
+          total_count: number;
+          runners: components["schemas"]["runner"][];
         };
       };
     };
@@ -9166,8 +9216,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          workflow_runs?: components["schemas"]["workflow-run"][];
+          total_count: number;
+          workflow_runs: components["schemas"]["workflow-run"][];
         };
       };
     };
@@ -9233,8 +9283,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          artifacts?: components["schemas"]["artifact"][];
+          total_count: number;
+          artifacts: components["schemas"]["artifact"][];
         };
       };
     };
@@ -9284,8 +9334,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          jobs?: components["schemas"]["job"][];
+          total_count: number;
+          jobs: components["schemas"]["job"][];
         };
       };
     };
@@ -9389,8 +9439,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          secrets?: components["schemas"]["actions-secret"][];
+          total_count: number;
+          secrets: components["schemas"]["actions-secret"][];
         };
       };
     };
@@ -9580,8 +9630,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          workflows?: components["schemas"]["workflow"][];
+          total_count: number;
+          workflows: components["schemas"]["workflow"][];
         };
       };
     };
@@ -9707,8 +9757,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          workflow_runs?: components["schemas"]["workflow-run"][];
+          total_count: number;
+          workflow_runs: components["schemas"]["workflow-run"][];
         };
       };
     };
@@ -11331,8 +11381,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          check_runs?: components["schemas"]["check-run"][];
+          total_count: number;
+          check_runs: components["schemas"]["check-run"][];
         };
       };
     };
@@ -11385,7 +11435,7 @@ export interface operations {
         "application/json": components["schemas"]["code-scanning-alert-code-scanning-alert-items"][];
       };
       /**
-       * Response if GitHub Advanced Security is not enabled for this repository
+       * Response if github advanced security is not enabled for this repository
        */
       "403": unknown;
       /**
@@ -11416,7 +11466,7 @@ export interface operations {
         "application/json": components["schemas"]["code-scanning-alert-code-scanning-alert"];
       };
       /**
-       * Response if GitHub Advanced Security is not enabled for this repository
+       * Response if github advanced security is not enabled for this repository
        */
       "403": unknown;
       "404": unknown;
@@ -11448,7 +11498,7 @@ export interface operations {
         "application/json": components["schemas"]["code-scanning-alert-code-scanning-alert"];
       };
       /**
-       * Response if the repository is archived, or if GitHub Advanced Security is not enabled for this repository
+       * Response if the repository is archived, or if github advanced security is not enabled for this repository
        */
       "403": unknown;
       /**
@@ -11485,7 +11535,7 @@ export interface operations {
         "application/json": components["schemas"]["code-scanning-analysis-code-scanning-analysis"][];
       };
       /**
-       * Response if GitHub Advanced Security is not enabled for this repository
+       * Response if github advanced security is not enabled for this repository
        */
       "403": unknown;
     };
@@ -11527,7 +11577,7 @@ export interface operations {
        */
       "400": unknown;
       /**
-       * Response if the repository is archived, or if GitHub Advanced Security is not enabled for this repository
+       * Response if the repository is archived, or if github advanced security is not enabled for this repository
        */
       "403": unknown;
       /**
@@ -12152,8 +12202,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          check_runs?: components["schemas"]["check-run"][];
+          total_count: number;
+          check_runs: components["schemas"]["check-run"][];
         };
       };
     };
@@ -12189,8 +12239,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          check_suites?: components["schemas"]["check-suite"][];
+          total_count: number;
+          check_suites: components["schemas"]["check-suite"][];
         };
       };
     };
@@ -12813,7 +12863,7 @@ export interface operations {
    * *   Create a new deployment that is active so that the system has a record of the current state, then delete the previously active deployment.
    * *   Mark the active deployment as inactive by adding any non-successful deployment status.
    *
-   * For more information, see "[Create a deployment](https://docs.github.com/rest/reference/repos/deployments/#create-a-deployment)" and "[Create a deployment status](https://docs.github.com/rest/reference/repos#create-a-deployment-status)."
+   * For more information, see "[Create a deployment](https://docs.github.com/rest/reference/repos/#create-a-deployment)" and "[Create a deployment status](https://docs.github.com/rest/reference/repos#create-a-deployment-status)."
    */
   "repos/delete-deployment": {
     parameters: {
@@ -15416,7 +15466,7 @@ export interface operations {
   /**
    * This method returns the contents of the repository's license file, if one is detected.
    *
-   * Similar to [Get repository content](https://docs.github.com/rest/reference/repos/contents#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
+   * Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
    */
   "licenses/get-for-repo": {
     parameters: {
@@ -16531,7 +16581,7 @@ export interface operations {
     };
   };
   /**
-   * This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/reference/guides#dealing-with-abuse-rate-limits)" for details.
+   * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
    */
   "pulls/merge": {
     parameters: {
@@ -16607,7 +16657,7 @@ export interface operations {
     };
   };
   /**
-   * This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/reference/guides#dealing-with-abuse-rate-limits)" for details.
+   * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
    */
   "pulls/request-reviewers": {
     parameters: {
@@ -16700,7 +16750,7 @@ export interface operations {
    *
    * Pull request reviews created in the `PENDING` state do not include the `submitted_at` property in the response.
    *
-   * **Note:** To comment on a specific line in a file, you need to first determine the _position_ of that line in the diff. The GitHub REST API v3 offers the `application/vnd.github.v3.diff` [media type](https://docs.github.com/rest/reference/media/#commits-commit-comparison-and-pull-requests). To see a pull request diff, add this media type to the `Accept` header of a call to the [single pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) endpoint.
+   * **Note:** To comment on a specific line in a file, you need to first determine the _position_ of that line in the diff. The GitHub REST API v3 offers the `application/vnd.github.v3.diff` [media type](https://docs.github.com/rest/overview/media-types#commits-commit-comparison-and-pull-requests). To see a pull request diff, add this media type to the `Accept` header of a call to the [single pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) endpoint.
    *
    * The `position` value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
    */
@@ -18785,9 +18835,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          incomplete_results?: boolean;
-          items?: components["schemas"]["code-search-result-item"][];
+          total_count: number;
+          incomplete_results: boolean;
+          items: components["schemas"]["code-search-result-item"][];
         };
       };
       "304": never;
@@ -18828,9 +18878,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          incomplete_results?: boolean;
-          items?: components["schemas"]["commit-search-result-item"][];
+          total_count: number;
+          incomplete_results: boolean;
+          items: components["schemas"]["commit-search-result-item"][];
         };
       };
       "304": never;
@@ -18884,9 +18934,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          incomplete_results?: boolean;
-          items?: components["schemas"]["issue-search-result-item"][];
+          total_count: number;
+          incomplete_results: boolean;
+          items: components["schemas"]["issue-search-result-item"][];
         };
       };
       "304": never;
@@ -18930,9 +18980,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          incomplete_results?: boolean;
-          items?: components["schemas"]["label-search-result-item"][];
+          total_count: number;
+          incomplete_results: boolean;
+          items: components["schemas"]["label-search-result-item"][];
         };
       };
       "304": never;
@@ -18978,9 +19028,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          incomplete_results?: boolean;
-          items?: components["schemas"]["repo-search-result-item"][];
+          total_count: number;
+          incomplete_results: boolean;
+          items: components["schemas"]["repo-search-result-item"][];
         };
       };
       "304": never;
@@ -19014,9 +19064,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          incomplete_results?: boolean;
-          items?: components["schemas"]["topic-search-result-item"][];
+          total_count: number;
+          incomplete_results: boolean;
+          items: components["schemas"]["topic-search-result-item"][];
         };
       };
       "304": never;
@@ -19056,9 +19106,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          incomplete_results?: boolean;
-          items?: components["schemas"]["user-search-result-item"][];
+          total_count: number;
+          incomplete_results: boolean;
+          items: components["schemas"]["user-search-result-item"][];
         };
       };
       "304": never;
@@ -19468,7 +19518,7 @@ export interface operations {
     };
   };
   /**
-   * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create reaction for a team discussion comment`](https://docs.github.comt/rest/reference/reactions#create-reaction-for-a-team-discussion-comment) endpoint.
+   * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Create reaction for a team discussion comment](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment)" endpoint.
    *
    * Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with a `Status: 200 OK` means that you already added the reaction type to this team discussion comment.
    */
@@ -20008,7 +20058,7 @@ export interface operations {
     };
   };
   /**
-   * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team repository permissions](https://docs.github.comt/rest/reference/teams#add-or-update-team-project-permissions) endpoint.
+   * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Add or update team repository permissions](https://docs.github.com/rest/reference/teams#add-or-update-team-repository-permissions)" endpoint.
    *
    * To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization.
    *
@@ -20649,8 +20699,8 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
-          installations?: components["schemas"]["installation"][];
+          total_count: number;
+          installations: components["schemas"]["installation"][];
         };
       };
       "304": never;
@@ -20684,9 +20734,9 @@ export interface operations {
        */
       "200": {
         "application/json": {
-          total_count?: number;
+          total_count: number;
           repository_selection?: string;
-          repositories?: components["schemas"]["repository"][];
+          repositories: components["schemas"]["repository"][];
         };
       };
       "304": never;
@@ -20697,7 +20747,7 @@ export interface operations {
   /**
    * Add a single repository to an installation. The authenticated user must have admin access to the repository.
    *
-   * You must use a personal access token (which you can create via the [command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations#create-a-new-authorization) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) to access this endpoint.
+   * You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
    */
   "apps/add-repo-to-installation": {
     parameters: {
@@ -20719,7 +20769,7 @@ export interface operations {
   /**
    * Remove a single repository from an installation. The authenticated user must have admin access to the repository.
    *
-   * You must use a personal access token (which you can create via the [command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations#create-a-new-authorization) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) to access this endpoint.
+   * You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
    */
   "apps/remove-repo-from-installation": {
     parameters: {
@@ -22217,6 +22267,9 @@ export interface components {
      * grant_id parameter
      */
     grant_id: number;
+    /**
+     * The client ID of your GitHub app.
+     */
     "client-id": string;
     "access-token": string;
     app_slug: string;
@@ -22886,7 +22939,6 @@ export interface components {
         updated_at?: string;
         permissions?: { admin?: boolean; push?: boolean; pull?: boolean };
         allow_rebase_merge?: boolean;
-        template_repository?: string;
         temp_clone_token?: string;
         allow_squash_merge?: boolean;
         delete_branch_on_merge?: boolean;
@@ -22918,8 +22970,8 @@ export interface components {
      * Authentication token for a GitHub App installed on a user or org.
      */
     "installation-token": {
-      token?: string;
-      expires_at?: string;
+      token: string;
+      expires_at: string;
       permissions?: {
         issues?: string;
         contents?: string;
@@ -22959,8 +23011,133 @@ export interface components {
       scopes: string[];
       user?: components["schemas"]["simple-user"] | null;
     };
+    /**
+     * The permissions granted to the user-to-server access token.
+     */
+    "app-permissions": {
+      /**
+       * The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
+       */
+      actions?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
+       */
+      administration?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
+       */
+      checks?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
+       */
+      content_references?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
+       */
+      contents?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
+       */
+      deployments?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
+       */
+      environments?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
+       */
+      issues?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
+       */
+      metadata?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
+       */
+      packages?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
+       */
+      pages?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
+       */
+      pull_requests?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
+       */
+      repository_hooks?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+       */
+      repository_projects?: "read" | "write" | "admin";
+      /**
+       * The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
+       */
+      secret_scanning_alerts?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
+       */
+      secrets?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
+       */
+      security_events?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
+       */
+      single_file?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
+       */
+      statuses?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
+       */
+      vulnerability_alerts?: "read";
+      /**
+       * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
+       */
+      workflows?: "write";
+      /**
+       * The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
+       */
+      members?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
+       */
+      organization_administration?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
+       */
+      organization_hooks?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
+       */
+      organization_plan?: "read";
+      /**
+       * The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+       */
+      organization_projects?: "read" | "write" | "admin";
+      /**
+       * The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
+       */
+      organization_secrets?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
+       */
+      organization_self_hosted_runners?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
+       */
+      organization_user_blocking?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
+       */
+      team_discussions?: "read" | "write";
+    };
     "scoped-installation": {
-      permissions: { [key: string]: any };
+      permissions: components["schemas"]["app-permissions"];
       /**
        * Describe whether all repositories have been selected or there's a selection involved
        */
@@ -23037,12 +23214,12 @@ export interface components {
      */
     "selected-actions-url": string;
     "actions-enterprise-permissions": {
-      enabled_organizations?: components["schemas"]["enabled-organizations"];
+      enabled_organizations: components["schemas"]["enabled-organizations"];
       /**
        * The API URL to use to get or set the selected organizations that are allowed to run GitHub Actions, when `enabled_organizations` is set to `selected`.
        */
       selected_organizations_url?: string;
-      allowed_actions?: components["schemas"]["allowed-actions"];
+      allowed_actions: components["schemas"]["allowed-actions"];
       selected_actions_url?: components["schemas"]["selected-actions-url"];
     };
     /**
@@ -23066,23 +23243,24 @@ export interface components {
       /**
        * Whether GitHub-owned actions are allowed. For example, this includes the actions in the `actions` organization.
        */
-      github_owned_allowed?: boolean;
+      github_owned_allowed: boolean;
       /**
        * Whether actions in GitHub Marketplace from verified creators are allowed. Set to `true` to allow all GitHub Marketplace actions by verified creators.
        */
-      verified_allowed?: boolean;
+      verified_allowed: boolean;
       /**
        * Specifies a list of string-matching patterns to allow specific action(s). Wildcards, tags, and SHAs are allowed. For example, `monalisa/octocat@*`, `monalisa/octocat@v2`, `monalisa/*`."
        */
-      patterns_allowed?: string[];
+      patterns_allowed: string[];
     };
     "runner-groups-enterprise": {
-      id?: number;
-      name?: string;
-      visibility?: string;
-      default?: boolean;
+      id: number;
+      name: string;
+      visibility: string;
+      default: boolean;
       selected_organizations_url?: string;
-      runners_url?: string;
+      runners_url: string;
+      allows_public_repositories: boolean;
     };
     /**
      * A self hosted runner
@@ -23124,10 +23302,10 @@ export interface components {
      * Runner Application
      */
     "runner-application": {
-      os?: string;
-      architecture?: string;
-      download_url?: string;
-      filename?: string;
+      os: string;
+      architecture: string;
+      download_url: string;
+      filename: string;
     };
     /**
      * Authentication Token
@@ -23226,16 +23404,16 @@ export interface components {
       /**
        * The sum of the free and paid GitHub Actions minutes used.
        */
-      total_minutes_used?: number;
+      total_minutes_used: number;
       /**
        * The total paid GitHub Actions minutes used.
        */
-      total_paid_minutes_used?: number;
+      total_paid_minutes_used: number;
       /**
        * The amount of free GitHub Actions minutes available.
        */
-      included_minutes?: number;
-      minutes_used_breakdown?: {
+      included_minutes: number;
+      minutes_used_breakdown: {
         /**
          * Total minutes used on Ubuntu runner machines.
          */
@@ -23254,29 +23432,29 @@ export interface components {
       /**
        * Sum of the free and paid storage space (GB) for GitHuub Packages.
        */
-      total_gigabytes_bandwidth_used?: number;
+      total_gigabytes_bandwidth_used: number;
       /**
        * Total paid storage space (GB) for GitHuub Packages.
        */
-      total_paid_gigabytes_bandwidth_used?: number;
+      total_paid_gigabytes_bandwidth_used: number;
       /**
        * Free storage space (GB) for GitHub Packages.
        */
-      included_gigabytes_bandwidth?: number;
+      included_gigabytes_bandwidth: number;
     };
     "combined-billing-usage": {
       /**
        * Numbers of days left in billing cycle.
        */
-      days_left_in_billing_cycle?: number;
+      days_left_in_billing_cycle: number;
       /**
        * Estimated storage space (GB) used in billing cycle.
        */
-      estimated_paid_storage_for_month?: number;
+      estimated_paid_storage_for_month: number;
       /**
        * Estimated sum of free and paid storage space (GB) used in billing cycle.
        */
-      estimated_storage_for_month?: number;
+      estimated_storage_for_month: number;
     };
     /**
      * Actor
@@ -23879,7 +24057,7 @@ export interface components {
       created_at?: string | null;
       updated_at?: string | null;
       permissions?: { admin?: boolean; push?: boolean; pull?: boolean };
-      template_repository?: string;
+      template_repository?: components["schemas"]["repository"] | null;
       temp_clone_token?: string;
       delete_branch_on_merge?: boolean;
       subscribers_count?: number;
@@ -23899,20 +24077,20 @@ export interface components {
      * Thread
      */
     thread: {
-      id?: string;
-      repository?: components["schemas"]["minimal-repository"];
-      subject?: {
-        title?: string;
-        url?: string;
-        latest_comment_url?: string;
-        type?: string;
+      id: string;
+      repository: components["schemas"]["minimal-repository"];
+      subject: {
+        title: string;
+        url: string;
+        latest_comment_url: string;
+        type: string;
       };
-      reason?: string;
-      unread?: boolean;
-      updated_at?: string;
-      last_read_at?: string | null;
-      url?: string;
-      subscription_url?: string;
+      reason: string;
+      unread: boolean;
+      updated_at: string;
+      last_read_at: string | null;
+      url: string;
+      subscription_url: string;
     };
     /**
      * Thread Subscription
@@ -23986,22 +24164,27 @@ export interface components {
      */
     "enabled-repositories": "all" | "none" | "selected";
     "actions-organization-permissions": {
-      enabled_repositories?: components["schemas"]["enabled-repositories"];
+      enabled_repositories: components["schemas"]["enabled-repositories"];
       /**
        * The API URL to use to get or set the selected repositories that are allowed to run GitHub Actions, when `enabled_repositories` is set to `selected`.
        */
       selected_repositories_url?: string;
-      allowed_actions?: components["schemas"]["allowed-actions"];
+      allowed_actions: components["schemas"]["allowed-actions"];
       selected_actions_url?: components["schemas"]["selected-actions-url"];
     };
     "runner-groups-org": {
-      id?: number;
-      name?: string;
-      visibility?: string;
-      default?: boolean;
+      id: number;
+      name: string;
+      visibility: string;
+      default: boolean;
+      /**
+       * Link to the selected repositories resource for this runner group. Not present unless visibility was set to `selected`
+       */
       selected_repositories_url?: string;
-      runners_url?: string;
-      inherited?: boolean;
+      runners_url: string;
+      inherited: boolean;
+      inherited_allows_public_repositories?: boolean;
+      allows_public_repositories: boolean;
     };
     /**
      * Secrets for GitHub Actions for an organization.
@@ -24072,6 +24255,15 @@ export interface components {
        * Date when the credential was last accessed. May be null if it was never accessed
        */
       credential_accessed_at?: string | null;
+      authorized_credential_id?: number | null;
+      /**
+       * The title given to the ssh key. This will only be present when the credential is an ssh key.
+       */
+      authorized_credential_title?: string;
+      /**
+       * The note given to the token. This will only be present when the credential is a token.
+       */
+      authorized_credential_note?: string;
     };
     /**
      * Org Hook
@@ -24128,15 +24320,15 @@ export interface components {
      * Organization Invitation
      */
     "organization-invitation": {
-      id?: number;
-      login?: string | null;
-      email?: string | null;
-      role?: string;
-      created_at?: string;
-      inviter?: components["schemas"]["simple-user"];
-      team_count?: number;
-      invitation_team_url?: string;
-      node_id?: string;
+      id: number;
+      login: string | null;
+      email: string | null;
+      role: string;
+      created_at: string;
+      inviter: components["schemas"]["simple-user"];
+      team_count: number;
+      invitation_team_url: string;
+      node_id: string;
       invitation_teams_url?: string;
     };
     /**
@@ -24251,15 +24443,13 @@ export interface components {
       created_at: string;
       updated_at: string;
       /**
-       * The baseline permission that all organization members have on this project
+       * The baseline permission that all organization members have on this project. Only present if owner is an organization.
        */
       organization_permission?: "read" | "write" | "admin" | "none";
       /**
-       * Whether or not this project can be seen by everyone.
+       * Whether or not this project can be seen by everyone. Only present if owner is an organization.
        */
       private?: boolean;
-      cards_url?: string;
-      permissions?: { read: boolean; write: boolean; admin: boolean };
     };
     /**
      * External Groups to be mapped to a team for membership
@@ -24448,22 +24638,28 @@ export interface components {
      * A team's access to a project.
      */
     "team-project": {
-      owner_url?: string;
-      url?: string;
-      html_url?: string;
-      columns_url?: string;
-      id?: number;
-      node_id?: string;
-      name?: string;
-      body?: string | null;
-      number?: number;
-      state?: string;
-      creator?: components["schemas"]["simple-user"];
-      created_at?: string;
-      updated_at?: string;
+      owner_url: string;
+      url: string;
+      html_url: string;
+      columns_url: string;
+      id: number;
+      node_id: string;
+      name: string;
+      body: string | null;
+      number: number;
+      state: string;
+      creator: components["schemas"]["simple-user"];
+      created_at: string;
+      updated_at: string;
+      /**
+       * The organization permission for this project. Only present when owner is an organization.
+       */
       organization_permission?: string;
+      /**
+       * Whether the project is private or not. Only present when owner is an organization.
+       */
       private?: boolean;
-      permissions?: { read?: boolean; write?: boolean; admin?: boolean };
+      permissions: { read: boolean; write: boolean; admin: boolean };
     };
     /**
      * A team's access to a repository.
@@ -24590,108 +24786,7 @@ export interface components {
        * Whether to allow rebase merges for pull requests.
        */
       allow_rebase_merge?: boolean;
-      template_repository?: {
-        id?: number;
-        node_id?: string;
-        name?: string;
-        full_name?: string;
-        owner?: {
-          login?: string;
-          id?: number;
-          node_id?: string;
-          avatar_url?: string;
-          gravatar_id?: string;
-          url?: string;
-          html_url?: string;
-          followers_url?: string;
-          following_url?: string;
-          gists_url?: string;
-          starred_url?: string;
-          subscriptions_url?: string;
-          organizations_url?: string;
-          repos_url?: string;
-          events_url?: string;
-          received_events_url?: string;
-          type?: string;
-          site_admin?: boolean;
-        };
-        private?: boolean;
-        html_url?: string;
-        description?: string;
-        fork?: boolean;
-        url?: string;
-        archive_url?: string;
-        assignees_url?: string;
-        blobs_url?: string;
-        branches_url?: string;
-        collaborators_url?: string;
-        comments_url?: string;
-        commits_url?: string;
-        compare_url?: string;
-        contents_url?: string;
-        contributors_url?: string;
-        deployments_url?: string;
-        downloads_url?: string;
-        events_url?: string;
-        forks_url?: string;
-        git_commits_url?: string;
-        git_refs_url?: string;
-        git_tags_url?: string;
-        git_url?: string;
-        issue_comment_url?: string;
-        issue_events_url?: string;
-        issues_url?: string;
-        keys_url?: string;
-        labels_url?: string;
-        languages_url?: string;
-        merges_url?: string;
-        milestones_url?: string;
-        notifications_url?: string;
-        pulls_url?: string;
-        releases_url?: string;
-        ssh_url?: string;
-        stargazers_url?: string;
-        statuses_url?: string;
-        subscribers_url?: string;
-        subscription_url?: string;
-        tags_url?: string;
-        teams_url?: string;
-        trees_url?: string;
-        clone_url?: string;
-        mirror_url?: string;
-        hooks_url?: string;
-        svn_url?: string;
-        homepage?: string;
-        language?: string;
-        forks_count?: number;
-        stargazers_count?: number;
-        watchers_count?: number;
-        size?: number;
-        default_branch?: string;
-        open_issues_count?: number;
-        is_template?: boolean;
-        topics?: string[];
-        has_issues?: boolean;
-        has_projects?: boolean;
-        has_wiki?: boolean;
-        has_pages?: boolean;
-        has_downloads?: boolean;
-        archived?: boolean;
-        disabled?: boolean;
-        visibility?: string;
-        pushed_at?: string;
-        created_at?: string;
-        updated_at?: string;
-        permissions?: { admin?: boolean; push?: boolean; pull?: boolean };
-        allow_rebase_merge?: boolean;
-        template_repository?: string;
-        temp_clone_token?: string;
-        allow_squash_merge?: boolean;
-        delete_branch_on_merge?: boolean;
-        allow_merge_commit?: boolean;
-        subscribers_count?: number;
-        network_count?: number;
-      } | null;
+      template_repository?: components["schemas"]["repository"] | null;
       temp_clone_token?: string;
       /**
        * Whether to allow squash merges for pull requests.
@@ -24975,8 +25070,8 @@ export interface components {
      */
     "actions-enabled": boolean;
     "actions-repository-permissions": {
-      enabled?: components["schemas"]["actions-enabled"];
-      allowed_actions?: components["schemas"]["allowed-actions"];
+      enabled: components["schemas"]["actions-enabled"];
+      allowed_actions: components["schemas"]["allowed-actions"];
       selected_actions_url?: components["schemas"]["selected-actions-url"];
     };
     "pull-request-minimal": {
@@ -25040,8 +25135,8 @@ export interface components {
       url: string;
       html_url: string;
       pull_requests: components["schemas"]["pull-request-minimal"][] | null;
-      created_at: string | null;
-      updated_at: string | null;
+      created_at: string;
+      updated_at: string;
       /**
        * The URL to the jobs for the workflow run.
        */
@@ -25079,12 +25174,12 @@ export interface components {
      * Workflow Run Usage
      */
     "workflow-run-usage": {
-      billable?: {
-        UBUNTU?: { total_ms?: number; jobs?: number };
-        MACOS?: { total_ms?: number; jobs?: number };
-        WINDOWS?: { total_ms?: number; jobs?: number };
+      billable: {
+        UBUNTU?: { total_ms: number; jobs?: number };
+        MACOS?: { total_ms: number; jobs?: number };
+        WINDOWS?: { total_ms: number; jobs: number };
       };
-      run_duration_ms?: number;
+      run_duration_ms: number;
     };
     /**
      * Set secrets for GitHub Actions.
@@ -25117,7 +25212,7 @@ export interface components {
      * Workflow Usage
      */
     "workflow-usage": {
-      billable?: {
+      billable: {
         UBUNTU?: { total_ms?: number };
         MACOS?: { total_ms?: number };
         WINDOWS?: { total_ms?: number };
@@ -25279,8 +25374,8 @@ export interface components {
      * Commit
      */
     commit: {
-      url: string | null;
-      sha: string | null;
+      url: string;
+      sha: string;
       node_id: string;
       html_url: string;
       comments_url: string;
@@ -25462,10 +25557,10 @@ export interface components {
      * Check suite configuration preferences for a repository.
      */
     "check-suite-preference": {
-      preferences?: {
+      preferences: {
         auto_trigger_checks?: { app_id: number; setting: boolean }[];
       };
-      repository?: components["schemas"]["repository"];
+      repository: components["schemas"]["repository"];
     };
     /**
      * State of a code scanning alert.
@@ -25525,16 +25620,16 @@ export interface components {
       version?: string | null;
     };
     "code-scanning-alert-code-scanning-alert-items": {
-      number?: components["schemas"]["alert-number"];
-      created_at?: components["schemas"]["alert-created-at"];
-      url?: components["schemas"]["alert-url"];
-      html_url?: components["schemas"]["alert-html-url"];
-      state?: components["schemas"]["code-scanning-alert-state"];
-      dismissed_by?: components["schemas"]["simple-user"];
-      dismissed_at?: components["schemas"]["code-scanning-alert-dismissed-at"];
-      dismissed_reason?: components["schemas"]["code-scanning-alert-dismissed-reason"];
-      rule?: components["schemas"]["code-scanning-alert-rule"];
-      tool?: components["schemas"]["code-scanning-analysis-tool"];
+      number: components["schemas"]["alert-number"];
+      created_at: components["schemas"]["alert-created-at"];
+      url: components["schemas"]["alert-url"];
+      html_url: components["schemas"]["alert-html-url"];
+      state: components["schemas"]["code-scanning-alert-state"];
+      dismissed_by: components["schemas"]["simple-user"];
+      dismissed_at: components["schemas"]["code-scanning-alert-dismissed-at"];
+      dismissed_reason: components["schemas"]["code-scanning-alert-dismissed-reason"];
+      rule: components["schemas"]["code-scanning-alert-rule"];
+      tool: components["schemas"]["code-scanning-analysis-tool"];
     };
     /**
      * Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name.
@@ -25554,17 +25649,17 @@ export interface components {
         }[]
       | null;
     "code-scanning-alert-code-scanning-alert": {
-      number?: components["schemas"]["alert-number"];
-      created_at?: components["schemas"]["alert-created-at"];
-      url?: components["schemas"]["alert-url"];
-      html_url?: components["schemas"]["alert-html-url"];
-      instances?: components["schemas"]["code-scanning-alert-instances"];
-      state?: components["schemas"]["code-scanning-alert-state"];
-      dismissed_by?: components["schemas"]["simple-user"];
-      dismissed_at?: components["schemas"]["code-scanning-alert-dismissed-at"];
-      dismissed_reason?: components["schemas"]["code-scanning-alert-dismissed-reason"];
-      rule?: components["schemas"]["code-scanning-alert-rule"];
-      tool?: components["schemas"]["code-scanning-analysis-tool"];
+      number: components["schemas"]["alert-number"];
+      created_at: components["schemas"]["alert-created-at"];
+      url: components["schemas"]["alert-url"];
+      html_url: components["schemas"]["alert-html-url"];
+      instances: components["schemas"]["code-scanning-alert-instances"];
+      state: components["schemas"]["code-scanning-alert-state"];
+      dismissed_by: components["schemas"]["simple-user"];
+      dismissed_at: components["schemas"]["code-scanning-alert-dismissed-at"];
+      dismissed_reason: components["schemas"]["code-scanning-alert-dismissed-reason"];
+      rule: components["schemas"]["code-scanning-alert-rule"];
+      tool: components["schemas"]["code-scanning-analysis-tool"];
     };
     /**
      * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
@@ -25587,13 +25682,13 @@ export interface components {
      */
     "code-scanning-analysis-environment": string;
     "code-scanning-analysis-code-scanning-analysis": {
-      commit_sha?: components["schemas"]["code-scanning-analysis-commit-sha"];
-      ref?: components["schemas"]["code-scanning-analysis-ref"];
-      analysis_key?: components["schemas"]["code-scanning-analysis-analysis-key"];
-      created_at?: components["schemas"]["code-scanning-analysis-created-at"];
-      tool_name?: components["schemas"]["code-scanning-analysis-tool-name"];
-      error?: string;
-      environment?: components["schemas"]["code-scanning-analysis-environment"];
+      commit_sha: components["schemas"]["code-scanning-analysis-commit-sha"];
+      ref: components["schemas"]["code-scanning-analysis-ref"];
+      analysis_key: components["schemas"]["code-scanning-analysis-analysis-key"];
+      created_at: components["schemas"]["code-scanning-analysis-created-at"];
+      tool_name: components["schemas"]["code-scanning-analysis-tool-name"];
+      error: string;
+      environment: components["schemas"]["code-scanning-analysis-environment"];
     };
     /**
      * A Base64 string representing the SARIF file to upload. You must first compress your SARIF file using [`gzip`](http://www.gnu.org/software/gzip/manual/gzip.html) and then translate the contents of the file into a Base64 encoding string.
@@ -25640,6 +25735,10 @@ export interface components {
       permissions: "read" | "write" | "admin";
       created_at: string;
       /**
+       * Whether or not the invitation has expired
+       */
+      expired?: boolean;
+      /**
        * URL for the repository invitation
        */
       url: string;
@@ -25680,9 +25779,9 @@ export interface components {
      * Branch Short
      */
     "branch-short": {
-      name?: string;
-      commit?: { sha?: string; url?: string };
-      protected?: boolean;
+      name: string;
+      commit: { sha: string; url: string };
+      protected: boolean;
     };
     /**
      * Hypermedia Link
@@ -25789,17 +25888,17 @@ export interface components {
      * The status of a commit.
      */
     status: {
-      url?: string;
-      avatar_url?: string | null;
-      id?: number;
-      node_id?: string;
-      state?: string;
-      description?: string;
-      target_url?: string;
-      context?: string;
-      created_at?: string;
-      updated_at?: string;
-      creator?: components["schemas"]["simple-user"];
+      url: string;
+      avatar_url: string | null;
+      id: number;
+      node_id: string;
+      state: string;
+      description: string;
+      target_url: string;
+      context: string;
+      created_at: string;
+      updated_at: string;
+      creator: components["schemas"]["simple-user"];
     };
     /**
      * Code of Conduct Simple
@@ -25964,7 +26063,7 @@ export interface components {
      * File Commit
      */
     "file-commit": {
-      content?: {
+      content: {
         name?: string;
         path?: string;
         sha?: string;
@@ -25976,7 +26075,7 @@ export interface components {
         type?: string;
         _links?: { self?: string; git?: string; html?: string };
       } | null;
-      commit?: {
+      commit: {
         sha?: string;
         node_id?: string;
         url?: string;
@@ -26109,7 +26208,7 @@ export interface components {
     /**
      * Short Blob
      */
-    "short-blob": { url?: string; sha?: string };
+    "short-blob": { url: string; sha: string };
     /**
      * Blob
      */
@@ -26129,17 +26228,17 @@ export interface components {
       /**
        * SHA for the commit
        */
-      sha?: string;
-      node_id?: string;
-      url?: string;
+      sha: string;
+      node_id: string;
+      url: string;
       /**
        * Identifying information for the git-user
        */
-      author?: {
+      author: {
         /**
          * Timestamp of the commit
          */
-        date?: string;
+        date: string;
         /**
          * Git email address of the user
          */
@@ -26152,11 +26251,11 @@ export interface components {
       /**
        * Identifying information for the git-user
        */
-      committer?: {
+      committer: {
         /**
          * Timestamp of the commit
          */
-        date?: string;
+        date: string;
         /**
          * Git email address of the user
          */
@@ -26169,44 +26268,44 @@ export interface components {
       /**
        * Message describing the purpose of the commit
        */
-      message?: string;
-      tree?: {
+      message: string;
+      tree: {
         /**
          * SHA for the commit
          */
-        sha?: string;
-        url?: string;
+        sha: string;
+        url: string;
       };
-      parents?: {
+      parents: {
         /**
          * SHA for the commit
          */
-        sha?: string;
-        url?: string;
-        html_url?: string;
+        sha: string;
+        url: string;
+        html_url: string;
       }[];
-      verification?: {
-        verified?: boolean;
-        reason?: string;
-        signature?: string | null;
-        payload?: string | null;
+      verification: {
+        verified: boolean;
+        reason: string;
+        signature: string | null;
+        payload: string | null;
       };
-      html_url?: string;
+      html_url: string;
     };
     /**
      * Git references within a repository
      */
     "git-ref": {
-      ref?: string;
-      node_id?: string;
-      url?: string;
-      object?: {
-        type?: string;
+      ref: string;
+      node_id: string;
+      url: string;
+      object: {
+        type: string;
         /**
          * SHA for the reference
          */
-        sha?: string;
-        url?: string;
+        sha: string;
+        url: string;
       };
     };
     /**
@@ -26452,13 +26551,13 @@ export interface components {
      * An SSH key granting access to a single repository.
      */
     "deploy-key": {
-      id?: number;
-      key?: string;
-      url?: string;
-      title?: string;
-      verified?: boolean;
-      created_at?: string;
-      read_only?: boolean;
+      id: number;
+      key: string;
+      url: string;
+      title: string;
+      verified: boolean;
+      created_at: string;
+      read_only: boolean;
     };
     /**
      * Language
@@ -26978,40 +27077,8 @@ export interface components {
      * Pull Request Review Request
      */
     "pull-request-review-request": {
-      users?: {
-        login?: string;
-        id?: number;
-        node_id?: string;
-        avatar_url?: string;
-        gravatar_id?: string;
-        url?: string;
-        html_url?: string;
-        followers_url?: string;
-        following_url?: string;
-        gists_url?: string;
-        starred_url?: string;
-        subscriptions_url?: string;
-        organizations_url?: string;
-        repos_url?: string;
-        events_url?: string;
-        received_events_url?: string;
-        type?: string;
-        site_admin?: boolean;
-      }[];
-      teams?: {
-        id?: number;
-        node_id?: string;
-        url?: string;
-        html_url?: string;
-        name?: string;
-        slug?: string;
-        description?: string | null;
-        privacy?: string;
-        permission?: string;
-        members_url?: string;
-        repositories_url?: string;
-        parent?: string | null;
-      }[];
+      users: components["schemas"]["simple-user"][];
+      teams: components["schemas"]["team-simple"][];
     };
     /**
      * Pull Request Reviews are reviews on pull requests.
@@ -27110,7 +27177,7 @@ export interface components {
       /**
        * State of the release asset.
        */
-      state: "uploaded";
+      state: "uploaded" | "open";
       content_type: string;
       size: number;
       download_count: number;
@@ -27207,7 +27274,7 @@ export interface components {
       total: number;
       weeks: { w?: string; a?: number; d?: number; c?: number }[];
     };
-    "participation-stats": { all?: number[]; owner?: number[] };
+    "participation-stats": { all: number[]; owner: number[] };
     /**
      * Repository invitations let you manage who you collaborate with.
      */
@@ -27238,7 +27305,7 @@ export interface components {
     /**
      * A topic aggregates entities that are related to a subject.
      */
-    topic: { names?: string[] };
+    topic: { names: string[] };
     traffic: { timestamp: string; uniques: number; count: number };
     /**
      * Clone Traffic
@@ -27270,13 +27337,13 @@ export interface components {
       views: components["schemas"]["traffic"][];
     };
     "scim-group-list-enterprise": {
-      schemas?: string[];
-      totalResults?: number;
-      itemsPerPage?: number;
-      startIndex?: number;
-      Resources?: {
-        schemas?: string[];
-        id?: string;
+      schemas: string[];
+      totalResults: number;
+      itemsPerPage: number;
+      startIndex: number;
+      Resources: {
+        schemas: string[];
+        id: string;
         externalId?: string | null;
         displayName?: string;
         members?: { value?: string; $ref?: string; display?: string }[];
@@ -27289,8 +27356,8 @@ export interface components {
       }[];
     };
     "scim-enterprise-group": {
-      schemas?: string[];
-      id?: string;
+      schemas: string[];
+      id: string;
       externalId?: string | null;
       displayName?: string;
       members?: { value?: string; $ref?: string; display?: string }[];
@@ -27302,13 +27369,13 @@ export interface components {
       };
     };
     "scim-user-list-enterprise": {
-      schemas?: string[];
-      totalResults?: number;
-      itemsPerPage?: number;
-      startIndex?: number;
-      Resources?: {
-        schemas?: string[];
-        id?: string;
+      schemas: string[];
+      totalResults: number;
+      itemsPerPage: number;
+      startIndex: number;
+      Resources: {
+        schemas: string[];
+        id: string;
         externalId?: string;
         userName?: string;
         name?: { givenName?: string; familyName?: string };
@@ -27324,8 +27391,8 @@ export interface components {
       }[];
     };
     "scim-enterprise-user": {
-      schemas?: string[];
-      id?: string;
+      schemas: string[];
+      id: string;
       externalId?: string;
       userName?: string;
       name?: { givenName?: string; familyName?: string };
@@ -27845,14 +27912,14 @@ export interface components {
      * Key
      */
     key: {
-      key_id?: string;
-      key?: string;
-      id?: number;
-      url?: string;
-      title?: string;
-      created_at?: string;
-      verified?: boolean;
-      read_only?: boolean;
+      key_id: string;
+      key: string;
+      id: number;
+      url: string;
+      title: string;
+      created_at: string;
+      verified: boolean;
+      read_only: boolean;
     };
     "marketplace-account": {
       url: string;
