@@ -769,19 +769,19 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@technote-space/anchor-markdown-header@^1.1.7":
+"@technote-space/anchor-markdown-header@^1.1.8":
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/@technote-space/anchor-markdown-header/-/anchor-markdown-header-1.1.8.tgz#0b62e42e3c571231e1938884a3c625e4e1724c31"
   integrity sha512-IML9nJqrXOXc4iFB0Tiay0shM1baAToqQCpjPm6dLzagoD1HjNMCWur5gDr8DFCgCoRPLr7b1WdGKrROf1zSXg==
   dependencies:
     emoji-regex "^9.2.0"
 
-"@technote-space/doctoc@^2.3.3":
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/@technote-space/doctoc/-/doctoc-2.3.3.tgz#0cd5ec3dc7b5eb19cbab6d9de67d85560d8e7055"
-  integrity sha512-TROp0d9aQ4za8DmZuj/JERRscUKosm7rVInHUex90GFpOk0r5ltjP4ZkX13cmgQ/Hf24JquJF3lS2MWubGJXZA==
+"@technote-space/doctoc@^2.3.5":
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/@technote-space/doctoc/-/doctoc-2.3.5.tgz#bb5b8db4d1ea8d44d57ddbf0ada7aced340d24e0"
+  integrity sha512-ykWy+3efOJUfD7CardWLIpEmsU21un2X3PJlMCd0LFl4Wp9ZVmKC1bTSVm6Su2AtgcW7ZFSOy96iXIr0bndp4w==
   dependencies:
-    "@technote-space/anchor-markdown-header" "^1.1.7"
+    "@technote-space/anchor-markdown-header" "^1.1.8"
     "@textlint/markdown-to-ast" "^6.2.6"
     htmlparser2 "^6.0.0"
     update-section "^0.3.3"
