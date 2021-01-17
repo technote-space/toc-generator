@@ -4,12 +4,6 @@ TEST
 <!-- param::isFolding::false:: -->
 <!-- param::entryPrefix::-:: -->
 <!-- param::test::test:: -->
-**test title**
-
-- [Test1](#test1)
-- [Test2](#test2)
-  - [Test2-1](#test2-1)
-
 <!-- END doctoc -->
 
 ## Test1
