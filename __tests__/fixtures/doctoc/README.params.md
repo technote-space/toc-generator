@@ -1,17 +1,10 @@
 TEST
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- START doctoc -->
 <!-- param::isFolding::false:: -->
 <!-- param::entryPrefix::-:: -->
 <!-- param::test::test:: -->
-**test title**
-
-- [Test1](#test1)
-- [Test2](#test2)
-  - [Test2-1](#test2-1)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- END doctoc -->
 
 ## Test1
 ## Test3
