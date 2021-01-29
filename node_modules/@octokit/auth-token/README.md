@@ -232,7 +232,7 @@ const TOKEN = "1234567890abcdef1234567890abcdef12345678";
 const auth = createTokenAuth(TOKEN);
 const authentication = await auth();
 
-const response = await request("GET /repos/:owner/:repo", {
+const response = await request("GET /repos/{owner}/{repo}", {
   owner: 'octocat',
   repo: 'hello-world'
   headers: authentication.headers

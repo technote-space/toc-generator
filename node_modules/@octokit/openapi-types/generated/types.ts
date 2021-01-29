@@ -1820,13 +1820,7 @@ export interface operations {
          * List of repository IDs that the token should have access to
          */
         repository_ids?: number[];
-        permissions?: {
-          contents?: string;
-          issues?: string;
-          deployments?: string;
-          single_file?: string;
-          def_not_a_repo?: string;
-        };
+        permissions?: components["schemas"]["app-permissions"];
       };
     };
     responses: {
@@ -4161,7 +4155,9 @@ export interface operations {
     };
   };
   /**
-   * This endpoint provides a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
+   * Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
+   *
+   * **Note:** The IP addresses shown in the documentation's response are only example values. You must always query the API directly to get the latest list of IP addresses.
    */
   "meta/get": {
     parameters: {};
@@ -13080,7 +13076,7 @@ export interface operations {
   /**
    * Create a fork for the authenticated user.
    *
-   * **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com).
+   * **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com).
    */
   "repos/create-fork": {
     parameters: {
@@ -13962,7 +13958,7 @@ export interface operations {
    * If there are problems, you will see one of these in the `status` field:
    *
    * *   `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
-   * *   `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. Contact [GitHub Support](https://github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com) for more information.
+   * *   `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. Contact [GitHub Support](https://support.github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com) for more information.
    * *   `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
    * *   `detection_found_nothing` - the importer didn't recognize any source control at the URL. To resolve, [Cancel the import](https://docs.github.com/rest/reference/migrations#cancel-an-import) and [retry](https://docs.github.com/rest/reference/migrations#start-an-import) with the correct URL.
    * *   `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. To update project choice, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
@@ -17347,7 +17343,7 @@ export interface operations {
    *
    * **Notes:**
    * *   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://docs.github.com/rest/reference/repos#list-assets-for-a-release)"
-   * endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://github.com/contact).
+   * endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact).
    * *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
    */
   "repos/upload-release-asset": {
@@ -22710,6 +22706,131 @@ export interface components {
       contact_email?: string | null;
     };
     /**
+     * The permissions granted to the user-to-server access token.
+     */
+    "app-permissions": {
+      /**
+       * The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
+       */
+      actions?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
+       */
+      administration?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
+       */
+      checks?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
+       */
+      content_references?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
+       */
+      contents?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
+       */
+      deployments?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
+       */
+      environments?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
+       */
+      issues?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
+       */
+      metadata?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
+       */
+      packages?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
+       */
+      pages?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
+       */
+      pull_requests?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
+       */
+      repository_hooks?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+       */
+      repository_projects?: "read" | "write" | "admin";
+      /**
+       * The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
+       */
+      secret_scanning_alerts?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
+       */
+      secrets?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
+       */
+      security_events?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
+       */
+      single_file?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
+       */
+      statuses?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
+       */
+      vulnerability_alerts?: "read";
+      /**
+       * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
+       */
+      workflows?: "write";
+      /**
+       * The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
+       */
+      members?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
+       */
+      organization_administration?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
+       */
+      organization_hooks?: "read" | "write";
+      /**
+       * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
+       */
+      organization_plan?: "read";
+      /**
+       * The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+       */
+      organization_projects?: "read" | "write" | "admin";
+      /**
+       * The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
+       */
+      organization_secrets?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
+       */
+      organization_self_hosted_runners?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
+       */
+      organization_user_blocking?: "read" | "write";
+      /**
+       * The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
+       */
+      team_discussions?: "read" | "write";
+    };
+    /**
      * License Simple
      */
     "license-simple": {
@@ -23010,131 +23131,6 @@ export interface components {
       updated_at: string;
       scopes: string[];
       user?: components["schemas"]["simple-user"] | null;
-    };
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
-    "app-permissions": {
-      /**
-       * The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
-       */
-      actions?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
-       */
-      administration?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
-       */
-      checks?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
-       */
-      content_references?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
-       */
-      contents?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
-       */
-      deployments?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
-       */
-      environments?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
-       */
-      issues?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
-       */
-      metadata?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
-       */
-      packages?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
-       */
-      pages?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
-       */
-      pull_requests?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
-       */
-      repository_hooks?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
-       */
-      repository_projects?: "read" | "write" | "admin";
-      /**
-       * The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
-       */
-      secret_scanning_alerts?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
-       */
-      secrets?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
-       */
-      security_events?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
-       */
-      single_file?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
-       */
-      statuses?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
-       */
-      vulnerability_alerts?: "read";
-      /**
-       * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
-       */
-      workflows?: "write";
-      /**
-       * The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
-       */
-      members?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
-       */
-      organization_administration?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
-       */
-      organization_hooks?: "read" | "write";
-      /**
-       * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
-       */
-      organization_plan?: "read";
-      /**
-       * The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
-       */
-      organization_projects?: "read" | "write" | "admin";
-      /**
-       * The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
-       */
-      organization_secrets?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
-       */
-      organization_self_hosted_runners?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
-       */
-      organization_user_blocking?: "read" | "write";
-      /**
-       * The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
-       */
-      team_discussions?: "read" | "write";
     };
     "scoped-installation": {
       permissions: components["schemas"]["app-permissions"];
@@ -23977,8 +23973,7 @@ export interface components {
       git?: string[];
       pages?: string[];
       importer?: string[];
-      github_services_sha?: string;
-      installed_version?: string;
+      actions?: string[];
     };
     /**
      * Minimal Repository
@@ -25175,8 +25170,8 @@ export interface components {
      */
     "workflow-run-usage": {
       billable: {
-        UBUNTU?: { total_ms: number; jobs?: number };
-        MACOS?: { total_ms: number; jobs?: number };
+        UBUNTU?: { total_ms: number; jobs: number };
+        MACOS?: { total_ms: number; jobs: number };
         WINDOWS?: { total_ms: number; jobs: number };
       };
       run_duration_ms: number;
