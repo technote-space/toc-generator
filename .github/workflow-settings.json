@@ -18,6 +18,7 @@
   "BRANCH_PREFIX": "release/",
   "ANNOTATION_EXCLUDE_PATTERNS": [
     ">> warning ",
+    ">> hint: ",
     "Cloning into",
     "has unmet peer dependency",
     "has incorrect peer dependency",
