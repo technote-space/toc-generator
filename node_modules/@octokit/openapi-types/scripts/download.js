@@ -1,11 +1,11 @@
 const { get } = require("https");
 const fs = require("fs");
 
-if (!process.env.VERSION) {
-  throw new Error("VERSION is not set");
+if (!process.env.OCTOKIT_OPENAPI_VERSION) {
+  throw new Error("OCTOKIT_OPENAPI_VERSION is not set");
 }
 
-download(process.env.VERSION.replace(/^v/, "")).then(
+download(process.env.OCTOKIT_OPENAPI_VERSION.replace(/^v/, "")).then(
   () => console.log("done"),
   console.error
 );
