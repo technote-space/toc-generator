@@ -77,8 +77,8 @@ e.g. `README.md`
 |COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|Git commit name|`${github.actor}`| | |
 |COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
-|CREATE_PR|Whether to check only default branch|`false`| |`true`|
-|CHECK_ONLY_DEFAULT_BRANCH|Whether to create PullRequest|`false`| |`true`|
+|CREATE_PR|Whether to create PullRequest|`false`| |`true`|
+|CHECK_ONLY_DEFAULT_BRANCH|Whether to check only default branch|`false`| |`true`|
 |PR_BRANCH_PREFIX|PullRequest branch prefix|`toc-generator/`|true| |
 |PR_BRANCH_NAME|PullRequest branch name<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
 |PR_TITLE|PullRequest title<br>[Context variables](#context-variables)|`chore(docs): update TOC (${PR_MERGE_REF})`|true|`docs: update TOC`|
