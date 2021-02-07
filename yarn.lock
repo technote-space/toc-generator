@@ -794,10 +794,10 @@
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
 
-"@technote-space/github-action-helper@^4.4.10", "@technote-space/github-action-helper@^4.4.4", "@technote-space/github-action-helper@^4.4.5":
-  version "4.4.10"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-4.4.10.tgz#8797137b62f31d8371edebcea8b6d2deabe0dbca"
-  integrity sha512-vVcfamU70QDeqU8sYBLad6ek4k/qd2IFEo0KQa1Q4gEXeTMceFm3NIrYfK/0iEoNBXI4LuY2dhr9GH4VBdnhdw==
+"@technote-space/github-action-helper@^4.4.10", "@technote-space/github-action-helper@^4.4.11", "@technote-space/github-action-helper@^4.4.4", "@technote-space/github-action-helper@^4.4.5":
+  version "4.4.11"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-4.4.11.tgz#1a44963fb56b98806015c20fea084e97ec6b2f49"
+  integrity sha512-LltbJmwtLVllz48qCu1VKMqa870bVsborerEc/3buKNlP2vUCQFVNX2UXEQy3Pu/e8kN4fICduYd5Jhv67aJYw==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
@@ -868,9 +868,9 @@
   integrity sha512-2QBwlqi2SU83vTHibfdTxGiLdIqR0btNyMGfVl0bwA6FI85HnSYoGFLrdCnq2V0nxpbhuvwzcm2Ja81w0VkMGA==
 
 "@textlint/markdown-to-ast@^6.2.6":
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/@textlint/markdown-to-ast/-/markdown-to-ast-6.3.1.tgz#0ec67b2134a66adccbdf50499816a876fc492c05"
-  integrity sha512-piqeTN6dzMr7ljlo7GbRBILMcZ8zW2H9raN48qH+HYhfrGZfEOmL5HAMMeF8h0sDz9CzTvZixEwGWLMdlwsb+A==
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/@textlint/markdown-to-ast/-/markdown-to-ast-6.3.2.tgz#ae69c8475073eb2631958b108497d4fea4e0255a"
+  integrity sha512-uwndF3PRJ48wTVAEDSy0IAEVJg/scxpdZ1r+QKeGuFfdtaGSrtcgROI6qiVU1g/WNyNfQw+DAA7F8HfM+pmleg==
   dependencies:
     "@textlint/ast-node-types" "^4.4.1"
     debug "^4.3.1"
