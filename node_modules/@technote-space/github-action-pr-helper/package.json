@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-pr-helper",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "PullRequest Helper for GitHub Actions.",
   "keywords": [
     "github",
@@ -38,7 +38,7 @@
     "@actions/github": "^4.0.0",
     "@octokit/openapi-types": "^4.0.1",
     "@technote-space/filter-github-action": "^0.5.16",
-    "@technote-space/github-action-helper": "^5.1.1",
+    "@technote-space/github-action-helper": "^5.2.0",
     "moment": "^2.29.1"
   },
   "devDependencies": {
