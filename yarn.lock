@@ -794,10 +794,23 @@
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
 
-"@technote-space/github-action-helper@^4.4.10", "@technote-space/github-action-helper@^4.4.11", "@technote-space/github-action-helper@^4.4.4", "@technote-space/github-action-helper@^4.4.5":
+"@technote-space/github-action-helper@^4.4.4", "@technote-space/github-action-helper@^4.4.5":
   version "4.4.11"
   resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-4.4.11.tgz#1a44963fb56b98806015c20fea084e97ec6b2f49"
   integrity sha512-LltbJmwtLVllz48qCu1VKMqa870bVsborerEc/3buKNlP2vUCQFVNX2UXEQy3Pu/e8kN4fICduYd5Jhv67aJYw==
+  dependencies:
+    "@actions/core" "^1.2.6"
+    "@actions/github" "^4.0.0"
+    "@octokit/openapi-types" "^4.0.1"
+    "@octokit/plugin-rest-endpoint-methods" "^4.10.1"
+    "@technote-space/github-action-log-helper" "^0.1.17"
+    shell-escape "^0.2.0"
+    sprintf-js "^1.1.2"
+
+"@technote-space/github-action-helper@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-5.0.0.tgz#dcd1be20c1295a16ac34d6b5751f12a659613963"
+  integrity sha512-+4KqG6z596vIyDr41Jt48ORur0ZM7gblwYRSQd9nLbNXaU6JRsoHRJ07WiULg6UILpH9LeVghSlnj7cllM4npw==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
@@ -815,16 +828,16 @@
     "@actions/core" "^1.2.6"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^2.1.8":
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.1.8.tgz#feff208de4dd942a08a28308c1bfa1da8be631e2"
-  integrity sha512-fIyC+DOP2WNA4fWvsq3ionCIukSSOlnzyLfOSaLico8IMDL8FfRA/ilsYaewc9VGQLLLmWGzjMcifOQlFMCvKg==
+"@technote-space/github-action-pr-helper@^2.1.9":
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.1.9.tgz#49cba847e8f7dbffb5a6ab28f866f8e74be0e369"
+  integrity sha512-itsUZXBy8UDTU1tfC+Qr6YA/TuSeagcLGnnJ7Cq7Xcn2kKF/ieU9N1ohXGgQ5a4R91jVs6hy8VLuvSklgj1lfA==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
     "@octokit/openapi-types" "^4.0.1"
     "@technote-space/filter-github-action" "^0.5.16"
-    "@technote-space/github-action-helper" "^4.4.10"
+    "@technote-space/github-action-helper" "^5.0.0"
     moment "^2.29.1"
 
 "@technote-space/github-action-test-helper@^0.6.13":
