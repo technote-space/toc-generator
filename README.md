@@ -77,7 +77,7 @@ e.g. `README.md`
 |COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|true|`docs: update TOC`|
 |COMMIT_NAME|Git commit name|`${github.actor}`| | |
 |COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
-|CREATE_PR|Whether to create PullRequest|`false`| |`true`|
+|CREATE_PR|Whether to create PullRequest. This option has no effect in a worflow that is triggered by a push event (see https://github.com/technote-space/toc-generator/issues/313#issuecomment-774641025)|`false`| |`true`|
 |CHECK_ONLY_DEFAULT_BRANCH|Whether to check only default branch|`false`| |`true`|
 |PR_BRANCH_PREFIX|PullRequest branch prefix|`toc-generator/`|true| |
 |PR_BRANCH_NAME|PullRequest branch name<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
@@ -153,7 +153,7 @@ If you want to trigger actions, use a personal access token instead.
    ```
 
 ### Create PullRequest
-If `CREATE_PR` is set to `true`, a PullRequest is created.  
+If `CREATE_PR` is set to `true`, a PullRequest is created. Note: `CREATE_PR` has no effect in a worflow that is triggered by a push event (see https://github.com/technote-space/toc-generator/issues/313#issuecomment-774641025
 
 ```yaml
 on: pull_request
