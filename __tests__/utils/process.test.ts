@@ -137,6 +137,8 @@ describe('main', () => {
     }));
 
     stdoutCalledWith(mockStdout, [
+      '[command]git config --global \'init.defaultBranch\' master',
+      '  >> stdout',
       '::group::Target PullRequest Ref [master]',
       '> Fetching...',
       '[command]git init \'.\'',
@@ -236,6 +238,7 @@ describe('main', () => {
     }));
 
     stdoutCalledWith(mockStdout, [
+      '[command]git config --global \'init.defaultBranch\' master',
       '::group::Fetching...',
       '[command]git remote add origin',
       '[command]git fetch --no-tags origin \'refs/heads/test:refs/remotes/origin/test\'',
@@ -331,6 +334,7 @@ describe('main', () => {
     }));
 
     stdoutCalledWith(mockStdout, [
+      '[command]git config --global \'init.defaultBranch\' master',
       '::group::Fetching...',
       '[command]git remote add origin',
       '[command]git fetch --no-tags origin \'refs/heads/toc-generator/update-toc-21031067:refs/remotes/origin/toc-generator/update-toc-21031067\'',
