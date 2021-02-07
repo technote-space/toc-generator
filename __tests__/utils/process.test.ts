@@ -139,6 +139,12 @@ describe('main', () => {
     stdoutCalledWith(mockStdout, [
       '::group::Target PullRequest Ref [master]',
       '> Fetching...',
+      '[command]git config \'init.defaultBranch\' master',
+      '  >> stdout',
+      '[command]git config \'user.name\' test-actor',
+      '  >> stdout',
+      '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
+      '  >> stdout',
       '[command]git init \'.\'',
       '  >> stdout',
       '[command]git remote add origin',
@@ -237,6 +243,9 @@ describe('main', () => {
 
     stdoutCalledWith(mockStdout, [
       '::group::Fetching...',
+      '[command]git config \'init.defaultBranch\' master',
+      '[command]git config \'user.name\' test-actor',
+      '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '[command]git remote add origin',
       '[command]git fetch --no-tags origin \'refs/heads/test:refs/remotes/origin/test\'',
       '[command]git reset --hard',
@@ -271,6 +280,7 @@ describe('main', () => {
       '::group::Checking diff...',
       '[command]git add --all',
       '[command]git status --short -uno',
+      '[command]git config \'init.defaultBranch\' master',
       '[command]git config \'user.name\' test-actor',
       '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '::endgroup::',
@@ -332,6 +342,9 @@ describe('main', () => {
 
     stdoutCalledWith(mockStdout, [
       '::group::Fetching...',
+      '[command]git config \'init.defaultBranch\' master',
+      '[command]git config \'user.name\' test-actor',
+      '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '[command]git remote add origin',
       '[command]git fetch --no-tags origin \'refs/heads/toc-generator/update-toc-21031067:refs/remotes/origin/toc-generator/update-toc-21031067\'',
       '[command]git reset --hard',
@@ -362,6 +375,7 @@ describe('main', () => {
       '::group::Checking diff...',
       '[command]git add --all',
       '[command]git status --short -uno',
+      '[command]git config \'init.defaultBranch\' master',
       '[command]git config \'user.name\' test-actor',
       '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '::endgroup::',
