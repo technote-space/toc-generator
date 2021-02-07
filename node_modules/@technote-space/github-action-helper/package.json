@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-helper",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Helper for GitHub Action.",
   "keywords": [
     "github",
@@ -45,7 +45,7 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@technote-space/github-action-test-helper": "^0.6.13",
+    "@technote-space/github-action-test-helper": "^0.7.1",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
