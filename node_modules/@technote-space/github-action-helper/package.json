@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-helper",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "description": "Helper for GitHub Action.",
   "keywords": [
     "github",
@@ -36,20 +36,20 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "@octokit/openapi-types": "^4.0.3",
-    "@octokit/plugin-rest-endpoint-methods": "^4.10.3",
-    "@technote-space/github-action-log-helper": "^0.1.18",
+    "@octokit/openapi-types": "^5.1.0",
+    "@octokit/plugin-rest-endpoint-methods": "^4.12.0",
+    "@technote-space/github-action-log-helper": "^0.1.19",
     "shell-escape": "^0.2.0",
     "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@technote-space/github-action-test-helper": "^0.7.1",
+    "@technote-space/github-action-test-helper": "^0.7.2",
     "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.27",
-    "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
+    "@types/node": "^14.14.31",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
     "husky": "^5.0.9",
     "jest": "^26.6.3",
