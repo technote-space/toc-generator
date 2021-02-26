@@ -56,7 +56,7 @@
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - uses: technote-space/toc-generator@v3
+         - uses: technote-space/toc-generator@v4
    ```
 
 ## スクリーンショット
@@ -146,7 +146,7 @@ GitHub Actions で提供される`GITHUB_TOKEN`は連続するイベントを作
        name: TOC Generator
        runs-on: ubuntu-latest
        steps:
-         - uses: technote-space/toc-generator@v3
+         - uses: technote-space/toc-generator@v4
            with:
              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
    ```
@@ -162,7 +162,7 @@ jobs:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v3
+      - uses: technote-space/toc-generator@v4
         with:
           CREATE_PR: true
 ```
@@ -181,7 +181,7 @@ jobs:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v3
+      - uses: technote-space/toc-generator@v4
 ```
 
 ### Context variables
@@ -219,7 +219,7 @@ jobs:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v3
+      - uses: technote-space/toc-generator@v4
 ```
 
 ### 例２
@@ -235,7 +235,7 @@ jobs:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v3
+      - uses: technote-space/toc-generator@v4
         with:
           CREATE_PR: true
           TARGET_BRANCH_PREFIX: release/
@@ -255,7 +255,7 @@ jobs:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v3
+      - uses: technote-space/toc-generator@v4
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           CHECK_ONLY_DEFAULT_BRANCH: true
