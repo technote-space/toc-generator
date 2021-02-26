@@ -813,7 +813,7 @@
     htmlparser2 "^6.0.0"
     update-section "^0.3.3"
 
-"@technote-space/filter-github-action@^0.5.16":
+"@technote-space/filter-github-action@^0.5.16", "@technote-space/filter-github-action@^0.5.18":
   version "0.5.18"
   resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.5.18.tgz#147f9af36bcb79e38b9d197ebdaad546990722bd"
   integrity sha512-JeIuxmPxb93GRhxAcemWKqz9Gw3O5t6h2np1ad3PtMQb7XIPfVtATnb62GjaOu++hmP+MgkvVpgNYtChjy40PQ==
@@ -821,7 +821,7 @@
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
 
-"@technote-space/github-action-helper@^5.0.0", "@technote-space/github-action-helper@^5.2.0", "@technote-space/github-action-helper@^5.2.2":
+"@technote-space/github-action-helper@^5.2.0", "@technote-space/github-action-helper@^5.2.2":
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-5.2.2.tgz#c0a687819e5d31c30d97e0ef09c83f62e416e084"
   integrity sha512-rAEjfe/kU5cYPC0TLmVsX3HUTcPdwCF+9Zf1dtnnSHr7JtGfA7eu+YuRgsftvVsEJrrkMSdHToRYApQhb4DDoA==
@@ -834,7 +834,7 @@
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-log-helper@^0.1.17", "@technote-space/github-action-log-helper@^0.1.19":
+"@technote-space/github-action-log-helper@^0.1.19":
   version "0.1.19"
   resolved "https://registry.yarnpkg.com/@technote-space/github-action-log-helper/-/github-action-log-helper-0.1.19.tgz#070caf85b7bd638c749e2345ae35334251efd872"
   integrity sha512-S93VGD0RsgbtI7Goh/f9hRHpS+0lblbcDr62yabt3IbdFLQRSPXrrw0YceGHH1718UYNRZav9pOhpB7c9qBtqw==
@@ -864,29 +864,29 @@
     "@octokit/plugin-rest-endpoint-methods" "^4.11.0"
     js-yaml "^4.0.0"
 
-"@technote-space/release-github-actions-cli@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions-cli/-/release-github-actions-cli-1.8.0.tgz#b9f924f92ba40aa59b94c73b3c2a1b604e6e1cd7"
-  integrity sha512-KQhBbyRln0xuQcLNG/KhqqtyBk6gp3L+Zk/k29g+6oCN2O/DpHmP0f7Y+35GIMaiHsVIP3GxZnzqg8zNyk7g3w==
+"@technote-space/release-github-actions-cli@^1.8.4":
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions-cli/-/release-github-actions-cli-1.8.4.tgz#1e2dd3a5723a524f6faa3f2ef57983c71846da1d"
+  integrity sha512-yx9IlTkFWPIHDGyssXm0bz7sTSGJ3MejOEVnYPymGIcm+IVmVagN1nDaZI3+LpjZtJauIgAFV3c5pLZSYaTZFw==
   dependencies:
-    "@technote-space/github-action-helper" "^5.0.0"
-    "@technote-space/github-action-log-helper" "^0.1.17"
-    "@technote-space/release-github-actions" "^7.0.0"
-    commander "^7.0.0"
+    "@technote-space/github-action-helper" "^5.2.2"
+    "@technote-space/github-action-log-helper" "^0.1.19"
+    "@technote-space/release-github-actions" "^7.0.2"
+    commander "^7.1.0"
     cosmiconfig "^7.0.0"
     dotenv "^8.2.0"
     js-yaml "^4.0.0"
 
-"@technote-space/release-github-actions@^7.0.0":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-7.0.1.tgz#b081b14d05fa662be0e37a89262256a999f33b6c"
-  integrity sha512-wHmIxBDYlQxc70gfgr2Us3P+q464AG02qdscOkAgAD12ESvx2MOW09A+qrFSKjQW95if4CAv0TTWgsR/+DtwFQ==
+"@technote-space/release-github-actions@^7.0.2":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-7.0.3.tgz#6afad8c77fe0856a84ecfaa95dd93494d4ab7d21"
+  integrity sha512-HQ6uuSJGDKns5HCZE2wEzg9qv93tcLN85InYYkP99oXtkiGqEY4Lwg6weZVO7tScveO6JU/7IBc6pBBbRiCoaA==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
-    "@technote-space/filter-github-action" "^0.5.16"
-    "@technote-space/github-action-helper" "^5.2.0"
-    "@technote-space/github-action-log-helper" "^0.1.17"
+    "@technote-space/filter-github-action" "^0.5.18"
+    "@technote-space/github-action-helper" "^5.2.2"
+    "@technote-space/github-action-log-helper" "^0.1.19"
     memize "^1.1.0"
 
 "@textlint/ast-node-types@^4.4.1":
@@ -1678,7 +1678,7 @@ commander@^6.2.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
   integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
 
-commander@^7.0.0:
+commander@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-7.1.0.tgz#f2eaecf131f10e36e07d894698226e36ae0eb5ff"
   integrity sha512-pRxBna3MJe6HKnBGsDyMv8ETbptw3axEdYHoqNh7gu5oDcew8fs0xnivZGm06Ogk8zGAJ9VX+OPEr2GXEQK4dg==
