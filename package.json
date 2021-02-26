@@ -32,7 +32,10 @@
     "lint:fix": "eslint --fix 'src/**/*.ts' '__tests__/**/*.ts'",
     "release": "yarn release-ga --test",
     "test": "yarn lint && yarn cover",
-    "update": "npx npm-check-updates -u && yarn install && yarn upgrade && yarn audit"
+    "update": "npx npm-check-updates -u && yarn install && yarn upgrade && yarn audit",
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
@@ -53,11 +56,12 @@
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
-    "husky": "^5.0.9",
+    "husky": "^5.1.1",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
     "lint-staged": "^10.5.4",
     "nock": "^13.0.7",
+    "pinst": "^2.1.6",
     "ts-jest": "^26.5.1",
     "typescript": "^4.1.5"
   },
