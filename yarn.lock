@@ -727,29 +727,24 @@
     "@octokit/types" "^6.0.3"
     universal-user-agent "^6.0.0"
 
-"@octokit/openapi-types@^4.0.1":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-4.0.4.tgz#96fcce11e929802898646205ac567e5df592f82b"
-  integrity sha512-31zY8JIuz3h6RAFOnyA8FbOwhILILiBu1qD81RyZZWY7oMBhIdBn6MaAmnnptLhB4jk0g50nkQkUVP4kUzppcA==
-
-"@octokit/openapi-types@^5.1.0":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-5.1.1.tgz#d01ae6e2879c589edcea7800e3a427455ece619f"
-  integrity sha512-yMyaX9EDWCiyv7m85/K8L7bLFj1wrLdfDkKcZEZ6gNmepSW5mfSMFJnYwRINN7lF58wvevKPWvw0MYy6sxcFlQ==
+"@octokit/openapi-types@^5.1.0", "@octokit/openapi-types@^5.1.1", "@octokit/openapi-types@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-5.2.0.tgz#54e6ca0bc2cd54cd93f0a64658e893c32a5e69ec"
+  integrity sha512-MInMij2VK5o96Ei6qaHjxBglSZWOXQs9dTZfnGX2Xnr2mhA+yk9L/QCH4RcJGISJJCBclLHuY3ytq+iRgDfX7w==
 
 "@octokit/plugin-paginate-rest@^2.2.3":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.10.0.tgz#5925156d809c94b7bfc47b28e17488415548fa67"
-  integrity sha512-71OsKBSMcQEu/6lfVbhv5C5ikU1rn10rKot/WiV7do7fyfElQ2eCUQFogHPbj0ci5lnKAjvahOiMAr6lcvL8Qw==
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.11.0.tgz#3568c43896a3355f4a0bbb3a64f443b2abdc760d"
+  integrity sha512-7L9xQank2G3r1dGqrVPo1z62V5utbykOUzlmNHPz87Pww/JpZQ9KyG5CHtUzgmB4n5iDRKYNK/86A8D98HP0yA==
   dependencies:
-    "@octokit/types" "^6.10.0"
+    "@octokit/types" "^6.11.0"
 
-"@octokit/plugin-rest-endpoint-methods@^4.0.0", "@octokit/plugin-rest-endpoint-methods@^4.11.0", "@octokit/plugin-rest-endpoint-methods@^4.12.0":
-  version "4.12.2"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-rest-endpoint-methods/-/plugin-rest-endpoint-methods-4.12.2.tgz#d2bd0b794d6c11a13113db6199baf44a39b06f50"
-  integrity sha512-5+MmGusB7wPw7OholtcGaMyjfrsFSpFqtJW8VsrbfU/TuaiQepY4wgVkS7P3TAObX257jrTbbGo/sJLcoGf16g==
+"@octokit/plugin-rest-endpoint-methods@^4.0.0", "@octokit/plugin-rest-endpoint-methods@^4.12.0", "@octokit/plugin-rest-endpoint-methods@^4.12.2":
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-rest-endpoint-methods/-/plugin-rest-endpoint-methods-4.13.0.tgz#59a90f59a564d416214ab191c3ffcd641f175e6a"
+  integrity sha512-Ofusy7BwHkU7z4TNsVdf7wm5W3KR625KqlQj4AiWPnBvclmZU0Y2bVK8b8Mz8nW7sEX9TJcCdX6KeaincE/cLw==
   dependencies:
-    "@octokit/types" "^6.10.1"
+    "@octokit/types" "^6.11.0"
     deprecation "^2.3.1"
 
 "@octokit/request-error@^2.0.0":
@@ -775,12 +770,12 @@
     once "^1.4.0"
     universal-user-agent "^6.0.0"
 
-"@octokit/types@^6.0.3", "@octokit/types@^6.10.0", "@octokit/types@^6.10.1", "@octokit/types@^6.7.1":
-  version "6.10.1"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-6.10.1.tgz#5955dc0cf344bb82a46283a0c332651f5dd9f1ad"
-  integrity sha512-hgNC5jxKG8/RlqxU/6GThkGrvFpz25+cPzjQjyiXTNBvhyltn2Z4GhFY25+kbtXwZ4Co4zM0goW5jak1KLp1ug==
+"@octokit/types@^6.0.3", "@octokit/types@^6.11.0", "@octokit/types@^6.7.1":
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-6.11.0.tgz#830a608882cde659be19a6e86568abaa619e2ee7"
+  integrity sha512-RMLAmpPZf/a33EsclBazKg02NCCj4rC69V9sUgf0SuWTjmnBD2QC1nIVtJo7RJrGnwG1+aoFBb2yTrWm/8AS7w==
   dependencies:
-    "@octokit/openapi-types" "^5.1.0"
+    "@octokit/openapi-types" "^5.2.0"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
@@ -813,15 +808,15 @@
     htmlparser2 "^6.0.0"
     update-section "^0.3.3"
 
-"@technote-space/filter-github-action@^0.5.16", "@technote-space/filter-github-action@^0.5.18":
-  version "0.5.18"
-  resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.5.18.tgz#147f9af36bcb79e38b9d197ebdaad546990722bd"
-  integrity sha512-JeIuxmPxb93GRhxAcemWKqz9Gw3O5t6h2np1ad3PtMQb7XIPfVtATnb62GjaOu++hmP+MgkvVpgNYtChjy40PQ==
+"@technote-space/filter-github-action@^0.5.18", "@technote-space/filter-github-action@^0.5.19":
+  version "0.5.19"
+  resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.5.19.tgz#8823c12dc4d4c35c5ceba849fd93a66239b472d5"
+  integrity sha512-uIw4/CNsGMS0ZkrX7ZxBrGsjeekURnU6ta1KV1u1b53mk08JVOc1W0eCusNkPbDh7SvJOtntanl4w8NpAl0A/g==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
 
-"@technote-space/github-action-helper@^5.2.0", "@technote-space/github-action-helper@^5.2.2":
+"@technote-space/github-action-helper@^5.2.2":
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/@technote-space/github-action-helper/-/github-action-helper-5.2.2.tgz#c0a687819e5d31c30d97e0ef09c83f62e416e084"
   integrity sha512-rAEjfe/kU5cYPC0TLmVsX3HUTcPdwCF+9Zf1dtnnSHr7JtGfA7eu+YuRgsftvVsEJrrkMSdHToRYApQhb4DDoA==
@@ -834,34 +829,34 @@
     shell-escape "^0.2.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-log-helper@^0.1.19":
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-log-helper/-/github-action-log-helper-0.1.19.tgz#070caf85b7bd638c749e2345ae35334251efd872"
-  integrity sha512-S93VGD0RsgbtI7Goh/f9hRHpS+0lblbcDr62yabt3IbdFLQRSPXrrw0YceGHH1718UYNRZav9pOhpB7c9qBtqw==
+"@technote-space/github-action-log-helper@^0.1.19", "@technote-space/github-action-log-helper@^0.1.20":
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-log-helper/-/github-action-log-helper-0.1.20.tgz#9d25f3b3a99835259a8c3a9a91672be6ca2a8ad0"
+  integrity sha512-qVgl9slTJq5OV4h7U8eLENWyuhpveqFljU5vgPfG7P+/nw9qYNYRMKYXCsgpWShRA5MKuStHlyFTWVua0Jk0aQ==
   dependencies:
     "@actions/core" "^1.2.6"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.2.3.tgz#9ed8ede5965e9311894e7c2f95dfcb302a36bf8d"
-  integrity sha512-Gyv3PAkZ14mr10a+nQxunRsmq/R9g+RfZ8xNiAu6nHAvDKnW2a0Fc8yPbSbbeJOZwgEeZmtJW8zUDEcU2FcGWA==
+"@technote-space/github-action-pr-helper@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.2.4.tgz#520a23dcf27ee716331c6be8aba84e2ddc1ffef5"
+  integrity sha512-2x+ZFbbd2zLKLul+ea9Htw6jahd/x8h2g3vWy+rr17F6y6Sl8gWfIbBB4rDcaAfSeqVhrNNU3kTHzPbGeigUiQ==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
-    "@octokit/openapi-types" "^4.0.1"
-    "@technote-space/filter-github-action" "^0.5.16"
-    "@technote-space/github-action-helper" "^5.2.0"
+    "@octokit/openapi-types" "^5.1.1"
+    "@technote-space/filter-github-action" "^0.5.19"
+    "@technote-space/github-action-helper" "^5.2.2"
     moment "^2.29.1"
 
-"@technote-space/github-action-test-helper@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-test-helper/-/github-action-test-helper-0.7.2.tgz#273cb69eb8164fffdc53d7afc61bea262e858994"
-  integrity sha512-ODIWlMFWSzrm8Rt3R3aBl0lVDq16TL+X8Y1r+rFBR3ciBHa7aofYyb/86/ZaQyK0wPWQftemtwybUxMLyODV9Q==
+"@technote-space/github-action-test-helper@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-test-helper/-/github-action-test-helper-0.7.3.tgz#865572ffaf4ad3200aecebf95a4cdb972bff4436"
+  integrity sha512-3u+8IZh0+Z+5b3xi1YQl45QekLquT92boJDwJ9q2MiYE0Q3JbB2AUhyb442xI+Wo7JJBMmqJsTVSFCc502z1cg==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
-    "@octokit/plugin-rest-endpoint-methods" "^4.11.0"
+    "@octokit/plugin-rest-endpoint-methods" "^4.12.2"
     js-yaml "^4.0.0"
 
 "@technote-space/release-github-actions-cli@^1.8.4":
@@ -1983,9 +1978,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.649:
-  version "1.3.674"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.674.tgz#d97feefdf1d9411fdc9d56d17e1b9d67b818e710"
-  integrity sha512-DBmEKRVYLZAoQSW+AmLcTF5Bpwhk4RUkobtzXVDlfPPYIlbsH3Jfg3QbBjAfFcRARzMIo4YiMhp3N+RnMuo1Eg==
+  version "1.3.675"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.675.tgz#7ad29f98d7b48da581554eb28bb9a71fd5fd4956"
+  integrity sha512-GEQw+6dNWjueXGkGfjgm7dAMtXfEqrfDG3uWcZdeaD4cZ3dKYdPRQVruVXQRXtPLtOr5GNVVlNLRMChOZ611pQ==
 
 emittery@^0.7.1:
   version "0.7.2"
@@ -4881,9 +4876,9 @@ string-length@^4.0.1:
     strip-ansi "^6.0.0"
 
 string-width@^4.1.0, string-width@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.0.tgz#952182c46cc7b2c313d1596e623992bd163b72b5"
-  integrity sha512-zUz5JD+tgqtuDjMhwIg5uFVV3dtqZ9yQJlZVfq4I01/K5Paj5UHj7VyrQOJvzawSVlKpObApbfD0Ed6yJc+1eg==
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.1.tgz#1933ce1f470973d224368009bd1316cad81d5f4f"
+  integrity sha512-LL0OLyN6AnfV9xqGQpDBwedT2Rt63737LxvsRxbcwpa2aIeynBApG2Sm//F3TaLHIR1aJBN52DWklc06b94o5Q==
   dependencies:
     emoji-regex "^8.0.0"
     is-fullwidth-code-point "^3.0.0"
