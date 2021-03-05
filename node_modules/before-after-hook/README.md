@@ -11,8 +11,6 @@
 
 ### Singular hook
 
-Recommended for [TypeScript](#typescript)
-
 ```js
 // instantiate singular hook API
 const hook = new Hook.Singular();
@@ -526,49 +524,113 @@ hookCollection.remove("save", validateRecord);
 
 ## TypeScript
 
-This library contains type definitions for TypeScript. When you use TypeScript we highly recommend using the `Hook.Singular` constructor for your hooks as this allows you to pass along type information for the options object. For example:
+This library contains type definitions for TypeScript.
+
+### Type support for `Singular`:
 
 ```ts
+import { Hook } from "before-after-hook";
 
-import {Hook} from 'before-after-hook'
+type TOptions = { foo: string }; // type for options
+type TResult = { bar: number }; // type for result
+type TError = Error; // type for error
 
-interface Foo {
-  bar: string
-  num: number;
-}
+const hook = new Hook.Singular<TOptions, TResult, TError>();
 
-const hook = new Hook.Singular<Foo>();
+hook.before((options) => {
+  // `options.foo` has `string` type
 
-hook.before(function (foo) {
+  // not allowed
+  options.foo = 42;
 
-  // typescript will complain about the following mutation attempts
-  foo.hello = 'world'
-  foo.bar = 123
+  // allowed
+  options.foo = "Forty-Two";
+});
 
-  // yet this is valid
-  foo.bar = 'other-string'
-  foo.num = 123
-})
+const hookedMethod = hook(
+  (options) => {
+    // `options.foo` has `string` type
 
-const foo = hook(function(foo) {
-  // handle `foo`
-  foo.bar = 'another-string'
-}, {bar: 'random-string'})
+    // not allowed, because it does not satisfy the `R` type
+    return { foo: 42 };
 
-// foo outputs
-{
-  bar: 'another-string',
-  num: 123
-}
+    // allowed
+    return { bar: 42 };
+  },
+  { foo: "Forty-Two" }
+);
 ```
 
-An alternative import:
+You can choose not to pass the types for options, result or error. So, these are completely valid:
+
+```ts
+const hook = new Hook.Singular<O, R>();
+const hook = new Hook.Singular<O>();
+const hook = new Hook.Singular();
+```
+
+In these cases, the omitted types will implicitly be `any`.
+
+### Type support for `Collection`:
+
+`Collection` also has strict type support. You can use it like this:
+
+```ts
+import { Hook } from "before-after-hook";
+
+type HooksType = {
+  add: {
+    Options: { type: string };
+    Result: { id: number };
+    Error: Error;
+  };
+  save: {
+    Options: { type: string };
+    Result: { id: number };
+  };
+  read: {
+    Options: { id: number; foo: number };
+  };
+  destroy: {
+    Options: { id: number; foo: string };
+  };
+};
+
+const hooks = new Hook.Collection<HooksType>();
+
+hooks.before("destroy", (options) => {
+  // `options.id` has `number` type
+});
+
+hooks.error("add", (err, options) => {
+  // `options.type` has `string` type
+  // `err` is `instanceof Error`
+});
+
+hooks.error("save", (err, options) => {
+  // `options.type` has `string` type
+  // `err` has type `any`
+});
+
+hooks.after("save", (result, options) => {
+  // `options.type` has `string` type
+  // `result.id` has `number` type
+});
+```
+
+You can choose not to pass the types altogether. In that case, everything will implicitly be `any`:
+
+```ts
+const hook = new Hook.Collection();
+```
+
+Alternative imports:
 
 ```ts
 import { Singular, Collection } from "before-after-hook";
 
-const hook = new Singular<{ foo: string }>();
-const hookCollection = new Collection();
+const hook = new Singular();
+const hooks = new Collection();
 ```
 
 ## Upgrading to 1.4
