@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/anchor-markdown-header",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "description": "Generates an anchor for a markdown header.",
   "keywords": [
     "markdown",
@@ -41,22 +41,22 @@
     "update": "npx npm-check-updates -u && yarn install && yarn upgrade && yarn audit"
   },
   "dependencies": {
-    "emoji-regex": "^9.2.1"
+    "emoji-regex": "^9.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.31",
-    "@typescript-eslint/eslint-plugin": "^4.16.1",
-    "@typescript-eslint/parser": "^4.16.1",
+    "@types/node": "^14.14.32",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
     "eslint": "^7.21.0",
     "husky": "^5.1.3",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
     "lint-staged": "^10.5.4",
-    "ts-jest": "^26.5.2",
-    "typescript": "^4.2.2"
+    "ts-jest": "^26.5.3",
+    "typescript": "^4.2.3"
   },
   "publishConfig": {
     "access": "public"
