@@ -117,7 +117,7 @@ describe('transformAndSave', () => {
     process.env.INPUT_FOLDING          = 'true';
     process.env.INPUT_MAX_HEADER_LEVEL = '3';
     process.env.INPUT_ENTRY_PREFIX     = '☆';
-    process.env.INPUT_FOOTER           = '<div style="text-align: right;">generated with <a href="https://github.com/technote-space/toc-generator">TOC Generator</a></div>';
+    process.env.INPUT_FOOTER           = '*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*';
 
     expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title)).toEqual({
       changed: [
