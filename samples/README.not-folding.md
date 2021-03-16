@@ -34,6 +34,8 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
   - [Example 3](#example-3)
 - [Author](#author)
 
+*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation

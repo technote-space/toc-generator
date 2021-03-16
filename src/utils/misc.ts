@@ -16,16 +16,12 @@ export const replaceDirectory = (message: string): string => {
 };
 
 const getTargetPaths = (): Array<string> => Utils.getArrayInput('TARGET_PATHS', true).filter(target => target && !target.startsWith('/') && !target.includes('..'));
+const getTocTitle    = (): string => getInput('TOC_TITLE');
 
-const getTocTitle = (): string => getInput('TOC_TITLE');
-
-export const isNoTitle = (title: string): boolean => '' === title;
-
-export const isFolding = (): boolean => Utils.getBoolValue(getInput('FOLDING'));
-
+export const isNoTitle         = (title: string): boolean => '' === title;
+export const isFolding         = (): boolean => Utils.getBoolValue(getInput('FOLDING'));
 export const getMaxHeaderLevel = (): number | undefined => /^\d+$/.test(getInput('MAX_HEADER_LEVEL')) ? Number.parseInt(getInput('MAX_HEADER_LEVEL')) : undefined;
-
-export const getEntryPrefix = (): string => getInput('ENTRY_PREFIX');
+export const getEntryPrefix    = (): string => getInput('ENTRY_PREFIX');
 
 const getExecuteCommands = (logger: Logger): Array<ExecuteTask> => {
   const paths = getTargetPaths();
@@ -73,8 +69,7 @@ export const getRunnerArguments = (): MainArguments => {
 
 // eslint-disable-next-line no-magic-numbers
 export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
-
-export const cleanPath = (path: string): string => homeExpanded(path).replace(/\s/g, '\\ ');
+export const cleanPath    = (path: string): string => homeExpanded(path).replace(/\s/g, '\\ ');
 
 // to avoid removing space
 const getRawInput          = (name: string): string => String(process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`]);

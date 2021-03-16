@@ -10,6 +10,8 @@ TEST
   ☆ [Test3-1](#test3-1)
   ☆ [Test3-2](#test3-2)
 
+*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*
+
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
