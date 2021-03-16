@@ -36,7 +36,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 - [Sample repositories using this Action](#sample-repositories-using-this-action)
 - [Author](#author)
 
-<div style="text-align: right;">generated with <a href="https://github.com/technote-space/toc-generator">TOC Generator</a></div>
+*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*
 
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

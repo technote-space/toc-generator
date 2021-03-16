@@ -32,7 +32,7 @@ which executes [DocToc](https://github.com/thlorenz/doctoc) and commits if chang
 <a href="#author">Author</a>
 </p>
 
-<div style="text-align: right;">generated with <a href="https://github.com/technote-space/toc-generator">TOC Generator</a></div>
+*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
