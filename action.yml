@@ -59,6 +59,9 @@ inputs:
     description: Separator for custom mode
     required: false
     default: <span>|</span>
+  FOOTER:
+    description: Footer
+    required: false
 
   COMMIT_MESSAGE:
     description: Commit message.
