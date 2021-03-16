@@ -1,4 +1,4 @@
 {
   "TOC_TARGET_PATHS": "README*.md,samples/*.md",
-  "TOC_FOOTER": "<div style=\"text-align: right;\">generated with <a href=\"https://github.com/technote-space/toc-generator\">TOC Generator</a></div>"
+  "TOC_FOOTER": "*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*"
 }
