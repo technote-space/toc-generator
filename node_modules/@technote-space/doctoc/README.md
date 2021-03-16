@@ -52,6 +52,7 @@ transform(readFileSync('README.md', {
   // customTemplate: '<p align="center">${ITEMS}</p>',
   // itemTemplate: '<a href="${LINK}">${TEXT}</a>',
   // separator: '<span>|</span>',
+  // footer: '',
 }));
 ```
 
