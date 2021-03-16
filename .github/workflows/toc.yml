@@ -24,3 +24,4 @@ jobs:
           TOC_TITLE: ${{ env.TOC_TITLE }}
           CREATE_PR: ${{ env.TOC_CREATE_PR }}
           TARGET_PATHS: ${{ env.TOC_TARGET_PATHS }}
+          FOOTER: ${{ env.TOC_FOOTER }}
