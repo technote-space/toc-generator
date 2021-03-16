@@ -23,6 +23,7 @@ export const transformWithWrap = (path: string, title: string): { transformed: b
     customTemplate: getInput('CUSTOM_TEMPLATE') || getInput('HTML_TEMPLATE'),
     itemTemplate: getInput('ITEM_TEMPLATE'),
     separator: getInput('SEPARATOR'),
+    footer: getInput('FOOTER'),
   });
   return {path, transformed, data};
 };
