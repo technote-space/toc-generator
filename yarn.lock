@@ -733,9 +733,9 @@
   integrity sha512-NxF1yfYOUO92rCx3dwvA2onF30Vdlg7YUkMVXkeptqpzA3tRLplThhFleV/UKWFgh7rpKu1yYRbvNDUtzSopKA==
 
 "@octokit/plugin-paginate-rest@^2.2.3":
-  version "2.13.2"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.13.2.tgz#7b8244a0dd7a31135ba2adc58a533213837bfe87"
-  integrity sha512-mjfBcla00UNS4EI/NN7toEbUM45ow3kk4go+LxsXAFLQodsrXcIZbftUhXTqi6ZKd+r6bcqMI+Lv4dshLtFjww==
+  version "2.13.3"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.13.3.tgz#f0f1792230805108762d87906fb02d573b9e070a"
+  integrity sha512-46lptzM9lTeSmIBt/sVP/FLSTPGx6DCzAdSX3PfeJ3mTf4h9sGC26WpaQzMEq/Z44cOcmx8VsOhO+uEgE3cjYg==
   dependencies:
     "@octokit/types" "^6.11.0"
 
@@ -808,7 +808,7 @@
     htmlparser2 "^6.0.1"
     update-section "^0.3.3"
 
-"@technote-space/filter-github-action@^0.5.18", "@technote-space/filter-github-action@^0.5.21":
+"@technote-space/filter-github-action@^0.5.21", "@technote-space/filter-github-action@^0.5.22":
   version "0.5.22"
   resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.5.22.tgz#8c1ee5707a36938855169d5af1bea32eda4a1b9a"
   integrity sha512-jTn1SDShW1umNAYuP509iDwA2bD9MKVpKgXu/EGJTjNJ7t24KOGyS3nmLvQtDlB2xRVU8RmMlnNWLxMmFXCshQ==
@@ -873,15 +873,15 @@
     js-yaml "^4.0.0"
 
 "@technote-space/release-github-actions@^7.0.2":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-7.0.3.tgz#6afad8c77fe0856a84ecfaa95dd93494d4ab7d21"
-  integrity sha512-HQ6uuSJGDKns5HCZE2wEzg9qv93tcLN85InYYkP99oXtkiGqEY4Lwg6weZVO7tScveO6JU/7IBc6pBBbRiCoaA==
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-7.0.4.tgz#9c2ae7b5b33521c1dc3a8b95d4bb83b455f28545"
+  integrity sha512-aOhE25VIb7Kax+zJRejrxXIbrC6euo5EkMBahT7lveXBHVFibPZlwBgTXSnQUB4Gf9c4pEAaZAwdSeCVli+Mxg==
   dependencies:
     "@actions/core" "^1.2.6"
     "@actions/github" "^4.0.0"
-    "@technote-space/filter-github-action" "^0.5.18"
-    "@technote-space/github-action-helper" "^5.2.2"
-    "@technote-space/github-action-log-helper" "^0.1.19"
+    "@technote-space/filter-github-action" "^0.5.22"
+    "@technote-space/github-action-helper" "^5.2.4"
+    "@technote-space/github-action-log-helper" "^0.1.21"
     memize "^1.1.0"
 
 "@textlint/ast-node-types@^4.4.2":
@@ -1983,9 +1983,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.649:
-  version "1.3.692"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.692.tgz#4d00479055a7282cdd1b19caec09ed7779529640"
-  integrity sha512-Ix+zDUAXWZuUzqKdhkgN5dP7ZM+IwMG4yAGFGDLpGJP/3vNEEwuHG1LIhtXUfW0FFV0j38t5PUv2n/3MFSRviQ==
+  version "1.3.693"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.693.tgz#5089c506a925c31f93fcb173a003a22e341115dd"
+  integrity sha512-vUdsE8yyeu30RecppQtI+XTz2++LWLVEIYmzeCaCRLSdtKZ2eXqdJcrs85KwLiPOPVc6PELgWyXBsfqIvzGZag==
 
 emittery@^0.7.1:
   version "0.7.2"
