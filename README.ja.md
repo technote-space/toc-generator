@@ -36,8 +36,6 @@
 - [このアクションを使用しているリポジトリの例](#%E3%81%93%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BE%8B)
 - [Author](#author)
 
-*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*
-
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
