@@ -1,7 +1,7 @@
-# queue-microtask [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
+# queue-microtask [![ci][ci-image]][ci-url] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
 
-[travis-image]: https://img.shields.io/travis/feross/queue-microtask/master.svg
-[travis-url]: https://travis-ci.org/feross/queue-microtask
+[ci-image]: https://img.shields.io/github/workflow/status/feross/queue-microtask/ci/master
+[ci-url]: https://github.com/feross/queue-microtask/actions
 [npm-image]: https://img.shields.io/npm/v/queue-microtask.svg
 [npm-url]: https://npmjs.org/package/queue-microtask
 [downloads-image]: https://img.shields.io/npm/dm/queue-microtask.svg
