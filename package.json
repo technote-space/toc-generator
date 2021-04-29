@@ -32,7 +32,7 @@
     "lint:fix": "eslint --fix 'src/**/*.ts' '__tests__/**/*.ts'",
     "release": "yarn release-ga --test",
     "test": "yarn lint && yarn cover",
-    "update": "npx npm-check-updates -u && yarn install && yarn upgrade && yarn audit",
+    "update": "npm_config_yes=true npx npm-check-updates -u --timeout 100000 && yarn install && yarn upgrade && yarn audit",
     "postinstall": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/husky ] || husky install",
     "prepublishOnly": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/pinst ] || pinst --disable",
     "postpublish": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/pinst ] || pinst --enable"
