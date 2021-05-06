@@ -7,6 +7,9 @@ on:
     types: [update-deps]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 name: Update dependencies
 jobs:
   update:
@@ -25,10 +28,6 @@ jobs:
         with:
           CONFIG_FILENAME: workflow-settings.json, workflow-details.json
           IGNORE_WARNING: 'true'
-      - uses: technote-space/auto-cancel-redundant-workflow@v1
-        if: env.RUNNING1
-        with:
-          EXCLUDE_MERGED: 'true'
       - name: Update dependencies
         if: env.RUNNING1
         id: update_deps

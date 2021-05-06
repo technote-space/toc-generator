@@ -6,6 +6,9 @@ on:
       - develop/v*
     types: [closed]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 name: Add release tag
 
 jobs:
