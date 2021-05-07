@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-helper",
-  "version": "5.2.6",
+  "version": "5.2.7",
   "description": "Helper for GitHub Action.",
   "keywords": [
     "github",
@@ -39,16 +39,16 @@
   "dependencies": {
     "@actions/core": "^1.2.7",
     "@actions/github": "^4.0.0",
-    "@octokit/openapi-types": "^6.2.1",
-    "@octokit/plugin-rest-endpoint-methods": "^5.1.0",
-    "@technote-space/github-action-log-helper": "^0.1.23",
+    "@octokit/openapi-types": "^7.0.0",
+    "@octokit/plugin-rest-endpoint-methods": "^5.1.1",
+    "@technote-space/github-action-log-helper": "^0.1.24",
     "shell-escape": "^0.2.0",
     "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
-    "@technote-space/github-action-test-helper": "^0.7.8",
+    "@technote-space/github-action-test-helper": "^0.7.9",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.1",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
