@@ -2,6 +2,9 @@ on:
   pull_request:
     types: [synchronize]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 name: Add test tag
 
 jobs:
