@@ -1,5 +1,8 @@
 on: pull_request_target
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 name: Pull Request updated
 
 jobs:
