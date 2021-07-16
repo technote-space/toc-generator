@@ -28,17 +28,10 @@ jobs:
         run: echo "RUNNING=" >> $GITHUB_ENV
         if: "! env.GIT_DIFF"
 
-      - name: Get Yarn Cache Directory
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-        if: env.RUNNING
-      - name: Cache node dependencies
-        uses: actions/cache@v2
+      - uses: actions/setup-node@v2
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: 14
+          cache: yarn
         if: env.RUNNING
       - name: Install Package dependencies
         run: yarn install
@@ -88,17 +81,10 @@ jobs:
             echo "RUNNING=" >> $GITHUB_ENV
           fi
 
-      - name: Get Yarn Cache Directory
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-        if: env.RUNNING
-      - name: Cache node dependencies
-        uses: actions/cache@v2
+      - uses: actions/setup-node@v2
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: 14
+          cache: yarn
         if: env.RUNNING
       - name: Install Package dependencies
         run: yarn install
@@ -124,16 +110,10 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v2
-      - name: Get Yarn Cache Directory
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache node dependencies
-        uses: actions/cache@v2
+      - uses: actions/setup-node@v2
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: 14
+          cache: yarn
 
       - name: Release GitHub Actions
         uses: technote-space/release-github-actions@v6
@@ -184,29 +164,19 @@ jobs:
         if: env.RUNNING && matrix.target == 'gpr'
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 14
           registry-url: https://registry.npmjs.org/
+          cache: yarn
         if: env.RUNNING && matrix.target == 'npm'
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 14
           registry-url: https://npm.pkg.github.com
+          cache: yarn
         if: env.RUNNING && matrix.target == 'gpr'
-      - name: Get Yarn Cache Directory
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-        if: env.RUNNING
-      - name: Cache node dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-        if: env.RUNNING
       - name: Install Package dependencies
         run: yarn install
         if: env.RUNNING
