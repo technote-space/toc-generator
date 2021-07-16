@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/doctoc",
-  "version": "2.4.9",
+  "version": "2.4.10",
   "description": "Generates TOC for markdown files of local git repo.",
   "keywords": [
     "github",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@technote-space/anchor-markdown-header": "^1.1.22",
-    "@textlint/markdown-to-ast": "^12.0.0",
+    "@textlint/markdown-to-ast": "^12.0.2",
     "htmlparser2": "^6.1.0",
     "update-section": "^0.3.3"
   },
@@ -52,12 +52,12 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@textlint/ast-node-types": "^12.0.0",
-    "@types/jest": "^26.0.23",
-    "@types/node": "^16.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
     "eslint": "^7.30.0",
-    "husky": "^7.0.0",
+    "husky": "^7.0.1",
     "jest": "^27.0.6",
     "jest-circus": "^27.0.6",
     "lint-staged": "^11.0.0",

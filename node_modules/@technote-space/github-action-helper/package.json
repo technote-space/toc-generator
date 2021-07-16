@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-helper",
-  "version": "5.2.11",
+  "version": "5.2.12",
   "description": "Helper for GitHub Action.",
   "keywords": [
     "github",
@@ -39,8 +39,8 @@
   "dependencies": {
     "@actions/core": "^1.4.0",
     "@actions/github": "^5.0.0",
-    "@octokit/openapi-types": "^8.2.0",
-    "@octokit/plugin-rest-endpoint-methods": "^5.4.0",
+    "@octokit/openapi-types": "^8.2.1",
+    "@octokit/plugin-rest-endpoint-methods": "^5.4.1",
     "@technote-space/github-action-log-helper": "^0.1.30",
     "shell-escape": "^0.2.0",
     "sprintf-js": "^1.1.2"
@@ -49,16 +49,16 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@technote-space/github-action-test-helper": "^0.7.16",
-    "@types/jest": "^26.0.23",
-    "@types/node": "^16.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
     "eslint": "^7.30.0",
-    "husky": "^7.0.0",
+    "husky": "^7.0.1",
     "jest": "^27.0.6",
     "jest-circus": "^27.0.6",
     "lint-staged": "^11.0.0",
-    "nock": "^13.1.0",
+    "nock": "^13.1.1",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.5"
   },
