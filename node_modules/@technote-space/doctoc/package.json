@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/doctoc",
-  "version": "2.4.13",
+  "version": "2.4.14",
   "description": "Generates TOC for markdown files of local git repo.",
   "keywords": [
     "github",
@@ -43,25 +43,25 @@
     "update": "npx npm-check-updates -u && yarn install && yarn upgrade && yarn audit"
   },
   "dependencies": {
-    "@technote-space/anchor-markdown-header": "^1.1.25",
+    "@technote-space/anchor-markdown-header": "^1.1.27",
     "@textlint/markdown-to-ast": "^12.0.2",
-    "htmlparser2": "^6.1.0",
+    "htmlparser2": "^7.0.0",
     "update-section": "^0.3.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@textlint/ast-node-types": "^12.0.0",
-    "@types/jest": "^26.0.24",
-    "@types/node": "^16.4.13",
-    "@typescript-eslint/eslint-plugin": "^4.29.0",
-    "@typescript-eslint/parser": "^4.29.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
     "eslint": "^7.32.0",
     "husky": "^7.0.1",
     "jest": "^27.0.6",
     "jest-circus": "^27.0.6",
     "lint-staged": "^11.1.2",
-    "ts-jest": "^27.0.4",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.3.5"
   },
   "publishConfig": {
