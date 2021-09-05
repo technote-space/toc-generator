@@ -40,17 +40,17 @@
   "dependencies": {
     "@actions/core": "^1.5.0",
     "@technote-space/doctoc": "^2.4.15",
-    "@technote-space/github-action-helper": "^5.2.19",
-    "@technote-space/github-action-log-helper": "^0.1.39",
-    "@technote-space/github-action-pr-helper": "^2.2.10",
+    "@technote-space/github-action-helper": "^5.2.20",
+    "@technote-space/github-action-log-helper": "^0.1.40",
+    "@technote-space/github-action-pr-helper": "^2.2.11",
     "fast-glob": "^3.2.7"
   },
   "devDependencies": {
     "@actions/github": "^5.0.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@technote-space/github-action-test-helper": "^0.7.26",
-    "@technote-space/release-github-actions-cli": "^1.8.6",
+    "@technote-space/github-action-test-helper": "^0.7.27",
+    "@technote-space/release-github-actions-cli": "^1.8.7",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.10",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
