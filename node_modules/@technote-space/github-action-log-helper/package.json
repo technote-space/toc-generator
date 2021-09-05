@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-log-helper",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "description": "Logging helpers for GitHub Actions.",
   "keywords": [
     "github",
@@ -43,11 +43,11 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@technote-space/github-action-test-helper": "^0.7.25",
+    "@technote-space/github-action-test-helper": "^0.7.26",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.5",
-    "@typescript-eslint/eslint-plugin": "^4.29.3",
-    "@typescript-eslint/parser": "^4.29.3",
+    "@types/node": "^16.7.10",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
     "eslint": "^7.32.0",
     "husky": "^7.0.2",
     "jest": "^27.1.0",
