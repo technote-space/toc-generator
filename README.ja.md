@@ -1,9 +1,9 @@
 # TOC Generator
 
 [![CI Status](https://github.com/technote-space/toc-generator/workflows/CI/badge.svg)](https://github.com/technote-space/toc-generator/actions)
-[![codecov](https://codecov.io/gh/technote-space/toc-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/technote-space/toc-generator)
+[![codecov](https://codecov.io/gh/technote-space/toc-generator/branch/main/graph/badge.svg)](https://codecov.io/gh/technote-space/toc-generator)
 [![CodeFactor](https://www.codefactor.io/repository/github/technote-space/toc-generator/badge)](https://www.codefactor.io/repository/github/technote-space/toc-generator)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/technote-space/toc-generator/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/technote-space/toc-generator/blob/main/LICENSE)
 
 *Read this in other languages: [English](README.md), [日本語](README.ja.md).*
 
@@ -33,7 +33,6 @@
   - [例１](#%E4%BE%8B%EF%BC%91)
   - [例２](#%E4%BE%8B%EF%BC%92)
   - [例３](#%E4%BE%8B%EF%BC%93)
-- [このアクションを使用しているリポジトリの例](#%E3%81%93%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BE%8B)
 - [Author](#author)
 
 </details>
@@ -191,8 +190,8 @@ jobs:
 | PR_NUMBER_REF | `#${pull_request.number}` (例：`#11`) |
 | PR_ID | pull_request.id (例：`21031067`) |
 | PR_HEAD_REF | pull_request.head.ref (例：`change`) |
-| PR_BASE_REF | pull_request.base.ref (例：`master`) |
-| PR_MERGE_REF | pull_request.base.ref (例：`change -> master`) |
+| PR_BASE_REF | pull_request.base.ref (例：`main`) |
+| PR_MERGE_REF | pull_request.base.ref (例：`change -> main`) |
 | PR_TITLE | pull_request.title (例：`update the README with new information.`) |
 
 [Payload example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-28)
@@ -260,21 +259,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           CHECK_ONLY_DEFAULT_BRANCH: true
 ```
-
-## このアクションを使用しているリポジトリの例
-- [Release GitHub Actions](https://github.com/technote-space/release-github-actions)
-  - [toc.yml](https://github.com/technote-space/release-github-actions/blob/master/.github/workflows/toc.yml)
-- [Auto card labeler](https://github.com/technote-space/auto-card-labeler)
-  - [toc.yml](https://github.com/technote-space/auto-card-labeler/blob/master/.github/workflows/toc.yml)
-- [Assign Author](https://github.com/technote-space/assign-author)
-  - [toc.yml](https://github.com/technote-space/assign-author/blob/master/.github/workflows/toc.yml)
-- [TOC Generator](https://github.com/technote-space/toc-generator)
-  - [toc.yml](https://github.com/technote-space/toc-generator/blob/master/.github/workflows/toc.yml)
-- [Package Version Check Action](https://github.com/technote-space/package-version-check-action)
-  - [toc.yml](https://github.com/technote-space/package-version-check-action/blob/master/.github/workflows/toc.yml)
-- [`jina-ai/jina` Change Log](https://github.com/jina-ai/jina/blob/master/CHANGELOG.md)
-  - [autocommit.yml](https://github.com/jina-ai/jina/blob/master/.github/workflows/autocommit.yml)
-
 
 ## Author
 [GitHub (Technote)](https://github.com/technote-space)  
