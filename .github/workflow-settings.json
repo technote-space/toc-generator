@@ -25,5 +25,6 @@
     "Using version",
     "ci-helper",
     "tests/bootstrap.php"
-  ]
+  ],
+  "CHANGE_TEMPLATE": "- [ ] ${TITLE} (#${NUMBER}) @${AUTHOR}"
 }
