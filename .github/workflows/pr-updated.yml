@@ -32,6 +32,7 @@ jobs:
           TITLE: ${{ env.PR_BODY_TITLE }}
           LINK_ISSUE_KEYWORD: ${{ (startsWith(github.head_ref, 'release/') && 'closes') || '' }}
           FILTER_PR: true
+          CHANGE_TEMPLATE: ${{ env.CHANGE_TEMPLATE }}
 
   manageRelease:
     name: Manage release
