@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/github-action-log-helper",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "description": "Logging helpers for GitHub Actions.",
   "keywords": [
     "github",
@@ -28,34 +28,34 @@
   "scripts": {
     "build": "tsc",
     "cover": "jest --coverage",
+    "postinstall": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/husky ] || husky install",
     "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts' --cache",
     "lint:fix": "eslint --fix 'src/**/*.ts' '__tests__/**/*.ts'",
-    "test": "yarn lint && yarn cover",
-    "update": "npm_config_yes=true npx npm-check-updates -u --timeout 100000 && yarn install && yarn upgrade && yarn audit",
-    "postinstall": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/husky ] || husky install",
     "prepublishOnly": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/pinst ] || pinst --disable",
-    "postpublish": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/pinst ] || pinst --enable"
+    "postpublish": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/pinst ] || pinst --enable",
+    "test": "yarn lint && yarn cover",
+    "update": "npm_config_yes=true npx npm-check-updates -u --timeout 100000 && yarn install && yarn upgrade && yarn audit"
   },
   "dependencies": {
-    "@actions/core": "^1.5.0",
+    "@actions/core": "^1.6.0",
     "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
-    "@technote-space/github-action-test-helper": "^0.7.26",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.10",
-    "@typescript-eslint/eslint-plugin": "^4.30.0",
-    "@typescript-eslint/parser": "^4.30.0",
-    "eslint": "^7.32.0",
-    "husky": "^7.0.2",
-    "jest": "^27.1.0",
-    "jest-circus": "^27.1.0",
-    "lint-staged": "^11.1.2",
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "@technote-space/github-action-test-helper": "^0.7.28",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "eslint": "^8.2.0",
+    "husky": "^7.0.4",
+    "jest": "^27.3.1",
+    "jest-circus": "^27.3.1",
+    "lint-staged": "^11.2.6",
     "pinst": "^2.1.6",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.2"
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
   },
   "publishConfig": {
     "access": "public"

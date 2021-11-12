@@ -1,6 +1,6 @@
 {
   "name": "@technote-space/filter-github-action",
-  "version": "0.5.47",
+  "version": "0.5.48",
   "description": "Helper to filter GitHub Action.",
   "keywords": [
     "github",
@@ -34,20 +34,20 @@
     "update": "npm_config_yes=true npx npm-check-updates -u --timeout 100000 && yarn install && yarn upgrade && yarn audit"
   },
   "dependencies": {
-    "@actions/core": "^1.5.0",
+    "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0"
   },
   "devDependencies": {
-    "@technote-space/github-action-test-helper": "^0.7.27",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.13",
-    "@typescript-eslint/eslint-plugin": "^4.31.0",
-    "@typescript-eslint/parser": "^4.31.0",
-    "eslint": "^7.32.0",
-    "jest": "^27.1.0",
-    "jest-circus": "^27.1.0",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.2"
+    "@technote-space/github-action-test-helper": "^0.7.28",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "eslint": "^8.2.0",
+    "jest": "^27.3.1",
+    "jest-circus": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
   },
   "publishConfig": {
     "access": "public"
