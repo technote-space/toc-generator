@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@actions/core@^1.5.0", "@actions/core@^1.6.0":
+"@actions/core@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.6.0.tgz#0568e47039bfb6a9170393a73f3b7eb3b22462cb"
   integrity sha512-NB1UAZomZlCV/LmJqkLhNTqtKfFXJZAUPcfl/zqG7EfsQdeUJtaWO98SGbuQ3pydJ3fHl2CvI/51OKYlCYYcaw==
@@ -828,7 +828,7 @@
     htmlparser2 "^7.1.1"
     update-section "^0.3.3"
 
-"@technote-space/filter-github-action@^0.5.46", "@technote-space/filter-github-action@^0.5.48":
+"@technote-space/filter-github-action@^0.5.48":
   version "0.5.48"
   resolved "https://registry.yarnpkg.com/@technote-space/filter-github-action/-/filter-github-action-0.5.48.tgz#02ec39db6014d98a0de976af4fa611639ded6323"
   integrity sha512-HRxeY3tOnrprlJjtYHnYCv27eKcN6LhOBdEdx4jVqTa1ddC+swaMd3Sdo06h1OcUbQDoj3aRgN1LSuFA25b5Zg==
@@ -893,15 +893,15 @@
     js-yaml "^4.1.0"
 
 "@technote-space/release-github-actions@^7.0.7":
-  version "7.0.7"
-  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-7.0.7.tgz#d589cbde40b35f46cfcfb5d39a1ff5c398df9a3e"
-  integrity sha512-crSJjAIMherC33SWculI/uvkvvj2X3LL2OS1dNCyxiJQgOtK3TwcqXXJctCmQzXMg2kCKKkX5Y5mIR+KmVY0Tw==
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@technote-space/release-github-actions/-/release-github-actions-7.0.8.tgz#7eb2585630588735b728b689ed3beb6485f9ae8e"
+  integrity sha512-8n2BDDNEPg4Tc5DPJNH9lS1aLfPluUNRyEsaA1/w+aBnlTl9ZK5O0WRo81XMFTE17ck31yOdwxlXdNTnUbNyeA==
   dependencies:
-    "@actions/core" "^1.5.0"
+    "@actions/core" "^1.6.0"
     "@actions/github" "^5.0.0"
-    "@technote-space/filter-github-action" "^0.5.46"
-    "@technote-space/github-action-helper" "^5.2.20"
-    "@technote-space/github-action-log-helper" "^0.1.40"
+    "@technote-space/filter-github-action" "^0.5.48"
+    "@technote-space/github-action-helper" "^5.2.23"
+    "@technote-space/github-action-log-helper" "^0.1.41"
     memize "^1.1.0"
 
 "@textlint/ast-node-types@^12.0.0":
@@ -1807,9 +1807,9 @@ dotenv@^10.0.0:
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 electron-to-chromium@^1.3.886:
-  version "1.3.895"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.895.tgz#9b0f8f2e32d8283bbb200156fd5d8dfd775f31ed"
-  integrity sha512-9Ww3fB8CWctjqHwkOt7DQbMZMpal2x2reod+/lU4b9axO1XJEDUpPMBxs7YnjLhhqpKXIIB5SRYN/B4K0QpvyQ==
+  version "1.3.896"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.896.tgz#4a94efe4870b1687eafd5c378198a49da06e8a1b"
+  integrity sha512-NcGkBVXePiuUrPLV8IxP43n1EOtdg+dudVjrfVEUd/bOqpQUFZ2diL5PPYzbgEhZFEltdXV3AcyKwGnEQ5lhMA==
 
 emittery@^0.8.1:
   version "0.8.1"
