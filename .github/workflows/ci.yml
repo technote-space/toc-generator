@@ -115,13 +115,18 @@ jobs:
           node-version: 14
           cache: yarn
 
+      - uses: technote-space/load-config-action@v1
+        with:
+          CONFIG_FILENAME: workflow-settings.json, workflow-details.json
+          IGNORE_WARNING: 'true'
       - name: Release GitHub Actions
-        uses: technote-space/release-github-actions@v6
+        uses: technote-space/release-github-actions@v7
         with:
           OUTPUT_BUILD_INFO_FILENAME: build.json
           TEST_TAG_PREFIX: test/
           ORIGINAL_TAG_PREFIX: original/
           CLEAN_TEST_TAG: true
+          DELETE_NODE_MODULES: ${{ env.RELEASE_GA_DELETE_NODE_MODULES }}
 
   package:
     name: Publish Package
