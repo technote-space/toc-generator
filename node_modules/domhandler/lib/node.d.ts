@@ -1,4 +1,22 @@
 import { ElementType } from "domelementtype";
+interface SourceCodeLocation {
+    /** One-based line index of the first character. */
+    startLine: number;
+    /** One-based column index of the first character. */
+    startCol: number;
+    /** Zero-based first character index. */
+    startOffset: number;
+    /** One-based line index of the last character. */
+    endLine: number;
+    /** One-based column index of the last character. Points directly *after* the last character. */
+    endCol: number;
+    /** Zero-based last character index. Points directly *after* the last character. */
+    endOffset: number;
+}
+interface TagSourceCodeLocation extends SourceCodeLocation {
+    startTag?: SourceCodeLocation;
+    endTag?: SourceCodeLocation;
+}
 /**
  * This object will be used as the prototype for Nodes when creating a
  * DOM-Level-1-compliant structure.
@@ -20,14 +38,7 @@ export declare class Node {
      *
      * Available if parsing with parse5 and location info is enabled.
      */
-    sourceCodeLocation?: {
-        startOffset: number;
-        endOffset: number;
-        startLine: number;
-        endLine: number;
-        startColumn: number;
-        endColumn: number;
-    };
+    sourceCodeLocation?: SourceCodeLocation | null;
     /**
      *
      * @param type The type of the node.
@@ -160,6 +171,12 @@ export declare class Element extends NodeWithChildren {
     constructor(name: string, attribs: {
         [name: string]: string;
     }, children?: Node[], type?: ElementType.Tag | ElementType.Script | ElementType.Style);
+    /**
+     * `parse5` source code location info, with start & end tags.
+     *
+     * Available if parsing with parse5 and location info is enabled.
+     */
+    sourceCodeLocation?: TagSourceCodeLocation | null;
     /**
      * Same as {@link name}.
      * [DOM spec](https://dom.spec.whatwg.org)-compatible alias.
