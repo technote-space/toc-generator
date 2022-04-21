@@ -62,6 +62,7 @@ jobs:
           FILES: |
             yarn.lock
             jest.config.js
+            vite.config.ts
         if: "! contains(env.COMMIT_MESSAGE, '[skip ci]') && ! contains(env.COMMIT_MESSAGE, '[ci skip]')"
       - name: Set running flag
         run: echo "RUNNING=" >> $GITHUB_ENV
