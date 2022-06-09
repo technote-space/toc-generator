@@ -236,7 +236,7 @@ jobs:
     timeout-minutes: 3
     if: always()
     steps:
-      - uses: technote-space/workflow-conclusion-action@v2
+      - uses: technote-space/workflow-conclusion-action@v3
       - uses: 8398a7/action-slack@v3
         with:
           status: failure
