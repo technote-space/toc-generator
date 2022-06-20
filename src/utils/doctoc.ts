@@ -1,11 +1,11 @@
-import { Utils } from '@technote-space/github-action-helper';
 import type { Logger } from '@technote-space/github-action-log-helper';
+import type { CommandOutput, ExecuteTask } from '@technote-space/github-action-pr-helper/dist/types';
 import fs from 'fs';
-import { sync } from 'fast-glob';
 import { findMarkdownFiles } from '@technote-space/doctoc';
+import { Utils } from '@technote-space/github-action-helper';
+import { sync } from 'fast-glob';
 import { cleanPath } from './misc';
 import { transformWithWrap } from './transform';
-import type { CommandOutput, ExecuteTask } from '@technote-space/github-action-pr-helper/dist/types';
 
 export const transformAndSave = (files: Array<{ path: string }>, title: string): { changed: Array<{ path: string }>; unchanged: Array<{ path: string }> } => {
   const transformed = files.map(file => transformWithWrap(file.path, title));

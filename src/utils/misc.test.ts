@@ -1,8 +1,9 @@
 /* eslint-disable no-magic-numbers */
-import { describe, expect, it, vi } from 'vitest';
 import os from 'os';
 import path from 'path';
 import { testEnv } from '@technote-space/github-action-test-helper';
+import { describe, expect, it, vi } from 'vitest';
+import { TARGET_EVENTS } from '../constant';
 import {
   replaceDirectory,
   getRunnerArguments,
@@ -14,7 +15,6 @@ import {
   cleanPath,
   getArrayInput,
 } from './misc';
-import { TARGET_EVENTS } from '../constant';
 
 const rootDir = path.resolve(__dirname, '../..');
 

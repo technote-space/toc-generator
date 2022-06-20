@@ -1,9 +1,10 @@
 /* eslint-disable no-magic-numbers */
-import { beforeEach, describe, it, vi } from 'vitest';
 import type { Context } from '@actions/github/lib/context';
+import type { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import fs from 'fs';
-import nock from 'nock';
 import { resolve } from 'path';
+import { Logger } from '@technote-space/github-action-log-helper';
+import { main } from '@technote-space/github-action-pr-helper';
 import {
   generateContext,
   testEnv,
@@ -15,9 +16,8 @@ import {
   setChildProcessParams,
   testChildProcess,
 } from '@technote-space/github-action-test-helper';
-import { Logger } from '@technote-space/github-action-log-helper';
-import { main } from '@technote-space/github-action-pr-helper';
-import type { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+import nock from 'nock';
+import { beforeEach, describe, it, vi } from 'vitest';
 import { getRunnerArguments } from './misc';
 
 const rootDir     = resolve(__dirname, '../..');
