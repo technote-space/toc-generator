@@ -26,7 +26,7 @@
     "action.yml"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rdf lib && rollup -c",
     "cover": "vitest run --coverage",
     "postinstall": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/husky ] || husky install",
     "lint": "eslint 'src/**/*.ts' --cache",
@@ -34,21 +34,24 @@
     "prepublishOnly": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/pinst ] || pinst --disable",
     "postpublish": "[ -n \"$CI\" ] || [ ! -f node_modules/.bin/pinst ] || pinst --enable",
     "release": "yarn release-ga --test",
-    "test": "yarn lint && yarn cover",
+    "test": "yarn lint && yarn typecheck && yarn cover",
+    "typecheck": "tsc --noEmit",
     "update": "npm_config_yes=true npx npm-check-updates -u --timeout 100000 && yarn install && yarn upgrade && yarn audit"
   },
-  "dependencies": {
+  "devDependencies": {
     "@actions/core": "^1.9.0",
+    "@actions/github": "^5.0.3",
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.3",
+    "@sindresorhus/tsconfig": "^3.0.1",
     "@technote-space/doctoc": "^2.4.23",
     "@technote-space/github-action-helper": "^5.3.7",
     "@technote-space/github-action-log-helper": "^0.2.6",
     "@technote-space/github-action-pr-helper": "^2.3.3",
-    "fast-glob": "^3.2.11"
-  },
-  "devDependencies": {
-    "@actions/github": "^5.0.3",
-    "@commitlint/cli": "^17.0.2",
-    "@commitlint/config-conventional": "^17.0.2",
     "@technote-space/github-action-test-helper": "^0.9.8",
     "@technote-space/release-github-actions-cli": "^1.9.0",
     "@types/node": "^18.0.0",
@@ -57,10 +60,12 @@
     "c8": "^7.11.3",
     "eslint": "^8.18.0",
     "eslint-plugin-import": "^2.26.0",
+    "fast-glob": "^3.2.11",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.2",
     "nock": "^13.2.7",
     "pinst": "^3.0.0",
+    "rollup": "^2.75.7",
     "typescript": "^4.7.4",
     "vitest": "^0.15.1"
   },
