@@ -1,6 +1,6 @@
 import {Utils} from '@technote-space/github-action-helper';
 import {Logger} from '@technote-space/github-action-log-helper';
-import {writeFileSync, statSync} from 'fs';
+import fs from 'fs';
 import {sync} from 'fast-glob';
 import {findMarkdownFiles} from '@technote-space/doctoc';
 import {cleanPath} from './misc';
@@ -13,7 +13,7 @@ export const transformAndSave = (files: Array<{ path: string }>, title: string):
   const unchanged   = transformed.filter(item => !item.transformed);
 
   changed.forEach(item => {
-    writeFileSync(item.path, item.data, 'utf8');
+    fs.writeFileSync(item.path, item.data, 'utf8');
   });
 
   return {changed, unchanged};
@@ -26,7 +26,7 @@ const parsePaths = (paths: Array<string>): Array<string> => sync(paths.map(path 
 });
 
 export const executeDoctoc = (paths: Array<string>, title: string, logger: Logger): { changed: Array<string>; unchanged: Array<string> } => parsePaths(paths).map(path => {
-  const stat = statSync(path);
+  const stat = fs.statSync(path);
   if (stat.isDirectory()) {
     logger.displayCommand('DocToccing "%s" and its sub directories.', path);
     return transformAndSave(findMarkdownFiles(path), title);

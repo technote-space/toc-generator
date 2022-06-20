@@ -1,4 +1,5 @@
 /* eslint-disable no-magic-numbers */
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import fs from 'fs';
 import {resolve} from 'path';
 import {testEnv} from '@technote-space/github-action-test-helper';
@@ -12,7 +13,9 @@ const rootDir   = resolve(__dirname, '../..');
 const doctocDir = resolve(__dirname, '../fixtures/doctoc');
 const logger    = new Logger();
 const title     = '**test title**';
-jest.spyOn(fs, 'writeFileSync').mockImplementation(jest.fn());
+beforeEach(() => {
+  vi.spyOn(fs, 'writeFileSync').mockImplementation(() => undefined);
+});
 
 describe('transformAndSave', () => {
   testEnv(rootDir);

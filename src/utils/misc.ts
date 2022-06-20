@@ -1,5 +1,5 @@
 import {resolve, join} from 'path';
-import {homedir} from 'os';
+import os from 'os';
 import {Utils} from '@technote-space/github-action-helper';
 import {Logger} from '@technote-space/github-action-log-helper';
 import {ExecuteTask, MainArguments} from '@technote-space/github-action-pr-helper/dist/types';
@@ -68,7 +68,7 @@ export const getRunnerArguments = (): MainArguments => {
 };
 
 // eslint-disable-next-line no-magic-numbers
-export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
+export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(os.homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
 export const cleanPath    = (path: string): string => homeExpanded(path).replace(/\s/g, '\\ ');
 
 // to avoid removing space

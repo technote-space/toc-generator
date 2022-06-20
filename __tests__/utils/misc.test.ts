@@ -1,4 +1,5 @@
 /* eslint-disable no-magic-numbers */
+import { describe, expect, it, vi } from 'vitest';
 import os from 'os';
 import path from 'path';
 import {testEnv} from '@technote-space/github-action-test-helper';
@@ -227,7 +228,7 @@ describe('homeExpanded', () => {
   testEnv(rootDir);
 
   it('should return home path', () => {
-    const spy = jest.spyOn(os, 'homedir').mockImplementation(() => '/home/test');
+    const spy = vi.spyOn(os, 'homedir').mockImplementation(() => '/home/test');
     expect(homeExpanded('~/test.txt')).toBe('/home/test/test.txt');
     spy.mockRestore();
   });
@@ -242,7 +243,7 @@ describe('cleanPath', () => {
   testEnv(rootDir);
 
   it('should return clean path', () => {
-    const spy = jest.spyOn(os, 'homedir').mockImplementation(() => '/home/test');
+    const spy = vi.spyOn(os, 'homedir').mockImplementation(() => '/home/test');
     expect(cleanPath('~/t e s t.txt')).toBe('/home/test/t\\ e\\ s\\ t.txt');
     spy.mockRestore();
   });

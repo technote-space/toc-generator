@@ -1,4 +1,5 @@
 /* eslint-disable no-magic-numbers */
+import { beforeEach, describe, it, vi } from 'vitest';
 import {Context} from '@actions/github/lib/context';
 import fs from 'fs';
 import nock from 'nock';
@@ -26,8 +27,8 @@ const title       = '**test title**';
 const setExists   = testFs();
 beforeEach(() => {
   Logger.resetForTesting();
+  vi.spyOn(fs, 'writeFileSync').mockImplementation(() => undefined);
 });
-jest.spyOn(fs, 'writeFileSync').mockImplementation(jest.fn());
 
 const context     = (action: string, event = 'pull_request', ref = 'refs/pull/55/merge'): Context => generateContext({
   owner: 'hello',
