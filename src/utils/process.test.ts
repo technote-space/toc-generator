@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { beforeEach, describe, it, vi } from 'vitest';
-import { Context } from '@actions/github/lib/context';
+import type { Context } from '@actions/github/lib/context';
 import fs from 'fs';
 import nock from 'nock';
 import { resolve } from 'path';
@@ -17,7 +17,7 @@ import {
 } from '@technote-space/github-action-test-helper';
 import { Logger } from '@technote-space/github-action-log-helper';
 import { main } from '@technote-space/github-action-pr-helper';
-import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+import type { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import { getRunnerArguments } from './misc';
 
 const rootDir     = resolve(__dirname, '../..');

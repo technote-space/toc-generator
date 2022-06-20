@@ -1,4 +1,4 @@
-import { Context } from '@actions/github/lib/context';
+import type { Context } from '@actions/github/lib/context';
 
 export const ACTION_NAME   = 'TOC Generator';
 export const ACTION_OWNER  = 'technote-space';
