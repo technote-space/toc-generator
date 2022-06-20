@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
 import { beforeEach, describe, it, vi } from 'vitest';
-import {Context} from '@actions/github/lib/context';
+import { Context } from '@actions/github/lib/context';
 import fs from 'fs';
 import nock from 'nock';
-import {resolve} from 'path';
+import { resolve } from 'path';
 import {
   generateContext,
   testEnv,
@@ -15,10 +15,10 @@ import {
   setChildProcessParams,
   testChildProcess,
 } from '@technote-space/github-action-test-helper';
-import {Logger} from '@technote-space/github-action-log-helper';
-import {main} from '@technote-space/github-action-pr-helper';
-import {MainArguments} from '@technote-space/github-action-pr-helper/dist/types';
-import {getRunnerArguments} from '../../src/utils/misc';
+import { Logger } from '@technote-space/github-action-log-helper';
+import { main } from '@technote-space/github-action-pr-helper';
+import { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+import { getRunnerArguments } from './misc';
 
 const rootDir     = resolve(__dirname, '../..');
 const doctocDir   = resolve(__dirname, '../fixtures/doctoc');

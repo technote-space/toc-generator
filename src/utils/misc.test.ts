@@ -2,7 +2,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import os from 'os';
 import path from 'path';
-import {testEnv} from '@technote-space/github-action-test-helper';
+import { testEnv } from '@technote-space/github-action-test-helper';
 import {
   replaceDirectory,
   getRunnerArguments,
@@ -13,8 +13,8 @@ import {
   homeExpanded,
   cleanPath,
   getArrayInput,
-} from '../../src/utils/misc';
-import {TARGET_EVENTS} from '../../src/constant';
+} from './misc';
+import { TARGET_EVENTS } from '../constant';
 
 const rootDir = path.resolve(__dirname, '../..');
 

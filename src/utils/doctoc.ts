@@ -1,11 +1,11 @@
-import {Utils} from '@technote-space/github-action-helper';
-import {Logger} from '@technote-space/github-action-log-helper';
+import { Utils } from '@technote-space/github-action-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
 import fs from 'fs';
-import {sync} from 'fast-glob';
-import {findMarkdownFiles} from '@technote-space/doctoc';
-import {cleanPath} from './misc';
-import {transformWithWrap} from './transform';
-import {CommandOutput, ExecuteTask} from '@technote-space/github-action-pr-helper/dist/types';
+import { sync } from 'fast-glob';
+import { findMarkdownFiles } from '@technote-space/doctoc';
+import { cleanPath } from './misc';
+import { transformWithWrap } from './transform';
+import { CommandOutput, ExecuteTask } from '@technote-space/github-action-pr-helper/dist/types';
 
 export const transformAndSave = (files: Array<{ path: string }>, title: string): { changed: Array<{ path: string }>; unchanged: Array<{ path: string }> } => {
   const transformed = files.map(file => transformWithWrap(file.path, title));
@@ -16,7 +16,7 @@ export const transformAndSave = (files: Array<{ path: string }>, title: string):
     fs.writeFileSync(item.path, item.data, 'utf8');
   });
 
-  return {changed, unchanged};
+  return { changed, unchanged };
 };
 
 const parsePaths = (paths: Array<string>): Array<string> => sync(paths.map(path => cleanPath(path)), {
@@ -33,7 +33,7 @@ export const executeDoctoc = (paths: Array<string>, title: string, logger: Logge
   }
 
   logger.displayCommand('DocToccing single file "%s".', path);
-  return transformAndSave([{path}], title);
+  return transformAndSave([{ path }], title);
 }).reduce((acc, value) => ({
   changed: acc.changed.concat(value.changed.map(item => item.path)),
   unchanged: acc.unchanged.concat(value.unchanged.map(item => item.path)),

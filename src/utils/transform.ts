@@ -1,7 +1,7 @@
 import fs from 'fs';
-import {getInput} from '@actions/core' ;
-import {transform, CHECK_OPENING_COMMENT, CHECK_CLOSING_COMMENT} from '@technote-space/doctoc';
-import {Utils} from '@technote-space/github-action-helper';
+import { getInput } from '@actions/core' ;
+import { transform, CHECK_OPENING_COMMENT, CHECK_CLOSING_COMMENT } from '@technote-space/doctoc';
+import { Utils } from '@technote-space/github-action-helper';
 import {
   isNoTitle,
   getEntryPrefix,
@@ -11,7 +11,7 @@ import {
 } from './misc';
 
 export const transformWithWrap = (path: string, title: string): { transformed: boolean; path: string; data: string } => {
-  const {transformed, data} = transform(fs.readFileSync(path, 'utf8'), {
+  const { transformed, data } = transform(fs.readFileSync(path, 'utf8'), {
     maxHeaderLevel: getMaxHeaderLevel(),
     title,
     isNotitle: isNoTitle(title),
@@ -25,5 +25,5 @@ export const transformWithWrap = (path: string, title: string): { transformed: b
     separator: getInput('SEPARATOR'),
     footer: getInput('FOOTER'),
   });
-  return {path, transformed, data};
+  return { path, transformed, data };
 };

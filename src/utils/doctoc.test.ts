@@ -1,13 +1,13 @@
 /* eslint-disable no-magic-numbers */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import fs from 'fs';
-import {resolve} from 'path';
-import {testEnv} from '@technote-space/github-action-test-helper';
-import {Logger} from '@technote-space/github-action-log-helper';
+import { resolve } from 'path';
+import { testEnv } from '@technote-space/github-action-test-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
 import {
   transformAndSave,
   executeDoctoc,
-} from '../../src/utils/doctoc';
+} from './doctoc';
 
 const rootDir   = resolve(__dirname, '../..');
 const doctocDir = resolve(__dirname, '../fixtures/doctoc');
@@ -21,11 +21,11 @@ describe('transformAndSave', () => {
   testEnv(rootDir);
 
   it('should return empty', () => {
-    expect(transformAndSave([], title)).toEqual({changed: [], unchanged: []});
+    expect(transformAndSave([], title)).toEqual({ changed: [], unchanged: [] });
   });
 
   it('should run doctoc', () => {
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title)).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.update.md') }], title)).toEqual({
       changed: [
         {
           data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.md'), 'utf8'),
@@ -38,7 +38,7 @@ describe('transformAndSave', () => {
   });
 
   it('should not run doctoc', () => {
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.not.update.md')}], title)).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.not.update.md') }], title)).toEqual({
       changed: [],
       unchanged: [
         {
@@ -52,11 +52,11 @@ describe('transformAndSave', () => {
 
   it('mixed', () => {
     expect(transformAndSave([
-      {path: resolve(doctocDir, 'README.create1.md')},
-      {path: resolve(doctocDir, 'README.create2.md')},
-      {path: resolve(doctocDir, 'README.update.md')},
-      {path: resolve(doctocDir, 'README.not.update.md')},
-      {path: resolve(doctocDir, 'README.toc-me.md')},
+      { path: resolve(doctocDir, 'README.create1.md') },
+      { path: resolve(doctocDir, 'README.create2.md') },
+      { path: resolve(doctocDir, 'README.update.md') },
+      { path: resolve(doctocDir, 'README.not.update.md') },
+      { path: resolve(doctocDir, 'README.toc-me.md') },
     ], title)).toEqual({
       changed: [
         {
@@ -93,7 +93,7 @@ describe('transformAndSave', () => {
   it('should wrap', () => {
     process.env.INPUT_FOLDING = 'true';
 
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title)).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.update.md') }], title)).toEqual({
       changed: [
         {
           data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.wrap.md'), 'utf8'),
@@ -104,7 +104,7 @@ describe('transformAndSave', () => {
       unchanged: [],
     });
 
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], 'test title')).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.update.md') }], 'test title')).toEqual({
       changed: [
         {
           data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.wrap.md'), 'utf8'),
@@ -122,7 +122,7 @@ describe('transformAndSave', () => {
     process.env.INPUT_ENTRY_PREFIX     = '☆';
     process.env.INPUT_FOOTER           = '*generated with [TOC Generator](https://github.com/technote-space/toc-generator)*';
 
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.update.md')}], title)).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.update.md') }], title)).toEqual({
       changed: [
         {
           data: fs.readFileSync(resolve(doctocDir, 'expected/README.update.options.md'), 'utf8'),
@@ -139,7 +139,7 @@ describe('transformAndSave', () => {
     process.env.INPUT_CUSTOM_TEMPLATE = '<p align="center"><sub>${ITEMS}</sub></p>';
     process.env.INPUT_ITEM_TEMPLATE   = '<a href="${LINK}">[${TEXT}]</a>';
     process.env.INPUT_SEPARATOR       = '･';
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.horizontal.md')}], title)).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.horizontal.md') }], title)).toEqual({
       changed: [
         {
           data: fs.readFileSync(resolve(doctocDir, 'expected/README.horizontal1.md'), 'utf8'),
@@ -153,7 +153,7 @@ describe('transformAndSave', () => {
 
   it('should run doctoc with html mode (deprecated)', () => {
     process.env.INPUT_HTML_MODE = 'true';
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.horizontal.md')}], title)).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.horizontal.md') }], title)).toEqual({
       changed: [
         {
           data: fs.readFileSync(resolve(doctocDir, 'expected/README.horizontal2.md'), 'utf8'),
@@ -170,7 +170,7 @@ describe('transformAndSave', () => {
     process.env.INPUT_MAX_HEADER_LEVEL = '3';
     process.env.INPUT_ENTRY_PREFIX     = '☆';
 
-    expect(transformAndSave([{path: resolve(doctocDir, 'README.params.md')}], title)).toEqual({
+    expect(transformAndSave([{ path: resolve(doctocDir, 'README.params.md') }], title)).toEqual({
       changed: [
         {
           data: fs.readFileSync(resolve(doctocDir, 'expected/README.params.md'), 'utf8'),

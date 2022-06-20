@@ -1,17 +1,17 @@
-import {resolve, join} from 'path';
+import { resolve, join } from 'path';
 import os from 'os';
-import {Utils} from '@technote-space/github-action-helper';
-import {Logger} from '@technote-space/github-action-log-helper';
-import {ExecuteTask, MainArguments} from '@technote-space/github-action-pr-helper/dist/types';
-import {getInput} from '@actions/core' ;
-import {doctoc} from './doctoc';
-import {ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS} from '../constant';
+import { Utils } from '@technote-space/github-action-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
+import { ExecuteTask, MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+import { getInput } from '@actions/core' ;
+import { doctoc } from './doctoc';
+import { ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS } from '../constant';
 
 export const replaceDirectory = (message: string): string => {
   const workDir = resolve(Utils.getWorkspace());
   return [
-    {key: ` -C ${workDir}`, value: ''},
-    {key: workDir, value: '[Working Directory]'},
+    { key: ` -C ${workDir}`, value: '' },
+    { key: workDir, value: '[Working Directory]' },
   ].reduce((value, target) => Utils.replaceAll(value, target.key, target.value), message);
 };
 
