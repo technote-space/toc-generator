@@ -8,7 +8,7 @@ inputs:
   GITHUB_TOKEN:
     description: Secret GitHub API token used to make API requests or git authentication.
     default: ${{ github.token }}
-    required: true
+    required: false
   API_TOKEN:
     description: Secret GitHub API token used to make API requests.
     required: false
@@ -16,7 +16,7 @@ inputs:
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
     default: 'README*.md'
-    required: true
+    required: false
   TOC_TITLE:
     description: TOC Title
     default: '**Table of Contents**'
@@ -65,7 +65,7 @@ inputs:
 
   COMMIT_MESSAGE:
     description: Commit message.
-    required: true
+    required: false
     default: 'chore(docs): update TOC'
   COMMIT_NAME:
     description: Git commit name.
@@ -85,18 +85,18 @@ inputs:
   PR_BRANCH_PREFIX:
     description: PullRequest branch prefix.
     default: 'toc-generator/'
-    required: true
+    required: false
   PR_BRANCH_NAME:
     description: PullRequest branch name.
     default: 'update-toc-${PR_ID}'
-    required: true
+    required: false
   PR_TITLE:
     description: PullRequest title.
-    required: true
+    required: false
     default: 'chore(docs): update TOC (${PR_MERGE_REF})'
   PR_BODY:
     description: PullRequest body.
-    required: true
+    required: false
     default: |
       ## Base PullRequest
 
