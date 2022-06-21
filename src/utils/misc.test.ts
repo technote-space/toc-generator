@@ -39,7 +39,7 @@ describe('getRunnerArguments', () => {
     expect(args).toHaveProperty('executeCommands');
     delete args.executeCommands;
     expect(args).toEqual({
-      rootDir: rootDir,
+      rootDir: path.resolve(__dirname, '..'),
       actionName: 'TOC Generator',
       actionOwner: 'technote-space',
       actionRepo: 'toc-generator',
@@ -139,7 +139,7 @@ describe('getRunnerArguments', () => {
     const args = getRunnerArguments();
     delete args.logger;
     expect(args).toEqual({
-      rootDir: rootDir,
+      rootDir: path.resolve(__dirname, '..'),
       actionName: 'TOC Generator',
       actionOwner: 'technote-space',
       actionRepo: 'toc-generator',
