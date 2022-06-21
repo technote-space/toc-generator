@@ -1,8 +1,10 @@
 /* eslint-disable no-magic-numbers */
-import {Context} from '@actions/github/lib/context';
+import type { Context } from '@actions/github/lib/context';
+import type { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
 import fs from 'fs';
-import nock from 'nock';
-import {resolve} from 'path';
+import { resolve } from 'path';
+import { Logger } from '@technote-space/github-action-log-helper';
+import { main } from '@technote-space/github-action-pr-helper';
 import {
   generateContext,
   testEnv,
@@ -14,10 +16,9 @@ import {
   setChildProcessParams,
   testChildProcess,
 } from '@technote-space/github-action-test-helper';
-import {Logger} from '@technote-space/github-action-log-helper';
-import {main} from '@technote-space/github-action-pr-helper';
-import {MainArguments} from '@technote-space/github-action-pr-helper/dist/types';
-import {getRunnerArguments} from '../../src/utils/misc';
+import nock from 'nock';
+import { beforeEach, describe, it, vi } from 'vitest';
+import { getRunnerArguments } from './misc';
 
 const rootDir     = resolve(__dirname, '../..');
 const doctocDir   = resolve(__dirname, '../fixtures/doctoc');
@@ -26,8 +27,8 @@ const title       = '**test title**';
 const setExists   = testFs();
 beforeEach(() => {
   Logger.resetForTesting();
+  vi.spyOn(fs, 'writeFileSync').mockImplementation(() => undefined);
 });
-jest.spyOn(fs, 'writeFileSync').mockImplementation(jest.fn());
 
 const context     = (action: string, event = 'pull_request', ref = 'refs/pull/55/merge'): Context => generateContext({
   owner: 'hello',

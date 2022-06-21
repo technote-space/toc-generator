@@ -1,17 +1,17 @@
-import {resolve, join} from 'path';
-import {homedir} from 'os';
-import {Utils} from '@technote-space/github-action-helper';
-import {Logger} from '@technote-space/github-action-log-helper';
-import {ExecuteTask, MainArguments} from '@technote-space/github-action-pr-helper/dist/types';
-import {getInput} from '@actions/core' ;
-import {doctoc} from './doctoc';
-import {ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS} from '../constant';
+import type { ExecuteTask, MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+import os from 'os';
+import { resolve, join } from 'path';
+import { getInput } from '@actions/core' ;
+import { Utils } from '@technote-space/github-action-helper';
+import { Logger } from '@technote-space/github-action-log-helper';
+import { ACTION_NAME, ACTION_OWNER, ACTION_REPO, TARGET_EVENTS } from '../constant';
+import { doctoc } from './doctoc';
 
 export const replaceDirectory = (message: string): string => {
   const workDir = resolve(Utils.getWorkspace());
   return [
-    {key: ` -C ${workDir}`, value: ''},
-    {key: workDir, value: '[Working Directory]'},
+    { key: ` -C ${workDir}`, value: '' },
+    { key: workDir, value: '[Working Directory]' },
   ].reduce((value, target) => Utils.replaceAll(value, target.key, target.value), message);
 };
 
@@ -68,7 +68,7 @@ export const getRunnerArguments = (): MainArguments => {
 };
 
 // eslint-disable-next-line no-magic-numbers
-export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
+export const homeExpanded = (path: string): string => path.indexOf('~') === 0 ? join(os.homedir(), path.substr(1)) : resolve(Utils.getWorkspace(), path);
 export const cleanPath    = (path: string): string => homeExpanded(path).replace(/\s/g, '\\ ');
 
 // to avoid removing space
