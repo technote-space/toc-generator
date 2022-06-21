@@ -38,7 +38,7 @@ const getExecuteCommands = (logger: Logger): Array<ExecuteTask> => {
 export const getRunnerArguments = (): MainArguments => {
   const logger = new Logger(replaceDirectory);
   return {
-    rootDir: resolve(__dirname, '../..'),
+    rootDir: resolve(__dirname, '..'),
     logger,
     actionName: ACTION_NAME,
     actionOwner: ACTION_OWNER,
