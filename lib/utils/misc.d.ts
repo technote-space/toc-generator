@@ -1,0 +1,10 @@
+import type { MainArguments } from '@technote-space/github-action-pr-helper/dist/types';
+export declare const replaceDirectory: (message: string) => string;
+export declare const isNoTitle: (title: string) => boolean;
+export declare const isFolding: () => boolean;
+export declare const getMaxHeaderLevel: () => number | undefined;
+export declare const getEntryPrefix: () => string;
+export declare const getRunnerArguments: () => MainArguments;
+export declare const homeExpanded: (path: string) => string;
+export declare const cleanPath: (path: string) => string;
+export declare const getArrayInput: (name: string) => Array<string>;
