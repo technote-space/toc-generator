@@ -51,7 +51,7 @@ jobs:
       - name: Set running flag
         run: echo "RUNNING2=1" >> $GITHUB_ENV
         if: env.RUNNING1 && steps.update_deps.outputs.result != 'succeeded' && github.event_name == 'pull_request' && github.event.action != 'closed' && startsWith(github.head_ref, 'release/')
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         if: env.RUNNING2
       - name: Set running flag
         run: |
