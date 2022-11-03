@@ -12,6 +12,8 @@ import {
   disableNetConnect,
   spyOnStdout,
   stdoutCalledWith,
+  spyOnSetOutput,
+  setOutputCalledWith,
   getApiFixture,
   setChildProcessParams,
   testChildProcess,
@@ -108,6 +110,7 @@ describe('main', () => {
     process.env.INPUT_TOC_TITLE      = title;
     process.env.INPUT_CREATE_PR      = 'true';
     const mockStdout                 = spyOnStdout();
+    const mockOutput                 = spyOnSetOutput();
     setChildProcessParams({
       stdout: (command: string): string => {
         if (command.includes(' diff ')) {
@@ -205,10 +208,9 @@ describe('main', () => {
       '::group::Total:2  Succeeded:1  Failed:0  Skipped:1',
       '> \x1b[33;40m→\x1b[0m\t[octocat:new-topic] PR from fork',
       '> \x1b[32;40m✔\x1b[0m\t[master] has been closed because there is no reference diff',
-      '',
-      '::set-output name=result::succeeded',
       '::endgroup::',
     ]);
+    setOutputCalledWith(mockOutput, [{ name: 'result', value: 'succeeded' }]);
   });
 
   it('should create commit', async() => {
@@ -216,6 +218,7 @@ describe('main', () => {
     process.env.INPUT_GITHUB_TOKEN = 'test-token';
     process.env.INPUT_TOC_TITLE    = title;
     const mockStdout               = spyOnStdout();
+    const mockOutput               = spyOnSetOutput();
     setChildProcessParams({
       stdout: (command: string): string => {
         if (command.endsWith('status --short -uno')) {
@@ -285,11 +288,10 @@ describe('main', () => {
       '::endgroup::',
       '::group::Pushing to hello/world@test...',
       '[command]git push origin test:refs/heads/test',
-      '',
-      '::set-output name=result::succeeded',
       '::endgroup::',
       '> \x1b[32;40m✔\x1b[0m\t[feature/new-feature] updated',
     ]);
+    setOutputCalledWith(mockOutput, [{ name: 'result', value: 'succeeded' }]);
   });
 
   it('should create pull request', async() => {
@@ -302,6 +304,7 @@ describe('main', () => {
     process.env.INPUT_ENTRY_PREFIX     = '☆';
     process.env.INPUT_CREATE_PR        = 'true';
     const mockStdout                   = spyOnStdout();
+    const mockOutput                   = spyOnSetOutput();
     setChildProcessParams({
       stdout: (command: string): string => {
         if (command.endsWith('status --short -uno')) {
@@ -384,10 +387,9 @@ describe('main', () => {
       '[command]git push origin toc-generator/update-toc-21031067:refs/heads/toc-generator/update-toc-21031067',
       '::endgroup::',
       '::group::Creating comment to PullRequest...',
-      '',
-      '::set-output name=result::succeeded',
       '::endgroup::',
       '> \x1b[32;40m✔\x1b[0m\t[feature/new-feature] updated',
     ]);
+    setOutputCalledWith(mockOutput, [{ name: 'result', value: 'succeeded' }]);
   });
 });
