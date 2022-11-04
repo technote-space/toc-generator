@@ -51,7 +51,7 @@
     "@technote-space/doctoc": "^2.5.2",
     "@technote-space/github-action-helper": "^5.3.9",
     "@technote-space/github-action-log-helper": "^0.2.8",
-    "@technote-space/github-action-pr-helper": "^2.3.5",
+    "@technote-space/github-action-pr-helper": "^2.3.6",
     "@technote-space/github-action-test-helper": "^0.11.0",
     "@technote-space/release-github-actions-cli": "^1.9.3",
     "@types/node": "^18.11.9",
