@@ -51,7 +51,7 @@
     "@technote-space/doctoc": "^2.6.1",
     "@technote-space/github-action-helper": "^5.3.10",
     "@technote-space/github-action-log-helper": "^0.2.9",
-    "@technote-space/github-action-pr-helper": "^2.3.7",
+    "@technote-space/github-action-pr-helper": "^2.4.0",
     "@technote-space/github-action-test-helper": "^0.11.1",
     "@technote-space/release-github-actions-cli": "^1.9.3",
     "@types/node": "^18.11.12",
@@ -65,7 +65,7 @@
     "lint-staged": "^13.1.0",
     "nock": "^13.2.9",
     "pinst": "^3.0.0",
-    "rollup": "^3.7.0",
+    "rollup": "^3.7.1",
     "typescript": "^4.9.4",
     "vitest": "^0.25.6"
   },

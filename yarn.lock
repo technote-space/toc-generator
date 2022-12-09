@@ -522,10 +522,10 @@
     "@actions/core" "^1.10.0"
     sprintf-js "^1.1.2"
 
-"@technote-space/github-action-pr-helper@^2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.3.7.tgz#4c6be56f5e0a2ec658ded911b23c01e9b20aaa39"
-  integrity sha512-DDRFolm5F7l3pHWrBDyn6CU0uV40A7YmXgswQB7nKFzmPerEgu+Fb2IMSvbN58oVuGJY8vgYrcu6RMJ7AWW/Ng==
+"@technote-space/github-action-pr-helper@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@technote-space/github-action-pr-helper/-/github-action-pr-helper-2.4.0.tgz#0a2b0c0351c28e9524334dbe3e137d4f7a92b6ad"
+  integrity sha512-5cag9qNS0vPeD62OfJ5FxIuwgSitf8w6p2GQ4WiIVeOSWev+MSjK3xOvRVr/4MZhuXuwS43QmXKcg97bLVXp/w==
   dependencies:
     "@actions/core" "^1.10.0"
     "@actions/github" "^5.1.1"
@@ -3362,10 +3362,10 @@ rollup@^2.79.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rollup@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.7.0.tgz#7c4310378cf28764abb6b7611c9ccec081ff6d97"
-  integrity sha512-FIJe0msW9P7L9BTfvaJyvn1U1BVCNTL3w8O+PKIrCyiMLg+rIUGb4MbcgVZ10Lnm1uWXOTOWRNARjfXC1+M12Q==
+rollup@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.7.1.tgz#615b736bdc6ad405953d269fc6afd3822d6d8811"
+  integrity sha512-ek6+FORvI79VQTNlIYtXpIrGEPRlYSNZO+5EcmaozKkRL5L6KLvGDUbM5E+bd6jnHW9fgcK0DKTdWjIsEmNb4g==
   optionalDependencies:
     fsevents "~2.3.2"
 
