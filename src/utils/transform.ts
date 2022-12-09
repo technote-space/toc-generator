@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { getInput } from '@actions/core' ;
-import { transform, CHECK_OPENING_COMMENT, CHECK_CLOSING_COMMENT } from '@technote-space/doctoc';
+import { transform, CHECK_OPENING_COMMENT, CHECK_CLOSING_COMMENT, CHECK_SKIP_COMMENT } from '@technote-space/doctoc';
 import { Utils } from '@technote-space/github-action-helper';
 import {
   isNoTitle,
@@ -19,6 +19,7 @@ export const transformWithWrap = (path: string, title: string): { transformed: b
     entryPrefix: getEntryPrefix(),
     checkOpeningComments: Utils.uniqueArray(getArrayInput('OPENING_COMMENT').concat(CHECK_OPENING_COMMENT)),
     checkClosingComments: Utils.uniqueArray(getArrayInput('CLOSING_COMMENT').concat(CHECK_CLOSING_COMMENT)),
+    checkSkipComments: Utils.uniqueArray(getArrayInput('SKIP_COMMENT').concat(CHECK_SKIP_COMMENT)),
     isCustomMode: Utils.getBoolValue(getInput('CUSTOM_MODE') || getInput('HTML_MODE')),
     customTemplate: getInput('CUSTOM_TEMPLATE') || getInput('HTML_TEMPLATE'),
     itemTemplate: getInput('ITEM_TEMPLATE'),
