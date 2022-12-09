@@ -38,6 +38,9 @@ inputs:
     description: Closing comment (for other than DocToc)
     required: false
     default: '<!-- tocstop '
+  SKIP_COMMENT:
+    description: Skip comment
+    required: false
   HTML_MODE:
     description: Whether it is html mode (deprecated).
     required: false
