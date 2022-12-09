@@ -483,10 +483,10 @@
   dependencies:
     emoji-regex "^10.2.1"
 
-"@technote-space/doctoc@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@technote-space/doctoc/-/doctoc-2.6.0.tgz#5b0f5fad534d4b20f8c58a6e0f4483ee647fff61"
-  integrity sha512-BtUqv3vc2bZIazUVC2sLkBHk/G2semwCMfwtJwCp2FEB4qc9jV9swnfLMhrFSUmBYiUuJW1WvPLW7qsEJLG+rw==
+"@technote-space/doctoc@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@technote-space/doctoc/-/doctoc-2.6.1.tgz#082d2b812f8f44a1ec621cb64b1a2bbf82cdd9d2"
+  integrity sha512-yGBtU8Jtv3VWTm1VYGXtlMg5DbK8r57eu/riwTbjlB0NlARoLNgtrVQvM5VwKyV6qiThbZlpaarY8ZdHoRjZvQ==
   dependencies:
     "@technote-space/anchor-markdown-header" "^1.1.39"
     "@textlint/markdown-to-ast" "^12.2.3"
