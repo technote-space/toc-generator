@@ -48,7 +48,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
     "@sindresorhus/tsconfig": "^3.0.1",
-    "@technote-space/doctoc": "^2.6.0",
+    "@technote-space/doctoc": "^2.6.1",
     "@technote-space/github-action-helper": "^5.3.10",
     "@technote-space/github-action-log-helper": "^0.2.9",
     "@technote-space/github-action-pr-helper": "^2.3.7",
