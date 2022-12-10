@@ -62,33 +62,34 @@
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## オプション
-| name | description | default | required | e.g. |
-|:---|:---|:---|:---|:---|
-|TARGET_PATHS|対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
-|TOC_TITLE|目次タイトル|`**Table of Contents**`| |`''`|
-|MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
-|CUSTOM_MODE|Customモードかどうか([生成例](samples/README.horizontal.md))|`false`| |`true`|
-|CUSTOM_TEMPLATE|Customテンプレート(Customモード)|`<p align="center">${ITEMS}</p>`| | |
-|ITEM_TEMPLATE|アイテムテンプレート(Customモード)|`<a href="${LINK}">${TEXT}</a>`| | |
-|SEPARATOR|セパレータ(Customモード)|<code>\<span>&#124;\</span></code>| | |
-|FOLDING|目次を折りたたみ式にするかどうか|`false`| |`true`|
-|COMMIT_MESSAGE|コミットメッセージ|`chore(docs): update TOC`|true|`docs: update TOC`|
-|COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| | |
-|COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| | |
-|CREATE_PR|プルリクエストを作成するかどうか|`false`| |`true`|
-|CHECK_ONLY_DEFAULT_BRANCH|デフォルトのブランチのみをチェックするかどうか|`false`| |`true`|
-|PR_BRANCH_PREFIX|プルリクエストのブランチプリフィックス|`toc-generator/`|true| |
-|PR_BRANCH_NAME|プルリクエストのブランチ名<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
-|PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`chore(docs): update TOC (${PR_MERGE_REF})`|true|`docs: update TOC`|
-|PR_BODY|プルリクエストの本文<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
-|PR_COMMENT_BODY|プルリクエストの本文(コメント用)<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
-|PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR has been closed because it is no longer needed.`| | |
-|TARGET_BRANCH_PREFIX|ブランチ名のフィルタ| | |`release/`|
-|INCLUDE_LABELS|プルリクエストに付与されているかチェックするラベル| | |`Label1, Label2`|
-|OPENING_COMMENT|開始コメント (DocToc以外のため)|`<!-- toc `| | |
-|CLOSING_COMMENT|終了コメント (DocToc以外のため)|`<!-- tocstop `| | |
-|SKIP_COMMENT|スキップコメント| | |`<!-- toc skip `|
-|GITHUB_TOKEN|アクセストークン|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
+| name | description | default | e.g. |
+|:---|:---|:---|:---|
+|TARGET_PATHS|対象のファイルパス (カンマ区切り, [詳細](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|`README*.md,CHANGELOG.md`, `.`|
+|TOC_TITLE|目次タイトル|`**Table of Contents**`|`''`|
+|MAX_HEADER_LEVEL|Heading最大レベル ([詳細](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| |`3`|
+|CUSTOM_MODE|Customモードかどうか([生成例](samples/README.horizontal.md))|`false`|`true`|
+|CUSTOM_TEMPLATE|Customテンプレート(Customモード)|`<p align="center">${ITEMS}</p>`| |
+|ITEM_TEMPLATE|アイテムテンプレート(Customモード)|`<a href="${LINK}">${TEXT}</a>`| |
+|SEPARATOR|セパレータ(Customモード)|<code>\<span>&#124;\</span></code>| |
+|FOLDING|目次を折りたたみ式にするかどうか|`false`|`true`|
+|COMMIT_MESSAGE|コミットメッセージ|`chore(docs): update TOC`|`docs: update TOC`|
+|COMMIT_NAME|コミット時に設定する名前|`${github.actor}`| |
+|COMMIT_EMAIL|コミット時に設定するメールアドレス|`${github.actor}@users.noreply.github.com`| |
+|CREATE_PR|プルリクエストを作成するかどうか|`false`|`true`|
+|CHECK_ONLY_DEFAULT_BRANCH|デフォルトのブランチのみをチェックするかどうか|`false`|`true`|
+|PR_BRANCH_PREFIX|プルリクエストのブランチプリフィックス|`toc-generator/`| |
+|PR_BRANCH_NAME|プルリクエストのブランチ名<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|`toc-${PR_NUMBER}`|
+|PR_TITLE|プルリクエストのタイトル<br>[Context variables](#context-variables)|`chore(docs): update TOC (${PR_MERGE_REF})`|`docs: update TOC`|
+|PR_BODY|プルリクエストの本文<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| |
+|PR_COMMENT_BODY|プルリクエストの本文(コメント用)<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| |
+|PR_CLOSE_MESSAGE|プルリクエストを閉じるときのメッセージ|`This PR has been closed because it is no longer needed.`| |
+|TARGET_BRANCH_PREFIX|ブランチ名のフィルタ| |`release/`|
+|INCLUDE_LABELS|プルリクエストに付与されているかチェックするラベル| |`Label1, Label2`|
+|OPENING_COMMENT|開始コメント (DocToc以外のため)|`<!-- toc `| |
+|CLOSING_COMMENT|終了コメント (DocToc以外のため)|`<!-- tocstop `| |
+|SKIP_COMMENT|スキップコメント| |`<!-- toc skip `|
+|GITHUB_TOKEN|アクセストークン|`${{github.token}}`|`${{secrets.ACCESS_TOKEN}}`|
+|SIGNOFF| Signed-off-byを付与 | |`true`|
 
 ### 個別に指定
 [doctoc](https://github.com/technote-space/doctoc#example) に使用されているオプションはコメントで値を指定することが可能です。  
