@@ -63,33 +63,34 @@ e.g. `README.md`
 ![behavior](https://raw.githubusercontent.com/technote-space/toc-generator/images/screenshot.gif)
 
 ## Options
-| name | description | default | required | e.g. |
-|:---|:---|:---|:---|:---|
-|TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|true|`README*.md,CHANGELOG.md`, `.`|
-|TOC_TITLE|TOC Title|`**Table of Contents**`| |`''`|
-|MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| | |`3`|
-|CUSTOM_MODE|Whether it is custom mode([Generated Example](samples/README.horizontal.md))|`false`| |`true`|
-|CUSTOM_TEMPLATE|Custom template for custom mode|`<p align="center">${ITEMS}</p>`| | |
-|ITEM_TEMPLATE|Item template for custom mode|`<a href="${LINK}">${TEXT}</a>`| | |
-|SEPARATOR|Separator for custom mode|<code>\<span>&#124;\</span></code>| | |
-|FOLDING|Whether to make TOC foldable|`false`| |`true`|
-|COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|true|`docs: update TOC`|
-|COMMIT_NAME|Git commit name|`${github.actor}`| | |
-|COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| | |
-|CREATE_PR|Whether to create PullRequest|`false`| |`true`|
-|CHECK_ONLY_DEFAULT_BRANCH|Whether to check only default branch|`false`| |`true`|
-|PR_BRANCH_PREFIX|PullRequest branch prefix|`toc-generator/`|true| |
-|PR_BRANCH_NAME|PullRequest branch name<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|true|`toc-${PR_NUMBER}`|
-|PR_TITLE|PullRequest title<br>[Context variables](#context-variables)|`chore(docs): update TOC (${PR_MERGE_REF})`|true|`docs: update TOC`|
-|PR_BODY|PullRequest body<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)|true| |
-|PR_COMMENT_BODY|PullRequest body for comment<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| | |
-|PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR has been closed because it is no longer needed.`| | |
-|TARGET_BRANCH_PREFIX|Filter by branch name| | |`release/`|
-|INCLUDE_LABELS|Labels used to check if the PullRequest has it| | |`Label1, Label2`|
-|OPENING_COMMENT|Opening comment (for other than DocToc)|`<!-- toc `| | |
-|CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| | |
-|SKIP_COMMENT|Skip comment| | |`<!-- toc skip `|
-|GITHUB_TOKEN|Access token|`${{github.token}}`|true|`${{secrets.ACCESS_TOKEN}}`|
+| name | description | default | e.g. |
+|:---|:---|:---|:---|
+|TARGET_PATHS|Target file path. (Comma separated, [Detail](https://github.com/thlorenz/doctoc#adding-toc-to-individual-files))|`README*.md`|`README*.md,CHANGELOG.md`, `.`|
+|TOC_TITLE|TOC Title|`**Table of Contents**`|`''`|
+|MAX_HEADER_LEVEL|Maximum heading level. ([Detail](https://github.com/thlorenz/doctoc#specifying-a-maximum-heading-level-for-toc-entries))| |`3`|
+|CUSTOM_MODE|Whether it is custom mode([Generated Example](samples/README.horizontal.md))|`false`|`true`|
+|CUSTOM_TEMPLATE|Custom template for custom mode|`<p align="center">${ITEMS}</p>`| |
+|ITEM_TEMPLATE|Item template for custom mode|`<a href="${LINK}">${TEXT}</a>`| |
+|SEPARATOR|Separator for custom mode|<code>\<span>&#124;\</span></code>| |
+|FOLDING|Whether to make TOC foldable|`false`|`true`|
+|COMMIT_MESSAGE|Commit message|`chore(docs): update TOC`|`docs: update TOC`|
+|COMMIT_NAME|Git commit name|`${github.actor}`| |
+|COMMIT_EMAIL|Git commit email|`${github.actor}@users.noreply.github.com`| |
+|CREATE_PR|Whether to create PullRequest|`false`|`true`|
+|CHECK_ONLY_DEFAULT_BRANCH|Whether to check only default branch|`false`|`true`|
+|PR_BRANCH_PREFIX|PullRequest branch prefix|`toc-generator/`| |
+|PR_BRANCH_NAME|PullRequest branch name<br>[Context variables](#context-variables)|`update-toc-${PR_ID}`|`toc-${PR_NUMBER}`|
+|PR_TITLE|PullRequest title<br>[Context variables](#context-variables)|`chore(docs): update TOC (${PR_MERGE_REF})`|`docs: update TOC`|
+|PR_BODY|PullRequest body<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| |
+|PR_COMMENT_BODY|PullRequest body for comment<br>[Context PR variables](#context-pr-variables)|[action.yml](action.yml)| |
+|PR_CLOSE_MESSAGE|Message body when closing PullRequest|`This PR has been closed because it is no longer needed.`| |
+|TARGET_BRANCH_PREFIX|Filter by branch name| |`release/`|
+|INCLUDE_LABELS|Labels used to check if the PullRequest has it| |`Label1, Label2`|
+|OPENING_COMMENT|Opening comment (for other than DocToc)|`<!-- toc `| |
+|CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| |
+|SKIP_COMMENT|Skip comment| |`<!-- toc skip `|
+|GITHUB_TOKEN|Access token|`${{github.token}}`|`${{secrets.ACCESS_TOKEN}}`|
+|SIGNOFF| Add `Signed-off-by` line | |`true`|
 
 ### Specify options individually
 The options used for [doctoc](https://github.com/technote-space/doctoc#example) can be commented to specify values.  
