@@ -64,6 +64,7 @@ export const getRunnerArguments = (): MainArguments => {
     targetEvents: TARGET_EVENTS,
     notCreatePr: !Utils.getBoolValue(getInput('CREATE_PR')),
     checkOnlyDefaultBranch: Utils.getBoolValue(getInput('CHECK_ONLY_DEFAULT_BRANCH')),
+    signoff: Utils.getBoolValue(getInput('SIGNOFF')),
   };
 };
 

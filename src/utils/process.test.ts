@@ -307,6 +307,7 @@ describe('main', () => {
     process.env.INPUT_MAX_HEADER_LEVEL = '1';
     process.env.INPUT_ENTRY_PREFIX     = '☆';
     process.env.INPUT_CREATE_PR        = 'true';
+    process.env.INPUT_SIGNOFF          = 'true';
     const mockStdout                   = spyOnStdout();
     const mockOutput                   = spyOnSetOutput();
     setChildProcessParams({
@@ -380,7 +381,7 @@ describe('main', () => {
       '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '::endgroup::',
       '::group::Committing...',
-      '[command]git commit -qm \'chore(docs): update TOC\'',
+      '[command]git commit --signoff -qm \'chore(docs): update TOC\'',
       '[command]git show \'--stat-count=10\' HEAD',
       '::endgroup::',
       '::group::Checking references diff...',
