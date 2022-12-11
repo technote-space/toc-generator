@@ -88,7 +88,7 @@ e.g. `README.md`
 |INCLUDE_LABELS|Labels used to check if the PullRequest has it| |`Label1, Label2`|
 |OPENING_COMMENT|Opening comment (for other than DocToc)|`<!-- toc `| |
 |CLOSING_COMMENT|Closing comment (for other than DocToc)|`<!-- tocstop `| |
-|SKIP_COMMENT|Skip comment| |`<!-- toc skip `|
+|SKIP_COMMENT|Change skip comment (default: `<!-- DOCTOC SKIP `)| |`<!-- toc skip `|
 |GITHUB_TOKEN|Access token|`${{github.token}}`|`${{secrets.ACCESS_TOKEN}}`|
 |SIGNOFF| Add `Signed-off-by` line | |`true`|
 

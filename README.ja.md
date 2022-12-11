@@ -87,7 +87,7 @@
 |INCLUDE_LABELS|プルリクエストに付与されているかチェックするラベル| |`Label1, Label2`|
 |OPENING_COMMENT|開始コメント (DocToc以外のため)|`<!-- toc `| |
 |CLOSING_COMMENT|終了コメント (DocToc以外のため)|`<!-- tocstop `| |
-|SKIP_COMMENT|スキップコメント| |`<!-- toc skip `|
+|SKIP_COMMENT|スキップコメントを変更 (default: `<!-- DOCTOC SKIP `)| |`<!-- toc skip `|
 |GITHUB_TOKEN|アクセストークン|`${{github.token}}`|`${{secrets.ACCESS_TOKEN}}`|
 |SIGNOFF| Signed-off-byを付与 | |`true`|
 
