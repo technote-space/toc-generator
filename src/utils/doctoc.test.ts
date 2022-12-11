@@ -205,6 +205,7 @@ describe('executeDoctoc', () => {
       ],
       unchanged: [
         resolve(doctocDir, 'README.not.update.md'),
+        resolve(doctocDir, 'README.skip.md'),
         resolve(doctocDir, 'expected/README.create1.md'),
         resolve(doctocDir, 'expected/README.create2.md'),
         resolve(doctocDir, 'expected/README.toc-me.md'),
@@ -227,6 +228,7 @@ describe('executeDoctoc', () => {
       ],
       unchanged: [
         resolve(doctocDir, 'README.not.update.md'),
+        resolve(doctocDir, 'README.skip.md'),
       ],
     });
   });

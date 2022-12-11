@@ -12,6 +12,9 @@ inputs:
   API_TOKEN:
     description: Secret GitHub API token used to make API requests.
     required: false
+  SIGNOFF:
+    description: 'Add `Signed-off-by` line by the committer at the end of the commit log message.'
+    required: false
 
   TARGET_PATHS:
     description: Target file path. (Comma separated, @see https://github.com/thlorenz/doctoc#adding-toc-to-individual-files)
@@ -38,6 +41,9 @@ inputs:
     description: Closing comment (for other than DocToc)
     required: false
     default: '<!-- tocstop '
+  SKIP_COMMENT:
+    description: Skip comment
+    required: false
   HTML_MODE:
     description: Whether it is html mode (deprecated).
     required: false

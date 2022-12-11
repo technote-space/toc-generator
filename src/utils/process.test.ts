@@ -181,6 +181,7 @@ describe('main', () => {
       '[command]DocToccing single file "[Working Directory]/README.horizontal.md".',
       '[command]DocToccing single file "[Working Directory]/README.not.update.md".',
       '[command]DocToccing single file "[Working Directory]/README.params.md".',
+      '[command]DocToccing single file "[Working Directory]/README.skip.md".',
       '[command]DocToccing single file "[Working Directory]/README.toc-me.md".',
       '[command]DocToccing single file "[Working Directory]/README.update.md".',
       '[command]Run doctoc',
@@ -193,6 +194,7 @@ describe('main', () => {
       '  >>   - [Working Directory]/README.update.md',
       '  >> unchanged:',
       '  >>   - [Working Directory]/README.not.update.md',
+      '  >>   - [Working Directory]/README.skip.md',
       '> Checking diff...',
       '[command]git add --all',
       '  >> stdout',
@@ -263,6 +265,7 @@ describe('main', () => {
       '[command]DocToccing single file "[Working Directory]/README.horizontal.md".',
       '[command]DocToccing single file "[Working Directory]/README.not.update.md".',
       '[command]DocToccing single file "[Working Directory]/README.params.md".',
+      '[command]DocToccing single file "[Working Directory]/README.skip.md".',
       '[command]DocToccing single file "[Working Directory]/README.toc-me.md".',
       '[command]DocToccing single file "[Working Directory]/README.update.md".',
       '[command]Run doctoc',
@@ -275,6 +278,7 @@ describe('main', () => {
       '  >>   - [Working Directory]/README.update.md',
       '  >> unchanged:',
       '  >>   - [Working Directory]/README.not.update.md',
+      '  >>   - [Working Directory]/README.skip.md',
       '::endgroup::',
       '::group::Checking diff...',
       '[command]git add --all',
@@ -303,6 +307,7 @@ describe('main', () => {
     process.env.INPUT_MAX_HEADER_LEVEL = '1';
     process.env.INPUT_ENTRY_PREFIX     = '☆';
     process.env.INPUT_CREATE_PR        = 'true';
+    process.env.INPUT_SIGNOFF          = 'true';
     const mockStdout                   = spyOnStdout();
     const mockOutput                   = spyOnSetOutput();
     setChildProcessParams({
@@ -376,7 +381,7 @@ describe('main', () => {
       '[command]git config \'user.email\' \'test-actor@users.noreply.github.com\'',
       '::endgroup::',
       '::group::Committing...',
-      '[command]git commit -qm \'chore(docs): update TOC\'',
+      '[command]git commit --signoff -qm \'chore(docs): update TOC\'',
       '[command]git show \'--stat-count=10\' HEAD',
       '::endgroup::',
       '::group::Checking references diff...',

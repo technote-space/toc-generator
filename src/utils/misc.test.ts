@@ -110,6 +110,7 @@ describe('getRunnerArguments', () => {
       prTitleForDefaultBranch: '',
       targetBranchPrefix: '',
       targetEvents: TARGET_EVENTS,
+      signoff: false,
     });
   });
 
@@ -135,6 +136,7 @@ describe('getRunnerArguments', () => {
     process.env.INPUT_TARGET_PATHS              = '/';
     process.env.INPUT_CREATE_PR                 = 'false';
     process.env.INPUT_CHECK_ONLY_DEFAULT_BRANCH = 'true';
+    process.env.INPUT_SIGNOFF                   = 'true';
 
     const args = getRunnerArguments();
     delete args.logger;
@@ -171,6 +173,7 @@ describe('getRunnerArguments', () => {
       prTitleForDefaultBranch: 'test-default-branch: create pull request (${PR_NUMBER})',
       targetBranchPrefix: 'feature/',
       targetEvents: TARGET_EVENTS,
+      signoff: true,
     });
   });
 });
