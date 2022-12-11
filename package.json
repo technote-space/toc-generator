@@ -54,10 +54,10 @@
     "@technote-space/github-action-pr-helper": "^2.4.0",
     "@technote-space/github-action-test-helper": "^0.11.1",
     "@technote-space/release-github-actions-cli": "^1.9.3",
-    "@types/node": "^18.11.12",
+    "@types/node": "^18.11.13",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
-    "@vitest/coverage-c8": "^0.25.6",
+    "@vitest/coverage-c8": "^0.25.7",
     "eslint": "^8.29.0",
     "eslint-plugin-import": "^2.26.0",
     "fast-glob": "^3.2.12",
@@ -67,7 +67,7 @@
     "pinst": "^3.0.0",
     "rollup": "^3.7.2",
     "typescript": "^4.9.4",
-    "vitest": "^0.25.6"
+    "vitest": "^0.25.7"
   },
   "publishConfig": {
     "access": "public"
