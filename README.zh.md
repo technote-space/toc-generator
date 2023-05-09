@@ -1,4 +1,4 @@
- # TOC Generator
+ # TOC Generator 内容目录生成器
 
 [![CI Status](https://github.com/technote-space/toc-generator/workflows/CI/badge.svg)](https://github.com/technote-space/toc-generator/actions)
 [![codecov](https://codecov.io/gh/technote-space/toc-generator/branch/main/graph/badge.svg)](https://codecov.io/gh/technote-space/toc-generator)
